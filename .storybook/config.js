@@ -5,6 +5,7 @@ import backgrounds from "@storybook/addon-backgrounds";
 import { withKnobs, text } from '@storybook/addon-knobs/react';
 import { injectGlobal } from 'styled-components';
 
+import COLORS from '../src/style/colors';
 
 import '../src/style/global';
 
@@ -17,6 +18,8 @@ function loadStories() {
 injectGlobal`
   body {
     padding: 1rem;
+    background-color: ${COLORS.white};
+    color: ${COLORS.black};
   }
 `;
 
