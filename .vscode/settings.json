@@ -1,0 +1,20 @@
+{
+  "files.exclude": {
+    "node_modules/": true,
+    "yarn.lock": true,
+    ".cache": true,
+    "dist/": true,
+  },
+  "search.exclude": {
+    "node_modules/": true
+  },
+  "prettier.printWidth": 88,
+  "prettier.trailingComma": "none",
+  "prettier.singleQuote": true,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
+  "editor.formatOnSave": false,
+  "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.tabSize": 2,
+}
