@@ -1,9 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import TodosList from '../../container/TodosList';
 import Container from '../../components/Container';
 
-const Todos = () => <Wrapper>todos !</Wrapper>;
+const Todos = () => (
+  <Wrapper>
+    <TodosList />
+  </Wrapper>
+);
 
 Todos.defaultProps = {
   children: undefined,
