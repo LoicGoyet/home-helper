@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Task from '../Task';
+import Task from '../../container/Task';
 
 const TasksList = ({ tasks }) => <div>{tasks.map(task => <Task task={task} key={`task / ${task.id}`} />)}</div>;
 

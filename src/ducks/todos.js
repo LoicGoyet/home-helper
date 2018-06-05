@@ -1,5 +1,6 @@
 // Actions
 const ADD_TASK = 'home-helper/todos/ADD_TASK';
+const TOGGLE_TASK = 'home-helper/todos/TOGGLE_TASK';
 
 // Default state
 const defaultState = {
@@ -52,6 +53,20 @@ const reducer = (state = defaultState, action = {}) => {
       };
     }
 
+    case TOGGLE_TASK: {
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.id !== action.id) return task;
+
+          return {
+            ...task,
+            done: !task.done,
+          };
+        }),
+      };
+    }
+
     default:
       return state;
   }
@@ -61,11 +76,12 @@ export default reducer;
 
 // Action Creators
 
-export const addTask = title => {
-  console.log('hello world !');
+export const addTask = title => ({
+  type: ADD_TASK,
+  title,
+});
 
-  return {
-    type: ADD_TASK,
-    title,
-  };
-};
+export const toggleTask = id => ({
+  type: TOGGLE_TASK,
+  id,
+});
