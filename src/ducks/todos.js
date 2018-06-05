@@ -3,6 +3,7 @@ const ADD_TASK = 'home-helper/todos/ADD_TASK';
 
 // Default state
 const defaultState = {
+  baseId: 5,
   tasks: [
     {
       id: 0,
@@ -35,6 +36,22 @@ const defaultState = {
 // Reducer
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
+    case ADD_TASK: {
+      const { title } = action;
+
+      const newTask = {
+        id: state.baseId,
+        title,
+        done: false,
+      };
+
+      return {
+        ...state,
+        baseId: state.baseId + 1,
+        tasks: [...state.tasks, newTask],
+      };
+    }
+
     default:
       return state;
   }
@@ -43,7 +60,12 @@ const reducer = (state = defaultState, action = {}) => {
 export default reducer;
 
 // Action Creators
-export const addTask = title => ({
-  type: ADD_TASK,
-  title,
-});
+
+export const addTask = title => {
+  console.log('hello world !');
+
+  return {
+    type: ADD_TASK,
+    title,
+  };
+};
