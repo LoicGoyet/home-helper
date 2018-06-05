@@ -1,37 +1,11 @@
 // Actions
-const ADD_TASK = 'home-helper/todos/ADD_TASK';
-const TOGGLE_TASK = 'home-helper/todos/TOGGLE_TASK';
+export const ADD_TASK = 'home-helper/todos/ADD_TASK';
+export const TOGGLE_TASK = 'home-helper/todos/TOGGLE_TASK';
 
 // Default state
-const defaultState = {
-  baseId: 5,
-  tasks: [
-    {
-      id: 0,
-      title: 'task 1',
-      done: false,
-    },
-    {
-      id: 1,
-      title: 'task 2',
-      done: true,
-    },
-    {
-      id: 2,
-      title: 'task 3',
-      done: true,
-    },
-    {
-      id: 3,
-      title: 'task 4',
-      done: false,
-    },
-    {
-      id: 4,
-      title: 'task 5',
-      done: true,
-    },
-  ],
+export const defaultState = {
+  baseId: 0,
+  tasks: [],
 };
 
 // Reducer
