@@ -23,6 +23,13 @@ describe('actions', () => {
 });
 
 describe('reducer', () => {
+  const taskShape = (props = {}) => ({
+    id: 0,
+    title: 'title',
+    done: false,
+    ...props,
+  });
+
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(ducks.defaultState);
   });
@@ -32,39 +39,22 @@ describe('reducer', () => {
     const action = ducks.addTask(title);
     expect(reducer(undefined, action)).toEqual({
       baseId: 1,
-      tasks: [
-        {
-          id: 0,
-          title,
-          done: false,
-        },
-      ],
+      tasks: [taskShape({ title })],
     });
 
     const state = {
       baseId: 1,
-      tasks: [
-        {
-          id: 0,
-          title: 'title',
-          done: false,
-        },
-      ],
+      tasks: [taskShape()],
     };
 
     expect(reducer(state, action)).toEqual({
       baseId: 2,
       tasks: [
-        {
-          id: 0,
-          title: 'title',
-          done: false,
-        },
-        {
+        taskShape(),
+        taskShape({
           id: 1,
           title: 'hello world !',
-          done: false,
-        },
+        }),
       ],
     });
   });
@@ -75,46 +65,22 @@ describe('reducer', () => {
 
     let state = {
       baseId: 1,
-      tasks: [
-        {
-          id: 0,
-          title: 'title',
-          done: false,
-        },
-      ],
+      tasks: [taskShape()],
     };
 
     expect(reducer(state, action)).toEqual({
       baseId: 1,
-      tasks: [
-        {
-          id: 0,
-          title: 'title',
-          done: true,
-        },
-      ],
+      tasks: [taskShape({ done: true })],
     });
 
     state = {
       baseId: 1,
-      tasks: [
-        {
-          id: 0,
-          title: 'title',
-          done: true,
-        },
-      ],
+      tasks: [taskShape({ done: true })],
     };
 
     expect(reducer(state, action)).toEqual({
       baseId: 1,
-      tasks: [
-        {
-          id: 0,
-          title: 'title',
-          done: false,
-        },
-      ],
+      tasks: [taskShape()],
     });
   });
 });
