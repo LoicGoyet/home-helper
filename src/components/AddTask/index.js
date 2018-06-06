@@ -19,12 +19,17 @@ class AddTask extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentDidMount() {
+    this.titleInput.current.focus();
+  }
+
   submit(event) {
     event.preventDefault();
-    const title = this.titleInput.current.value;
-    const category = this.categoryInput.current.value;
-    this.props.addTask(title, category);
+    const titleInput = this.titleInput.current;
+    const categoryInput = this.categoryInput.current;
+    this.props.addTask(titleInput.value, categoryInput.value);
     this.form.current.reset();
+    titleInput.focus();
   }
 
   render() {
