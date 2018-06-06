@@ -2,13 +2,15 @@ import reducer, * as ducks from '../todos';
 
 describe('actions', () => {
   it('should create an action to add a task', () => {
-    const title = 'Finish docs';
+    const title = 'Tomatoes';
+    const category = 'Fruits & Vegetables';
     const expectedAction = {
       type: ducks.ADD_TASK,
       title,
+      category,
     };
 
-    expect(ducks.addTask(title)).toEqual(expectedAction);
+    expect(ducks.addTask(title, category)).toEqual(expectedAction);
   });
 
   it('should create an action to toggle a task', () => {
@@ -25,7 +27,8 @@ describe('actions', () => {
 describe('reducer', () => {
   const taskShape = (props = {}) => ({
     id: 0,
-    title: 'title',
+    title: 'Tomatoes',
+    category: 'Fruits & Vegetables',
     done: false,
     ...props,
   });
@@ -35,11 +38,12 @@ describe('reducer', () => {
   });
 
   it(`should handle ${ducks.ADD_TASK}`, () => {
-    const title = 'hello world !';
-    const action = ducks.addTask(title);
+    const title = 'Ketchup';
+    const category = 'Grocery';
+    const action = ducks.addTask(title, category);
     expect(reducer(undefined, action)).toEqual({
       baseId: 1,
-      tasks: [taskShape({ title })],
+      tasks: [taskShape({ title, category })],
     });
 
     const state = {
@@ -53,7 +57,8 @@ describe('reducer', () => {
         taskShape(),
         taskShape({
           id: 1,
-          title: 'hello world !',
+          title,
+          category,
         }),
       ],
     });

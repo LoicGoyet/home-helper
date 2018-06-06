@@ -10,12 +10,15 @@ class AddTask extends React.Component {
     super(props);
     this.form = React.createRef();
     this.titleInput = React.createRef();
+    this.categoryInput = React.createRef();
     this.submit = this.submit.bind(this);
   }
 
   submit(event) {
     event.preventDefault();
-    this.props.addTask(this.titleInput.current.value);
+    const title = this.titleInput.current.value;
+    const category = this.categoryInput.current.value;
+    this.props.addTask(title, category);
     this.form.current.reset();
   }
 
@@ -23,6 +26,9 @@ class AddTask extends React.Component {
     return (
       <form onSubmit={this.submit} ref={this.form}>
         <input type="text" ref={this.titleInput} required />
+        <input type="text" ref={this.categoryInput} list="category-suggestions" required />
+
+        <button type="submit" />
       </form>
     );
   }

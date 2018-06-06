@@ -12,11 +12,12 @@ export const defaultState = {
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_TASK: {
-      const { title } = action;
+      const { title, category } = action;
 
       const newTask = {
         id: state.baseId,
         title,
+        category,
         done: false,
       };
 
@@ -50,9 +51,10 @@ export default reducer;
 
 // Action Creators
 
-export const addTask = title => ({
+export const addTask = (title, category) => ({
   type: ADD_TASK,
   title,
+  category,
 });
 
 export const toggleTask = id => ({
