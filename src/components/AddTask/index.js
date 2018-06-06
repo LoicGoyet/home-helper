@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
+    categorySuggestions: PropTypes.arrayOf(PropTypes.string),
+  };
+
+  static defaultProps = {
+    categorySuggestions: [],
   };
 
   constructor(props) {
@@ -23,13 +28,21 @@ class AddTask extends React.Component {
   }
 
   render() {
-    return (
-      <form onSubmit={this.submit} ref={this.form}>
-        <input type="text" ref={this.titleInput} required />
-        <input type="text" ref={this.categoryInput} list="category-suggestions" required />
+    const { categorySuggestions } = this.props;
 
-        <button type="submit" />
-      </form>
+    return (
+      <React.Fragment>
+        <form onSubmit={this.submit} ref={this.form}>
+          <input type="text" ref={this.titleInput} required placeholder="nom du produit" />
+          <input type="text" ref={this.categoryInput} list="category-suggestions" required placeholder="categorie" />
+
+          <button type="submit" />
+        </form>
+
+        <datalist id="category-suggestions">
+          {categorySuggestions.map(suggestion => <option key={suggestion} value={suggestion} />)}
+        </datalist>
+      </React.Fragment>
     );
   }
 }
