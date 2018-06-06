@@ -33,8 +33,7 @@
     "build-storybook": "build-storybook",
     "lint:css": "stylelint './src/**/*.js'",
     "eslint": "./node_modules/.bin/eslint src",
-    "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test": "jest"
   },
   "husky": {
     "hooks": {
