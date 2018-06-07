@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import AddTask from '../../components/AddTask';
 import * as todos from '../../ducks/todos';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  tasks: state.todos.tasks,
+});
 
 const mapDispatchToProps = dispatch => ({
-  addTask: title => dispatch(todos.addTask(title)),
+  addTask: (title, category) => dispatch(todos.addTask(title, category)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTask);

@@ -1,6 +1,7 @@
 // Actions
 export const ADD_TASK = 'home-helper/todos/ADD_TASK';
 export const TOGGLE_TASK = 'home-helper/todos/TOGGLE_TASK';
+export const UPDATE_CATEGORY = 'home-helper/todos/UPDATE_CATEGORY';
 
 // Default state
 export const defaultState = {
@@ -12,11 +13,12 @@ export const defaultState = {
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_TASK: {
-      const { title } = action;
+      const { title, category } = action;
 
       const newTask = {
         id: state.baseId,
         title,
+        category,
         done: false,
       };
 
@@ -41,6 +43,20 @@ const reducer = (state = defaultState, action = {}) => {
       };
     }
 
+    case UPDATE_CATEGORY: {
+      return {
+        ...state,
+        tasks: state.tasks.map(task => {
+          if (task.category !== action.oldCategory) return task;
+
+          return {
+            ...task,
+            category: action.newCategory,
+          };
+        }),
+      };
+    }
+
     default:
       return state;
   }
@@ -50,12 +66,19 @@ export default reducer;
 
 // Action Creators
 
-export const addTask = title => ({
+export const addTask = (title, category) => ({
   type: ADD_TASK,
   title,
+  category,
 });
 
 export const toggleTask = id => ({
   type: TOGGLE_TASK,
   id,
+});
+
+export const updateCategory = (oldCategory, newCategory) => ({
+  type: UPDATE_CATEGORY,
+  oldCategory,
+  newCategory,
 });

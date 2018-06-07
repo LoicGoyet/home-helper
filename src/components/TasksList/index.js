@@ -6,11 +6,7 @@ import Task from '../../container/Task';
 const TasksList = ({ tasks }) => <div>{tasks.map(task => <Task task={task} key={`task / ${task.id}`} />)}</div>;
 
 TasksList.propTypes = {
-  tasks: PropTypes.arrayOf(PropTypes.object),
-};
-
-TasksList.defaultProps = {
-  tasks: [],
+  tasks: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default TasksList;
