@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { uniq } from '../../utils/arrays';
 
 class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
-    categorySuggestions: PropTypes.arrayOf(PropTypes.string),
-    titleSuggestions: PropTypes.arrayOf(PropTypes.string),
+    tasks: PropTypes.arrayOf(PropTypes.object),
   };
 
   static defaultProps = {
-    categorySuggestions: [],
-    titleSuggestions: [],
+    tasks: [],
   };
 
   constructor(props) {
@@ -19,10 +18,27 @@ class AddTask extends React.Component {
     this.titleInput = React.createRef();
     this.categoryInput = React.createRef();
     this.submit = this.submit.bind(this);
+    this.getAutoCategory = this.getAutoCategory.bind(this);
   }
 
   componentDidMount() {
     this.titleInput.current.focus();
+  }
+
+  get categories() {
+    return uniq(this.props.tasks.map(task => task.category));
+  }
+
+  get tasks() {
+    return uniq(this.props.tasks.map(task => task.title));
+  }
+
+  getAutoCategory(event) {
+    const { value } = event.target;
+    const taskWtSameTitle = this.props.tasks.find(({ title }) => title === value);
+    if (!taskWtSameTitle) return;
+
+    this.categoryInput.current.value = taskWtSameTitle.category;
   }
 
   submit(event) {
@@ -35,23 +51,28 @@ class AddTask extends React.Component {
   }
 
   render() {
-    const { categorySuggestions, titleSuggestions } = this.props;
-
     return (
       <React.Fragment>
         <form onSubmit={this.submit} ref={this.form}>
-          <input type="text" ref={this.titleInput} list="title-suggestions" placeholder="nom du produit" required />
+          <input
+            type="text"
+            ref={this.titleInput}
+            list="title-suggestions"
+            placeholder="nom du produit"
+            required
+            onChange={this.getAutoCategory}
+          />
           <input type="text" ref={this.categoryInput} list="category-suggestions" placeholder="categorie" required />
 
           <button type="submit" />
         </form>
 
         <datalist id="category-suggestions">
-          {categorySuggestions.map(suggestion => <option key={suggestion} value={suggestion} />)}
+          {this.categories.map(suggestion => <option key={suggestion} value={suggestion} />)}
         </datalist>
 
         <datalist id="title-suggestions">
-          {titleSuggestions.map(title => <option key={title} value={title} />)}
+          {this.tasks.map(suggestion => <option key={suggestion} value={suggestion} />)}
         </datalist>
       </React.Fragment>
     );
