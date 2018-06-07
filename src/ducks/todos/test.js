@@ -88,4 +88,26 @@ describe('reducer', () => {
       tasks: [taskShape()],
     });
   });
+
+  it(`should handle ${ducks.UPDATE_CATEGORY}`, () => {
+    const action = ducks.updateCategory('Fruits & Vegetables', 'Vegetables');
+    expect(reducer(undefined, action)).toEqual(ducks.defaultState);
+
+    let state = {
+      baseId: 1,
+      tasks: [taskShape()],
+    };
+
+    expect(reducer(state, action)).toEqual({
+      baseId: 1,
+      tasks: [taskShape({ category: 'Vegetables' })],
+    });
+
+    state = {
+      baseId: 1,
+      tasks: [taskShape({ title: 'Ketchup', category: 'Grocery' }), taskShape({ title: 'Salt', category: 'Grocery' })],
+    };
+
+    expect(reducer(state, action)).toEqual(state);
+  });
 });

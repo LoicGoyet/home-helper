@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
-import TasksList from '../../components/TasksList';
+import TodosList from '../../components/TodosList';
 import { isIn } from '../../utils/arrays';
+import * as todos from '../../ducks/todos';
 
 const mapStateToProps = state => {
   const undoneTasks = state.todos.tasks.filter(task => !task.done);
@@ -38,4 +39,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TasksList);
+const mapDispatchToProps = dispatch => ({
+  updateCategory: (oldCategory, newCategory) => dispatch(todos.updateCategory(oldCategory, newCategory)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosList);
