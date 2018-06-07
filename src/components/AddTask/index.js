@@ -5,10 +5,12 @@ class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
     categorySuggestions: PropTypes.arrayOf(PropTypes.string),
+    titleSuggestions: PropTypes.arrayOf(PropTypes.string),
   };
 
   static defaultProps = {
     categorySuggestions: [],
+    titleSuggestions: [],
   };
 
   constructor(props) {
@@ -33,19 +35,23 @@ class AddTask extends React.Component {
   }
 
   render() {
-    const { categorySuggestions } = this.props;
+    const { categorySuggestions, titleSuggestions } = this.props;
 
     return (
       <React.Fragment>
         <form onSubmit={this.submit} ref={this.form}>
-          <input type="text" ref={this.titleInput} required placeholder="nom du produit" />
-          <input type="text" ref={this.categoryInput} list="category-suggestions" required placeholder="categorie" />
+          <input type="text" ref={this.titleInput} list="title-suggestions" placeholder="nom du produit" required />
+          <input type="text" ref={this.categoryInput} list="category-suggestions" placeholder="categorie" required />
 
           <button type="submit" />
         </form>
 
         <datalist id="category-suggestions">
           {categorySuggestions.map(suggestion => <option key={suggestion} value={suggestion} />)}
+        </datalist>
+
+        <datalist id="title-suggestions">
+          {titleSuggestions.map(title => <option key={title} value={title} />)}
         </datalist>
       </React.Fragment>
     );

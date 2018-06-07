@@ -6,6 +6,7 @@ import { uniq } from '../../utils/arrays';
 
 const mapStateToProps = state => ({
   categorySuggestions: uniq(state.todos.tasks.map(task => task.category)),
+  titleSuggestions: uniq(state.todos.tasks.map(task => task.title)),
 });
 
 const mapDispatchToProps = dispatch => ({
