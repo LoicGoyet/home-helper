@@ -5,7 +5,7 @@ const COLORS = {
   black: 'rgb(0, 0, 0)',
   red: 'rgb(255, 18, 18)',
   transparent: 'rgba(0, 0, 0, 0)',
-  blue: 'cornflowerblue',
+  blue: 'rgb(32, 83, 243)',
   green: 'yellowgreen',
   violet: 'rgb(20, 10, 67)',
 };
@@ -20,4 +20,3 @@ export const THEMES = {
 export const isTheme = string => Object.keys(THEMES).includes(string);
 
 export default COLORS;
-// export { THEMES };
