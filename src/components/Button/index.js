@@ -52,9 +52,11 @@ class Button extends React.Component {
   }
 
   render() {
+    const { children } = this.props;
+
     return (
-      <Wrapper className={this.props.className} onClick={this.props.onClick} style={this.themeVars}>
-        {this.props.children}
+      <Wrapper {...this.props} style={this.themeVars}>
+        {children}
       </Wrapper>
     );
   }
