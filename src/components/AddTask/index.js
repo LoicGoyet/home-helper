@@ -44,6 +44,13 @@ class AddTask extends React.Component {
     this.titleInput.current.focus();
   }
 
+  componentDidUpdate() {
+    if (this.triggerSubmit) return this.submit();
+
+    // Auto focus on the next input displayed
+    setTimeout(() => this.inputs[this.state.step].current.focus(), 200);
+  }
+
   get categories() {
     return uniq(this.props.tasks.map(task => task.category));
   }
@@ -54,6 +61,10 @@ class AddTask extends React.Component {
 
   get isLastStep() {
     return this.state.step === Object.keys(this.inputs).length - 1;
+  }
+
+  get triggerSubmit() {
+    return this.state.step === Object.keys(this.inputs).length;
   }
 
   get successMessageThemeVars() {
@@ -69,8 +80,8 @@ class AddTask extends React.Component {
     };
   }
 
-  getAutoCategory(event) {
-    const { value } = event.target;
+  getAutoCategory() {
+    const { value } = this.titleInput.current;
     const taskWtSameTitle = this.props.tasks.find(({ title }) => title === value);
     if (!taskWtSameTitle) return;
 
@@ -95,9 +106,7 @@ class AddTask extends React.Component {
     event.preventDefault();
     event.stopPropagation();
     if (this.isLastStep) return this.submit();
-    this.setState({ step: this.state.step + 1 }, () => {
-      setTimeout(() => this.inputs[this.state.step].current.focus(), 200);
-    });
+    this.setState({ step: this.state.step + 1 });
   }
 
   isInputRequired(step) {
