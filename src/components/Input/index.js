@@ -28,7 +28,6 @@ const El = styled.input`
   font-size: 1rem;
   padding: 0.75rem;
   border: 0;
-  border-radius: 0.125rem;
   display: block;
   width: 100%;
   box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.125rem var(--inner-shadow-color),
