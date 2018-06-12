@@ -241,7 +241,7 @@ const Label = styled.span`
   letter-spacing: 0.075em;
   font-weight: bold;
   background-color: ${COLORS.lightgray};
-  flex-basis: 5.5rem;
+  flex-basis: 5rem;
   flex-shrink: 0;
 `;
 
