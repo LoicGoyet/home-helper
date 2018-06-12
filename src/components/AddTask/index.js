@@ -203,7 +203,6 @@ const Wrapper = styled.div`
   margin: 1rem 0;
   position: relative;
   height: 50px;
-  background-color: ${COLORS.white};
 `;
 
 const FormStep = styled.div`
@@ -223,23 +222,27 @@ const FormRow = styled.label`
   display: flex;
   height: 100%;
   color: black;
-  align-items: center;
+  align-items: stretch;
 `;
 
 const Label = styled.span`
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding-left: 1rem;
   padding-right: 0.75rem;
   font-size: 0.6em;
   text-transform: uppercase;
   letter-spacing: 0.075em;
   font-weight: bold;
+  background-color: ${COLORS.lightgray};
+  flex-basis: 5.5rem;
+  flex-shrink: 0;
 `;
 
 const Input = styled(InputComponent)`
   --border-color: transparent;
   flex-grow: 1;
-  align-self: stretch;
   box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.25rem var(--inner-shadow-color);
 `;
 
