@@ -29,10 +29,7 @@ class AddTask extends React.Component {
     this.titleInput = React.createRef();
     this.categoryInput = React.createRef();
 
-    this.inputs = {
-      0: this.titleInput,
-      1: this.categoryInput,
-    };
+    this.inputs = [this.titleInput, this.categoryInput];
   }
 
   state = {
@@ -46,6 +43,7 @@ class AddTask extends React.Component {
 
   componentDidUpdate() {
     if (this.triggerSubmit) return this.submit();
+    this.skipAutoFilledCategoryStep();
 
     // Auto focus on the next input displayed
     setTimeout(() => this.inputs[this.state.step].current.focus(), 200);
@@ -125,6 +123,13 @@ class AddTask extends React.Component {
       success = false;
       setTimeout(() => this.setState({ success }), 1000);
     });
+  }
+
+  skipAutoFilledCategoryStep() {
+    const skip = this.state.step === 1 && this.categoryInput.current.value !== '';
+    if (!skip) return;
+
+    return this.setState({ step: this.state.step + 1 });
   }
 
   submit() {
