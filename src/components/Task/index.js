@@ -60,7 +60,7 @@ const Wrapper = styled(Card)`
   opacity: var(--opacity);
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: default;
 
   &:hover {
     background-color: ${COLORS.lightgray};

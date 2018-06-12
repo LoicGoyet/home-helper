@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import Input from '../Input';
 
-const FormGroup = ({ help, id, label, pattern, placeholder, required, type }) => (
+const FormGroup = ({ help, id, label, pattern, placeholder, required, type, ...props }) => (
   <Wrapper htmlFor={id}>
     <Label>{label}</Label>
-    <Input type={type} id={id} name={id} required={required} placeholder={placeholder} pattern={pattern} />
+    <Input type={type} id={id} name={id} required={required} placeholder={placeholder} pattern={pattern} {...props} />
     {help !== undefined && <Help>{help}</Help>}
   </Wrapper>
 );
