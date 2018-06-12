@@ -37,10 +37,6 @@ class AddTask extends React.Component {
     success: false,
   };
 
-  componentDidMount() {
-    this.titleInput.current.focus();
-  }
-
   componentDidUpdate() {
     if (this.triggerSubmit) return this.submit();
     this.skipAutoFilledCategoryStep();
