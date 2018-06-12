@@ -249,6 +249,19 @@ const Input = styled(InputComponent)`
   --border-color: transparent;
   flex-grow: 1;
   box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.25rem var(--inner-shadow-color);
+
+  &:invalid {
+    --inner-shadow-color: ${COLORS.lightgray};
+  }
+
+  &:focus:invalid {
+    --border-color: transparent;
+    --inner-shadow-color: ${COLORS.blue};
+  }
+
+  &:not(:placeholder-shown):invalid {
+    --inner-shadow-color: ${COLORS.lightgray};
+  }
 `;
 
 const Submit = styled(Button).attrs({

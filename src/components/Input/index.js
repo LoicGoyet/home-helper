@@ -24,14 +24,15 @@ const El = styled.input`
   --border-color: ${COLORS.lightgray};
   --outer-shadow-color: transparent;
   --inner-shadow-color: transparent;
+  --box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.125rem var(--inner-shadow-color),
+    0 0 0 0.125rem var(--outer-shadow-color);
 
   font-size: 1rem;
   padding: 0.75rem;
   border: 0;
   display: block;
   width: 100%;
-  box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.125rem var(--inner-shadow-color),
-    0 0 0 0.125rem var(--outer-shadow-color);
+  box-shadow: var(--box-shadow);
 
   &:focus {
     --border-color: ${COLORS.blue};
