@@ -11,6 +11,8 @@ class Task extends React.Component {
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
       done: PropTypes.bool.isRequired,
+      quantity: PropTypes.number.isRequired,
+      quantityUnit: PropTypes.string.isRequired,
     }).isRequired,
     toggleTask: PropTypes.func.isRequired,
     style: PropTypes.object,
@@ -42,12 +44,17 @@ class Task extends React.Component {
   }
 
   render() {
-    const { title } = this.props.task;
+    const { title, quantity, quantityUnit } = this.props.task;
 
     return (
       <Wrapper style={this.themeVars} onClick={this.toggleTask}>
         <FakeCheckbox style={this.themeVars} />
-        <Label>{title}</Label>
+        <Label>
+          {title}
+          <Quantity>
+            {quantity} {quantityUnit}
+          </Quantity>
+        </Label>
       </Wrapper>
     );
   }
@@ -91,4 +98,10 @@ const Label = styled.span`
   flex-grow: 1;
   min-width: 0;
   overflow: hidden;
+`;
+
+const Quantity = styled.span`
+  font-size: 0.8em;
+  font-style: italic;
+  margin-left: 1em;
 `;

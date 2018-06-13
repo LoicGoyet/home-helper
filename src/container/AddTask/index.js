@@ -8,7 +8,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addTask: (title, category) => dispatch(todos.addTask(title, category)),
+  addTask: (title, category, quantity, quantityUnit) =>
+    dispatch(todos.addTask(title, category, quantity, quantityUnit)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTask);

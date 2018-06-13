@@ -8,6 +8,7 @@ import { uniq } from '../../utils/arrays';
 import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComponent from '../Input';
+import Select from '../Select';
 
 class AddTask extends React.Component {
   static propTypes = {
@@ -28,8 +29,10 @@ class AddTask extends React.Component {
 
     this.titleInput = React.createRef();
     this.categoryInput = React.createRef();
+    this.quantityInput = React.createRef();
+    this.quantityUnitInput = React.createRef();
 
-    this.inputs = [this.titleInput, this.categoryInput];
+    this.inputs = [this.titleInput, this.categoryInput, [this.quantityInput, this.quantityUnitInput]];
   }
 
   state = {
@@ -42,7 +45,9 @@ class AddTask extends React.Component {
     this.skipAutoFilledCategoryStep();
 
     // Auto focus on the next input displayed
-    setTimeout(() => this.inputs[this.state.step].current.focus(), 200);
+    const step = this.inputs[this.state.step];
+    const nextInput = Array.isArray(step) ? step[0] : step;
+    setTimeout(() => nextInput.current.focus(), 200);
   }
 
   get categories() {
@@ -77,9 +82,10 @@ class AddTask extends React.Component {
   getAutoCategory() {
     const { value } = this.titleInput.current;
     const taskWtSameTitle = this.props.tasks.find(({ title }) => title === value);
-    if (!taskWtSameTitle) return;
+    if (!taskWtSameTitle) return true;
 
     this.categoryInput.current.value = taskWtSameTitle.category;
+    return false;
   }
 
   getFormStepThemeVars(index) {
@@ -122,16 +128,18 @@ class AddTask extends React.Component {
   }
 
   skipAutoFilledCategoryStep() {
-    const skip = this.state.step === 1 && this.categoryInput.current.value !== '';
-    if (!skip) return;
-
+    if (this.state.step !== 1) return;
+    this.getAutoCategory();
+    if (this.categoryInput.current.value === '') return;
     return this.setState({ step: this.state.step + 1 });
   }
 
   submit() {
     const titleInput = this.titleInput.current;
     const categoryInput = this.categoryInput.current;
-    this.props.addTask(titleInput.value, categoryInput.value);
+    const quantityInput = this.quantityInput.current;
+    const quantityUnitInput = this.quantityUnitInput.current;
+    this.props.addTask(titleInput.value, categoryInput.value, parseInt(quantityInput.value), quantityUnitInput.value);
     this.reset();
     this.displaySuccessMessage();
   }
@@ -165,7 +173,6 @@ class AddTask extends React.Component {
                   list="title-suggestions"
                   placeholder="nom du produit"
                   required={this.isInputRequired(0)}
-                  onChange={this.getAutoCategory}
                 />
               </FormRow>
             </FormStep>
@@ -181,6 +188,26 @@ class AddTask extends React.Component {
                   placeholder="categorie"
                   required={this.isInputRequired(1)}
                 />
+              </FormRow>
+            </FormStep>
+
+            <FormStep style={this.getFormStepThemeVars(2)}>
+              <FormRow>
+                <Label>Quantité</Label>
+
+                <Input
+                  type="number"
+                  min="1"
+                  reference={this.quantityInput}
+                  placeholder="nombre"
+                  required={this.isInputRequired(2)}
+                />
+
+                <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
+                  <option value="piece">pièce</option>
+                  <option value="grams">grammes</option>
+                  <option value="milliliters">millilitres</option>
+                </Select>
               </FormRow>
             </FormStep>
 

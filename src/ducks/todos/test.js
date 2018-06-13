@@ -4,13 +4,17 @@ describe('actions', () => {
   it('should create an action to add a task', () => {
     const title = 'Tomatoes';
     const category = 'Fruits & Vegetables';
+    const quantity = 2;
+    const quantityUnit = 'piece';
     const expectedAction = {
       type: ducks.ADD_TASK,
       title,
       category,
+      quantity,
+      quantityUnit,
     };
 
-    expect(ducks.addTask(title, category)).toEqual(expectedAction);
+    expect(ducks.addTask(title, category, quantity, quantityUnit)).toEqual(expectedAction);
   });
 
   it('should create an action to toggle a task', () => {
@@ -29,6 +33,8 @@ describe('reducer', () => {
     id: 0,
     title: 'Tomatoes',
     category: 'Fruits & Vegetables',
+    quantity: 2,
+    quantityUnit: 'piece',
     done: false,
     ...props,
   });
@@ -40,15 +46,23 @@ describe('reducer', () => {
   it(`should handle ${ducks.ADD_TASK}`, () => {
     const title = 'Ketchup';
     const category = 'Grocery';
-    const action = ducks.addTask(title, category);
+    const quantity = 1;
+    const quantityUnit = 'piece';
+    const action = ducks.addTask(title, category, quantity, quantityUnit);
     expect(reducer(undefined, action)).toEqual({
       baseId: 1,
-      tasks: [taskShape({ title, category })],
+      tasks: [taskShape({ title, category, quantity, quantityUnit })],
+      units: {
+        [title]: quantityUnit,
+      },
     });
 
     const state = {
       baseId: 1,
       tasks: [taskShape()],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
     };
 
     expect(reducer(state, action)).toEqual({
@@ -59,8 +73,70 @@ describe('reducer', () => {
           id: 1,
           title,
           category,
+          quantity,
+          quantityUnit,
         }),
       ],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+        [title]: quantityUnit,
+      },
+    });
+  });
+
+  it(`should handle change quantity ${ducks.ADD_TASK} to a not done task`, () => {
+    const { title, category, quantity, quantityUnit } = taskShape();
+    const action = ducks.addTask(title, category, quantity, quantityUnit);
+
+    const state = {
+      baseId: 1,
+      tasks: [taskShape()],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
+    };
+
+    expect(reducer(state, action)).toEqual({
+      baseId: 1,
+      tasks: [
+        taskShape({
+          quantity: quantity * 2,
+        }),
+      ],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
+    });
+  });
+
+  it(`should handle change quantity ${ducks.ADD_TASK} to a not done task`, () => {
+    const { title, category, quantityUnit } = taskShape();
+    const quantity = 10;
+    const action = ducks.addTask(title, category, quantity, quantityUnit);
+
+    const state = {
+      baseId: 1,
+      tasks: [
+        taskShape({
+          done: true,
+        }),
+      ],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
+    };
+
+    expect(reducer(state, action)).toEqual({
+      baseId: 1,
+      tasks: [
+        taskShape({
+          quantity,
+          done: false,
+        }),
+      ],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
     });
   });
 
