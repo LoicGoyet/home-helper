@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MdSettings } from 'react-icons/lib/md';
 
-import COLORS from '../../style/colors';
 import TasksList from '../TasksList';
-import Card from '../Card';
 import FormGroup from '../FormGroup';
 import Button from '../Button';
+import Modal from '../Modal';
 
 class TodosSection extends React.Component {
   static propTypes = {
@@ -29,16 +28,6 @@ class TodosSection extends React.Component {
     isOptionsOpen: false,
   };
 
-  get themeVars() {
-    const { isOptionsOpen } = this.state;
-
-    return {
-      '--options-transform': isOptionsOpen ? 'translateX(0)' : 'translateX(100%)',
-      '--option-backdrop-pointer-events': isOptionsOpen ? 'initial' : 'none',
-      '--option-backdrop-opacity': isOptionsOpen ? 0.75 : 0,
-    };
-  }
-
   toggleOptions = () => this.setState({ isOptionsOpen: !this.state.isOptionsOpen });
 
   submitOptions = event => {
@@ -53,24 +42,22 @@ class TodosSection extends React.Component {
     const { category } = this.props.section;
 
     return (
-      <React.Fragment>
-        <OptionBackdrop style={this.themeVars} onClick={this.toggleOptions} />
+      <Modal isOpen={this.state.isOptionsOpen} toggle={this.toggleOptions}>
+        <OptionHeading>Réglages {category}</OptionHeading>
 
-        <OptionWrapper style={this.themeVars}>
-          <form onSubmit={this.submitOptions}>
-            <FormGroup
-              id={`${category}-title`}
-              label="title"
-              defaultValue={category}
-              innerRef={this.categoryOptionsInput}
-            />
+        <form onSubmit={this.submitOptions}>
+          <FormGroup
+            id={`${category}-title`}
+            label="nom de catégorie"
+            defaultValue={category}
+            innerRef={this.categoryOptionsInput}
+          />
 
-            <OptionSubmit type="submit" theme="success" block>
-              Enregistrer
-            </OptionSubmit>
-          </form>
-        </OptionWrapper>
-      </React.Fragment>
+          <OptionSubmit type="submit" theme="success" block>
+            Enregistrer
+          </OptionSubmit>
+        </form>
+      </Modal>
     );
   }
 
@@ -127,33 +114,12 @@ const SettingsTrigger = styled.button`
   }
 `;
 
-const OptionWrapper = styled(Card)`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  max-width: 300px;
-  width: calc(100% - 60px);
-  z-index: 1000;
-  transform: var(--options-transform);
-  transition: all 200ms ease-in-out;
+const OptionHeading = styled.h3`
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
 `;
 
 const OptionSubmit = styled(Button)`
   margin-left: auto;
   display: flex;
-`;
-
-const OptionBackdrop = styled.button`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: 999;
-  background-color: ${COLORS.violet};
-  pointer-events: var(--option-backdrop-pointer-events);
-  opacity: var(--option-backdrop-opacity);
-  transition: all 200ms ease-in-out;
-  border: 0;
 `;
