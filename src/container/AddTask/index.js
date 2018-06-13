@@ -5,6 +5,7 @@ import * as todos from '../../ducks/todos';
 
 const mapStateToProps = state => ({
   tasks: state.todos.tasks,
+  units: state.todos.units,
 });
 
 const mapDispatchToProps = dispatch => ({

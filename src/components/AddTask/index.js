@@ -14,10 +14,12 @@ class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
     tasks: PropTypes.arrayOf(PropTypes.object),
+    units: PropTypes.object,
   };
 
   static defaultProps = {
     tasks: [],
+    units: [],
   };
 
   constructor(props) {
@@ -38,11 +40,12 @@ class AddTask extends React.Component {
   state = {
     step: 0,
     success: false,
+    autoQuantityUnit: undefined,
   };
 
   componentDidUpdate() {
     if (this.triggerSubmit) return this.submit();
-    this.skipAutoFilledCategoryStep();
+    this.autoFillInputs();
 
     // Auto focus on the next input displayed
     const step = this.inputs[this.state.step];
@@ -88,6 +91,12 @@ class AddTask extends React.Component {
     return false;
   }
 
+  getAutoQuantityUnit() {
+    const { value } = this.titleInput.current;
+    const autoQuantityUnit = this.props.units[value];
+    if (autoQuantityUnit) this.setState({ autoQuantityUnit });
+  }
+
   getFormStepThemeVars(index) {
     const { step } = this.state;
     const active = index === step;
@@ -114,7 +123,7 @@ class AddTask extends React.Component {
   }
 
   reset() {
-    this.setState({ step: 0 });
+    this.setState({ step: 0, autoQuantityUnit: undefined });
     this.form.current.reset();
     this.inputs[0].current.focus();
   }
@@ -127,19 +136,22 @@ class AddTask extends React.Component {
     });
   }
 
-  skipAutoFilledCategoryStep() {
+  autoFillInputs() {
     if (this.state.step !== 1) return;
     this.getAutoCategory();
+    this.getAutoQuantityUnit();
     if (this.categoryInput.current.value === '') return;
     return this.setState({ step: this.state.step + 1 });
   }
 
   submit() {
-    const titleInput = this.titleInput.current;
-    const categoryInput = this.categoryInput.current;
-    const quantityInput = this.quantityInput.current;
-    const quantityUnitInput = this.quantityUnitInput.current;
-    this.props.addTask(titleInput.value, categoryInput.value, parseInt(quantityInput.value), quantityUnitInput.value);
+    const title = this.titleInput.current.value;
+    const category = this.categoryInput.current.value;
+    const quantity = parseInt(this.quantityInput.current.value);
+    const quantityUnit = this.quantityUnitInput.current
+      ? this.quantityUnitInput.current.value
+      : this.state.autoQuantityUnit;
+    this.props.addTask(title, category, quantity, quantityUnit);
     this.reset();
     this.displaySuccessMessage();
   }
@@ -159,6 +171,7 @@ class AddTask extends React.Component {
   }
 
   render() {
+    const { autoQuantityUnit } = this.state;
     return (
       <React.Fragment>
         <Wrapper>
@@ -203,11 +216,15 @@ class AddTask extends React.Component {
                   required={this.isInputRequired(2)}
                 />
 
-                <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
-                  <option value="piece">pièce</option>
-                  <option value="grams">grammes</option>
-                  <option value="milliliters">millilitres</option>
-                </Select>
+                {autoQuantityUnit === undefined && (
+                  <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
+                    <option value="piece">pièce</option>
+                    <option value="grams">grammes</option>
+                    <option value="milliliters">millilitres</option>
+                  </Select>
+                )}
+
+                {autoQuantityUnit !== undefined && <Unit>{autoQuantityUnit}</Unit>}
               </FormRow>
             </FormStep>
 
@@ -314,4 +331,11 @@ const SuccessMessage = styled.div`
   transition: all 200ms linear;
   display: flex;
   align-items: center;
+`;
+
+const Unit = styled.span`
+  background-color: ${COLORS.white};
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
 `;
