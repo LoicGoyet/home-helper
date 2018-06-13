@@ -18,8 +18,8 @@ function loadStories() {
 injectGlobal`
   body {
     padding: 1rem;
-    background-color: ${COLORS.white};
     color: ${COLORS.black};
+    background-color: initial;
   }
 `;
 

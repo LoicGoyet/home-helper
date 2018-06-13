@@ -7,8 +7,8 @@ import Container from '../../components/Container';
 
 const Todos = () => (
   <Wrapper>
-    <TodosList />
     <AddTask />
+    <TodosList />
   </Wrapper>
 );
 
@@ -19,6 +19,6 @@ Todos.defaultProps = {
 export default Todos;
 
 const Wrapper = styled(Container)`
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 `;

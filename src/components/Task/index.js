@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Card from '../Card';
+import COLORS from '../../style/colors';
+
 class Task extends React.Component {
   static propTypes = {
     task: PropTypes.shape({
@@ -26,7 +29,10 @@ class Task extends React.Component {
     const { task, style } = this.props;
 
     return {
-      '--text-decoration': task.done ? 'line-through red' : 'initial',
+      '--text-decoration': task.done ? 'line-through' : 'initial',
+      '--opacity': task.done ? 0.5 : 'initial',
+      '--checkbox-bg-color': task.done ? 'currentColor' : COLORS.transparent,
+      '--checkbox-opacity': task.done ? 0.5 : 'initial',
       ...style,
     };
   }
@@ -40,7 +46,8 @@ class Task extends React.Component {
 
     return (
       <Wrapper style={this.themeVars} onClick={this.toggleTask}>
-        {title}
+        <FakeCheckbox style={this.themeVars} />
+        <Label>{title}</Label>
       </Wrapper>
     );
   }
@@ -48,6 +55,40 @@ class Task extends React.Component {
 
 export default Task;
 
-const Wrapper = styled.div`
+const Wrapper = styled(Card)`
   text-decoration: var(--text-decoration);
+  opacity: var(--opacity);
+  display: flex;
+  align-items: center;
+  cursor: default;
+
+  &:hover {
+    background-color: ${COLORS.lightgray};
+  }
+
+  & + & {
+    margin-top: 1px;
+  }
+`;
+
+const FakeCheckbox = styled.span`
+  content: '';
+  border: 1px solid;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+  color: ${COLORS.gray};
+  background-color: var(--checkbox-bg-color);
+  opacity: var(--checkbox-opacity);
+  flex-shrink: 0;
+`;
+
+const Label = styled.span`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  flex-grow: 1;
+  min-width: 0;
+  overflow: hidden;
 `;
