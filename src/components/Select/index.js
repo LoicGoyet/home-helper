@@ -8,22 +8,47 @@ export default class Select extends React.Component {
   static propTypes = {
     reference: PropTypes.object,
     children: PropTypes.node.isRequired,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
     reference: {},
+    className: undefined,
   };
 
   render() {
-    const { reference, children } = this.props;
+    const { reference, children, className } = this.props;
 
     return (
-      <El innerRef={reference} {...this.props}>
-        {children}
-      </El>
+      <Wrapper className={className}>
+        <El innerRef={reference} {...this.props}>
+          {children}
+        </El>
+      </Wrapper>
     );
   }
 }
+
+const Wrapper = styled.span`
+  position: relative;
+  display: flex;
+  width: 100%;
+
+  &::after {
+    position: absolute;
+    pointer-events: none;
+    z-index: 2;
+    content: '';
+    height: 0;
+    width: 0;
+    border-top: 9px solid;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-4.5px);
+  }
+`;
 
 const El = styled.select`
   --border-color: ${COLORS.lightgray};
@@ -35,9 +60,16 @@ const El = styled.select`
   font-size: 1rem;
   padding: 0.75rem;
   border: 0;
+  border-radius: 0;
   display: block;
   width: 100%;
   box-shadow: var(--box-shadow);
+  background-color: ${COLORS.white};
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* stylelint-enable property-no-vendor-prefix */
 
   &:focus {
     --border-color: ${COLORS.blue};

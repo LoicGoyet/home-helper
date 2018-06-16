@@ -8,7 +8,7 @@ import { uniq } from '../../utils/arrays';
 import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComponent from '../Input';
-import Select from '../Select';
+import SelectComponent from '../Select';
 
 class AddTask extends React.Component {
   static propTypes = {
@@ -289,6 +289,11 @@ const Input = styled(InputComponent)`
     --inner-shadow-color: ${COLORS.lightgray};
   }
 
+  &:focus {
+    position: relative;
+    z-index: 1;
+  }
+
   &:focus:invalid {
     --border-color: transparent;
     --inner-shadow-color: ${COLORS.blue};
@@ -326,4 +331,28 @@ const SuccessMessage = styled.div`
   transition: all 200ms linear;
   display: flex;
   align-items: center;
+`;
+
+const Select = styled(SelectComponent)`
+  flex-grow: 1;
+  margin-left: -0.25rem;
+
+  select {
+    --inner-shadow-color: ${COLORS.lightgray};
+    box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.25rem var(--inner-shadow-color);
+
+    &:focus {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:focus:invalid {
+      --border-color: transparent;
+      --inner-shadow-color: ${COLORS.blue};
+    }
+
+    &:not(:placeholder-shown):invalid {
+      --inner-shadow-color: ${COLORS.lightgray};
+    }
+  }
 `;
