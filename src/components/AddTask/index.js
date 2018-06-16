@@ -8,15 +8,18 @@ import { uniq } from '../../utils/arrays';
 import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComponent from '../Input';
+import SelectComponent from '../Select';
 
 class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
     tasks: PropTypes.arrayOf(PropTypes.object),
+    units: PropTypes.object,
   };
 
   static defaultProps = {
     tasks: [],
+    units: [],
   };
 
   constructor(props) {
@@ -28,21 +31,26 @@ class AddTask extends React.Component {
 
     this.titleInput = React.createRef();
     this.categoryInput = React.createRef();
+    this.quantityInput = React.createRef();
+    this.quantityUnitInput = React.createRef();
 
-    this.inputs = [this.titleInput, this.categoryInput];
+    this.inputs = [this.titleInput, this.categoryInput, [this.quantityInput, this.quantityUnitInput]];
   }
 
   state = {
     step: 0,
     success: false,
+    autoQuantityUnit: undefined,
   };
 
   componentDidUpdate() {
     if (this.triggerSubmit) return this.submit();
-    this.skipAutoFilledCategoryStep();
+    this.autoFillInputs();
 
     // Auto focus on the next input displayed
-    setTimeout(() => this.inputs[this.state.step].current.focus(), 200);
+    const step = this.inputs[this.state.step];
+    const nextInput = Array.isArray(step) ? step[0] : step;
+    setTimeout(() => nextInput.current.focus(), 200);
   }
 
   get categories() {
@@ -77,9 +85,16 @@ class AddTask extends React.Component {
   getAutoCategory() {
     const { value } = this.titleInput.current;
     const taskWtSameTitle = this.props.tasks.find(({ title }) => title === value);
-    if (!taskWtSameTitle) return;
+    if (!taskWtSameTitle) return true;
 
     this.categoryInput.current.value = taskWtSameTitle.category;
+    return false;
+  }
+
+  getAutoQuantityUnit() {
+    const { value } = this.titleInput.current;
+    if (!this.props.units[value]) return false;
+    this.quantityUnitInput.current.value = this.props.units[value];
   }
 
   getFormStepThemeVars(index) {
@@ -108,7 +123,7 @@ class AddTask extends React.Component {
   }
 
   reset() {
-    this.setState({ step: 0 });
+    this.setState({ step: 0, autoQuantityUnit: undefined });
     this.form.current.reset();
     this.inputs[0].current.focus();
   }
@@ -121,17 +136,22 @@ class AddTask extends React.Component {
     });
   }
 
-  skipAutoFilledCategoryStep() {
-    const skip = this.state.step === 1 && this.categoryInput.current.value !== '';
-    if (!skip) return;
-
+  autoFillInputs() {
+    if (this.state.step !== 1) return;
+    this.getAutoCategory();
+    this.getAutoQuantityUnit();
+    if (this.categoryInput.current.value === '') return;
     return this.setState({ step: this.state.step + 1 });
   }
 
   submit() {
-    const titleInput = this.titleInput.current;
-    const categoryInput = this.categoryInput.current;
-    this.props.addTask(titleInput.value, categoryInput.value);
+    const title = this.titleInput.current.value;
+    const category = this.categoryInput.current.value;
+    const quantity = parseInt(this.quantityInput.current.value);
+    const quantityUnit = this.quantityUnitInput.current
+      ? this.quantityUnitInput.current.value
+      : this.state.autoQuantityUnit;
+    this.props.addTask(title, category, quantity, quantityUnit);
     this.reset();
     this.displaySuccessMessage();
   }
@@ -165,7 +185,6 @@ class AddTask extends React.Component {
                   list="title-suggestions"
                   placeholder="nom du produit"
                   required={this.isInputRequired(0)}
-                  onChange={this.getAutoCategory}
                 />
               </FormRow>
             </FormStep>
@@ -181,6 +200,26 @@ class AddTask extends React.Component {
                   placeholder="categorie"
                   required={this.isInputRequired(1)}
                 />
+              </FormRow>
+            </FormStep>
+
+            <FormStep style={this.getFormStepThemeVars(2)}>
+              <FormRow>
+                <Label>Quantité</Label>
+
+                <Input
+                  type="number"
+                  min="1"
+                  reference={this.quantityInput}
+                  placeholder="nombre"
+                  required={this.isInputRequired(2)}
+                />
+
+                <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
+                  <option value="piece">pièce</option>
+                  <option value="grams">grammes</option>
+                  <option value="milliliters">millilitres</option>
+                </Select>
               </FormRow>
             </FormStep>
 
@@ -250,6 +289,11 @@ const Input = styled(InputComponent)`
     --inner-shadow-color: ${COLORS.lightgray};
   }
 
+  &:focus {
+    position: relative;
+    z-index: 1;
+  }
+
   &:focus:invalid {
     --border-color: transparent;
     --inner-shadow-color: ${COLORS.blue};
@@ -287,4 +331,28 @@ const SuccessMessage = styled.div`
   transition: all 200ms linear;
   display: flex;
   align-items: center;
+`;
+
+const Select = styled(SelectComponent)`
+  flex-grow: 1;
+  margin-left: -0.25rem;
+
+  select {
+    --inner-shadow-color: ${COLORS.lightgray};
+    box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.25rem var(--inner-shadow-color);
+
+    &:focus {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:focus:invalid {
+      --border-color: transparent;
+      --inner-shadow-color: ${COLORS.blue};
+    }
+
+    &:not(:placeholder-shown):invalid {
+      --inner-shadow-color: ${COLORS.lightgray};
+    }
+  }
 `;

@@ -13,7 +13,7 @@
   "prettier.singleQuote": true,
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.tabSize": 2,

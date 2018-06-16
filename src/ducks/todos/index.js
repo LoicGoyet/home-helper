@@ -7,25 +7,60 @@ export const UPDATE_CATEGORY = 'home-helper/todos/UPDATE_CATEGORY';
 export const defaultState = {
   baseId: 0,
   tasks: [],
+  units: {},
 };
 
 // Reducer
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_TASK: {
-      const { title, category } = action;
+      const { title, category, quantity, quantityUnit } = action;
 
-      const newTask = {
-        id: state.baseId,
-        title,
-        category,
-        done: false,
-      };
+      const getTask = stateTask => stateTask.title === title && stateTask.quantityUnit === quantityUnit;
+      const isOldTask = state.tasks.some(getTask);
+
+      let tasks = [];
+      if (isOldTask) {
+        const oldTask = state.tasks.find(getTask);
+        const newTask = {
+          ...oldTask,
+          quantity: oldTask.done ? quantity : oldTask.quantity + quantity,
+          done: false,
+        };
+
+        tasks = state.tasks.map(stateTask => {
+          if (stateTask.title !== newTask.title || stateTask.quantityUnit !== newTask.quantityUnit) return stateTask;
+          return newTask;
+        });
+      } else {
+        tasks = [
+          ...state.tasks,
+          {
+            id: state.baseId,
+            title,
+            category,
+            quantity,
+            quantityUnit,
+            done: false,
+          },
+        ];
+      }
+
+      const isUnitIsAlreadyInState = Object.keys(state.units).indexOf(title) > -1;
+      const units = isUnitIsAlreadyInState
+        ? state.units
+        : {
+            ...state.units,
+            [title]: quantityUnit,
+          };
+
+      const baseId = isOldTask ? state.baseId : state.baseId + 1;
 
       return {
         ...state,
-        baseId: state.baseId + 1,
-        tasks: [...state.tasks, newTask],
+        baseId,
+        tasks,
+        units,
       };
     }
 
@@ -66,10 +101,12 @@ export default reducer;
 
 // Action Creators
 
-export const addTask = (title, category) => ({
+export const addTask = (title, category, quantity, quantityUnit) => ({
   type: ADD_TASK,
   title,
   category,
+  quantity,
+  quantityUnit,
 });
 
 export const toggleTask = id => ({
