@@ -29,7 +29,7 @@ const reducer = (state = defaultState, action = {}) => {
         };
 
         tasks = state.tasks.map(stateTask => {
-          if (stateTask.title !== newTask.title) return stateTask;
+          if (stateTask.title !== newTask.title || stateTask.quantityUnit !== newTask.quantityUnit) return stateTask;
           return newTask;
         });
       } else {
