@@ -140,6 +140,38 @@ describe('reducer', () => {
     });
   });
 
+  it(`should create a new task ${ducks.ADD_TASK} if the title is the same but not the quantity unit`, () => {
+    const { title, category } = taskShape();
+    const quantity = 10;
+    const quantityUnit = 'grams';
+    const action = ducks.addTask(title, category, quantity, quantityUnit);
+
+    const state = {
+      baseId: 1,
+      tasks: [taskShape()],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
+    };
+
+    expect(reducer(state, action)).toEqual({
+      baseId: 2,
+      tasks: [
+        taskShape(),
+        taskShape({
+          id: 1,
+          title,
+          category,
+          quantity,
+          quantityUnit,
+        }),
+      ],
+      units: {
+        [taskShape().title]: taskShape().quantityUnit,
+      },
+    });
+  });
+
   it(`should handle ${ducks.TOGGLE_TASK}`, () => {
     const action = ducks.toggleTask(0);
     expect(reducer(undefined, action)).toEqual(ducks.defaultState);

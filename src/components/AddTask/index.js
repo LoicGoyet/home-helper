@@ -93,8 +93,8 @@ class AddTask extends React.Component {
 
   getAutoQuantityUnit() {
     const { value } = this.titleInput.current;
-    const autoQuantityUnit = this.props.units[value];
-    if (autoQuantityUnit) this.setState({ autoQuantityUnit });
+    if (!this.props.units[value]) return false;
+    this.quantityUnitInput.current.value = this.props.units[value];
   }
 
   getFormStepThemeVars(index) {
@@ -171,7 +171,6 @@ class AddTask extends React.Component {
   }
 
   render() {
-    const { autoQuantityUnit } = this.state;
     return (
       <React.Fragment>
         <Wrapper>
@@ -216,15 +215,11 @@ class AddTask extends React.Component {
                   required={this.isInputRequired(2)}
                 />
 
-                {autoQuantityUnit === undefined && (
-                  <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
-                    <option value="piece">pièce</option>
-                    <option value="grams">grammes</option>
-                    <option value="milliliters">millilitres</option>
-                  </Select>
-                )}
-
-                {autoQuantityUnit !== undefined && <Unit>{autoQuantityUnit}</Unit>}
+                <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
+                  <option value="piece">pièce</option>
+                  <option value="grams">grammes</option>
+                  <option value="milliliters">millilitres</option>
+                </Select>
               </FormRow>
             </FormStep>
 
@@ -331,11 +326,4 @@ const SuccessMessage = styled.div`
   transition: all 200ms linear;
   display: flex;
   align-items: center;
-`;
-
-const Unit = styled.span`
-  background-color: ${COLORS.white};
-  display: flex;
-  align-items: center;
-  padding: 0.75rem;
 `;

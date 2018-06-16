@@ -16,7 +16,7 @@ const reducer = (state = defaultState, action = {}) => {
     case ADD_TASK: {
       const { title, category, quantity, quantityUnit } = action;
 
-      const getTask = stateTask => stateTask.title === title;
+      const getTask = stateTask => stateTask.title === title && stateTask.quantityUnit === quantityUnit;
       const isOldTask = state.tasks.some(getTask);
 
       let tasks = [];
