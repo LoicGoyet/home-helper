@@ -240,20 +240,19 @@ class AddTask extends React.Component {
 export default AddTask;
 
 const Wrapper = styled.div`
-  margin: 1rem 0;
   position: relative;
-  height: 50px;
+  height: 3.125rem;
 `;
 
 const FormStep = styled.div`
-  height: 50px;
+  height: 3.125rem;
   transform: var(--transform);
   opacity: var(--opacity);
   pointer-events: var(--pointer-events);
   position: absolute;
   left: 0;
   top: 0;
-  right: 50px;
+  right: 3.125rem;
   transition: 200ms linear;
   z-index: 1;
 `;
@@ -307,7 +306,7 @@ const Input = styled(InputComponent)`
 const Submit = styled(Button).attrs({
   color: COLORS.blue,
   block: true,
-  square: '50px',
+  square: '3.125rem',
 })`
   position: absolute;
   top: 0;
