@@ -1,27 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import TodosList from '../../container/TodosList';
 import AddTask from '../../container/AddTask';
 import Container from '../../components/Container';
+import * as todos from '../../ducks/todos';
+import Config from '../../config';
 
-const Todos = () => (
-  <Wrapper>
-    <AddTaskWrapper>
-      <Container>
-        <AddTask />
-      </Container>
-    </AddTaskWrapper>
+const mapStateToProps = () => ({});
 
-    <TodosList />
-  </Wrapper>
-);
+const mapDispatchToProps = dispatch => ({
+  fetchTodos: () => dispatch(todos.fetch()),
+});
 
-Todos.defaultProps = {
-  children: undefined,
-};
+class Todos extends React.Component {
+  static propTypes = {
+    fetchTodos: PropTypes.func.isRequired,
+  };
 
-export default Todos;
+  componentWillMount() {
+    if (Config.USE_MOCK) return;
+    this.props.fetchTodos();
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <AddTaskWrapper>
+          <Container>
+            <AddTask />
+          </Container>
+        </AddTaskWrapper>
+
+        <TodosList />
+      </Wrapper>
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Todos);
 
 const Wrapper = styled(Container)`
   margin-top: 1rem;

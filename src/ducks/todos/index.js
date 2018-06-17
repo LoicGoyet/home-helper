@@ -1,9 +1,11 @@
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, select, put } from 'redux-saga/effects';
 
 import Config from '../../config';
+import database from '../../utils/database';
 
 // Actions
-export const FETCH_TASKS = 'home-helper/todos/FETCH_TASKS';
+export const FETCH = 'home-helper/todos/FETCH';
+export const FETCH_SUCCESS = 'home-helper/todos/FETCH_SUCCESS';
 export const ADD_TASK = 'home-helper/todos/ADD_TASK';
 export const TOGGLE_TASK = 'home-helper/todos/TOGGLE_TASK';
 export const UPDATE_CATEGORY = 'home-helper/todos/UPDATE_CATEGORY';
@@ -18,11 +20,15 @@ export const defaultState = {
 // Reducer
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
+    case FETCH_SUCCESS: {
+      return action.data;
+    }
+
     case ADD_TASK: {
       const { title, category, quantity, quantityUnit } = action;
 
       const getTask = stateTask => stateTask.title === title && stateTask.quantityUnit === quantityUnit;
-      const isOldTask = state.tasks.some(getTask);
+      const isOldTask = state.tasks && state.tasks.some(getTask);
 
       let tasks = [];
       if (isOldTask) {
@@ -125,21 +131,32 @@ export const updateCategory = (oldCategory, newCategory) => ({
   newCategory,
 });
 
+export const fetch = () => ({
+  type: FETCH,
+});
+
 // Sagas
 
-function* fetchTasks() {
+function* fetchTodos() {
   if (Config.USE_MOCK) return yield;
 
-  yield console.log('fetchTasks !');
+  const data = yield database
+    .ref('/todos')
+    .once('value')
+    .then(snapshot => snapshot.val());
+
+  yield put({ type: FETCH_SUCCESS, data });
 }
 
-function* saveTasks() {
+function* saveTodos() {
   if (Config.USE_MOCK) return yield;
-
-  yield console.log('saveTasks !');
+  const { todos } = yield select(state => state);
+  yield database.ref('/todos').set(todos);
 }
 
 export function* todosSaga() {
-  yield takeLatest(FETCH_TASKS, fetchTasks);
-  yield takeLatest(ADD_TASK, saveTasks);
+  yield takeLatest(FETCH, fetchTodos);
+  yield takeLatest(ADD_TASK, saveTodos);
+  yield takeLatest(TOGGLE_TASK, saveTodos);
+  yield takeLatest(UPDATE_CATEGORY, saveTodos);
 }
