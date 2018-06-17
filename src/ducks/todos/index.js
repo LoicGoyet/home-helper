@@ -1,4 +1,9 @@
+import { takeLatest } from 'redux-saga/effects';
+
+import Config from '../../config';
+
 // Actions
+export const FETCH_TASKS = 'home-helper/todos/FETCH_TASKS';
 export const ADD_TASK = 'home-helper/todos/ADD_TASK';
 export const TOGGLE_TASK = 'home-helper/todos/TOGGLE_TASK';
 export const UPDATE_CATEGORY = 'home-helper/todos/UPDATE_CATEGORY';
@@ -119,3 +124,22 @@ export const updateCategory = (oldCategory, newCategory) => ({
   oldCategory,
   newCategory,
 });
+
+// Sagas
+
+function* fetchTasks() {
+  if (Config.USE_MOCK) return yield;
+
+  yield console.log('fetchTasks !');
+}
+
+function* saveTasks() {
+  if (Config.USE_MOCK) return yield;
+
+  yield console.log('saveTasks !');
+}
+
+export function* todosSaga() {
+  yield takeLatest(FETCH_TASKS, fetchTasks);
+  yield takeLatest(ADD_TASK, saveTasks);
+}
