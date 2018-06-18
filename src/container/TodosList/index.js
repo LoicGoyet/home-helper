@@ -5,8 +5,9 @@ import { isIn } from '../../utils/arrays';
 import * as todos from '../../ducks/todos';
 
 const mapStateToProps = state => {
-  const undoneTasks = state.todos.tasks.filter(task => !task.done);
-  const doneTasks = state.todos.tasks.filter(task => task.done);
+  const tasks = state.todos.tasks || [];
+  const undoneTasks = tasks.filter(task => !task.done);
+  const doneTasks = tasks.filter(task => task.done);
 
   const tasksSections = undoneTasks.reduce((sections, task) => {
     const categories = sections.map(section => section.category);
