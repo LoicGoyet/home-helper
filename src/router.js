@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Todos from './views/Todos';
+import RecipesCollection from './views/RecipesCollection';
 import nodeEnv from './utils/nodeEnv';
 
 const Router = () => {
@@ -12,6 +13,7 @@ const Router = () => {
       <div>
         <Route exact path="/" component={Todos} />
         <Route exact path="/todos" component={Todos} />
+        <Route exact path="/recipes/collection" component={RecipesCollection} />
       </div>
     </BrowserRouter>
   );
