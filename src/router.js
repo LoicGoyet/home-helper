@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Todos from './views/Todos';
 import RecipesCollection from './views/RecipesCollection';
+import SuggestionsLists from './container/SuggestionsLists';
 import nodeEnv from './utils/nodeEnv';
 
 const Router = () => {
@@ -14,6 +15,7 @@ const Router = () => {
         <Route exact path="/" component={Todos} />
         <Route exact path="/todos" component={Todos} />
         <Route exact path="/recipes/collection" component={RecipesCollection} />
+        <SuggestionsLists />
       </div>
     </BrowserRouter>
   );
