@@ -1,5 +1,12 @@
 import React from 'react';
 
-const RecipesCollection = () => <div>Hello world !</div>;
+import AddRecipeInCollection from '../../container/AddRecipeInCollection';
+import Container from '../../components/Container';
+
+const RecipesCollection = () => (
+  <Container>
+    <AddRecipeInCollection />
+  </Container>
+);
 
 export default RecipesCollection;

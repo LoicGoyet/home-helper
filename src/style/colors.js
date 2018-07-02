@@ -6,7 +6,7 @@ const COLORS = {
   red: 'rgb(255, 18, 18)',
   transparent: 'rgba(0, 0, 0, 0)',
   blue: 'rgb(32, 83, 243)',
-  green: 'yellowgreen',
+  green: 'rgb(154, 205, 50)',
   violet: 'rgb(20, 10, 67)',
 };
 
