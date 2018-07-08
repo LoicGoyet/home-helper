@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { getContrastYIQ, alpha, darken, lighten, isLight } from '../../utils/colors';
 import COLORS from '../../style/colors';
@@ -11,19 +12,17 @@ class Button extends React.Component {
     children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
     color: ExtraPropTypes.color /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
     block: PropTypes.bool /* eslint-disable-line react/no-unused-prop-types */,
-    onClick: PropTypes.func,
-    className: PropTypes.string,
     square: PropTypes.string,
     style: PropTypes.object,
+    href: PropTypes.string,
   };
 
   static defaultProps = {
     color: '#140A43',
     block: false,
-    onClick: undefined,
-    className: '',
     square: undefined,
     style: {},
+    href: undefined,
   };
 
   get themeVars() {
@@ -52,7 +51,19 @@ class Button extends React.Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, href } = this.props;
+
+    if (href) {
+      // Avoid block props to be printed into Link tag
+      // eslint-disable-next-line no-unused-vars
+      const { block, ...props } = this.props;
+
+      return (
+        <LinkWrapper to={href} {...props} style={this.themeVars}>
+          {children}
+        </LinkWrapper>
+      );
+    }
 
     return (
       <Wrapper {...this.props} style={this.themeVars}>
@@ -64,7 +75,7 @@ class Button extends React.Component {
 
 export default Button;
 
-const Wrapper = styled.button`
+const BaseStyle = css`
   text-transform: uppercase;
   font-family: inherit;
   -moz-osx-font-smoothing: grayscale;
@@ -102,3 +113,6 @@ const Wrapper = styled.button`
     box-shadow: var(--box-shadow);
   }
 `;
+
+const Wrapper = styled.button(BaseStyle);
+const LinkWrapper = styled(Link)(BaseStyle);
