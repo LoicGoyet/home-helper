@@ -44,4 +44,7 @@ const mapDispatchToProps = dispatch => ({
   updateCategory: (oldCategory, newCategory) => dispatch(todos.updateCategory(oldCategory, newCategory)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodosList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodosList);

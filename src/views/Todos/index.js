@@ -40,7 +40,10 @@ class Todos extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Todos);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Todos);
 
 const Wrapper = styled(Container)`
   margin-top: 1rem;
