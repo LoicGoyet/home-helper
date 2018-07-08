@@ -110,7 +110,6 @@ const Wrapper = styled(Card)`
   transition: box-shadow var(--transition);
   box-shadow: var(--box-shadow);
   z-index: var(--z-index);
-  position: relative;
   overflow: hidden;
 `;
 
