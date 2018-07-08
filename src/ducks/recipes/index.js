@@ -11,7 +11,7 @@ export const defaultState = {
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_IN_COLLECTION: {
-      const { title, ingredients } = action;
+      const { title, tags, ingredients } = action;
 
       return {
         ...state,
@@ -21,6 +21,7 @@ const reducer = (state = defaultState, action = {}) => {
           {
             id: state.baseId,
             title,
+            tags,
             ingredients,
           },
         ],
@@ -36,8 +37,9 @@ export default reducer;
 
 // Action Creators
 
-export const addInCollection = (title, ingredients) => ({
+export const addInCollection = (title, tags, ingredients) => ({
   type: ADD_IN_COLLECTION,
   title,
+  tags,
   ingredients,
 });

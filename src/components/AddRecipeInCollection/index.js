@@ -21,6 +21,7 @@ class AddRecipeInCollection extends React.Component {
   constructor(props) {
     super(props);
     this.titleInput = React.createRef();
+    this.tagsInput = React.createRef();
 
     this.getIngredientValues = this.getIngredientValues.bind(this);
     this.addIngredient = this.addIngredient.bind(this);
@@ -35,11 +36,17 @@ class AddRecipeInCollection extends React.Component {
     event.preventDefault();
     const title = this.titleInput.current.value;
     const { ingredients } = this.state;
+    const tags = this.tagsValue;
 
     event.target.reset();
     this.setState({ ingredients: [{}] });
 
-    return this.props.addInCollection(title, ingredients);
+    return this.props.addInCollection(title, tags, ingredients);
+  }
+
+  get tagsValue() {
+    const tags = this.tagsInput.current.value.split(',');
+    return tags.map(tag => tag.trim());
   }
 
   getIngredientValues(index, values) {
@@ -62,6 +69,7 @@ class AddRecipeInCollection extends React.Component {
     return (
       <form onSubmit={this.onSubmit}>
         <FormGroup innerRef={this.titleInput} label="Nom" id="add-in-collection-id" />
+        <FormGroup innerRef={this.tagsInput} label="Tags" id="add-in-collection-tags" help="seperate tags by a comma" />
         {this.state.ingredients.map((ingredient, index) => (
           <IngredientForm
             key={`ingredient-${index}`}

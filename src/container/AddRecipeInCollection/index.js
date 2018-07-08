@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addInCollection: (title, ingredients) => dispatch(recipes.addInCollection(title, ingredients)),
+  addInCollection: (title, tags, ingredients) => dispatch(recipes.addInCollection(title, tags, ingredients)),
 });
 
 export default connect(
