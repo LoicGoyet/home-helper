@@ -1,20 +1,20 @@
 import React from 'react';
 
-import AddRecipeInCollection from '../../container/AddRecipeInCollection';
+import RecipesList from '../../container/RecipesList';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
 import PATHS from '../../router/paths';
 
-const RecipesAdd = () => (
+const RecipesCollection = () => (
   <Container>
     <header>
-      <Button href={PATHS.RECIPES_LIST} color="#fff" block>
-        Back to recipes
+      <Button href={PATHS.RECIPES_ADD} color="#fff" block>
+        Add recipe
       </Button>
     </header>
 
-    <AddRecipeInCollection />
+    <RecipesList />
   </Container>
 );
 
-export default RecipesAdd;
+export default RecipesCollection;

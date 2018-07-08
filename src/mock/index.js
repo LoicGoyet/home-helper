@@ -1,5 +1,6 @@
 import store from '../store';
 import { addTask } from '../ducks/todos';
+import { addInCollection } from '../ducks/recipes';
 import Config from '../config';
 
 export default () => {
@@ -17,4 +18,25 @@ export default () => {
   store.dispatch(addTask('Pizza', 'Produits Frais', 2, 'piece'));
   store.dispatch(addTask('Blanc de Poulet', 'Produits Frais', 2, 'piece'));
   store.dispatch(addTask('Émincés de Poulet', 'Produits Frais', 150, 'grams'));
+
+  store.dispatch(
+    addInCollection(
+      'Fish & Chips',
+      ['maison'],
+      [
+        {
+          title: 'Poisson pâné',
+          category: 'Poissonerie',
+          quantity: 2,
+          quantityUnit: 'units',
+        },
+        {
+          title: 'Pomme de terre',
+          category: 'Fruits & Légumes',
+          quantity: 200,
+          quantityUnit: 'grams',
+        },
+      ]
+    )
+  );
 };
