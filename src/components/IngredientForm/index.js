@@ -34,7 +34,7 @@ class IngredientForm extends React.Component {
     return this.props.onChange({
       title: this.titleInput.current.value,
       category: this.categoryInput.current.value,
-      quantityInput: this.quantityInput.current.value,
+      quantity: parseInt(this.quantityInput.current.value),
       quantityUnit: this.quantityUnitInput.current.value,
     });
   }
