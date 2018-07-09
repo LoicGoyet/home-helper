@@ -39,17 +39,13 @@ stories.add('available card', () => (
     ingredients={[
       {
         title: 'poison pané',
-        quantity: {
-          number: 2,
-          unit: 'pièces',
-        },
+        quantity: 2,
+        quantityUnit: 'pièces',
       },
       {
         title: 'pomme de terre',
-        quantity: {
-          number: 300,
-          unit: 'grammes',
-        },
+        quantity: 300,
+        quantityUnit: 'grammes',
       },
     ]}
   />
