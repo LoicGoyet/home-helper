@@ -11,6 +11,10 @@ const RecipesCollection = () => (
       <Button href={PATHS.RECIPES_ADD} color="#fff" block>
         Add recipe
       </Button>
+
+      <Button href={PATHS.RECIPES_PANTRY} color="#fff" block>
+        Pantry
+      </Button>
     </header>
 
     <RecipesList />

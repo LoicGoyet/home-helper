@@ -3,29 +3,36 @@ import { connect } from 'react-redux';
 
 import RecipesList from '../../components/RecipesList';
 import Button from '../../components/Button';
+import { addInPantry } from '../../ducks/recipes';
 
 const mapStateToProps = state => ({
-  recipes: state.recipes.collection.map(({ title, tags, id, ingredients }) => ({
-    title,
-    tags,
-    mainBtn: (
-      <Button onClick={e => e.stopPropagation()} block>
-        Add
-      </Button>
-    ),
-    ingredients: ingredients.map(ingredient => ({
-      title: ingredient.title,
-      quantity: {
-        number: ingredient.quantity,
-        unit: ingredient.quantityUnit,
-      },
-    })),
-  })),
+  collection: state.recipes.collection,
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  addInPantry: id => dispatch(addInPantry(id)),
+});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RecipesList);
+)(props => {
+  const recipes = props.collection.map(({ title, tags, id, ingredients }) => ({
+    title,
+    tags,
+    mainBtn: (
+      <Button
+        onClick={e => {
+          e.stopPropagation();
+          props.addInPantry(id);
+        }}
+        block
+      >
+        Add
+      </Button>
+    ),
+    ingredients,
+  }));
+
+  return <RecipesList recipes={recipes} />;
+});
