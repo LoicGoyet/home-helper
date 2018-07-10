@@ -3,8 +3,10 @@ import { addTask } from '../ducks/todos';
 import { addInCollection } from '../ducks/recipes';
 import Config from '../config';
 
+let mockIsLoaded = false;
+
 export default () => {
-  if (!Config.USE_MOCK) return;
+  if (!Config.USE_MOCK || mockIsLoaded) return;
   store.dispatch(addTask('Croissants', 'Boulangerie', 4, 'piece'));
   store.dispatch(addTask('Baguette', 'Boulangerie', 1, 'piece'));
   store.dispatch(addTask("Jus d'Orange", 'Boissons', 1, 'piece'));
@@ -39,4 +41,6 @@ export default () => {
       ]
     )
   );
+
+  mockIsLoaded = true;
 };
