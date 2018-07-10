@@ -50,7 +50,7 @@ class RecipesList extends React.Component {
 
           return (
             <Item
-              key={recipe.title}
+              key={`${recipe.title} ${recipe.id}`}
               onClick={() => this.toggleItemFocus(index)}
               isOpen={isOpen}
               theme={theme}

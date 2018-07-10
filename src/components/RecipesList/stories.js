@@ -30,24 +30,28 @@ const catalogActionRow = (
 const recipesCatalog = [
   {
     title: 'Burger Maison',
+    id: 0,
     tags: ['Maison'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
   },
   {
     title: 'Pizza',
+    id: 1,
     tags: ['Maison'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
   },
   {
     title: 'Quesadillas',
+    id: 2,
     tags: ['Maison'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
   },
   {
     title: 'Pané pâtes',
+    id: 3,
     tags: ['Maison', 'Bento'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
@@ -57,6 +61,7 @@ const recipesCatalog = [
 const availableList = [
   {
     title: 'Burger Maison',
+    id: 4,
     tags: ['Maison'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
@@ -119,6 +124,7 @@ const availableList = [
   },
   {
     title: 'Pizza',
+    id: 5,
     tags: ['Maison'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
@@ -131,6 +137,7 @@ const availableList = [
   },
   {
     title: 'Quesadillas',
+    id: 6,
     tags: ['Maison'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
@@ -163,6 +170,7 @@ const availableList = [
   },
   {
     title: 'Pané pâtes',
+    id: 7,
     tags: ['Maison', 'Bento'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
@@ -183,21 +191,25 @@ const availableList = [
 const unavailableList = [
   {
     title: 'Burger Maison',
+    id: 8,
     tags: ['Maison'],
     mainBtn: <CheckButton isChecked />,
   },
   {
     title: 'Pizza',
+    id: 9,
     tags: ['Maison'],
     mainBtn: <CheckButton isChecked />,
   },
   {
     title: 'Quesadillas',
+    id: 10,
     tags: ['Maison'],
     mainBtn: <CheckButton isChecked />,
   },
   {
     title: 'Pané pâtes',
+    id: 11,
     tags: ['Maison', 'Bento'],
     mainBtn: <CheckButton isChecked />,
   },
