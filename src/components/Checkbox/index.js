@@ -50,14 +50,12 @@ class Checkbox extends React.Component {
   }
 
   onFocus() {
-    console.log('focus');
     this.setState({
       focused: true,
     });
   }
 
   onBlur() {
-    console.log('blur');
     this.setState({
       focused: false,
     });
