@@ -1,4 +1,8 @@
 // Actions
+import { takeLatest, select, put, all } from 'redux-saga/effects';
+
+import { ADD_TASK } from '../todos';
+
 export const ADD_IN_COLLECTION = 'home-helper/recipes/ADD_IN_COLLECTION';
 export const ADD_IN_PANTRY = 'home-helper/recipes/ADD_IN_PANTRY';
 export const TOGGLE_AVAILABILITY_IN_PANTRY = 'home-helper/recipes/TOGGLE_AVAILABILITY_IN_PANTRY';
@@ -10,6 +14,9 @@ export const defaultState = {
   collection: [],
   pantry: [],
 };
+
+// Selectors
+const getRecipeInCollection = (state, id) => state.collection.find(recipe => recipe.id === id);
 
 // Reducer
 const reducer = (state = defaultState, action = {}) => {
@@ -33,7 +40,7 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case ADD_IN_PANTRY: {
-      const recipeSelected = state.collection.find(recipe => recipe.id === action.id);
+      const recipeSelected = getRecipeInCollection(state, action.id);
       return {
         ...state,
         basePantryId: state.basePantryId + 1,
@@ -49,7 +56,6 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case TOGGLE_AVAILABILITY_IN_PANTRY: {
-      console.log('reducer');
       return {
         ...state,
         pantry: [
@@ -90,3 +96,13 @@ export const toggleAvailabilityInPantry = id => ({
   type: TOGGLE_AVAILABILITY_IN_PANTRY,
   id,
 });
+
+function* addIngredientsInTodos({ id }) {
+  const { ingredients } = yield select(state => getRecipeInCollection(state.recipes, id));
+
+  yield all(ingredients.map(ingredient => put({ type: ADD_TASK, ...ingredient })));
+}
+
+export function* recipesSaga() {
+  yield takeLatest(ADD_IN_PANTRY, addIngredientsInTodos);
+}
