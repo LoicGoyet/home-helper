@@ -49,11 +49,14 @@ const reducer = (state = defaultState, action = {}) => {
 
     case ADD_IN_PANTRY: {
       const recipeSelected = getRecipeInCollection(state, action.id);
+
+      const pantry = state.pantry || [];
+
       return {
         ...state,
         basePantryId: state.basePantryId + 1,
         pantry: [
-          ...state.pantry,
+          ...pantry,
           {
             id: state.basePantryId,
             done: false,
@@ -118,12 +121,10 @@ function* addIngredientsInTodos({ id }) {
 }
 
 function* fetchRecipes() {
-  const { recipes } = select(state => state);
-
-  if (Config.USE_MOCK || recipes !== defaultState || recipes === undefined) return yield;
+  if (Config.USE_MOCK) return yield;
 
   const data = yield database
-    .ref('/todos')
+    .ref('/recipes')
     .once('value')
     .then(snapshot => snapshot.val());
 

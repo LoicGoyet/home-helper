@@ -6,10 +6,13 @@ import RecipesList from '../../components/RecipesList';
 import Checkbox from '../../components/Checkbox';
 import { toggleAvailabilityInPantry } from '../../ducks/recipes';
 
-const mapStateToProps = state => ({
-  available: state.recipes.pantry.filter(recipe => !recipe.done),
-  eaten: state.recipes.pantry.filter(recipe => recipe.done).slice(0, 5),
-});
+const mapStateToProps = state => {
+  const pantry = state.recipes.pantry || [];
+  return {
+    available: pantry.filter(recipe => !recipe.done),
+    eaten: pantry.filter(recipe => recipe.done).slice(0, 5),
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   toggleAvailabilityInPantry: bindActionCreators(toggleAvailabilityInPantry, dispatch),
