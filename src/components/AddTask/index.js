@@ -48,6 +48,7 @@ class AddTask extends React.Component {
     this.autoFillInputs();
 
     // Auto focus on the next input displayed
+    if (this.state.step === 0) return;
     const step = this.inputs[this.state.step];
     const nextInput = Array.isArray(step) ? step[0] : step;
     setTimeout(() => nextInput.current.focus(), 200);

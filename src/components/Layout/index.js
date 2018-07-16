@@ -71,6 +71,7 @@ const Menu = styled.nav`
   display: flex;
   padding: 2px;
   height: 60px;
+  z-index: 10;
 `;
 
 const MenuLink = styled(NavLink)`
