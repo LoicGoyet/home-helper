@@ -8,7 +8,7 @@ import { toggleAvailabilityInPantry } from '../../ducks/recipes';
 
 const mapStateToProps = state => ({
   available: state.recipes.pantry.filter(recipe => !recipe.done),
-  eaten: state.recipes.pantry.filter(recipe => recipe.done),
+  eaten: state.recipes.pantry.filter(recipe => recipe.done).slice(0, 5),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -42,9 +42,9 @@ const recipeList = (collection, onChange, done = false) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(props => (
-  <React.Fragment>
-    {recipeList(props.available, props.toggleAvailabilityInPantry)}
-    {recipeList(props.eaten, props.toggleAvailabilityInPantry, true)}
-  </React.Fragment>
+)(({ available, eaten, ...props }) => (
+  <div style={{ marginBottom: '-1rem' }}>
+    {available.length > 0 && recipeList(available, props.toggleAvailabilityInPantry)}
+    {eaten.length > 0 && recipeList(eaten, props.toggleAvailabilityInPantry, true)}
+  </div>
 ));

@@ -18,7 +18,7 @@ class Button extends React.Component {
   };
 
   static defaultProps = {
-    color: '#140A43',
+    color: COLORS.violet,
     block: false,
     square: undefined,
     style: {},
@@ -96,6 +96,7 @@ const BaseStyle = css`
   width: var(--width);
   padding: var(--padding);
   position: relative;
+  text-decoration: none;
 
   background-color: var(--bg-color);
   color: var(--color);

@@ -3,11 +3,12 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
+import Container from '../Container';
 import COLORS from '../../style/colors';
 import { darken } from '../../utils/colors';
 
 const Layout = ({ children, menu }) => (
-  <div>
+  <Wrapper>
     <main>{children}</main>
 
     <Menu>
@@ -37,7 +38,7 @@ const Layout = ({ children, menu }) => (
     </Menu>
 
     <MenuPlaceholder />
-  </div>
+  </Wrapper>
 );
 
 Layout.propTypes = {
@@ -56,6 +57,11 @@ Layout.defaultProps = {
 };
 
 export default Layout;
+
+const Wrapper = styled(Container)`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+`;
 
 const Menu = styled.nav`
   position: fixed;

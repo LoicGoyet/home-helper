@@ -45,9 +45,7 @@ export default connect(
   mapDispatchToProps
 )(Todos);
 
-const Wrapper = styled(Container)`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+const Wrapper = styled.section`
   padding-top: 4.125rem;
 `;
 
@@ -57,5 +55,4 @@ const AddTaskWrapper = styled.header`
   left: 0;
   width: 100%;
   margin: 1rem 0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;

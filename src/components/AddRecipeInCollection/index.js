@@ -79,13 +79,17 @@ class AddRecipeInCollection extends React.Component {
           />
         ))}
 
-        <Button onClick={this.addIngredient} block>
-          Add ingredient
-        </Button>
+        <div>
+          <Button onClick={this.addIngredient} block style={{ marginLeft: '-16px' }}>
+            Nouvel ingredient
+          </Button>
+        </div>
 
-        <Button type="submit" block color={COLORS.green}>
-          Submit
-        </Button>
+        <div style={{ textAlign: 'right' }}>
+          <Button type="submit" block color={COLORS.green}>
+            Enregistrer
+          </Button>
+        </div>
       </form>
     );
   }

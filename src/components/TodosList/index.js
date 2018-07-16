@@ -11,8 +11,6 @@ const TodosList = ({ tasksSections, doneTasks, updateCategory }) => (
         <TodosSection key={section.category} section={section} updateCategory={updateCategory} />
       ))}
 
-    {tasksSections.length > 0 && doneTasks.length > 0 && <hr />}
-
     {doneTasks.length > 0 && <TasksList tasks={doneTasks} />}
   </React.Fragment>
 );

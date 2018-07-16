@@ -16,19 +16,19 @@ const Router = () => {
 
   const menu = [
     {
-      icon: FaShoppingCart,
-      path: PATHS.TODOS,
-      label: 'liste de courses',
-    },
-    {
       icon: FaBook,
       path: PATHS.RECIPES_LIST,
       label: 'livre de recettes',
     },
     {
+      icon: FaShoppingCart,
+      path: PATHS.TODOS,
+      label: 'liste de courses',
+    },
+    {
       icon: FaInbox,
       path: PATHS.RECIPES_PANTRY,
-      label: 'garde manger',
+      label: 'au menu',
     },
   ];
 

@@ -28,7 +28,7 @@ export default connect(
         }}
         block
       >
-        Add
+        Ajouter
       </Button>
     ),
     ingredients,
