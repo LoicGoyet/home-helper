@@ -2,7 +2,11 @@
 import { takeLatest, select, put, all } from 'redux-saga/effects';
 
 import { ADD_TASK } from '../todos';
+import Config from '../../config';
+import database from '../../utils/database';
 
+export const FETCH = 'home-helper/recipes/FETCH';
+export const FETCH_SUCCESS = 'home-helper/recipes/FETCH_SUCCESS';
 export const ADD_IN_COLLECTION = 'home-helper/recipes/ADD_IN_COLLECTION';
 export const ADD_IN_PANTRY = 'home-helper/recipes/ADD_IN_PANTRY';
 export const TOGGLE_AVAILABILITY_IN_PANTRY = 'home-helper/recipes/TOGGLE_AVAILABILITY_IN_PANTRY';
@@ -21,6 +25,10 @@ const getRecipeInCollection = (state, id) => state.collection.find(recipe => rec
 // Reducer
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
+    case FETCH_SUCCESS: {
+      return action.data;
+    }
+
     case ADD_IN_COLLECTION: {
       const { title, tags, ingredients } = action;
 
@@ -97,12 +105,41 @@ export const toggleAvailabilityInPantry = id => ({
   id,
 });
 
+export const fetch = () => ({
+  type: FETCH,
+});
+
+// Sagas
+
 function* addIngredientsInTodos({ id }) {
   const { ingredients } = yield select(state => getRecipeInCollection(state.recipes, id));
 
   yield all(ingredients.map(ingredient => put({ type: ADD_TASK, ...ingredient })));
 }
 
+function* fetchRecipes() {
+  const { recipes } = select(state => state);
+
+  if (Config.USE_MOCK || recipes !== defaultState || recipes === undefined) return yield;
+
+  const data = yield database
+    .ref('/todos')
+    .once('value')
+    .then(snapshot => snapshot.val());
+
+  yield put({ type: FETCH_SUCCESS, data });
+}
+
+function* saveRecipes() {
+  if (Config.USE_MOCK) return yield;
+  const { recipes } = yield select(state => state);
+  yield database.ref('/recipes').set(recipes);
+}
+
 export function* recipesSaga() {
+  yield takeLatest(FETCH, fetchRecipes);
   yield takeLatest(ADD_IN_PANTRY, addIngredientsInTodos);
+  yield takeLatest(ADD_IN_COLLECTION, saveRecipes);
+  yield takeLatest(ADD_IN_PANTRY, saveRecipes);
+  yield takeLatest(TOGGLE_AVAILABILITY_IN_PANTRY, saveRecipes);
 }
