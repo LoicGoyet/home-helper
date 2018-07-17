@@ -1,6 +1,6 @@
 import store from '../store';
 import { addTask } from '../ducks/todos';
-import { addInCollection } from '../ducks/recipes';
+import { addInCollection, addInPantry } from '../ducks/recipes';
 import Config from '../config';
 
 let mockIsLoaded = false;
@@ -41,6 +41,31 @@ export default () => {
       ]
     )
   );
+
+  store.dispatch(
+    addInCollection(
+      'Cordon bleu & pates',
+      ['maison', 'bento'],
+      [
+        {
+          title: 'Cordon bleu',
+          category: 'Produits Frais',
+          quantity: 2,
+          quantityUnit: 'units',
+        },
+        {
+          title: 'Pates',
+          category: 'Épicerie salée',
+          quantity: 160,
+          quantityUnit: 'grams',
+        },
+      ]
+    )
+  );
+
+  store.dispatch(addInPantry(0));
+  store.dispatch(addInPantry(1));
+  store.dispatch(addInPantry(1));
 
   mockIsLoaded = true;
 };
