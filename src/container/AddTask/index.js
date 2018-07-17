@@ -13,4 +13,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(todos.addTask(title, category, quantity, quantityUnit)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTask);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddTask);

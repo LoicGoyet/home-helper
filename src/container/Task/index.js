@@ -9,4 +9,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   toggleTask: () => dispatch(todos.toggleTask(ownProps.task.id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Task);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Task);

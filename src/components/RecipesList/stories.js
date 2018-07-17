@@ -30,24 +30,28 @@ const catalogActionRow = (
 const recipesCatalog = [
   {
     title: 'Burger Maison',
+    id: 0,
     tags: ['Maison'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
   },
   {
     title: 'Pizza',
+    id: 1,
     tags: ['Maison'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
   },
   {
     title: 'Quesadillas',
+    id: 2,
     tags: ['Maison'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
   },
   {
     title: 'Pané pâtes',
+    id: 3,
     tags: ['Maison', 'Bento'],
     mainBtn: <Button block>Ajouter</Button>,
     actionRow: catalogActionRow,
@@ -57,162 +61,128 @@ const recipesCatalog = [
 const availableList = [
   {
     title: 'Burger Maison',
+    id: 4,
     tags: ['Maison'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
       {
         title: 'salade',
-        quantity: {
-          number: 1,
-          unit: 'pièces',
-        },
+        quantity: 1,
+        quantityUnit: 'pièces',
       },
       {
         title: 'oignon fris',
-        quantity: {
-          number: 30,
-          unit: 'grammes',
-        },
+        quantity: 30,
+        quantityUnit: 'grammes',
       },
       {
         title: 'filet de poulet',
-        quantity: {
-          number: 2,
-          unit: 'pièces',
-        },
+        quantity: 2,
+        quantityUnit: 'pièces',
       },
       {
         title: 'oeuf',
-        quantity: {
-          number: 3,
-          unit: 'pièces',
-        },
+        quantity: 3,
+        quantityUnit: 'pièces',
       },
       {
         title: 'panure',
-        quantity: {
-          number: 100,
-          unit: 'grammes',
-        },
+        quantity: 100,
+        quantityUnit: 'grammes',
       },
       {
         title: 'farine',
-        quantity: {
-          number: 500,
-          unit: 'grammes',
-        },
+        quantity: 500,
+        quantityUnit: 'grammes',
       },
       {
         title: 'levure de boulanger',
-        quantity: {
-          number: 1,
-          unit: 'sachet',
-        },
+        quantity: 1,
+        quantityUnit: 'sachet',
       },
       {
         title: 'sel',
-        quantity: {
-          number: 8,
-          unit: 'grammes',
-        },
+        quantity: 8,
+        quantityUnit: 'grammes',
       },
       {
         title: 'sucre roux',
-        quantity: {
-          number: 25,
-          unit: 'grammes',
-        },
+        quantity: 25,
+        quantityUnit: 'grammes',
       },
       {
         title: 'beurre',
-        quantity: {
-          number: 30,
-          unit: 'grammes',
-        },
+        quantity: 30,
+        quantityUnit: 'grammes',
       },
       {
         title: 'lait',
-        quantity: {
-          number: 80,
-          unit: 'millilitres',
-        },
+        quantity: 80,
+        quantityUnit: 'millilitres',
       },
     ],
   },
   {
     title: 'Pizza',
+    id: 5,
     tags: ['Maison'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
       {
         title: 'pizza',
-        quantity: {
-          number: 1,
-          unit: 'pièces',
-        },
+        quantity: 1,
+        quantityUnit: 'pièces',
       },
     ],
   },
   {
     title: 'Quesadillas',
+    id: 6,
     tags: ['Maison'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
       {
         title: 'farine',
-        quantity: {
-          number: 400,
-          unit: 'grammes',
-        },
+        quantity: 400,
+        quantityUnit: 'grammes',
       },
       {
         title: 'sel',
-        quantity: {
-          number: 5,
-          unit: 'grammes',
-        },
+        quantity: 5,
+        quantityUnit: 'grammes',
       },
       {
         title: 'huile d’olive',
-        quantity: {
-          number: 50,
-          unit: 'millilitres',
-        },
+        quantity: 50,
+        quantityUnit: 'millilitres',
       },
       {
         title: 'cheddar',
-        quantity: {
-          number: 200,
-          unit: 'grammes',
-        },
+        quantity: 200,
+        quantityUnit: 'grammes',
       },
       {
         title: 'vâche qui rit',
-        quantity: {
-          number: 12,
-          unit: 'pièces',
-        },
+        quantity: 12,
+        quantityUnit: 'pièces',
       },
     ],
   },
   {
     title: 'Pané pâtes',
+    id: 7,
     tags: ['Maison', 'Bento'],
     mainBtn: <Checkbox title="example of checkbox" />,
     ingredients: [
       {
         title: 'panés de dinde',
-        quantity: {
-          number: 2,
-          unit: 'pièces',
-        },
+        quantity: 2,
+        quantityUnit: 'pièces',
       },
       {
         title: 'pâtes',
-        quantity: {
-          number: 160,
-          unit: 'grammes',
-        },
+        quantity: 160,
+        quantityUnit: 'grammes',
       },
     ],
   },
@@ -221,21 +191,25 @@ const availableList = [
 const unavailableList = [
   {
     title: 'Burger Maison',
+    id: 8,
     tags: ['Maison'],
     mainBtn: <CheckButton isChecked />,
   },
   {
     title: 'Pizza',
+    id: 9,
     tags: ['Maison'],
     mainBtn: <CheckButton isChecked />,
   },
   {
     title: 'Quesadillas',
+    id: 10,
     tags: ['Maison'],
     mainBtn: <CheckButton isChecked />,
   },
   {
     title: 'Pané pâtes',
+    id: 11,
     tags: ['Maison', 'Bento'],
     mainBtn: <CheckButton isChecked />,
   },

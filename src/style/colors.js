@@ -6,8 +6,8 @@ const COLORS = {
   red: 'rgb(255, 18, 18)',
   transparent: 'rgba(0, 0, 0, 0)',
   blue: 'rgb(32, 83, 243)',
-  green: 'yellowgreen',
-  violet: 'rgb(20, 10, 67)',
+  green: 'rgb(48, 202, 189)',
+  violet: 'rgb(49, 22, 79)',
 };
 
 export const THEMES = {

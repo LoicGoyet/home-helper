@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { MdAddBox } from 'react-icons/lib/md';
 // /add-box
 
-import { uniq } from '../../utils/arrays';
 import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComponent from '../Input';
 import SelectComponent from '../Select';
+import { TASK_CATEGORY_SUGGESTIONS, TASK_TITLE_SUGGESTIONS } from '../../container/SuggestionsLists';
 
 class AddTask extends React.Component {
   static propTypes = {
@@ -48,17 +48,10 @@ class AddTask extends React.Component {
     this.autoFillInputs();
 
     // Auto focus on the next input displayed
+    if (this.state.step === 0) return;
     const step = this.inputs[this.state.step];
     const nextInput = Array.isArray(step) ? step[0] : step;
     setTimeout(() => nextInput.current.focus(), 200);
-  }
-
-  get categories() {
-    return uniq(this.props.tasks.map(task => task.category));
-  }
-
-  get tasks() {
-    return uniq(this.props.tasks.map(task => task.title));
   }
 
   get isLastStep() {
@@ -156,20 +149,6 @@ class AddTask extends React.Component {
     this.displaySuccessMessage();
   }
 
-  renderDatalist() {
-    return (
-      <React.Fragment>
-        <datalist id="category-suggestions">
-          {this.categories.map(suggestion => <option key={suggestion} value={suggestion} />)}
-        </datalist>
-
-        <datalist id="title-suggestions">
-          {this.tasks.map(suggestion => <option key={suggestion} value={suggestion} />)}
-        </datalist>
-      </React.Fragment>
-    );
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -182,7 +161,7 @@ class AddTask extends React.Component {
                 <Input
                   type="text"
                   reference={this.titleInput}
-                  list="title-suggestions"
+                  list={TASK_TITLE_SUGGESTIONS}
                   placeholder="nom du produit"
                   required={this.isInputRequired(0)}
                 />
@@ -196,7 +175,7 @@ class AddTask extends React.Component {
                 <Input
                   type="text"
                   reference={this.categoryInput}
-                  list="category-suggestions"
+                  list={TASK_CATEGORY_SUGGESTIONS}
                   placeholder="categorie"
                   required={this.isInputRequired(1)}
                 />
@@ -230,8 +209,6 @@ class AddTask extends React.Component {
 
           <SuccessMessage style={this.successMessageThemeVars}>Item ajouté !</SuccessMessage>
         </Wrapper>
-
-        {this.renderDatalist()}
       </React.Fragment>
     );
   }
@@ -242,6 +219,7 @@ export default AddTask;
 const Wrapper = styled.div`
   position: relative;
   height: 3.125rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
 const FormStep = styled.div`

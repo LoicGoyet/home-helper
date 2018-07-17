@@ -6,7 +6,7 @@ import store from './store';
 import mock from './mock';
 
 export default class App extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     mock();
   }
 

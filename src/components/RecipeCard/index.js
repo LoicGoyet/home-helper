@@ -24,10 +24,8 @@ export default class RecipeCard extends React.Component {
     ingredients: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        quantity: PropTypes.shape({
-          number: PropTypes.number.isRequired,
-          unit: PropTypes.string.isRequired,
-        }).isRequired,
+        quantity: PropTypes.number.isRequired,
+        quantityUnit: PropTypes.string.isRequired,
       })
     ),
   };
@@ -110,7 +108,6 @@ const Wrapper = styled(Card)`
   transition: box-shadow var(--transition);
   box-shadow: var(--box-shadow);
   z-index: var(--z-index);
-  position: relative;
   overflow: hidden;
 `;
 
