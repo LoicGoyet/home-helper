@@ -37,7 +37,8 @@
     "lint:css": "stylelint './src/**/*.js'",
     "lint-tests": "./node_modules/.bin/eslint src",
     "unit-tests": "jest",
-    "test": "yarn lint-tests && yarn unit-tests"
+    "test": "yarn lint-tests && yarn unit-tests",
+    "deploy": "yarn make-prod && node deploy"
   },
   "husky": {
     "hooks": {
@@ -56,6 +57,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "dotenv": "^6.0.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-html": "^4.0.2",
@@ -63,6 +65,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
+    "ftp-deploy": "^2.1.2",
     "husky": "^1.0.0-rc.8",
     "jest": "^23.1.0",
     "parcel-bundler": "^1.6.2",
