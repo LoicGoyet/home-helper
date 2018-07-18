@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import RecipesList from '../../container/RecipesList';
+import PantryCount from '../../container/PantryCount';
 import Button from '../../components/Button';
 import PATHS from '../../router/paths';
 import * as recipes from '../../ducks/recipes';
@@ -33,6 +34,7 @@ class RecipesCollection extends React.Component {
           <FaPlus size={30} />
         </AddButton>
 
+        <Count />
         <RecipesList />
       </React.Fragment>
     );
@@ -53,4 +55,15 @@ const AddButton = styled(Button)`
   height: 50px;
   justify-content: center;
   min-width: initial;
+  z-index: 10;
+`;
+
+const Count = styled(PantryCount)`
+  position: sticky;
+  z-index: 10;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;

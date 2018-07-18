@@ -2,10 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Tags = ({ items, ...props }) => <Wrapper {...props}>{items.map(item => <Item key={item}>{item}</Item>)}</Wrapper>;
+const Tags = ({ items, ...props }) => {
+  if (Array.isArray(items)) {
+    return <Wrapper {...props}>{items.map(item => <Item key={item}>{item}</Item>)}</Wrapper>;
+  }
+
+  return (
+    <Wrapper {...props}>
+      {Object.keys(items).map(key => (
+        <Item key={key}>
+          <strong>{key}</strong>: {items[key]}
+        </Item>
+      ))}
+    </Wrapper>
+  );
+};
 
 Tags.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+  items: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.string), PropTypes.object]).isRequired,
 };
 
 export default Tags;
