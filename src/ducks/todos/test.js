@@ -167,7 +167,7 @@ describe('reducer', () => {
         }),
       ],
       units: {
-        [taskShape().title]: taskShape().quantityUnit,
+        [taskShape().title]: quantityUnit,
       },
     });
   });

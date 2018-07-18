@@ -57,13 +57,24 @@ const reducer = (state = defaultState, action = {}) => {
         ];
       }
 
-      const isUnitIsAlreadyInState = Object.keys(state.units).indexOf(title) > -1;
-      const units = isUnitIsAlreadyInState
-        ? state.units
-        : {
-            ...state.units,
-            [title]: quantityUnit,
-          };
+      /*
+       * change auto unit when not in state
+       */
+      // const isUnitIsAlreadyInState = Object.keys(state.units).indexOf(title) > -1;
+      // const units = isUnitIsAlreadyInState
+      //   ? state.units
+      //   : {
+      //       ...state.units,
+      //       [title]: quantityUnit,
+      //     };
+
+      /*
+       * change auto unit at any changes
+       */
+      const units = {
+        ...state.units,
+        [title]: quantityUnit,
+      };
 
       const baseId = isOldTask ? state.baseId : state.baseId + 1;
 

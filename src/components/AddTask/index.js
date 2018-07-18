@@ -2,13 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MdAddBox } from 'react-icons/lib/md';
-// /add-box
 
 import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComponent from '../Input';
-import SelectComponent from '../Select';
-import { TASK_CATEGORY_SUGGESTIONS, TASK_TITLE_SUGGESTIONS } from '../../container/SuggestionsLists';
+import {
+  TASK_CATEGORY_SUGGESTIONS,
+  TASK_TITLE_SUGGESTIONS,
+  TASK_QUANTITY_UNIT_SUGGESTIONS,
+} from '../../container/SuggestionsLists';
 
 class AddTask extends React.Component {
   static propTypes = {
@@ -194,11 +196,13 @@ class AddTask extends React.Component {
                   required={this.isInputRequired(2)}
                 />
 
-                <Select reference={this.quantityUnitInput} required={this.isInputRequired(2)}>
-                  <option value="piece">pièce</option>
-                  <option value="grams">grammes</option>
-                  <option value="milliliters">millilitres</option>
-                </Select>
+                <Input
+                  type="text"
+                  reference={this.quantityUnitInput}
+                  list={TASK_QUANTITY_UNIT_SUGGESTIONS}
+                  placeholder="unité"
+                  required={this.isInputRequired(2)}
+                />
               </FormRow>
             </FormStep>
 
@@ -308,28 +312,4 @@ const SuccessMessage = styled.div`
   transition: all 200ms linear;
   display: flex;
   align-items: center;
-`;
-
-const Select = styled(SelectComponent)`
-  flex-grow: 1;
-  margin-left: -0.25rem;
-
-  select {
-    --inner-shadow-color: ${COLORS.lightgray};
-    box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.25rem var(--inner-shadow-color);
-
-    &:focus {
-      position: relative;
-      z-index: 1;
-    }
-
-    &:focus:invalid {
-      --border-color: transparent;
-      --inner-shadow-color: ${COLORS.blue};
-    }
-
-    &:not(:placeholder-shown):invalid {
-      --inner-shadow-color: ${COLORS.lightgray};
-    }
-  }
 `;

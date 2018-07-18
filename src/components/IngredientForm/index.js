@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import FormGroup from '../FormGroup';
-import Select from '../Select';
-import { TASK_CATEGORY_SUGGESTIONS, TASK_TITLE_SUGGESTIONS } from '../../container/SuggestionsLists';
+import {
+  TASK_CATEGORY_SUGGESTIONS,
+  TASK_TITLE_SUGGESTIONS,
+  TASK_QUANTITY_UNIT_SUGGESTIONS,
+} from '../../container/SuggestionsLists';
 
 class IngredientForm extends React.Component {
   static propTypes = {
@@ -101,11 +104,15 @@ class IngredientForm extends React.Component {
           </QuantityInputCol>
 
           <QuantityUnitInputCol>
-            <Select reference={this.quantityUnitInput} onChange={this.onChange} required>
-              <option value="piece">pièce</option>
-              <option value="grams">grammes</option>
-              <option value="milliliters">millilitres</option>
-            </Select>
+            <FormGroup
+              innerRef={this.quantityUnitInput}
+              id="quantity-unit"
+              list={TASK_QUANTITY_UNIT_SUGGESTIONS}
+              label="Quantity Unit"
+              placeholder="unité"
+              onChange={this.onChange}
+              required
+            />
           </QuantityUnitInputCol>
         </QuantityCol>
       </Row>
