@@ -6,17 +6,14 @@ import Button from '../../components/Button';
 import { addInPantry } from '../../ducks/recipes';
 
 const mapStateToProps = state => ({
-  collection: state.recipes.collection,
+  collection: state.recipes.collection.filter(collection => collection !== null),
 });
 
 const mapDispatchToProps = dispatch => ({
   addInPantry: id => dispatch(addInPantry(id)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(props => {
+export default connect(mapStateToProps, mapDispatchToProps)(props => {
   const recipes = props.collection.map(({ title, tags, id, ingredients }) => ({
     title,
     tags,
