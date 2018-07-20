@@ -13,10 +13,14 @@ const mapDispatchToProps = dispatch => ({
   addInPantry: id => dispatch(addInPantry(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(props => {
-  const recipes = props.collection.map(({ title, tags, id, ingredients }) => ({
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(props => {
+  const recipes = props.collection.map(({ title, tags, id, ingredients, link }) => ({
     title,
     tags,
+    ingredients,
     mainBtn: (
       <Button
         onClick={e => {
@@ -29,7 +33,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(props => {
         Ajouter
       </Button>
     ),
-    ingredients,
+    actionRow: link ? (
+      <React.Fragment>
+        <Button exthref={link}>Recette</Button>
+      </React.Fragment>
+    ) : null,
   }));
 
   return <RecipesList recipes={recipes} />;
