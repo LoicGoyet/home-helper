@@ -15,6 +15,7 @@ class Button extends React.Component {
     square: PropTypes.string,
     style: PropTypes.object,
     href: PropTypes.string,
+    exthref: PropTypes.string,
   };
 
   static defaultProps = {
@@ -23,6 +24,7 @@ class Button extends React.Component {
     square: undefined,
     style: {},
     href: undefined,
+    exthref: undefined,
   };
 
   get themeVars() {
@@ -51,7 +53,7 @@ class Button extends React.Component {
   }
 
   render() {
-    const { children, href } = this.props;
+    const { children, href, exthref } = this.props;
 
     if (href) {
       // Avoid block props to be printed into Link tag
@@ -62,6 +64,18 @@ class Button extends React.Component {
         <LinkWrapper to={href} {...props} style={this.themeVars}>
           {children}
         </LinkWrapper>
+      );
+    }
+
+    if (exthref) {
+      // Avoid block props to be printed into Link tag
+      // eslint-disable-next-line no-unused-vars
+      const { block, ...props } = this.props;
+
+      return (
+        <ExtLinkWrapper {...props} style={this.themeVars} href={exthref} target="_blank">
+          {children}
+        </ExtLinkWrapper>
       );
     }
 
@@ -117,3 +131,4 @@ const BaseStyle = css`
 
 const Wrapper = styled.button(BaseStyle);
 const LinkWrapper = styled(Link)(BaseStyle);
+const ExtLinkWrapper = styled.a(BaseStyle);

@@ -30,7 +30,7 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case ADD_IN_COLLECTION: {
-      const { title, tags, ingredients } = action;
+      const { title, tags, ingredients, link } = action;
 
       return {
         ...state,
@@ -42,6 +42,7 @@ const reducer = (state = defaultState, action = {}) => {
             title,
             tags,
             ingredients,
+            link,
           },
         ],
       };
@@ -91,11 +92,12 @@ export default reducer;
 
 // Action Creators
 
-export const addInCollection = (title, tags, ingredients) => ({
+export const addInCollection = (title, tags, ingredients, link) => ({
   type: ADD_IN_COLLECTION,
   title,
   tags,
   ingredients,
+  link,
 });
 
 export const addInPantry = id => ({

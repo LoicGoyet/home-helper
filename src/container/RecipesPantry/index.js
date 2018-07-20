@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import RecipesList from '../../components/RecipesList';
 import Checkbox from '../../components/Checkbox';
+import Button from '../../components/Button';
 import { toggleAvailabilityInPantry } from '../../ducks/recipes';
 
 const mapStateToProps = state => {
@@ -20,12 +21,13 @@ const mapDispatchToProps = dispatch => ({
 
 const recipeList = (collection, onChange, done = false) => {
   const recipes = collection.map(({ recipe, id }) => {
-    const { title, tags, ingredients } = recipe;
+    const { title, tags, ingredients, link } = recipe;
 
     return {
       title,
       tags,
       id,
+      ingredients,
       mainBtn: (
         <Checkbox
           title={`mark ${title} as${done ? 'not ' : ' '} eaten`}
@@ -35,7 +37,12 @@ const recipeList = (collection, onChange, done = false) => {
           }}
         />
       ),
-      ingredients,
+
+      actionRow: link ? (
+        <React.Fragment>
+          <Button exthref={link}>Recette</Button>
+        </React.Fragment>
+      ) : null,
     };
   });
 
