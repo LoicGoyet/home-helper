@@ -2,6 +2,7 @@ import { takeLatest, select, put } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
+import { generateId } from '../../../utils/redux';
 
 export const FETCH = 'home-helper/todos/categories/FETCH';
 export const FETCH_SUCCESS = 'home-helper/todos/categories/FETCH_SUCCESS';
@@ -23,7 +24,7 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case ADD_CATEGORY: {
-      const id = state.allIds.length;
+      const id = generateId(state.allIds);
       const { title } = action;
       const createdAt = Date.now();
 
