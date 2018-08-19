@@ -1,4 +1,4 @@
-import reducer, * as ducks from '../todos';
+import reducer, * as ducks from './index';
 
 describe('actions', () => {
   it('should create an action to add a task', () => {

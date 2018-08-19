@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import TodosList from '../../container/TodosList';
 import AddTask from '../../container/AddTask';
 import Container from '../../components/Container';
-import * as todos from '../../ducks/todos';
+import * as todos from '../../ducks/todos/tasks';
 import Config from '../../config';
 
 const mapStateToProps = () => ({});

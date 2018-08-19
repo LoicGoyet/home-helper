@@ -2,10 +2,10 @@ import { connect } from 'react-redux';
 
 import TodosList from '../../components/TodosList';
 import { isIn } from '../../utils/arrays';
-import * as todos from '../../ducks/todos';
+import * as todos from '../../ducks/todos/tasks';
 
 const mapStateToProps = state => {
-  const tasks = state.todos.tasks || [];
+  const tasks = state.todos.tasks.tasks || [];
   const undoneTasks = tasks.filter(task => !task.done);
   const doneTasks = tasks.filter(task => task.done).slice(0, 5);
 

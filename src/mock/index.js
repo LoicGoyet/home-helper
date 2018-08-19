@@ -1,5 +1,5 @@
 import store from '../store';
-import { addTask } from '../ducks/todos';
+import { addTask } from '../ducks/todos/tasks';
 import { addInCollection, addInPantry } from '../ducks/recipes';
 import Config from '../config';
 

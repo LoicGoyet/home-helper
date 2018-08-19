@@ -1,7 +1,7 @@
 // Actions
 import { takeLatest, select, put, all } from 'redux-saga/effects';
 
-import { ADD_TASK } from '../todos';
+import { ADD_TASK } from '../todos/tasks';
 import Config from '../../config';
 import database from '../../utils/database';
 

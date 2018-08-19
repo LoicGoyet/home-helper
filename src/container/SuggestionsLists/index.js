@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { uniq } from '../../utils/arrays';
 
 const mapStateToProps = state => ({
-  categories: uniq(state.todos.tasks.map(task => task.category)),
-  tasks: uniq(state.todos.tasks.map(task => task.title)),
-  units: uniq(Object.values(state.todos.units)),
+  categories: uniq(state.todos.tasks.tasks.map(task => task.category)),
+  tasks: uniq(state.todos.tasks.tasks.map(task => task.title)),
+  units: uniq(Object.values(state.todos.tasks.units)),
 });
 
 export const TASK_CATEGORY_SUGGESTIONS = 'category-suggestions';
