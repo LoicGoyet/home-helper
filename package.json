@@ -35,7 +35,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "lint:css": "stylelint './src/**/*.js'",
-    "lint-tests": "./node_modules/.bin/eslint src",
+    "lint-tests": "./node_modules/.bin/eslint ./src",
     "unit-tests": "jest",
     "test": "yarn lint-tests && yarn unit-tests",
     "deploy": "yarn make-prod && node deploy"
