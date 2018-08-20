@@ -1,5 +1,7 @@
 import reducer, { defaultState, addCategory, updateCategory, ADD_CATEGORY, UPDATE_CATEGORY } from './index';
 
+Date.now = jest.fn(() => 1534598990000);
+
 describe('actions', () => {
   it(`should create action '${ADD_CATEGORY}'`, () => {
     expect(addCategory('Boulangerie')).toEqual({
