@@ -5,9 +5,19 @@ import { isIn } from '../../utils/arrays';
 import * as todos from '../../ducks/todos/tasks';
 
 const mapStateToProps = state => {
-  const tasks = state.todos.tasks.tasks || [];
-  const undoneTasks = tasks.filter(task => !task.done);
-  const doneTasks = tasks.filter(task => task.done).slice(0, 5);
+  const tasks = state.todos.tasks || {};
+
+  const undoneTasks = tasks.allIds.reduce((acc, id) => {
+    const task = tasks.byId[id];
+    if (task.done) return [...acc];
+    return [...acc, task];
+  }, []);
+
+  const doneTasks = tasks.allIds.reduce((acc, id) => {
+    const task = tasks.byId[id];
+    if (!task.done || acc.length >= 5) return [...acc];
+    return [...acc, task];
+  }, []);
 
   const tasksSections = undoneTasks.reduce((sections, task) => {
     const categories = sections.map(section => section.category);

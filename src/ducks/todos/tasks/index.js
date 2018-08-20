@@ -2,6 +2,7 @@ import { takeLatest, select, put } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
+import { generateId } from '../../../utils/redux';
 
 // Actions
 export const FETCH = 'home-helper/todos/tasks/FETCH';
@@ -12,8 +13,8 @@ export const UPDATE_CATEGORY = 'home-helper/todos/tasks/UPDATE_CATEGORY';
 
 // Default state
 export const defaultState = {
-  baseId: 0,
-  tasks: [],
+  byId: {},
+  allIds: [],
   units: {},
 };
 
@@ -25,92 +26,100 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case ADD_TASK: {
-      const { title, category, quantity, quantityUnit } = action;
+      // Check if in state there is task with similar title and which is open
+      const getAlreadyInStateTask = taskId => {
+        const task = state.byId[taskId];
+        const hasSameTitle = task.title === action.title;
+        const hasSameQuantityUnit = task.quantityUnit === action.quantityUnit;
+        const isNotDone = task.done === false;
 
-      const getTask = stateTask => stateTask.title === title && stateTask.quantityUnit === quantityUnit;
-      const isOldTask = state.tasks && state.tasks.some(getTask);
+        if (hasSameTitle && hasSameQuantityUnit && isNotDone) return task;
+        return false;
+      };
 
-      let tasks = [];
-      if (isOldTask) {
-        const oldTask = state.tasks.find(getTask);
-        const newTask = {
-          ...oldTask,
-          quantity: oldTask.done ? quantity : oldTask.quantity + quantity,
-          done: false,
+      const isTaskAlreadyOpen = Object.keys(state.byId).some(getAlreadyInStateTask);
+
+      // if we just have to add more quantity to a task
+      if (isTaskAlreadyOpen) {
+        const taskId = state.allIds.find(getAlreadyInStateTask);
+        const task = state.byId[taskId];
+
+        return {
+          ...state,
+          byId: {
+            ...state.byId,
+            [task.id]: {
+              ...task,
+              quantity: task.quantity + action.quantity,
+              updatedAt: Date.now(),
+            },
+          },
         };
+      }
 
-        tasks = state.tasks.map(stateTask => {
-          if (stateTask.title !== newTask.title || stateTask.quantityUnit !== newTask.quantityUnit) return stateTask;
-          return newTask;
-        });
-      } else {
-        tasks = [
-          ...state.tasks,
-          {
-            id: state.baseId,
+      const id = generateId(state.allIds);
+      const { title, category, quantity, quantityUnit } = action;
+      const createdAt = Date.now();
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [id]: {
+            id,
             title,
             category,
             quantity,
             quantityUnit,
             done: false,
+            createdAt,
+            updatedAt: createdAt,
           },
-        ];
-      }
-
-      /*
-       * change auto unit when not in state
-       */
-      // const isUnitIsAlreadyInState = Object.keys(state.units).indexOf(title) > -1;
-      // const units = isUnitIsAlreadyInState
-      //   ? state.units
-      //   : {
-      //       ...state.units,
-      //       [title]: quantityUnit,
-      //     };
-
-      /*
-       * change auto unit at any changes
-       */
-      const units = {
-        ...state.units,
-        [title]: quantityUnit,
-      };
-
-      const baseId = isOldTask ? state.baseId : state.baseId + 1;
-
-      return {
-        ...state,
-        baseId,
-        tasks,
-        units,
+        },
+        allIds: [...state.allIds, id],
       };
     }
 
     case TOGGLE_TASK: {
+      const { id } = action;
+      const task = state.byId[id];
+
+      if (!task) return { ...state };
+
       return {
         ...state,
-        tasks: state.tasks.map(task => {
-          if (task.id !== action.id) return task;
-
-          return {
+        byId: {
+          ...state.byId,
+          [id]: {
             ...task,
             done: !task.done,
-          };
-        }),
+            updatedAt: Date.now(),
+          },
+        },
       };
     }
 
     case UPDATE_CATEGORY: {
-      return {
-        ...state,
-        tasks: state.tasks.map(task => {
-          if (task.category !== action.oldCategory) return task;
+      const tasksAffected = Object.keys(state.byId).reduce((acc, id) => {
+        const task = state.byId[id];
+        if (task.category !== action.oldCategory) return { ...acc };
 
-          return {
+        return {
+          ...acc,
+          [id]: {
             ...task,
             category: action.newCategory,
-          };
-        }),
+            updateAt: Date.now(),
+          },
+        };
+      }, {});
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          ...tasksAffected,
+        },
       };
     }
 

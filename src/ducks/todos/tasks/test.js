@@ -1,221 +1,129 @@
-import reducer, * as ducks from './index';
+import reducer, { defaultState, addTask, toggleTask, ADD_TASK, TOGGLE_TASK } from './index';
+
+Date.now = jest.fn(() => 1534598990000);
 
 describe('actions', () => {
   it('should create an action to add a task', () => {
-    const title = 'Tomatoes';
-    const category = 'Fruits & Vegetables';
-    const quantity = 2;
-    const quantityUnit = 'piece';
-    const expectedAction = {
-      type: ducks.ADD_TASK,
-      title,
-      category,
-      quantity,
-      quantityUnit,
-    };
-
-    expect(ducks.addTask(title, category, quantity, quantityUnit)).toEqual(expectedAction);
+    expect(addTask('Tomates', 'Fruits & Légumes', 2, 'pièces')).toEqual({
+      type: ADD_TASK,
+      title: 'Tomates',
+      category: 'Fruits & Légumes',
+      quantity: 2,
+      quantityUnit: 'pièces',
+    });
   });
 
   it('should create an action to toggle a task', () => {
-    const id = 1;
-    const expectedAction = {
-      type: ducks.TOGGLE_TASK,
-      id,
-    };
-
-    expect(ducks.toggleTask(id)).toEqual(expectedAction);
+    expect(toggleTask(1)).toEqual({
+      type: TOGGLE_TASK,
+      id: 1,
+    });
   });
 });
 
+const stateMock = {
+  byId: {
+    0: {
+      id: 0,
+      title: 'Pommes de terre',
+      category: 'Fruits & Légumes',
+      quantity: 100,
+      quantityUnit: 'grammes',
+      done: false,
+      createdAt: 1534598989178,
+      updatedAt: 1534598989178,
+    },
+    1: {
+      id: 1,
+      title: 'Eau gazeuze',
+      category: 'Boissons',
+      quantity: 4,
+      quantityUnit: 'bouteilles',
+      done: true,
+      createdAt: 1534598989179,
+      updatedAt: 1534598989180,
+    },
+  },
+  allIds: [0, 1],
+  units: {},
+};
+
 describe('reducer', () => {
-  const taskShape = (props = {}) => ({
-    id: 0,
-    title: 'Tomatoes',
-    category: 'Fruits & Vegetables',
-    quantity: 2,
-    quantityUnit: 'piece',
-    done: false,
-    ...props,
-  });
-
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(ducks.defaultState);
+    expect(reducer(undefined, {})).toEqual(defaultState);
   });
 
-  it(`should handle ${ducks.ADD_TASK}`, () => {
-    const title = 'Ketchup';
-    const category = 'Grocery';
-    const quantity = 1;
-    const quantityUnit = 'piece';
-    const action = ducks.addTask(title, category, quantity, quantityUnit);
-    expect(reducer(undefined, action)).toEqual({
-      baseId: 1,
-      tasks: [taskShape({ title, category, quantity, quantityUnit })],
-      units: {
-        [title]: quantityUnit,
-      },
-    });
-
-    const state = {
-      baseId: 1,
-      tasks: [taskShape()],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
-      },
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 2,
-      tasks: [
-        taskShape(),
-        taskShape({
-          id: 1,
-          title,
-          category,
-          quantity,
-          quantityUnit,
-        }),
-      ],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
-        [title]: quantityUnit,
-      },
-    });
-  });
-
-  it(`should handle change quantity ${ducks.ADD_TASK} to a not done task`, () => {
-    const { title, category, quantity, quantityUnit } = taskShape();
-    const action = ducks.addTask(title, category, quantity, quantityUnit);
-
-    const state = {
-      baseId: 1,
-      tasks: [taskShape()],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
-      },
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 1,
-      tasks: [
-        taskShape({
-          quantity: quantity * 2,
-        }),
-      ],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
-      },
-    });
-  });
-
-  it(`should handle change quantity ${ducks.ADD_TASK} to a not done task`, () => {
-    const { title, category, quantityUnit } = taskShape();
-    const quantity = 10;
-    const action = ducks.addTask(title, category, quantity, quantityUnit);
-
-    const state = {
-      baseId: 1,
-      tasks: [
-        taskShape({
-          done: true,
-        }),
-      ],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
-      },
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 1,
-      tasks: [
-        taskShape({
-          quantity,
+  it(`should handle ${ADD_TASK}`, () => {
+    const action = addTask('Ketchup', 'Épicerie sâlée', 1, 'bouteille');
+    expect(reducer(stateMock, action)).toEqual({
+      ...stateMock,
+      byId: {
+        ...stateMock.byId,
+        2: {
+          id: 2,
+          title: 'Ketchup',
+          category: 'Épicerie sâlée',
+          quantity: 1,
+          quantityUnit: 'bouteille',
           done: false,
-        }),
-      ],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        },
+      },
+      allIds: [...stateMock.allIds, 2],
+    });
+  });
+
+  it(`should handle change quantity ${ADD_TASK} to a not done task`, () => {
+    const action = addTask('Pommes de terre', 'Fruits & Légumes', 50, 'grammes');
+
+    expect(reducer(stateMock, action)).toEqual({
+      ...stateMock,
+      byId: {
+        ...stateMock.byId,
+        0: {
+          ...stateMock.byId[0],
+          quantity: 150,
+          updatedAt: Date.now(),
+        },
       },
     });
   });
 
-  it(`should create a new task ${ducks.ADD_TASK} if the title is the same but not the quantity unit`, () => {
-    const { title, category } = taskShape();
-    const quantity = 10;
-    const quantityUnit = 'grams';
-    const action = ducks.addTask(title, category, quantity, quantityUnit);
-
-    const state = {
-      baseId: 1,
-      tasks: [taskShape()],
-      units: {
-        [taskShape().title]: taskShape().quantityUnit,
+  it(`should create a new task ${ADD_TASK} if the title is the same but not the quantity unit`, () => {
+    const action = addTask('Pommes de terre', 'Fruits & Légumes', 1, 'pièce');
+    expect(reducer(stateMock, action)).toEqual({
+      ...stateMock,
+      byId: {
+        ...stateMock.byId,
+        2: {
+          id: 2,
+          title: 'Pommes de terre',
+          category: 'Fruits & Légumes',
+          quantity: 1,
+          quantityUnit: 'pièce',
+          done: false,
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
+        },
       },
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 2,
-      tasks: [
-        taskShape(),
-        taskShape({
-          id: 1,
-          title,
-          category,
-          quantity,
-          quantityUnit,
-        }),
-      ],
-      units: {
-        [taskShape().title]: quantityUnit,
-      },
+      allIds: [...stateMock.allIds, 2],
     });
   });
 
-  it(`should handle ${ducks.TOGGLE_TASK}`, () => {
-    const action = ducks.toggleTask(0);
-    expect(reducer(undefined, action)).toEqual(ducks.defaultState);
-
-    let state = {
-      baseId: 1,
-      tasks: [taskShape()],
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 1,
-      tasks: [taskShape({ done: true })],
+  it(`should handle ${TOGGLE_TASK}`, () => {
+    expect(reducer(undefined, toggleTask(1))).toEqual(defaultState);
+    expect(reducer(stateMock, toggleTask(1))).toEqual({
+      ...stateMock,
+      byId: {
+        ...stateMock.byId,
+        1: {
+          ...stateMock.byId[1],
+          done: false,
+          updatedAt: Date.now(),
+        },
+      },
     });
-
-    state = {
-      baseId: 1,
-      tasks: [taskShape({ done: true })],
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 1,
-      tasks: [taskShape()],
-    });
-  });
-
-  it(`should handle ${ducks.UPDATE_CATEGORY}`, () => {
-    const action = ducks.updateCategory('Fruits & Vegetables', 'Vegetables');
-    expect(reducer(undefined, action)).toEqual(ducks.defaultState);
-
-    let state = {
-      baseId: 1,
-      tasks: [taskShape()],
-    };
-
-    expect(reducer(state, action)).toEqual({
-      baseId: 1,
-      tasks: [taskShape({ category: 'Vegetables' })],
-    });
-
-    state = {
-      baseId: 1,
-      tasks: [taskShape({ title: 'Ketchup', category: 'Grocery' }), taskShape({ title: 'Salt', category: 'Grocery' })],
-    };
-
-    expect(reducer(state, action)).toEqual(state);
+    expect(reducer(stateMock, toggleTask(4))).toEqual(stateMock);
   });
 });
