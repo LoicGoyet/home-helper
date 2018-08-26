@@ -24,7 +24,6 @@ export default connect(
     mainBtn: (
       <Button
         onClick={e => {
-          console.log(id);
           e.stopPropagation();
           props.addInPantry(id);
         }}

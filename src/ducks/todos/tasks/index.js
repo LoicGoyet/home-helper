@@ -1,15 +1,17 @@
-import { takeLatest, select, put } from 'redux-saga/effects';
+import { takeLatest, takeEvery, select, put, take } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
+import { selectProductByTitle, ADD_PRODUCT, ADD_PRODUCT_JOINED } from '../products';
+import { selectUnitByTitle, ADD_UNIT } from '../units';
 
 // Actions
 export const FETCH = 'home-helper/todos/tasks/FETCH';
 export const FETCH_SUCCESS = 'home-helper/todos/tasks/FETCH_SUCCESS';
 export const ADD_TASK = 'home-helper/todos/tasks/ADD_TASK';
+export const ADD_TASK_JOINED = 'home-helper/todos/tasks/ADD_TASK_JOINED';
 export const TOGGLE_TASK = 'home-helper/todos/tasks/TOGGLE_TASK';
-export const UPDATE_CATEGORY = 'home-helper/todos/tasks/UPDATE_CATEGORY';
 
 // Default state
 export const defaultState = {
@@ -25,15 +27,15 @@ const reducer = (state = defaultState, action = {}) => {
       return action.data;
     }
 
-    case ADD_TASK: {
+    case ADD_TASK_JOINED: {
       // Check if in state there is task with similar title and which is open
       const getAlreadyInStateTask = taskId => {
         const task = state.byId[taskId];
-        const hasSameTitle = task.title === action.title;
-        const hasSameQuantityUnit = task.quantityUnit === action.quantityUnit;
+        const hasSameProduct = task.product === action.product;
+        const hasSameUnit = task.unit === action.unit;
         const isNotDone = task.done === false;
 
-        if (hasSameTitle && hasSameQuantityUnit && isNotDone) return task;
+        if (hasSameProduct && hasSameUnit && isNotDone) return task;
         return false;
       };
 
@@ -58,7 +60,7 @@ const reducer = (state = defaultState, action = {}) => {
       }
 
       const id = generateId(state.allIds);
-      const { title, category, quantity, quantityUnit } = action;
+      const { product, quantity, unit } = action;
       const createdAt = Date.now();
 
       return {
@@ -67,10 +69,9 @@ const reducer = (state = defaultState, action = {}) => {
           ...state.byId,
           [id]: {
             id,
-            title,
-            category,
+            product,
             quantity,
-            quantityUnit,
+            unit,
             done: false,
             createdAt,
             updatedAt: createdAt,
@@ -99,30 +100,6 @@ const reducer = (state = defaultState, action = {}) => {
       };
     }
 
-    case UPDATE_CATEGORY: {
-      const tasksAffected = Object.keys(state.byId).reduce((acc, id) => {
-        const task = state.byId[id];
-        if (task.category !== action.oldCategory) return { ...acc };
-
-        return {
-          ...acc,
-          [id]: {
-            ...task,
-            category: action.newCategory,
-            updateAt: Date.now(),
-          },
-        };
-      }, {});
-
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          ...tasksAffected,
-        },
-      };
-    }
-
     default:
       return state;
   }
@@ -132,24 +109,24 @@ export default reducer;
 
 // Action Creators
 
-export const addTask = (title, category, quantity, quantityUnit) => ({
+export const addTask = (productTitle, categoryTitle, quantity, unitTitle) => ({
   type: ADD_TASK,
-  title,
-  category,
+  productTitle,
+  categoryTitle,
   quantity,
-  quantityUnit,
+  unitTitle,
+});
+
+export const addTaskJoined = (product, quantity, unit) => ({
+  type: ADD_TASK_JOINED,
+  product,
+  quantity,
+  unit,
 });
 
 export const toggleTask = id => ({
   type: TOGGLE_TASK,
   id,
-});
-
-// to destroy
-export const updateCategory = (oldCategory, newCategory) => ({
-  type: UPDATE_CATEGORY,
-  oldCategory,
-  newCategory,
 });
 
 export const fetch = () => ({
@@ -175,9 +152,57 @@ function* saveTodos() {
   yield database.ref('/todos').set(todos);
 }
 
-export function* todosSaga() {
+function* joinProductToTasks(payload) {
+  const { productTitle, categoryTitle } = payload;
+  let product = yield select(selectProductByTitle(productTitle));
+
+  if (product !== undefined) {
+    return yield product;
+  }
+
+  yield put({
+    type: ADD_PRODUCT,
+    title: productTitle,
+    categoryTitle,
+  });
+
+  yield take(ADD_PRODUCT_JOINED);
+  product = yield select(selectProductByTitle(productTitle));
+  return yield product;
+}
+
+function* joinUnitToTasks(payload) {
+  const title = payload.unitTitle;
+  let unit = yield select(selectUnitByTitle(title));
+  if (unit !== undefined) {
+    return yield unit;
+  }
+
+  yield put({
+    type: ADD_UNIT,
+    title,
+  });
+
+  unit = yield select(selectUnitByTitle(title));
+  return yield unit;
+}
+
+function* createJoinedTask(payload) {
+  const product = yield* joinProductToTasks(payload);
+  const unit = yield* joinUnitToTasks(payload);
+
+  const { quantity } = payload;
+
+  yield put({
+    type: ADD_TASK_JOINED,
+    product,
+    quantity,
+    unit,
+  });
+}
+
+export function* tasksSaga() {
   yield takeLatest(FETCH, fetchTodos);
-  yield takeLatest(ADD_TASK, saveTodos);
-  yield takeLatest(TOGGLE_TASK, saveTodos);
-  yield takeLatest(UPDATE_CATEGORY, saveTodos);
+  yield takeLatest([ADD_TASK_JOINED, TOGGLE_TASK], saveTodos);
+  yield takeEvery(ADD_TASK, createJoinedTask);
 }

@@ -28,13 +28,13 @@ class Todos extends React.Component {
   render() {
     return (
       <Wrapper>
-        <AddTaskWrapper>
+        {/* <AddTaskWrapper>
           <Container>
             <AddTask />
           </Container>
         </AddTaskWrapper>
 
-        <TodosList />
+        <TodosList /> */}
       </Wrapper>
     );
   }
