@@ -15,14 +15,18 @@ import {
 class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
-    tasks: PropTypes.arrayOf(PropTypes.object),
+    tasks: PropTypes.object,
     units: PropTypes.object,
+    categories: PropTypes.object,
+    products: PropTypes.object,
     className: PropTypes.string,
   };
 
   static defaultProps = {
-    tasks: [],
-    units: [],
+    tasks: { byId: {}, allIds: [] },
+    units: { byId: {}, allIds: [] },
+    categories: { byId: {}, allIds: [] },
+    products: { byId: {}, allIds: [] },
     className: undefined,
   };
 
@@ -33,12 +37,12 @@ class AddTask extends React.Component {
     this.getAutoCategory = this.getAutoCategory.bind(this);
     this.manageFormStep = this.manageFormStep.bind(this);
 
-    this.titleInput = React.createRef();
+    this.productInput = React.createRef();
     this.categoryInput = React.createRef();
     this.quantityInput = React.createRef();
     this.quantityUnitInput = React.createRef();
 
-    this.inputs = [this.titleInput, this.categoryInput, [this.quantityInput, this.quantityUnitInput]];
+    this.inputs = [this.productInput, this.categoryInput, [this.quantityInput, this.quantityUnitInput]];
   }
 
   state = {
@@ -80,18 +84,21 @@ class AddTask extends React.Component {
   }
 
   getAutoCategory() {
-    const { value } = this.titleInput.current;
-    const taskWtSameTitle = this.props.tasks.find(({ title }) => title === value);
-    if (!taskWtSameTitle) return true;
+    const { products, categories } = this.props;
+    const { value } = this.productInput.current;
 
-    this.categoryInput.current.value = taskWtSameTitle.category;
-    return false;
+    const storedProductId = products.allIds.find(id => products.byId[id].title === value);
+    if (storedProductId === undefined) return true;
+    this.categoryInput.current.value = categories.byId[products.byId[storedProductId].category].title;
   }
 
   getAutoQuantityUnit() {
-    const { value } = this.titleInput.current;
-    if (!this.props.units[value]) return false;
-    this.quantityUnitInput.current.value = this.props.units[value];
+    const { products, units } = this.props;
+    const { value } = this.productInput.current;
+
+    const storedProductId = products.allIds.find(id => products.byId[id].title === value);
+    if (storedProductId === undefined) return;
+    this.quantityUnitInput.current.value = units.byId[products.byId[storedProductId].defaultUnit].title;
   }
 
   getFormStepThemeVars(index) {
@@ -142,13 +149,13 @@ class AddTask extends React.Component {
   }
 
   submit() {
-    const title = this.titleInput.current.value;
+    const product = this.productInput.current.value;
     const category = this.categoryInput.current.value;
     const quantity = parseInt(this.quantityInput.current.value);
     const quantityUnit = this.quantityUnitInput.current
       ? this.quantityUnitInput.current.value
       : this.state.autoQuantityUnit;
-    this.props.addTask(title, category, quantity, quantityUnit);
+    this.props.addTask(product, category, quantity, quantityUnit);
     this.reset();
     this.displaySuccessMessage();
   }
@@ -164,7 +171,7 @@ class AddTask extends React.Component {
 
                 <Input
                   type="text"
-                  reference={this.titleInput}
+                  reference={this.productInput}
                   list={TODOS_PRODUCTS_SUGGESTIONS}
                   placeholder="nom du produit"
                   required={this.isInputRequired(0)}

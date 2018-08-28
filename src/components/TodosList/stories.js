@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import TodosList from '../TodosList';
-import { tasks, categories, products, units } from './stories-data';
+import { tasks, categories, products, units } from '../../../.storybook/mock';
 
 const stories = storiesOf('TodosList', module);
 stories.add('default', () => <TodosList tasks={tasks} categories={categories} products={products} units={units} />);

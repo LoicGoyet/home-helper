@@ -152,7 +152,7 @@ function* saveTodos() {
   yield database.ref('/todos').set(todos);
 }
 
-function* joinProductToTasks(payload) {
+function* joinProductToTasks(payload, unit) {
   const { productTitle, categoryTitle } = payload;
   let product = yield select(selectProductByTitle(productTitle));
 
@@ -164,6 +164,7 @@ function* joinProductToTasks(payload) {
     type: ADD_PRODUCT,
     title: productTitle,
     categoryTitle,
+    unit,
   });
 
   yield take(ADD_PRODUCT_JOINED);
@@ -188,8 +189,8 @@ function* joinUnitToTasks(payload) {
 }
 
 function* createJoinedTask(payload) {
-  const product = yield* joinProductToTasks(payload);
   const unit = yield* joinUnitToTasks(payload);
+  const product = yield* joinProductToTasks(payload, unit);
 
   const { quantity } = payload;
 

@@ -31,7 +31,7 @@ const reducer = (state = defaultState, action = {}) => {
       if (alreadyStored !== undefined) return { ...state };
 
       const id = generateId(state.allIds);
-      const { title, category } = action;
+      const { title, category, defaultUnit } = action;
       const createdAt = Date.now();
 
       return {
@@ -42,6 +42,7 @@ const reducer = (state = defaultState, action = {}) => {
             id,
             title,
             category,
+            defaultUnit,
             createdAt,
             updatedAt: createdAt,
           },
@@ -152,11 +153,12 @@ function* joinCategoryToProducts(payload) {
 
 function* createJoinedProduct(payload) {
   const category = yield* joinCategoryToProducts(payload);
-  const { title } = payload;
+  const { title, unit } = payload;
 
   yield put({
     type: ADD_PRODUCT_JOINED,
     title,
+    defaultUnit: unit,
     category,
   });
 }
