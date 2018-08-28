@@ -2,6 +2,7 @@ import { takeLatest, select, put } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
+import { strToColor } from '../../../utils/colors';
 import { generateId } from '../../../utils/redux';
 
 export const FETCH = 'home-helper/todos/categories/FETCH';
@@ -38,6 +39,7 @@ const reducer = (state = defaultState, action = {}) => {
           [id]: {
             id,
             title,
+            color: strToColor(title),
             createdAt,
             updatedAt: createdAt,
           },

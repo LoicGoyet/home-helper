@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import { configure, addDecorator } from '@storybook/react';
 import '@storybook/addon-console';
 import { checkA11y } from '@storybook/addon-a11y';
@@ -18,14 +20,14 @@ function loadStories() {
 injectGlobal`
   body {
     padding: 1rem;
-    color: ${COLORS.black};
+    color: ${COLORS.white};
     background-color: initial;
   }
 `;
 
 addDecorator(backgrounds([
-  { name: "white", value: "#ffffff", default: true },
-  { name: "purple", value: "#140A43" },
+  { name: "white", value: "#ffffff" },
+  { name: "purple", value: "#140A43", default: true },
 ]));
 
 addDecorator(checkA11y)

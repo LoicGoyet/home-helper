@@ -17,11 +17,13 @@ class AddTask extends React.Component {
     addTask: PropTypes.func.isRequired,
     tasks: PropTypes.arrayOf(PropTypes.object),
     units: PropTypes.object,
+    className: PropTypes.string,
   };
 
   static defaultProps = {
     tasks: [],
     units: [],
+    className: undefined,
   };
 
   constructor(props) {
@@ -154,7 +156,7 @@ class AddTask extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Wrapper>
+        <Wrapper className={this.props.className}>
           <form onSubmit={this.manageFormStep} ref={this.form}>
             <FormStep style={this.getFormStepThemeVars(0)}>
               <FormRow>

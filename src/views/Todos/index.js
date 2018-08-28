@@ -27,15 +27,12 @@ class Todos extends React.Component {
 
   render() {
     return (
-      <Wrapper>
-        {/* <AddTaskWrapper>
-          <Container>
-            <AddTask />
-          </Container>
-        </AddTaskWrapper>
-
-        <TodosList /> */}
-      </Wrapper>
+      <main>
+        <Container>
+          <AddTaskForm />
+          <TodosList />
+        </Container>
+      </main>
     );
   }
 }
@@ -45,14 +42,9 @@ export default connect(
   mapDispatchToProps
 )(Todos);
 
-const Wrapper = styled.section`
-  padding-top: 4.125rem;
-`;
-
-const AddTaskWrapper = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 1rem 0;
+const AddTaskForm = styled(AddTask)`
+  position: sticky;
+  top: 1rem;
+  margin: 0 0 2rem;
+  z-index: 1;
 `;
