@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 import FormGroup from '../FormGroup';
 import {
-  TASK_CATEGORY_SUGGESTIONS,
-  TASK_TITLE_SUGGESTIONS,
-  TASK_QUANTITY_UNIT_SUGGESTIONS,
+  TODOS_CATEGORIES_SUGGESTIONS,
+  TODOS_PRODUCTS_SUGGESTIONS,
+  TODOS_UNITS_SUGGESTIONS,
 } from '../../container/SuggestionsLists';
 
 class IngredientForm extends React.Component {
@@ -71,7 +71,7 @@ class IngredientForm extends React.Component {
             innerRef={this.titleInput}
             id="title"
             label="Title"
-            list={TASK_TITLE_SUGGESTIONS}
+            list={TODOS_PRODUCTS_SUGGESTIONS}
             placeholder="nom du produit"
             onChange={this.autoFillInputs}
             required
@@ -83,7 +83,7 @@ class IngredientForm extends React.Component {
             innerRef={this.categoryInput}
             id="category"
             label="Category"
-            list={TASK_CATEGORY_SUGGESTIONS}
+            list={TODOS_CATEGORIES_SUGGESTIONS}
             placeholder="categorie"
             onChange={this.onChange}
             required
@@ -107,7 +107,7 @@ class IngredientForm extends React.Component {
             <FormGroup
               innerRef={this.quantityUnitInput}
               id="quantity-unit"
-              list={TASK_QUANTITY_UNIT_SUGGESTIONS}
+              list={TODOS_UNITS_SUGGESTIONS}
               label="Quantity Unit"
               placeholder="unité"
               onChange={this.onChange}

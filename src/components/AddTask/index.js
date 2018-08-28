@@ -7,9 +7,9 @@ import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComponent from '../Input';
 import {
-  TASK_CATEGORY_SUGGESTIONS,
-  TASK_TITLE_SUGGESTIONS,
-  TASK_QUANTITY_UNIT_SUGGESTIONS,
+  TODOS_CATEGORIES_SUGGESTIONS,
+  TODOS_PRODUCTS_SUGGESTIONS,
+  TODOS_UNITS_SUGGESTIONS,
 } from '../../container/SuggestionsLists';
 
 class AddTask extends React.Component {
@@ -165,7 +165,7 @@ class AddTask extends React.Component {
                 <Input
                   type="text"
                   reference={this.titleInput}
-                  list={TASK_TITLE_SUGGESTIONS}
+                  list={TODOS_PRODUCTS_SUGGESTIONS}
                   placeholder="nom du produit"
                   required={this.isInputRequired(0)}
                 />
@@ -179,7 +179,7 @@ class AddTask extends React.Component {
                 <Input
                   type="text"
                   reference={this.categoryInput}
-                  list={TASK_CATEGORY_SUGGESTIONS}
+                  list={TODOS_CATEGORIES_SUGGESTIONS}
                   placeholder="categorie"
                   required={this.isInputRequired(1)}
                 />
@@ -201,7 +201,7 @@ class AddTask extends React.Component {
                 <Input
                   type="text"
                   reference={this.quantityUnitInput}
-                  list={TASK_QUANTITY_UNIT_SUGGESTIONS}
+                  list={TODOS_UNITS_SUGGESTIONS}
                   placeholder="unité"
                   required={this.isInputRequired(2)}
                 />
