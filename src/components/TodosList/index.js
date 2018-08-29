@@ -27,7 +27,7 @@ class TodosList extends React.Component {
     const { tasks } = this.props;
     return tasks.allIds
       .filter(id => !tasks.byId[id].done)
-      .sort((idA, idB) => tasks.byId[idA].updatedAt > tasks.byId[idB].updatedAt)
+      .sort((idA, idB) => tasks.byId[idA].createdAt > tasks.byId[idB].createdAt)
       .reduce((acc, id) => {
         const category = this.getCategoryFromTask(id).id;
 
