@@ -1,10 +1,10 @@
-import { takeLatest, takeEvery, select, put, take } from 'redux-saga/effects';
+import { takeLatest, takeEvery, select, put } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
-import { selectProductByTitle, ADD_PRODUCT, ADD_PRODUCT_JOINED } from '../products';
-import { selectUnitByTitle, ADD_UNIT } from '../units';
+import { getProductId } from '../products';
+import { getUnitId } from '../units';
 
 // Actions
 export const FETCH = 'home-helper/todos/tasks/FETCH';
@@ -17,7 +17,6 @@ export const TOGGLE_TASK = 'home-helper/todos/tasks/TOGGLE_TASK';
 export const defaultState = {
   byId: {},
   allIds: [],
-  units: {},
 };
 
 // Reducer
@@ -152,45 +151,10 @@ function* saveTodos() {
   yield database.ref('/todos').set(todos);
 }
 
-function* joinProductToTasks(payload, unit) {
-  const { productTitle, categoryTitle } = payload;
-  let product = yield select(selectProductByTitle(productTitle));
-
-  if (product !== undefined) {
-    return yield product;
-  }
-
-  yield put({
-    type: ADD_PRODUCT,
-    title: productTitle,
-    categoryTitle,
-    unit,
-  });
-
-  yield take(ADD_PRODUCT_JOINED);
-  product = yield select(selectProductByTitle(productTitle));
-  return yield product;
-}
-
-function* joinUnitToTasks(payload) {
-  const title = payload.unitTitle;
-  let unit = yield select(selectUnitByTitle(title));
-  if (unit !== undefined) {
-    return yield unit;
-  }
-
-  yield put({
-    type: ADD_UNIT,
-    title,
-  });
-
-  unit = yield select(selectUnitByTitle(title));
-  return yield unit;
-}
-
 function* createJoinedTask(payload) {
-  const unit = yield* joinUnitToTasks(payload);
-  const product = yield* joinProductToTasks(payload, unit);
+  const { productTitle, categoryTitle, unitTitle } = payload;
+  const unit = yield* getUnitId(unitTitle);
+  const product = yield* getProductId(productTitle, categoryTitle, unit);
 
   const { quantity } = payload;
 

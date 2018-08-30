@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import backgrounds from '@storybook/addon-backgrounds';
 
 import RecipesList from '../RecipesList';
 import Button from '../Button';
@@ -8,7 +7,6 @@ import CheckButton from '../CheckButton';
 import Checkbox from '../Checkbox';
 
 const stories = storiesOf('RecipesList', module);
-stories.addDecorator(backgrounds([{ name: 'purple', value: '#140A43', default: true }]));
 stories.add('catalog list', () => <RecipesList recipes={recipesCatalog} />);
 stories.add('available list', () => (
   <div>

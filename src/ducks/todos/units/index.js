@@ -116,3 +116,20 @@ export const selectUnitByTitle = title => state => {
   const { units } = state.todos;
   return units.allIds.find(id => units.byId[id].title === title);
 };
+
+// Getters
+
+export function* getUnitId(title) {
+  let unit = yield select(selectUnitByTitle(title));
+  if (unit !== undefined) {
+    return yield unit;
+  }
+
+  yield put({
+    type: ADD_UNIT,
+    title,
+  });
+
+  unit = yield select(selectUnitByTitle(title));
+  return yield unit;
+}

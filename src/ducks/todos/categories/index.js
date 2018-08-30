@@ -114,7 +114,27 @@ export function* categoriesSaga() {
   yield takeLatest(UPDATE_CATEGORY, saveCategories);
 }
 
+// Selector
+
 export const selectCategoryByTitle = title => state => {
   const { categories } = state.todos;
   return categories.allIds.find(id => categories.byId[id].title === title);
 };
+
+// Getter
+
+export function* getCategoryId(title) {
+  let category = yield select(selectCategoryByTitle(title));
+
+  if (category !== undefined) {
+    return yield category;
+  }
+
+  yield put({
+    type: ADD_CATEGORY,
+    title,
+  });
+
+  category = yield select(selectCategoryByTitle(title));
+  return yield category;
+}

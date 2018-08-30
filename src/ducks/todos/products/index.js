@@ -1,9 +1,9 @@
-import { takeLatest, takeEvery, select, put } from 'redux-saga/effects';
+import { takeLatest, takeEvery, select, put, take } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
-import { selectCategoryByTitle, ADD_CATEGORY } from '../categories';
+import { getCategoryId } from '../categories';
 
 export const FETCH = 'home-helper/todos/products/FETCH';
 export const FETCH_SUCCESS = 'home-helper/todos/products/FETCH_SUCCESS';
@@ -11,6 +11,7 @@ export const ADD_PRODUCT = 'home-helper/todos/products/ADD_PRODUCT';
 export const ADD_PRODUCT_JOINED = 'home-helper/todos/products/ADD_PRODUCT_JOINED';
 export const SET_PRODUCT_CATEGORY = 'home-helper/todos/products/SET_PRODUCT_CATEGORY';
 export const SET_PRODUCT_TITLE = 'home-helper/todos/products/SET_PRODUCT_TITLE';
+export const GHOST_ACTION = 'home-helper/todos/products/GHOST_ACTION';
 
 // Default state
 export const defaultState = {
@@ -27,9 +28,6 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case ADD_PRODUCT_JOINED: {
-      const alreadyStored = state.allIds.find(productId => state.byId[productId].title === action.title);
-      if (alreadyStored !== undefined) return { ...state };
-
       const id = generateId(state.allIds);
       const { title, category, defaultUnit } = action;
       const createdAt = Date.now();
@@ -134,25 +132,8 @@ function* saveCategories() {
   yield database.ref('/todos/products').set(products);
 }
 
-function* joinCategoryToProducts(payload) {
-  const title = payload.categoryTitle;
-  let category = yield select(selectCategoryByTitle(title));
-
-  if (category !== undefined) {
-    return yield category;
-  }
-
-  yield put({
-    type: ADD_CATEGORY,
-    title,
-  });
-
-  category = yield select(selectCategoryByTitle(title));
-  return yield category;
-}
-
 function* createJoinedProduct(payload) {
-  const category = yield* joinCategoryToProducts(payload);
+  const category = yield* getCategoryId(payload.categoryTitle);
   const { title, unit } = payload;
 
   yield put({
@@ -175,3 +156,30 @@ export const selectProductByTitle = title => state => {
   const { products } = state.todos;
   return products.allIds.find(id => products.byId[id].title === title);
 };
+
+// Getters
+
+export function* getProductId(productTitle, categoryTitle, unit) {
+  let product = yield select(selectProductByTitle(productTitle));
+
+  if (product !== undefined) {
+    return yield product;
+  }
+
+  yield put({
+    type: ADD_PRODUCT,
+    title: productTitle,
+    categoryTitle,
+    unit,
+  });
+
+  yield take(ADD_PRODUCT_JOINED);
+
+  // fix take() above for unknow reasons
+  yield put({
+    type: GHOST_ACTION,
+  });
+
+  product = yield select(selectProductByTitle(productTitle));
+  return yield product;
+}

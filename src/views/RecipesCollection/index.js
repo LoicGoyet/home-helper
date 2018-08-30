@@ -4,7 +4,7 @@ import { FaPlus } from 'react-icons/lib/fa';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import RecipesList from '../../container/RecipesList';
+import Collection from '../../container/RecipesCollection';
 import PantryCount from '../../container/PantryCount';
 import Button from '../../components/Button';
 import PATHS from '../../router/paths';
@@ -35,7 +35,7 @@ class RecipesCollection extends React.Component {
         </AddButton>
 
         <Count />
-        <RecipesList />
+        <Collection />
       </React.Fragment>
     );
   }
