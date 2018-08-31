@@ -23,36 +23,33 @@ class RecipesCollection extends React.Component {
     this.props.addItem(id);
   };
 
-  render = () => {
-    console.log(this.props.collection);
-    return (
-      <CardsAccordion>
-        {this.props.collection.allIds.map(id => {
-          const item = this.props.collection.byId[id];
+  render = () => (
+    <CardsAccordion>
+      {this.props.collection.allIds.map(id => {
+        const item = this.props.collection.byId[id];
 
-          return (
-            <CardsAccordionItem
-              key={id}
-              header={() => (
-                <Header>
-                  <HeaderContent>
-                    <Title>{item.title}</Title>
-                    <Tags items={item.tags} />
-                  </HeaderContent>
+        return (
+          <CardsAccordionItem
+            key={id}
+            header={() => (
+              <Header>
+                <HeaderContent>
+                  <Title>{item.title}</Title>
+                  <Tags items={item.tags} />
+                </HeaderContent>
 
-                  <AddButton color={COLORS.violet} block onClick={e => this.onAddBtnClick(e, id)}>
-                    Ajouter
-                  </AddButton>
-                </Header>
-              )}
-            >
-              <IngredientsList ingredients={item.ingredients} />
-            </CardsAccordionItem>
-          );
-        })}
-      </CardsAccordion>
-    );
-  };
+                <AddButton color={COLORS.violet} block onClick={e => this.onAddBtnClick(e, id)}>
+                  Ajouter
+                </AddButton>
+              </Header>
+            )}
+          >
+            <IngredientsList ingredients={item.ingredients} />
+          </CardsAccordionItem>
+        );
+      })}
+    </CardsAccordion>
+  );
 }
 
 export default RecipesCollection;

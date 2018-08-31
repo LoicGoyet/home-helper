@@ -179,6 +179,9 @@ export function* getProductId(productTitle, categoryTitle, unit) {
   yield put({
     type: GHOST_ACTION,
   });
+  yield put({
+    type: GHOST_ACTION,
+  });
 
   product = yield select(selectProductByTitle(productTitle));
   return yield product;
