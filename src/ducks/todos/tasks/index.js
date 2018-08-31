@@ -5,6 +5,7 @@ import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
 import { getProductId } from '../products';
 import { getUnitId } from '../units';
+import { ADD_JOINED_PANTRY_ENTRY } from '../../recipes/pantry';
 
 // Actions
 export const FETCH = 'home-helper/todos/tasks/FETCH';
@@ -166,8 +167,20 @@ function* createJoinedTask(payload) {
   });
 }
 
+function* createdJoinedTaskFromPantry({ ingredients }) {
+  return yield ingredients.map(function*({ product, quantity, unit }) {
+    return yield put({
+      type: ADD_TASK_JOINED,
+      product,
+      quantity,
+      unit,
+    });
+  });
+}
+
 export function* tasksSaga() {
   yield takeLatest(FETCH, fetchTodos);
   yield takeLatest([ADD_TASK_JOINED, TOGGLE_TASK], saveTodos);
   yield takeEvery(ADD_TASK, createJoinedTask);
+  yield takeEvery(ADD_JOINED_PANTRY_ENTRY, createdJoinedTaskFromPantry);
 }

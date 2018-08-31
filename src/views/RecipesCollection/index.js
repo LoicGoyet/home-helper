@@ -34,7 +34,7 @@ class RecipesCollection extends React.Component {
           <FaPlus size={30} />
         </AddButton>
 
-        <Count />
+        {/* <Count /> */}
         <Collection />
       </React.Fragment>
     );

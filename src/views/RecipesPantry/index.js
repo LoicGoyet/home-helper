@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import RecipesPantryContainer from '../../container/RecipesPantry';
+import AvailableRecipesPantry from '../../container/AvailableRecipesPantry';
+import UnavailableRecipesPantry from '../../container/UnavailableRecipesPantry';
 import * as recipes from '../../ducks/recipes';
 import Config from '../../config';
 
@@ -25,7 +27,8 @@ class RecipesPantry extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <RecipesPantryContainer />
+        <Available />
+        <Unavailable />
       </React.Fragment>
     );
   }
@@ -35,3 +38,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(RecipesPantry);
+
+const Available = styled(AvailableRecipesPantry)`
+  margin-bottom: 1rem;
+`;
+
+const Unavailable = styled(UnavailableRecipesPantry)`
+  margin-bottom: 1rem;
+`;

@@ -1,6 +1,7 @@
 import store from '../store';
 import { addTask } from '../ducks/todos/tasks';
 import { addInCollection } from '../ducks/recipes/collection';
+import { addPantryEntry } from '../ducks/recipes/pantry';
 import Config from '../config';
 
 let mockIsLoaded = false;
@@ -63,9 +64,9 @@ export default () => {
     )
   );
 
-  // store.dispatch(addInPantry(0));
-  // store.dispatch(addInPantry(1));
-  // store.dispatch(addInPantry(1));
+  store.dispatch(addPantryEntry(0));
+  store.dispatch(addPantryEntry(1));
+  store.dispatch(addPantryEntry(1));
 
   mockIsLoaded = true;
 };

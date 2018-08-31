@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import TodosList from '../../container/TodosList';
 import AddTask from '../../container/AddTask';
-import Container from '../../components/Container';
 import * as todos from '../../ducks/todos/tasks';
 import Config from '../../config';
 
@@ -27,12 +26,10 @@ class Todos extends React.Component {
 
   render() {
     return (
-      <main>
-        <Container>
-          <AddTaskForm />
-          <TodosList />
-        </Container>
-      </main>
+      <React.Fragment>
+        <AddTaskForm />
+        <TodosList />
+      </React.Fragment>
     );
   }
 }

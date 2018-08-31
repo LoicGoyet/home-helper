@@ -8,6 +8,23 @@ import { alpha } from '../../utils/colors';
 import COLORS from '../../style/colors';
 
 class CardsAccordionItem extends React.Component {
+  static propTypes = {
+    isOpen: PropTypes.bool,
+    toggle: PropTypes.func,
+    children: PropTypes.node,
+    header: PropTypes.func.isRequired,
+    style: PropTypes.object,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    isOpen: false,
+    toggle: () => undefined,
+    children: undefined,
+    style: {},
+    className: undefined,
+  };
+
   constructor(props) {
     super(props);
     this.header = React.createRef();
@@ -29,14 +46,15 @@ class CardsAccordionItem extends React.Component {
     return {
       '--box-shadow': this.props.isOpen ? isOpenBoxShadow : 'none',
       '--z-index': this.props.isOpen ? '1' : 'initial',
+      ...this.props.style,
     };
   }
 
   render() {
-    const { isOpen, children, header } = this.props;
+    const { isOpen, children, header, className } = this.props;
 
     return (
-      <Wrapper style={this.themeVars}>
+      <Wrapper style={this.themeVars} className={className}>
         <Header innerRef={this.header} onClick={this.onHeaderClick} onKeyPress={this.onHeaderKeyPress} tabIndex="0">
           {header()}
         </Header>
@@ -48,19 +66,6 @@ class CardsAccordionItem extends React.Component {
     );
   }
 }
-
-CardsAccordionItem.propTypes = {
-  isOpen: PropTypes.bool,
-  toggle: PropTypes.func,
-  children: PropTypes.node,
-  header: PropTypes.func.isRequired,
-};
-
-CardsAccordionItem.defaultProps = {
-  isOpen: false,
-  toggle: () => undefined,
-  children: undefined,
-};
 
 export default CardsAccordionItem;
 

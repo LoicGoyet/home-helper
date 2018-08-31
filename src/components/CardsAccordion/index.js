@@ -8,6 +8,11 @@ export { CardsAccordionItem };
 export default class CardsAccordion extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: undefined,
   };
 
   state = {
@@ -30,5 +35,5 @@ export default class CardsAccordion extends React.Component {
       openItem: this.isItemOpened(item) ? -1 : item,
     });
 
-  render = () => <div>{this.children}</div>;
+  render = () => <section className={this.props.className}>{this.children}</section>;
 }
