@@ -34,7 +34,7 @@ class RecipesCollection extends React.Component {
           <FaPlus size={30} />
         </AddButton>
 
-        {/* <Count /> */}
+        <Count />
         <Collection />
       </React.Fragment>
     );
@@ -59,11 +59,5 @@ const AddButton = styled(Button)`
 `;
 
 const Count = styled(PantryCount)`
-  position: sticky;
-  z-index: 10;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
   margin-bottom: 1rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 `;

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import AvailableRecipesPantry from '../../container/AvailableRecipesPantry';
 import UnavailableRecipesPantry from '../../container/UnavailableRecipesPantry';
+import PantryCount from '../../container/PantryCount';
 import * as recipes from '../../ducks/recipes';
 import Config from '../../config';
 
@@ -27,6 +28,7 @@ class RecipesPantry extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <Count />
         <Available />
         <Unavailable />
       </React.Fragment>
@@ -44,5 +46,9 @@ const Available = styled(AvailableRecipesPantry)`
 `;
 
 const Unavailable = styled(UnavailableRecipesPantry)`
+  margin-bottom: 1rem;
+`;
+
+const Count = styled(PantryCount)`
   margin-bottom: 1rem;
 `;

@@ -33,7 +33,7 @@ stories.add('themes', () => (
       };
 
       return (
-        <React.Fragment>
+        <React.Fragment key={theme}>
           <Pill {...props}>{theme}</Pill>
 
           <Pill {...props} isBlock>

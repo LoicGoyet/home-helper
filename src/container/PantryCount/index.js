@@ -3,19 +3,32 @@ import { connect } from 'react-redux';
 import PantryCount from '../../components/PantryCount';
 
 const mapStateToProps = state => {
-  const pantry = state.recipes.pantry || [];
+  const { tags, pantry } = state.recipes;
+
+  const counts = tags.allIds.reduce(
+    (acc, tagId) => {
+      const label = tags.byId[tagId].title;
+      const value = pantry.allIds.filter(pantryId => pantry.byId[pantryId].tags.indexOf(tagId) > -1).length;
+
+      return [
+        ...acc,
+        {
+          label,
+          value,
+        },
+      ];
+    },
+    [
+      {
+        label: 'total',
+        value: pantry.allIds.length,
+        isTotal: true,
+      },
+    ]
+  );
+
   return {
-    tags: pantry.filter(recipe => !recipe.done).reduce((count, item) => {
-      const tags = { ...count };
-      return item.recipe.tags.reduce(
-        (acc, tag) => ({
-          ...acc,
-          [tag]: (acc[tag] || 0) + 1,
-        }),
-        tags
-      );
-    }, {}),
-    pantryLength: pantry.filter(recipe => !recipe.done).length,
+    counts,
   };
 };
 
