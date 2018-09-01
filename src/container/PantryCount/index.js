@@ -8,7 +8,10 @@ const mapStateToProps = state => {
   const counts = tags.allIds.reduce(
     (acc, tagId) => {
       const label = tags.byId[tagId].title;
-      const value = pantry.allIds.filter(pantryId => pantry.byId[pantryId].tags.indexOf(tagId) > -1).length;
+      const value = pantry.allIds.filter(pantryId => {
+        const pantryItem = pantry.byId[pantryId];
+        return pantryItem.tags.indexOf(tagId) > -1 && pantryItem.available;
+      }).length;
 
       return [
         ...acc,
@@ -21,7 +24,7 @@ const mapStateToProps = state => {
     [
       {
         label: 'total',
-        value: pantry.allIds.length,
+        value: pantry.allIds.filter(pantryId => pantry.byId[pantryId].available).length,
         isTotal: true,
       },
     ]
