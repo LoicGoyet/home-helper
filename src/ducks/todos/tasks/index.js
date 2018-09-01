@@ -1,4 +1,4 @@
-import { takeLatest, takeEvery, select, put } from 'redux-saga/effects';
+import { takeLatest, takeEvery, select, put, all, call } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
@@ -154,8 +154,8 @@ function* saveTodos() {
 
 function* createJoinedTask(payload) {
   const { productTitle, categoryTitle, unitTitle } = payload;
-  const unit = yield* getUnitId(unitTitle);
-  const product = yield* getProductId(productTitle, categoryTitle, unit);
+  const unit = yield call(getUnitId, unitTitle);
+  const product = yield call(getProductId, productTitle, categoryTitle, unit);
 
   const { quantity } = payload;
 
@@ -168,14 +168,16 @@ function* createJoinedTask(payload) {
 }
 
 function* createdJoinedTaskFromPantry({ ingredients }) {
-  return yield ingredients.map(function*({ product, quantity, unit }) {
-    return yield put({
-      type: ADD_TASK_JOINED,
-      product,
-      quantity,
-      unit,
-    });
-  });
+  return yield all(
+    ingredients.map(function*({ product, quantity, unit }) {
+      return yield put({
+        type: ADD_TASK_JOINED,
+        product,
+        quantity,
+        unit,
+      });
+    })
+  );
 }
 
 export function* tasksSaga() {

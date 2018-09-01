@@ -1,4 +1,4 @@
-import { takeLatest, takeEvery, select, put, take } from 'redux-saga/effects';
+import { takeLatest, takeEvery, select, put, take, call } from 'redux-saga/effects';
 
 import Config from '../../../config';
 import database from '../../../utils/database';
@@ -133,7 +133,7 @@ function* saveCategories() {
 }
 
 function* createJoinedProduct(payload) {
-  const category = yield* getCategoryId(payload.categoryTitle);
+  const category = yield call(getCategoryId, payload.categoryTitle);
   const { title, unit } = payload;
 
   yield put({

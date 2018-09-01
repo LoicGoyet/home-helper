@@ -1,5 +1,5 @@
 // Actions
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, all, call } from 'redux-saga/effects';
 
 import { getProductId } from '../../todos/products';
 import { getUnitId } from '../../todos/units';
@@ -78,30 +78,34 @@ export const addInCollection = (title, tags, ingredients, link) => ({
 // Sagas
 
 function* joinIngredients(ingredients) {
-  return yield ingredients.map(function*(ingredient) {
-    const { productTitle, categoryTitle, unitTitle, quantity } = ingredient;
-    const unit = yield* getUnitId(unitTitle);
-    const product = yield* getProductId(productTitle, categoryTitle, unit);
+  return yield all(
+    ingredients.map(function*(ingredient) {
+      const { productTitle, categoryTitle, unitTitle, quantity } = ingredient;
+      const unit = yield call(getUnitId, unitTitle);
+      const product = yield call(getProductId, productTitle, categoryTitle, unit);
 
-    return {
-      product,
-      quantity,
-      unit,
-    };
-  });
+      return {
+        product,
+        quantity,
+        unit,
+      };
+    })
+  );
 }
 
 function* joinTags(tags) {
-  return yield tags.map(function*(tag) {
-    return yield getTagId(tag);
-  });
+  return yield all(
+    tags.map(function*(tag) {
+      return yield call(getTagId, tag);
+    })
+  );
 }
 
 function* createJoinedCollectionItem(payload) {
   const { title, link } = payload;
 
-  const ingredients = yield* joinIngredients(payload.ingredients);
-  const tags = yield* joinTags(payload.tags);
+  const ingredients = yield call(joinIngredients, payload.ingredients);
+  const tags = yield call(joinTags, payload.tags);
 
   yield put({
     type: ADD_JOINED_COLLECTION_ITEM,
