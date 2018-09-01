@@ -6,6 +6,7 @@ import CardsAccordion, { CardsAccordionItem } from '../CardsAccordion';
 import Tags from '../Tags';
 import Checkbox from '../Checkbox';
 import IngredientsList from '../IngredientsList';
+import Container from '../Container';
 
 class RecipesCollection extends React.Component {
   static propTypes = {
@@ -41,10 +42,10 @@ class RecipesCollection extends React.Component {
               <Header>
                 <HeaderContent>
                   <Title>{item.title}</Title>
-                  <Tags items={item.tags} />
+                  <RecipeTags items={item.tags} />
                 </HeaderContent>
 
-                <Checkbox
+                <PantryCheckbox
                   defaultChecked={!item.available}
                   title={`${item.title} checkbox`}
                   onChange={() => this.onCheckboxChange(id)}
@@ -68,6 +69,21 @@ const Title = styled.h2`
   font-size: 1.25rem;
   letter-spacing: 0.0125em;
   margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 28rem) {
+    font-size: 1rem;
+    letter-spacing: initial;
+    margin-bottom: 0.25rem;
+  }
+`;
+
+const RecipeTags = styled(Tags)`
+  @media (max-width: 28rem) {
+    font-size: 0.75rem;
+  }
 `;
 
 const Header = styled.div`
@@ -78,8 +94,14 @@ const Header = styled.div`
 
 const HeaderContent = styled.div`
   padding-right: 1rem;
+  width: 100%;
+  min-width: 0;
 `;
 
 const CardItem = styled(CardsAccordionItem)`
   opacity: var(--opacity);
+`;
+
+const PantryCheckbox = styled(Checkbox)`
+  flex-shrink: 0;
 `;

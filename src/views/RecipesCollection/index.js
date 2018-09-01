@@ -4,7 +4,7 @@ import { FaPlus } from 'react-icons/lib/fa';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Collection from '../../container/RecipesCollection';
+import RecipesCollectionContainer from '../../container/RecipesCollection';
 import PantryCount from '../../container/PantryCount';
 import Button from '../../components/Button';
 import PATHS from '../../router/paths';
@@ -60,4 +60,11 @@ const AddButton = styled(Button)`
 
 const Count = styled(PantryCount)`
   margin-bottom: 1rem;
+`;
+
+const Collection = styled(RecipesCollectionContainer)`
+  @media (max-width: 38rem) {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
 `;

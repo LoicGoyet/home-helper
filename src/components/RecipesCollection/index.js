@@ -12,6 +12,11 @@ class RecipesCollection extends React.Component {
   static propTypes = {
     collection: PropTypes.object.isRequired,
     addItem: PropTypes.func,
+    className: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: undefined,
   };
 
   static defaultProps = {
@@ -24,7 +29,7 @@ class RecipesCollection extends React.Component {
   };
 
   render = () => (
-    <CardsAccordion>
+    <CardsAccordion className={this.props.className}>
       {this.props.collection.allIds.map(id => {
         const item = this.props.collection.byId[id];
 
@@ -35,7 +40,7 @@ class RecipesCollection extends React.Component {
               <Header>
                 <HeaderContent>
                   <Title>{item.title}</Title>
-                  <Tags items={item.tags} />
+                  <RecipeTags items={item.tags} />
                 </HeaderContent>
 
                 <AddButton color={COLORS.violet} block onClick={e => this.onAddBtnClick(e, id)}>
@@ -60,6 +65,21 @@ const Title = styled.h2`
   font-size: 1.25rem;
   letter-spacing: 0.0125em;
   margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: 28rem) {
+    font-size: 1rem;
+    letter-spacing: initial;
+    margin-bottom: 0.25rem;
+  }
+`;
+
+const RecipeTags = styled(Tags)`
+  @media (max-width: 28rem) {
+    font-size: 0.75rem;
+  }
 `;
 
 const Header = styled.div`
@@ -70,6 +90,8 @@ const Header = styled.div`
 
 const HeaderContent = styled.div`
   padding-right: 1rem;
+  width: 100%;
+  min-width: 0;
 `;
 
 const AddButton = styled(Button).attrs({

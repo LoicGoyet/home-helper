@@ -29,8 +29,10 @@ class RecipesPantry extends React.Component {
     return (
       <React.Fragment>
         <Count />
-        <Available />
-        <Unavailable />
+        <ListWrapper>
+          <Available />
+          <Unavailable />
+        </ListWrapper>
       </React.Fragment>
     );
   }
@@ -51,4 +53,11 @@ const Unavailable = styled(UnavailableRecipesPantry)`
 
 const Count = styled(PantryCount)`
   margin-bottom: 1rem;
+`;
+
+const ListWrapper = styled.div`
+  @media (max-width: 38rem) {
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
 `;
