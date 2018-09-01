@@ -8,19 +8,19 @@ let mockIsLoaded = false;
 
 export default () => {
   if (!Config.USE_MOCK || mockIsLoaded) return;
-  store.dispatch(addTask("Jus d'Orange", 'Boissons', 1, 'piece'));
-  store.dispatch(addTask('Croissants', 'Boulangerie', 4, 'piece'));
-  store.dispatch(addTask('Coca-Cola Zero', 'Boissons', 2, 'piece'));
-  store.dispatch(addTask('Baguette', 'Boulangerie', 1, 'piece'));
-  store.dispatch(addTask('Thon', 'Épicerie salée', 140, 'grams'));
-  store.dispatch(addTask('Croûtons', 'Épicerie salée', 50, 'grams'));
-  store.dispatch(addTask('Céréales', 'Épicerie sucrée', 500, 'grams'));
-  store.dispatch(addTask('Salade Batavia', 'Fruits & légumes', 1, 'piece'));
-  store.dispatch(addTask('Tomates', 'Fruits & 2mes', 3, 'piece'));
-  store.dispatch(addTask('Pain de mie', 'pièce(s)', 14, 'piece'));
-  store.dispatch(addTask('Pizza', 'pièce(s) Frais', 2, 'piece'));
-  store.dispatch(addTask('Blanc de Poulet', 'Produits frais', 2, 'piece'));
-  store.dispatch(addTask('Émincés de Poulet', 'Produits frais', 150, 'grams'));
+  store.dispatch(addTask("Jus d'Orange", 'Boissons', 1, 'pièce(s)'));
+  store.dispatch(addTask('Croissants', 'Boulangerie', 4, 'pièce(s)'));
+  store.dispatch(addTask('Coca-Cola Zero', 'Boissons', 2, 'pièce(s)'));
+  store.dispatch(addTask('Baguette', 'Boulangerie', 1, 'pièce(s)'));
+  store.dispatch(addTask('Thon', 'Épicerie salée', 140, 'grammes'));
+  store.dispatch(addTask('Croûtons', 'Épicerie salée', 50, 'grammes'));
+  store.dispatch(addTask('Céréales', 'Épicerie sucrée', 500, 'grammes'));
+  store.dispatch(addTask('Salade Batavia', 'Fruits & légumes', 1, 'pièce(s)'));
+  store.dispatch(addTask('Tomates', 'Fruits & légumes', 3, 'pièce(s)'));
+  store.dispatch(addTask('Pain de mie', 'Boulangerie', 14, 'pièce(s)'));
+  store.dispatch(addTask('Pizza', 'Produits frais', 2, 'pièce(s)'));
+  store.dispatch(addTask('Blanc de Poulet', 'Produits frais', 2, 'pièce(s)'));
+  store.dispatch(addTask('Émincés de Poulet', 'Produits frais', 150, 'grammes'));
 
   store.dispatch(
     addInCollection(
