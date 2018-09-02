@@ -12,15 +12,15 @@ export default () => {
   store.dispatch(addTask('Croissants', 'Boulangerie', 4, 'pièce(s)'));
   store.dispatch(addTask('Coca-Cola Zero', 'Boissons', 2, 'pièce(s)'));
   store.dispatch(addTask('Baguette', 'Boulangerie', 1, 'pièce(s)'));
-  store.dispatch(addTask('Thon', 'Épicerie salée', 140, 'grammes'));
-  store.dispatch(addTask('Croûtons', 'Épicerie salée', 50, 'grammes'));
-  store.dispatch(addTask('Céréales', 'Épicerie sucrée', 500, 'grammes'));
+  store.dispatch(addTask('Thon en boîte', 'Épicerie salée', 140, 'gramme(s)'));
+  store.dispatch(addTask('Croûtons', 'Épicerie salée', 50, 'gramme(s)'));
+  store.dispatch(addTask('Céréales', 'Épicerie sucrée', 500, 'gramme(s)'));
   store.dispatch(addTask('Salade Batavia', 'Fruits & légumes', 1, 'pièce(s)'));
   store.dispatch(addTask('Tomates', 'Fruits & légumes', 3, 'pièce(s)'));
   store.dispatch(addTask('Pain de mie', 'Boulangerie', 14, 'pièce(s)'));
-  store.dispatch(addTask('Pizza', 'Produits frais', 2, 'pièce(s)'));
+  store.dispatch(addTask('Pizza industrielle', 'Produits frais', 2, 'pièce(s)'));
   store.dispatch(addTask('Blanc de Poulet', 'Produits frais', 2, 'pièce(s)'));
-  store.dispatch(addTask('Émincés de Poulet', 'Produits frais', 150, 'grammes'));
+  store.dispatch(addTask('Émincés de Poulet', 'Produits frais', 150, 'gramme(s)'));
 
   store.dispatch(
     addInCollection(
@@ -37,7 +37,7 @@ export default () => {
           productTitle: 'Pomme de terre',
           categoryTitle: 'Fruits & légumes',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -58,7 +58,7 @@ export default () => {
           productTitle: 'Pâtes',
           categoryTitle: 'Épicerie salée',
           quantity: 160,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -88,13 +88,13 @@ export default () => {
           productTitle: 'Taboulé oriental',
           categoryTitle: 'Produits frais',
           quantity: 300,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Betteraves',
           categoryTitle: 'Produits frais',
           quantity: 300,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -109,7 +109,7 @@ export default () => {
           productTitle: 'Quiche lorraine industrielle',
           categoryTitle: 'Produits frais',
           quantity: 400,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -130,25 +130,25 @@ export default () => {
           productTitle: 'Madame Loïk',
           categoryTitle: 'Produits frais',
           quantity: 320,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Cheddar',
           categoryTitle: 'Produits frais',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Salade',
           categoryTitle: 'Fruits & légumes',
           quantity: 0.2,
-          unitTitle: 'pièce(s)(s)',
+          unitTitle: 'pièce(s)',
         },
         {
           productTitle: 'Tomates',
           categoryTitle: 'Fruits & légumes',
           quantity: 2,
-          unitTitle: 'pièce(s)(s)',
+          unitTitle: 'pièce(s)',
         },
       ]
     )
@@ -163,31 +163,31 @@ export default () => {
           productTitle: 'Salade',
           categoryTitle: 'Fruits & légumes',
           quantity: 0.2,
-          unitTitle: 'pièce(s)(s)',
+          unitTitle: 'pièce(s)',
         },
         {
           productTitle: 'Tomates',
           categoryTitle: 'Fruits & légumes',
           quantity: 2,
-          unitTitle: 'pièce(s)(s)',
+          unitTitle: 'pièce(s)',
         },
         {
           productTitle: 'Dés de mozzarela',
           categoryTitle: 'Produits frais',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Croûtons',
           categoryTitle: 'Épicerie salée',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Émincés de poulet',
           categoryTitle: 'Produits frais',
           quantity: 150,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -223,7 +223,7 @@ export default () => {
           productTitle: 'Riz',
           categoryTitle: 'Épicerie salée',
           quantity: 160,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Tomates',
@@ -235,13 +235,13 @@ export default () => {
           productTitle: 'Mozzarella',
           categoryTitle: 'Produits frais',
           quantity: 125,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Crème fraîche',
           categoryTitle: 'Produits frais',
           quantity: 20,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -256,19 +256,19 @@ export default () => {
           productTitle: 'Nuggets de poulet',
           categoryTitle: 'Produits frais',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Purée',
           categoryTitle: 'Épicerie salée',
           quantity: 1,
-          unitTitle: 'sachet',
+          unitTitle: 'sachet(s)',
         },
         {
           productTitle: 'Lait',
           categoryTitle: 'Produits frais',
           quantity: 350,
-          unitTitle: 'millilitres',
+          unitTitle: 'millilitre(s)',
         },
       ]
     )
@@ -340,7 +340,7 @@ export default () => {
           productTitle: 'Thon en boîte',
           categoryTitle: 'Épicerie salée',
           quantity: 140,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -361,13 +361,13 @@ export default () => {
           productTitle: 'Pâtes',
           categoryTitle: 'Épicerie salée',
           quantity: 160,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Thon en boîte',
           categoryTitle: 'Épicerie salée',
           quantity: 140,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -413,33 +413,33 @@ export default () => {
         },
         {
           productTitle: 'Farine',
-          categoryTitle: 'Épicerie sucée',
+          categoryTitle: 'Épicerie sucrée',
           quantity: 330,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Paprika',
           categoryTitle: 'Épicerie salée',
           quantity: 10,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Oignon en poudre',
           categoryTitle: 'Épicerie salée',
           quantity: 5,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Ail en poudre',
           categoryTitle: 'Épicerie salée',
           quantity: 5,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Lait ribot',
           categoryTitle: 'Produits frais',
           quantity: 400,
-          unitTitle: 'millilitres',
+          unitTitle: 'millilitre(s)',
         },
         {
           productTitle: 'Levure chimique',
@@ -451,7 +451,7 @@ export default () => {
           productTitle: 'Sucre en poudre',
           categoryTitle: 'Épicerie sucrée',
           quantity: 10,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Oeufs',
@@ -463,7 +463,7 @@ export default () => {
           productTitle: 'Beurre',
           categoryTitle: 'Produits frais',
           quantity: 90,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -484,13 +484,13 @@ export default () => {
           productTitle: 'Coulis de tomate',
           categoryTitle: 'Épicerie salée',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Fromage râpé',
           categoryTitle: 'Produits frais',
           quantity: 400,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Mozzarella',
@@ -511,25 +511,25 @@ export default () => {
           productTitle: 'Macaroni',
           categoryTitle: 'Épicerie salée',
           quantity: 180,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Beurre',
           categoryTitle: 'Produits frais',
           quantity: 20,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Compté',
           categoryTitle: 'Produits frais',
           quantity: 100,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Parmesan',
           categoryTitle: 'Produits frais',
           quantity: 100,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Mozzarella',
@@ -541,7 +541,7 @@ export default () => {
           productTitle: 'Crème fraîche',
           categoryTitle: 'Produits frais',
           quantity: 50,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -562,7 +562,7 @@ export default () => {
           productTitle: 'Sauce soja',
           categoryTitle: 'Épicerie salée',
           quantity: 100,
-          unitTitle: 'millilitres',
+          unitTitle: 'millilitre(s)',
         },
         {
           productTitle: 'Poivron',
@@ -574,13 +574,13 @@ export default () => {
           productTitle: 'Pâtes',
           categoryTitle: 'Épicerie salée',
           quantity: 160,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Cacahuètes',
           categoryTitle: 'Épicerie salée',
           quantity: 30,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
       ]
     )
@@ -598,10 +598,10 @@ export default () => {
           unitTitle: 'pièce(s)',
         },
         {
-          productTitle: 'Fromage râpée',
+          productTitle: 'Fromage râpé',
           categoryTitle: 'Produits frais',
           quantity: 250,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Jambon de poulet',
@@ -613,7 +613,7 @@ export default () => {
           productTitle: 'Cidre',
           categoryTitle: 'Boissons',
           quantity: 1,
-          unitTitle: 'bouteille',
+          unitTitle: 'bouteille(s)',
         },
       ]
     )
@@ -628,7 +628,7 @@ export default () => {
           productTitle: 'Filet de poulet',
           categoryTitle: 'Produits frais',
           quantity: 400,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Salade',
@@ -646,19 +646,19 @@ export default () => {
           productTitle: 'Fromage râpé',
           categoryTitle: 'Produits Frais',
           quantity: 250,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Crème fraîche',
           categoryTitle: 'Produits Frais',
           quantity: 200,
-          unitTitle: 'millilitres',
+          unitTitle: 'millilitre(s)',
         },
         {
           productTitle: 'Kit Old el Paso',
           categoryTitle: 'Produits du monde',
           quantity: 1,
-          unitTitle: 'boîte',
+          unitTitle: 'boîte(s)',
         },
       ]
     )
@@ -673,19 +673,19 @@ export default () => {
           productTitle: 'Farine',
           categoryTitle: 'Épicerie sucrée',
           quantity: 400,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: "Huile d'olive",
           categoryTitle: 'Épicerie salée',
           quantity: 50,
-          unitTitle: 'millilitres',
+          unitTitle: 'millilitre(s)',
         },
         {
           productTitle: 'Cheddar',
           categoryTitle: 'Produits frais',
           quantity: 200,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'La vache qui rit',
@@ -706,13 +706,13 @@ export default () => {
           productTitle: 'Pâtes',
           categoryTitle: 'Épicerie salée',
           quantity: 280,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Sauce pesto rouge',
           categoryTitle: 'Épicerie salée',
           quantity: 100,
-          unitTitle: 'grammes',
+          unitTitle: 'gramme(s)',
         },
         {
           productTitle: 'Poivron',

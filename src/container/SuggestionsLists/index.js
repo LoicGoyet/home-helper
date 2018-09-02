@@ -1,12 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { uniq } from '../../utils/arrays';
 
-const mapStateToProps = state => ({
-  products: state.todos.products,
-  units: state.todos.units,
-  categories: state.todos.categories,
-});
+const mapStateToProps = state => {
+  const { products, units, categories } = state.todos;
+
+  const sort = (a, b, collection) => {
+    const titleA = collection.byId[a].title; // ignore upper and lowercase
+    const titleB = collection.byId[b].title; // ignore upper and lowercase
+
+    if (titleA < titleB) {
+      return -1;
+    }
+    if (titleA > titleB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  };
+
+  return {
+    products: {
+      ...products,
+      allIds: products.allIds.sort((a, b) => sort(a, b, products)),
+    },
+    units: {
+      ...units,
+      allIds: units.allIds.sort((a, b) => sort(a, b, units)),
+    },
+    categories: {
+      ...categories,
+      allIds: categories.allIds.sort((a, b) => sort(a, b, categories)),
+    },
+  };
+};
 
 export const TODOS_CATEGORIES_SUGGESTIONS = 'category-suggestions';
 export const TODOS_PRODUCTS_SUGGESTIONS = 'title-suggestions';
