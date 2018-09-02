@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaPlus } from 'react-icons/lib/fa';
+import { TiPlus } from 'react-icons/lib/ti';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -31,7 +31,7 @@ class RecipesCollection extends React.Component {
     return (
       <React.Fragment>
         <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
-          <FaPlus size={30} />
+          <TiPlus size={26} />
         </AddButton>
 
         <Count />
@@ -56,6 +56,8 @@ const AddButton = styled(Button)`
   justify-content: center;
   min-width: initial;
   z-index: 10;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
 `;
 
 const Count = styled(PantryCount)`
