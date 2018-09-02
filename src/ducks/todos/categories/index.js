@@ -40,6 +40,7 @@ const reducer = (state = defaultState, action = {}) => {
           [id]: {
             id,
             title,
+            pos: id,
             color: strToColor(title),
             createdAt,
             updatedAt: createdAt,
