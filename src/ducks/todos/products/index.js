@@ -3,6 +3,7 @@ import { takeLatest, takeEvery, select, put, take, call } from 'redux-saga/effec
 import Config from '../../../config';
 import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
+import { normalizeStr } from '../../../utils/strings';
 import { getCategoryId } from '../categories';
 
 export const FETCH = 'home-helper/todos/products/FETCH';
@@ -154,7 +155,7 @@ export function* productsSaga() {
 
 export const selectProductByTitle = title => state => {
   const { products } = state.todos;
-  return products.allIds.find(id => products.byId[id].title === title);
+  return products.allIds.find(id => normalizeStr(products.byId[id].title) === normalizeStr(title));
 };
 
 // Getters

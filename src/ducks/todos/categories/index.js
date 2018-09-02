@@ -4,6 +4,7 @@ import Config from '../../../config';
 import database from '../../../utils/database';
 import { strToColor } from '../../../utils/colors';
 import { generateId } from '../../../utils/redux';
+import { normalizeStr } from '../../../utils/strings';
 
 export const FETCH = 'home-helper/todos/categories/FETCH';
 export const FETCH_SUCCESS = 'home-helper/todos/categories/FETCH_SUCCESS';
@@ -118,7 +119,7 @@ export function* categoriesSaga() {
 
 export const selectCategoryByTitle = title => state => {
   const { categories } = state.todos;
-  return categories.allIds.find(id => categories.byId[id].title === title);
+  return categories.allIds.find(id => normalizeStr(categories.byId[id].title) === normalizeStr(title));
 };
 
 // Getter

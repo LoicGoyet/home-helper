@@ -56,7 +56,7 @@ export default () => {
         },
         {
           productTitle: 'Pâtes',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 160,
           unitTitle: 'grammes',
         },
@@ -179,7 +179,7 @@ export default () => {
         },
         {
           productTitle: 'Croûtons',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 200,
           unitTitle: 'grammes',
         },
@@ -221,7 +221,7 @@ export default () => {
         },
         {
           productTitle: 'Riz',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 160,
           unitTitle: 'grammes',
         },
@@ -260,7 +260,7 @@ export default () => {
         },
         {
           productTitle: 'Purée',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 1,
           unitTitle: 'sachet',
         },
@@ -308,7 +308,7 @@ export default () => {
       [
         {
           productTitle: 'Pain de mie',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 8,
           unitTitle: 'pièce(s)',
         },
@@ -338,7 +338,7 @@ export default () => {
         },
         {
           productTitle: 'Thon en boîte',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 140,
           unitTitle: 'grammes',
         },
@@ -359,13 +359,13 @@ export default () => {
         },
         {
           productTitle: 'Pâtes',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 160,
           unitTitle: 'grammes',
         },
         {
           productTitle: 'Thon en boîte',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 140,
           unitTitle: 'grammes',
         },
@@ -380,7 +380,7 @@ export default () => {
       [
         {
           productTitle: 'Pain de mie',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 6,
           unitTitle: 'pièce(s)',
         },
@@ -419,19 +419,19 @@ export default () => {
         },
         {
           productTitle: 'Paprika',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 10,
           unitTitle: 'grammes',
         },
         {
           productTitle: 'Oignon en poudre',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 5,
           unitTitle: 'grammes',
         },
         {
           productTitle: 'Ail en poudre',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 5,
           unitTitle: 'grammes',
         },
@@ -482,7 +482,7 @@ export default () => {
         },
         {
           productTitle: 'Coulis de tomate',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 200,
           unitTitle: 'grammes',
         },
@@ -509,7 +509,7 @@ export default () => {
       [
         {
           productTitle: 'Macaroni',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 180,
           unitTitle: 'grammes',
         },
@@ -560,7 +560,7 @@ export default () => {
         },
         {
           productTitle: 'Sauce soja',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 100,
           unitTitle: 'millilitres',
         },
@@ -572,13 +572,13 @@ export default () => {
         },
         {
           productTitle: 'Pâtes',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 160,
           unitTitle: 'grammes',
         },
         {
           productTitle: 'Cacahuètes',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 30,
           unitTitle: 'grammes',
         },
@@ -677,7 +677,7 @@ export default () => {
         },
         {
           productTitle: "Huile d'olive",
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 50,
           unitTitle: 'millilitres',
         },
@@ -704,13 +704,13 @@ export default () => {
       [
         {
           productTitle: 'Pâtes',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 280,
           unitTitle: 'grammes',
         },
         {
           productTitle: 'Sauce pesto rouge',
-          categoryTitle: 'Épicerie sâlée',
+          categoryTitle: 'Épicerie salée',
           quantity: 100,
           unitTitle: 'grammes',
         },

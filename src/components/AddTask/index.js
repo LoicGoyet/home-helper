@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { MdAddBox } from 'react-icons/lib/md';
+import { normalizeStr } from '../../utils/strings';
 
 import COLORS from '../../style/colors';
 import Button from '../Button';
@@ -15,7 +16,6 @@ import {
 class AddTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func.isRequired,
-    tasks: PropTypes.object,
     units: PropTypes.object,
     categories: PropTypes.object,
     products: PropTypes.object,
@@ -23,7 +23,6 @@ class AddTask extends React.Component {
   };
 
   static defaultProps = {
-    tasks: { byId: {}, allIds: [] },
     units: { byId: {}, allIds: [] },
     categories: { byId: {}, allIds: [] },
     products: { byId: {}, allIds: [] },
@@ -83,20 +82,23 @@ class AddTask extends React.Component {
     };
   }
 
+  getStoredProductId = value => {
+    const { products } = this.props;
+    return products.allIds.find(id => normalizeStr(products.byId[id].title) === normalizeStr(value));
+  };
+
   getAutoCategory() {
     const { products, categories } = this.props;
-    const { value } = this.productInput.current;
 
-    const storedProductId = products.allIds.find(id => products.byId[id].title === value);
-    if (storedProductId === undefined) return true;
+    const storedProductId = this.getStoredProductId(this.productInput.current.value);
+    if (storedProductId === undefined) return;
     this.categoryInput.current.value = categories.byId[products.byId[storedProductId].category].title;
   }
 
   getAutoQuantityUnit() {
     const { products, units } = this.props;
-    const { value } = this.productInput.current;
 
-    const storedProductId = products.allIds.find(id => products.byId[id].title === value);
+    const storedProductId = this.getStoredProductId(this.productInput.current.value);
     if (storedProductId === undefined) return;
     this.quantityUnitInput.current.value = units.byId[products.byId[storedProductId].defaultUnit].title;
   }

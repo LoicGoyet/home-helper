@@ -1,6 +1,7 @@
 import { select, put } from 'redux-saga/effects';
 
 import { generateId } from '../../../utils/redux';
+import { normalizeStr } from '../../../utils/strings';
 
 export const ADD_TAG = 'home-helper/recipes/tags/ADD_UNIT';
 
@@ -52,7 +53,7 @@ export const addTag = title => ({
 
 export const selectTagByTitle = title => state => {
   const { tags } = state.recipes;
-  return tags.allIds.find(id => tags.byId[id].title === title);
+  return tags.allIds.find(id => normalizeStr(tags.byId[id].title) === normalizeStr(title));
 };
 
 // Getters
