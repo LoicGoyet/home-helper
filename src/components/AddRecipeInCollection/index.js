@@ -1,101 +1,153 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { TiPlus, TiTrash } from 'react-icons/lib/ti';
 
 import FormGroup from '../FormGroup';
 import IngredientForm from '../IngredientForm';
 import Button from '../Button';
-import COLORS from '../../style/colors';
+import COLORS, { THEMES } from '../../style/colors';
+
+const defaultIngredient = {
+  product: '',
+  category: '',
+  quantity: 0,
+  unit: '',
+};
+
+const defaultValues = {
+  title: '',
+  tags: [],
+  link: '',
+  ingredients: [defaultIngredient],
+};
 
 class AddRecipeInCollection extends React.Component {
   static propTypes = {
-    tasks: PropTypes.arrayOf(PropTypes.object),
-    units: PropTypes.object,
-    addInCollection: PropTypes.func.isRequired,
+    products: PropTypes.object.isRequired,
+    units: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    defaultValues: PropTypes.shape({
+      title: PropTypes.string,
+      tags: PropTypes.arrayOf(PropTypes.string),
+      link: PropTypes.string,
+      ingredients: PropTypes.arrayOf(
+        PropTypes.shape({
+          product: PropTypes.string,
+          category: PropTypes.string,
+          quantity: PropTypes.number,
+          unit: PropTypes.string,
+        })
+      ),
+    }),
   };
 
   static defaultProps = {
-    tasks: [],
-    units: [],
+    defaultValues,
   };
 
   constructor(props) {
     super(props);
-    this.titleInput = React.createRef();
-    this.tagsInput = React.createRef();
-    this.linkInput = React.createRef();
 
-    this.getIngredientValues = this.getIngredientValues.bind(this);
-    this.addIngredient = this.addIngredient.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.state = this.props.defaultValues;
   }
 
   state = {
-    ingredients: [{}],
+    ingredients: [defaultIngredient],
   };
 
-  onSubmit(event) {
+  componentDidMount = () => {
+    this.props.defaultValues.ingredients.map((ingredient, index) => this.getIngredientValues(index, ingredient));
+  };
+
+  onSubmit = event => {
     event.preventDefault();
-    const title = this.titleInput.current.value;
-    const { ingredients } = this.state;
-    const tags = this.tagsValue;
-    const link = this.linkInput.current.value !== '' ? this.linkInput.current.value : null;
+    const { ingredients, title, tags } = this.state;
+    this.props.onSubmit(title, tags, ingredients, this.link);
+    return this.reset();
+  };
 
-    event.target.reset();
-    this.setState({ ingredients: [{}] });
+  onInputChange = (event, field) => {
+    this.setState({
+      [field]: event.target.value,
+    });
+  };
 
-    return this.props.addInCollection(title, tags, ingredients, link);
+  get link() {
+    return this.state.link !== '' ? this.state.link : null;
   }
 
-  get tagsValue() {
-    const tags = this.tagsInput.current.value.split(',');
-    return tags.map(tag => tag.trim());
-  }
-
-  getIngredientValues(index, values) {
+  getIngredientValues = (index, values) => {
     const { ingredients } = this.state;
     ingredients[index] = values;
     this.setState({
       ingredients,
     });
-  }
+  };
 
-  addIngredient() {
+  reset = () => {
     this.setState({
-      ingredients: [...this.state.ingredients, {}],
+      ...defaultValues,
     });
-  }
+  };
 
-  render() {
-    const { tasks, units } = this.props;
+  addIngredient = event => {
+    event.preventDefault();
+    event.currentTarget.blur();
+    this.setState({
+      ingredients: [...this.state.ingredients, defaultIngredient],
+    });
+  };
 
-    return (
-      <form onSubmit={this.onSubmit}>
-        <FormGroup innerRef={this.titleInput} label="Nom" id="add-in-collection-id" required />
-        <FormGroup innerRef={this.tagsInput} label="Tags" id="add-in-collection-tags" help="seperate tags by a comma" />
-        <FormGroup innerRef={this.linkInput} label="Lien vers la recette" id="add-in-collection-link" />
-        {this.state.ingredients.map((ingredient, index) => (
+  removeIngredient = (event, index) => {
+    event.preventDefault();
+
+    console.log(this.state.ingredients.splice(index, 1));
+
+    this.setState({
+      ingredients: this.state.ingredients.splice(index, 1),
+    });
+  };
+
+  render = () => (
+    <form onSubmit={this.onSubmit}>
+      <FormGroup label="Nom" onChange={e => this.onInputChange(e, 'title')} value={this.state.title} required />
+
+      <FormGroup
+        label="Tags"
+        onChange={e => this.onInputChange(e, 'tags')}
+        value={this.state.tags}
+        help="Séparez les tags par une virgule"
+      />
+
+      <FormGroup label="Lien vers la recette" onChange={e => this.onInputChange(e, 'link')} value={this.state.link} />
+
+      {this.state.ingredients.map((ingredient, index) => {
+        const isLast = index === this.state.ingredients.length - 1;
+        return (
           <IngredientForm
-            key={`ingredient-${index}`}
-            tasks={tasks}
-            units={units}
+            key={`ingredient-${ingredient.product}`}
+            units={this.props.units}
+            products={this.props.products}
+            categories={this.props.categories}
             onChange={values => this.getIngredientValues(index, values)}
+            defaultValues={ingredient}
+            button={{
+              onClick: isLast ? this.addIngredient : event => this.removeIngredient(event, index),
+              color: THEMES[isLast ? 'success' : 'danger'],
+              children: () => (isLast ? <TiPlus size={20} /> : <TiTrash size={20} />),
+            }}
           />
-        ))}
+        );
+      })}
 
-        <div>
-          <Button onClick={this.addIngredient} block style={{ marginLeft: '-16px' }}>
-            Nouvel ingredient
-          </Button>
-        </div>
-
-        <div style={{ textAlign: 'right' }}>
-          <Button type="submit" block color={COLORS.green}>
-            Enregistrer
-          </Button>
-        </div>
-      </form>
-    );
-  }
+      <div style={{ textAlign: 'right' }}>
+        <Button type="submit" block color={COLORS.green}>
+          Enregistrer
+        </Button>
+      </div>
+    </form>
+  );
 }
 
 export default AddRecipeInCollection;

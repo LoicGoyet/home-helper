@@ -9,8 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addInCollection: (title, tags, ingredients, link) =>
-    dispatch(recipes.addInCollection(title, tags, ingredients, link)),
+  onSubmit: (title, tags, ingredients, link) => dispatch(recipes.addInCollection(title, tags, ingredients, link)),
 });
 
 export default connect(
