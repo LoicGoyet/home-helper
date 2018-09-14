@@ -12,9 +12,10 @@ Date.now = jest.fn(() => 1534598990000);
 
 describe('actions', () => {
   it(`should create action '${ADD_PRODUCT}'`, () => {
-    expect(addProduct('Pain de mie')).toEqual({
+    expect(addProduct('Pain de mie', 'Boulangerie')).toEqual({
       type: ADD_PRODUCT,
       title: 'Pain de mie',
+      categoryTitle: 'Boulangerie',
     });
   });
 
@@ -30,7 +31,7 @@ describe('actions', () => {
     expect(setProductCategory(0, 'Gel douche')).toEqual({
       type: SET_PRODUCT_CATEGORY,
       id: 0,
-      category: 0,
+      categoryTitle: 'Gel douche',
     });
   });
 });
@@ -58,22 +59,6 @@ describe('reducer', () => {
     expect(reducer(undefined, {})).toEqual(defaultState);
   });
 
-  it('should add a new product', () => {
-    expect(reducer(stateMock, addProduct('Cheddar'))).toEqual({
-      ...stateMock,
-      byId: {
-        ...stateMock.byId,
-        2: {
-          id: 2,
-          title: 'Cheddar',
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        },
-      },
-      allIds: [...stateMock.allIds, 2],
-    });
-  });
-
   it('should update a product title', () => {
     expect(reducer(stateMock, setProductTitle(1, 'Poisson pâné'))).toEqual({
       ...stateMock,
@@ -82,20 +67,6 @@ describe('reducer', () => {
         1: {
           ...stateMock.byId[1],
           title: 'Poisson pâné',
-          updatedAt: Date.now(),
-        },
-      },
-    });
-  });
-
-  it('should update a product category', () => {
-    expect(reducer(stateMock, setProductCategory(1, 0))).toEqual({
-      ...stateMock,
-      byId: {
-        ...stateMock.byId,
-        1: {
-          ...stateMock.byId[1],
-          category: 0,
           updatedAt: Date.now(),
         },
       },

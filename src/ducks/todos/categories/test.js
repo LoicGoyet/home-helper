@@ -1,4 +1,5 @@
 import reducer, { defaultState, addCategory, updateCategory, ADD_CATEGORY, UPDATE_CATEGORY } from './index';
+import { strToColor } from '../../../utils/colors';
 
 Date.now = jest.fn(() => 1534598990000);
 
@@ -24,12 +25,16 @@ const stateMock = {
     0: {
       id: 0,
       title: 'Boulangerie',
+      color: strToColor('Boulangerie'),
+      pos: 0,
       createdAt: 1534598989178,
       updatedAt: 1534598989178,
     },
     1: {
       id: 1,
       title: 'Épicerie salée',
+      color: strToColor('Épicerie salée'),
+      pos: 1,
       createdAt: 1534598989179,
       updatedAt: 1534598989180,
     },
@@ -50,6 +55,8 @@ describe('reducer', () => {
         2: {
           id: 2,
           title: 'Produits Frais',
+          color: strToColor('Produits Frais'),
+          pos: 2,
           createdAt: Date.now(),
           updatedAt: Date.now(),
         },

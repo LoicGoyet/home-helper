@@ -6,10 +6,10 @@ describe('actions', () => {
   it('should create an action to add a task', () => {
     expect(addTask('Tomates', 'Fruits & Légumes', 2, 'pièces')).toEqual({
       type: ADD_TASK,
-      title: 'Tomates',
-      category: 'Fruits & Légumes',
+      productTitle: 'Tomates',
+      categoryTitle: 'Fruits & Légumes',
       quantity: 2,
-      quantityUnit: 'pièces',
+      unitTitle: 'pièces',
     });
   });
 
@@ -51,64 +51,6 @@ const stateMock = {
 describe('reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(defaultState);
-  });
-
-  it(`should handle ${ADD_TASK}`, () => {
-    const action = addTask('Ketchup', 'Épicerie sâlée', 1, 'bouteille');
-    expect(reducer(stateMock, action)).toEqual({
-      ...stateMock,
-      byId: {
-        ...stateMock.byId,
-        2: {
-          id: 2,
-          title: 'Ketchup',
-          category: 'Épicerie sâlée',
-          quantity: 1,
-          quantityUnit: 'bouteille',
-          done: false,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        },
-      },
-      allIds: [...stateMock.allIds, 2],
-    });
-  });
-
-  it(`should handle change quantity ${ADD_TASK} to a not done task`, () => {
-    const action = addTask('Pommes de terre', 'Fruits & Légumes', 50, 'grammes');
-
-    expect(reducer(stateMock, action)).toEqual({
-      ...stateMock,
-      byId: {
-        ...stateMock.byId,
-        0: {
-          ...stateMock.byId[0],
-          quantity: 150,
-          updatedAt: Date.now(),
-        },
-      },
-    });
-  });
-
-  it(`should create a new task ${ADD_TASK} if the title is the same but not the quantity unit`, () => {
-    const action = addTask('Pommes de terre', 'Fruits & Légumes', 1, 'pièce');
-    expect(reducer(stateMock, action)).toEqual({
-      ...stateMock,
-      byId: {
-        ...stateMock.byId,
-        2: {
-          id: 2,
-          title: 'Pommes de terre',
-          category: 'Fruits & Légumes',
-          quantity: 1,
-          quantityUnit: 'pièce',
-          done: false,
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        },
-      },
-      allIds: [...stateMock.allIds, 2],
-    });
   });
 
   it(`should handle ${TOGGLE_TASK}`, () => {
