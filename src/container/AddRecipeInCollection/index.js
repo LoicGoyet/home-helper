@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import AddRecipeInCollection from '../../components/AddRecipeInCollection';
+import RecipeForm from '../../components/RecipeForm';
 import * as recipes from '../../ducks/recipes';
 
 const mapStateToProps = state => ({
@@ -15,4 +15,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddRecipeInCollection);
+)(RecipeForm);

@@ -21,7 +21,7 @@ const defaultValues = {
   ingredients: [defaultIngredient],
 };
 
-class AddRecipeInCollection extends React.Component {
+class RecipeForm extends React.Component {
   static propTypes = {
     products: PropTypes.object.isRequired,
     units: PropTypes.object.isRequired,
@@ -150,4 +150,4 @@ class AddRecipeInCollection extends React.Component {
   );
 }
 
-export default AddRecipeInCollection;
+export default RecipeForm;
