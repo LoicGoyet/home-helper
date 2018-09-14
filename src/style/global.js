@@ -6,7 +6,7 @@ injectGlobal`
     @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
     html {
-      font-size: 14px;
+      font-size: 16px;
     }
 
     body {
