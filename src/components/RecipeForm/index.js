@@ -126,7 +126,7 @@ class RecipeForm extends React.Component {
         const isLast = index === this.state.ingredients.length - 1;
         return (
           <IngredientForm
-            key={`ingredient-${ingredient.product}`}
+            key={`ingredient-${index}`}
             units={this.props.units}
             products={this.props.products}
             categories={this.props.categories}
