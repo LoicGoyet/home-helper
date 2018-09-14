@@ -6,7 +6,6 @@ import CardsAccordion, { CardsAccordionItem } from '../CardsAccordion';
 import Tags from '../Tags';
 import Checkbox from '../Checkbox';
 import IngredientsList from '../IngredientsList';
-import Container from '../Container';
 
 class RecipesCollection extends React.Component {
   static propTypes = {

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { FaArrowLeft } from 'react-icons/lib/fa';
 
-import RecipeForm from '../../container/RecipeForm';
+import AddRecipeInCollection from '../../container/AddRecipeInCollection';
 import Button from '../../components/Button';
 import PATHS from '../../router/paths';
 import * as recipes from '../../ducks/recipes';
@@ -36,7 +36,7 @@ class RecipesAdd extends React.Component {
           </BackButton>
         </Header>
 
-        <RecipeForm />
+        <AddRecipeInCollection />
       </React.Fragment>
     );
   }

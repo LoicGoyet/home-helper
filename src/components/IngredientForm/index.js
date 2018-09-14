@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
+import { path } from 'ramda';
 import { normalizeStr } from '../../utils/strings';
 
 import FormGroup from '../FormGroup';
@@ -27,7 +28,7 @@ class IngredientForm extends React.Component {
     button: PropTypes.shape({
       onClick: PropTypes.func.isRequired,
       color: ExtraPropTypes.color.isRequired /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
-      children: PropTypes.func.isRequired,
+      icon: PropTypes.func.isRequired,
     }),
   };
 
@@ -114,6 +115,8 @@ class IngredientForm extends React.Component {
   };
 
   render() {
+    const ButtonIcon = path(['button', 'icon'], this.props);
+
     return (
       <Row role="group">
         <TitleCol>
@@ -168,7 +171,8 @@ class IngredientForm extends React.Component {
           {this.props.button && (
             <ButtonCol>
               <Button square="42px" onClick={this.props.button.onClick} color={this.props.button.color} block>
-                {this.props.button.children()}
+                {/* {this.props.button.icon()} */}
+                <ButtonIcon size={20} />
               </Button>
             </ButtonCol>
           )}

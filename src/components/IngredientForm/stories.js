@@ -21,7 +21,7 @@ stories.add('with a button', () => (
     button={{
       onClick: action('button onClick'),
       color: THEMES.success,
-      children: () => <TiPlus size={20} />,
+      icon: TiPlus,
     }}
   />
 ));

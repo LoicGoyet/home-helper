@@ -102,8 +102,6 @@ class RecipeForm extends React.Component {
   removeIngredient = (event, index) => {
     event.preventDefault();
 
-    console.log(this.state.ingredients.splice(index, 1));
-
     this.setState({
       ingredients: this.state.ingredients.splice(index, 1),
     });
@@ -135,7 +133,7 @@ class RecipeForm extends React.Component {
             button={{
               onClick: isLast ? this.addIngredient : event => this.removeIngredient(event, index),
               color: THEMES[isLast ? 'success' : 'danger'],
-              children: () => (isLast ? <TiPlus size={20} /> : <TiTrash size={20} />),
+              icon: isLast ? TiPlus : TiTrash,
             }}
           />
         );
