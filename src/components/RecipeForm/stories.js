@@ -22,16 +22,16 @@ stories.add('with default value', () => (
       link: '#',
       ingredients: [
         {
-          product: 'Pain de mie',
-          category: 'Boulangerie',
+          productTitle: 'Pain de mie',
+          categoryTitle: 'Boulangerie',
           quantity: 2,
-          unit: 'tranche(s)',
+          unitTitle: 'tranche(s)',
         },
         {
-          product: 'Beurre',
-          category: 'Produits Frais',
+          productTitle: 'Beurre',
+          categoryTitle: 'Produits Frais',
           quantity: 20,
-          unit: 'grammes',
+          unitTitle: 'grammes',
         },
       ],
     }}

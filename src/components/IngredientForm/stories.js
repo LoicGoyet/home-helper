@@ -32,10 +32,10 @@ stories.add('with default value', () => (
     products={products}
     categories={categories}
     defaultValues={{
-      product: 'Pain de mie',
-      category: 'Boulangerie',
+      productTitle: 'Pain de mie',
+      categoryTitle: 'Boulangerie',
       quantity: 2,
-      unit: 'tranche(s)',
+      unitTitle: 'tranche(s)',
     }}
   />
 ));

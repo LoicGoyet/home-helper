@@ -8,10 +8,10 @@ import Button from '../Button';
 import COLORS, { THEMES } from '../../style/colors';
 
 const defaultIngredient = {
-  product: '',
-  category: '',
+  productTitle: '',
+  categoryTitle: '',
   quantity: 0,
-  unit: '',
+  unitTitle: '',
 };
 
 const defaultValues = {
@@ -68,8 +68,11 @@ class RecipeForm extends React.Component {
   };
 
   onInputChange = (event, field) => {
+    const { value } = event.target;
+    const formatedValue = field === 'tags' ? this.convertStrToTags(value) : value;
+
     this.setState({
-      [field]: event.target.value,
+      [field]: formatedValue,
     });
   };
 
@@ -84,6 +87,8 @@ class RecipeForm extends React.Component {
       ingredients,
     });
   };
+
+  convertStrToTags = str => str.split(',').map(item => item.trim());
 
   reset = () => {
     this.setState({

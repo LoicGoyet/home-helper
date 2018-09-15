@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 
 import RecipeForm from '../../components/RecipeForm';
-import * as recipes from '../../ducks/recipes';
+import * as recipes from '../../ducks/recipes/collection';
 
 const mapStateToProps = state => ({
-  tasks: state.todos.tasks.tasks,
-  units: state.todos.tasks.units,
+  units: state.todos.units,
+  products: state.todos.products,
+  categories: state.todos.categories,
 });
 
 const mapDispatchToProps = dispatch => ({

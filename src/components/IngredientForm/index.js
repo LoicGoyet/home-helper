@@ -20,10 +20,10 @@ class IngredientForm extends React.Component {
     categories: PropTypes.object.isRequired,
     onChange: PropTypes.func,
     defaultValues: PropTypes.shape({
-      product: PropTypes.string,
-      category: PropTypes.string,
+      productTitle: PropTypes.string,
+      categoryTitle: PropTypes.string,
       quantity: PropTypes.number,
-      unit: PropTypes.string,
+      unitTitle: PropTypes.string,
     }),
     button: PropTypes.shape({
       onClick: PropTypes.func.isRequired,
@@ -35,10 +35,10 @@ class IngredientForm extends React.Component {
   static defaultProps = {
     onChange: () => undefined,
     defaultValues: {
-      product: '',
-      category: '',
+      productTitle: '',
+      categoryTitle: '',
       quantity: 0,
-      unit: '',
+      unitTitle: '',
     },
     button: undefined,
   };
@@ -49,10 +49,10 @@ class IngredientForm extends React.Component {
   }
 
   state = {
-    product: '',
-    category: '',
+    productTitle: '',
+    categoryTitle: '',
     quantity: 0,
-    unit: '',
+    unitTitle: '',
   };
 
   componentDidUpdate = prevProps => {
@@ -71,31 +71,31 @@ class IngredientForm extends React.Component {
   };
 
   getAutoCategory() {
-    const storedProductId = this.getStoredProductId(this.state.product);
+    const storedProductId = this.getStoredProductId(this.state.productTitle);
     if (storedProductId === undefined) return;
 
     this.setState(
       {
-        category: this.props.categories.byId[this.props.products.byId[storedProductId].category].title,
+        categoryTitle: this.props.categories.byId[this.props.products.byId[storedProductId].category].title,
       },
       this.onChange
     );
   }
 
   getAutoQuantityUnit() {
-    const storedProductId = this.getStoredProductId(this.state.product);
+    const storedProductId = this.getStoredProductId(this.state.productTitle);
     if (storedProductId === undefined) return;
 
     this.setState(
       {
-        unit: this.props.units.byId[this.props.products.byId[storedProductId].defaultUnit].title,
+        unitTitle: this.props.units.byId[this.props.products.byId[storedProductId].defaultUnit].title,
       },
       this.onChange
     );
   }
 
   handleProductChange = e => {
-    this.setState({ product: e.target.value }, () => {
+    this.setState({ productTitle: e.target.value }, () => {
       this.getAutoCategory();
       this.getAutoQuantityUnit();
       return this.onChange();
@@ -103,15 +103,17 @@ class IngredientForm extends React.Component {
   };
 
   handleCategoryChange = e => {
-    this.setState({ category: e.target.value }, this.onChange);
+    this.setState({ categoryTitle: e.target.value }, this.onChange);
   };
 
   handleQuantityChange = e => {
-    this.setState({ quantity: parseInt(e.target.value) }, this.onChange);
+    const { value } = e.target;
+    const quantity = value === '' ? 0 : parseInt(value);
+    this.setState({ quantity }, this.onChange);
   };
 
   handleUnitChange = e => {
-    this.setState({ unit: e.target.value }, this.onChange);
+    this.setState({ unitTitle: e.target.value }, this.onChange);
   };
 
   render() {
@@ -126,7 +128,7 @@ class IngredientForm extends React.Component {
             list={TODOS_PRODUCTS_SUGGESTIONS}
             placeholder="nom du produit"
             onChange={this.handleProductChange}
-            value={this.state.product}
+            value={this.state.productTitle}
             required
           />
         </TitleCol>
@@ -138,7 +140,7 @@ class IngredientForm extends React.Component {
             list={TODOS_CATEGORIES_SUGGESTIONS}
             placeholder="categorie"
             onChange={this.handleCategoryChange}
-            value={this.state.category}
+            value={this.state.categoryTitle}
             required
           />
         </CategoryCol>
@@ -149,7 +151,8 @@ class IngredientForm extends React.Component {
               id="quantity"
               label="Quantité"
               type="number"
-              min="1"
+              min="0"
+              step="any"
               onChange={this.handleQuantityChange}
               value={this.state.quantity}
               required
@@ -162,7 +165,7 @@ class IngredientForm extends React.Component {
               list={TODOS_UNITS_SUGGESTIONS}
               label="Unité"
               placeholder="unité"
-              value={this.state.unit}
+              value={this.state.unitTitle}
               onChange={this.handleUnitChange}
               required
             />
@@ -171,7 +174,6 @@ class IngredientForm extends React.Component {
           {this.props.button && (
             <ButtonCol>
               <Button square="42px" onClick={this.props.button.onClick} color={this.props.button.color} block>
-                {/* {this.props.button.icon()} */}
                 <ButtonIcon size={20} />
               </Button>
             </ButtonCol>
