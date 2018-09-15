@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { TiPlus } from 'react-icons/lib/ti';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { path } from 'ramda';
 
 import RecipesCollectionContainer from '../../container/RecipesCollection';
 import PantryCount from '../../container/PantryCount';
@@ -28,8 +29,10 @@ class RecipesCollection extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <React.Fragment>
+        {path(['location', 'state', 'newRecipe', 'title'], this.props)}
         <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
           <TiPlus size={26} />
         </AddButton>

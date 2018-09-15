@@ -36,7 +36,7 @@ class RecipesAdd extends React.Component {
           </BackButton>
         </Header>
 
-        <CreateRecipe />
+        <CreateRecipe redirectTo={PATHS.RECIPES_LIST} />
       </React.Fragment>
     );
   }
