@@ -12,6 +12,7 @@ const defaultIngredient = {
   categoryTitle: '',
   quantity: 0,
   unitTitle: '',
+  id: 0,
 };
 
 const defaultValues = {
@@ -37,6 +38,7 @@ class RecipeForm extends React.Component {
           category: PropTypes.string,
           quantity: PropTypes.number,
           unit: PropTypes.string,
+          id: PropTypes.number,
         })
       ),
     }),
@@ -50,6 +52,7 @@ class RecipeForm extends React.Component {
     super(props);
 
     this.state = this.props.defaultValues;
+    this.ingredientNextId = 1;
   }
 
   state = {
@@ -57,7 +60,7 @@ class RecipeForm extends React.Component {
   };
 
   componentDidMount = () => {
-    this.props.defaultValues.ingredients.map((ingredient, index) => this.getIngredientValues(index, ingredient));
+    this.props.defaultValues.ingredients.map((ingredient, index) => this.getIngredientValues(index, ingredient, true));
   };
 
   onSubmit = event => {
@@ -80,9 +83,22 @@ class RecipeForm extends React.Component {
     return this.state.link !== '' ? this.state.link : null;
   }
 
-  getIngredientValues = (index, values) => {
+  getIngredientValues = (index, values, init = false) => {
     const { ingredients } = this.state;
-    ingredients[index] = values;
+
+    ingredients[index] = {
+      ...values,
+    };
+
+    if (init) {
+      ingredients[index] = {
+        ...ingredients[index],
+        id: this.ingredientNextId,
+      };
+
+      this.ingredientNextId += 1;
+    }
+
     this.setState({
       ingredients,
     });
@@ -100,15 +116,23 @@ class RecipeForm extends React.Component {
     event.preventDefault();
     event.currentTarget.blur();
     this.setState({
-      ingredients: [...this.state.ingredients, defaultIngredient],
+      ingredients: [
+        ...this.state.ingredients,
+        {
+          ...defaultIngredient,
+          id: this.ingredientNextId,
+        },
+      ],
     });
+
+    this.ingredientNextId += 1;
   };
 
-  removeIngredient = (event, index) => {
+  removeIngredient = (event, id) => {
     event.preventDefault();
 
     this.setState({
-      ingredients: this.state.ingredients.splice(index, 1),
+      ingredients: this.state.ingredients.filter(i => i.id !== id),
     });
   };
 
@@ -129,14 +153,14 @@ class RecipeForm extends React.Component {
         const isLast = index === this.state.ingredients.length - 1;
         return (
           <IngredientForm
-            key={`ingredient-${index}`}
+            key={`ingredient-${ingredient.id || index}`}
             units={this.props.units}
             products={this.props.products}
             categories={this.props.categories}
             onChange={values => this.getIngredientValues(index, values)}
             defaultValues={ingredient}
             button={{
-              onClick: isLast ? this.addIngredient : event => this.removeIngredient(event, index),
+              onClick: isLast ? this.addIngredient : event => this.removeIngredient(event, ingredient.id),
               color: THEMES[isLast ? 'success' : 'danger'],
               icon: isLast ? TiPlus : TiTrash,
             }}
