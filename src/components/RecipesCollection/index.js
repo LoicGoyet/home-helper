@@ -12,21 +12,22 @@ class RecipesCollection extends React.Component {
   static propTypes = {
     collection: PropTypes.object.isRequired,
     addItem: PropTypes.func,
+    editHref: PropTypes.string,
     className: PropTypes.string,
   };
 
   static defaultProps = {
     className: undefined,
-  };
-
-  static defaultProps = {
     addItem: () => undefined,
+    editHref: undefined,
   };
 
   onAddBtnClick = (event, id) => {
     event.stopPropagation();
     this.props.addItem(id);
   };
+
+  getEditHref = id => this.props.editHref.replace(':id', id);
 
   render = () => (
     <CardsAccordion className={this.props.className}>
@@ -49,7 +50,17 @@ class RecipesCollection extends React.Component {
               </Header>
             )}
           >
-            <IngredientsList ingredients={item.ingredients} />
+            <DetailRow>
+              <IngredientCol>
+                <IngredientsList ingredients={item.ingredients} />
+              </IngredientCol>
+
+              <EditButtonCol>
+                <Button color={COLORS.blue} block href={this.getEditHref(id)}>
+                  Modifier
+                </Button>
+              </EditButtonCol>
+            </DetailRow>
           </CardsAccordionItem>
         );
       })}
@@ -99,4 +110,27 @@ const AddButton = styled(Button).attrs({
   block: true,
 })`
   flex-shrink: 0;
+`;
+
+const DetailRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  margin-top: -1rem;
+`;
+
+const IngredientCol = styled.div`
+  flex-grow: 1;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 1rem;
+  flex-basis: 28rem;
+`;
+
+const EditButtonCol = styled.div`
+  flex-shrink: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 1rem;
 `;

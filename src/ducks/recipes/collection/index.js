@@ -8,7 +8,9 @@ import { generateId } from '../../../utils/redux';
 import { ADD_JOINED_PANTRY_ENTRY } from '../pantry';
 
 export const ADD_COLLECTION_ITEM = 'home-helper/recipes/collection/ADD_COLLECTION_ITEM';
+export const UPDATE_COLLECTION_ITEM = 'home-helper/recipes/collection/UPDATE_COLLECTION_ITEM';
 export const ADD_JOINED_COLLECTION_ITEM = 'home-helper/recipes/collection/ADD_JOINED_COLLECTION_ITEM';
+export const UPDATE_JOINED_COLLECTION_ITEM = 'home-helper/recipes/collection/UPDATE_JOINED_COLLECTION_ITEM';
 export const UPDATE_COLLECTION_ITEM_LAST_ADD_IN_PANTRY =
   'home-helper/recipes/collection/UPDATE_COLLECTION_ITEM_LAST_ADD_IN_PANTRY';
 
@@ -45,6 +47,27 @@ const reducer = (state = defaultState, action = {}) => {
       };
     }
 
+    case UPDATE_JOINED_COLLECTION_ITEM: {
+      const { id, title, tags, ingredients, link } = action;
+      const updatedAt = Date.now();
+
+      return {
+        ...state,
+        byId: {
+          ...state.byId,
+          [id]: {
+            ...state.byId[id],
+            id,
+            title,
+            tags,
+            ingredients,
+            link,
+            updatedAt,
+          },
+        },
+      };
+    }
+
     case UPDATE_COLLECTION_ITEM_LAST_ADD_IN_PANTRY: {
       return {
         ...state,
@@ -69,6 +92,15 @@ export default reducer;
 
 export const addInCollection = (title, tags, ingredients, link) => ({
   type: ADD_COLLECTION_ITEM,
+  title,
+  tags,
+  ingredients,
+  link,
+});
+
+export const updateInCollection = (id, title, tags, ingredients, link) => ({
+  type: UPDATE_COLLECTION_ITEM,
+  id,
   title,
   tags,
   ingredients,
@@ -116,6 +148,22 @@ function* createJoinedCollectionItem(payload) {
   });
 }
 
+function* updateJoinedCollectionItem(payload) {
+  const { id, title, link } = payload;
+
+  const ingredients = yield call(joinIngredients, payload.ingredients);
+  const tags = yield call(joinTags, payload.tags);
+
+  yield put({
+    type: UPDATE_JOINED_COLLECTION_ITEM,
+    id,
+    title,
+    tags,
+    ingredients,
+    link,
+  });
+}
+
 function* updateItemLastAddInPantry({ collectionItem }) {
   return yield put({
     type: UPDATE_COLLECTION_ITEM_LAST_ADD_IN_PANTRY,
@@ -125,5 +173,6 @@ function* updateItemLastAddInPantry({ collectionItem }) {
 
 export function* collectionSaga() {
   yield takeEvery(ADD_COLLECTION_ITEM, createJoinedCollectionItem);
+  yield takeEvery(UPDATE_COLLECTION_ITEM, updateJoinedCollectionItem);
   yield takeEvery(ADD_JOINED_PANTRY_ENTRY, updateItemLastAddInPantry);
 }

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import RecipesCollection from '../../components/RecipesCollection';
 import { addPantryEntry } from '../../ducks/recipes/pantry';
@@ -30,7 +31,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addItem: id => dispatch(addPantryEntry(id)),
+  addItem: bindActionCreators(addPantryEntry, dispatch),
 });
 
 export default connect(

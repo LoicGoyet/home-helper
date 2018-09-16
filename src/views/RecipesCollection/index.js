@@ -29,16 +29,14 @@ class RecipesCollection extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <React.Fragment>
-        {path(['location', 'state', 'newRecipe', 'title'], this.props)}
         <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
           <TiPlus size={26} />
         </AddButton>
 
         <Count />
-        <Collection />
+        <Collection editHref={PATHS.RECIPES_EDIT} />
       </React.Fragment>
     );
   }
