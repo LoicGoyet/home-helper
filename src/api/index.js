@@ -1,18 +1,18 @@
 import database from '../utils/database';
-import nodeEnv from '../utils/nodeEnv';
 import { setState } from '../ducks/root';
 import mock from './mock.json';
+import { USE_MOCK } from '../config';
 
-const useMocks = nodeEnv.isDev || nodeEnv.isTest;
 const data = database.ref('/');
 
 export const sendDataToFirebase = state => {
-  if (useMocks) return;
-  return data.set(state);
+  if (USE_MOCK) return;
+  const jsonState = JSON.parse(JSON.stringify(state));
+  return data.set(jsonState);
 };
 
 export const loadDataFromFirebase = store => {
-  if (useMocks) {
+  if (USE_MOCK) {
     return store.dispatch(setState(mock));
   }
 
