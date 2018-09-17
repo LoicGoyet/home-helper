@@ -1,13 +1,9 @@
-import { takeLatest, select, put } from 'redux-saga/effects';
+import { select, put } from 'redux-saga/effects';
 
-import Config from '../../../config';
-import database from '../../../utils/database';
 import { strToColor } from '../../../utils/colors';
 import { generateId } from '../../../utils/redux';
 import { normalizeStr } from '../../../utils/strings';
 
-export const FETCH = 'home-helper/todos/categories/FETCH';
-export const FETCH_SUCCESS = 'home-helper/todos/categories/FETCH_SUCCESS';
 export const ADD_CATEGORY = 'home-helper/todos/categories/ADD_CATEGORY';
 export const UPDATE_CATEGORY = 'home-helper/todos/categories/UPDATE_CATEGORY';
 
@@ -18,13 +14,8 @@ export const defaultState = {
 };
 
 // Reducer
-// Actions
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case FETCH_SUCCESS: {
-      return action.data;
-    }
-
     case ADD_CATEGORY: {
       const alreadyStored = state.allIds.find(categoryId => state.byId[categoryId].title === action.title);
       if (alreadyStored !== undefined) return { ...state };
@@ -86,35 +77,6 @@ export const updateCategory = (id, title) => ({
   id,
   title,
 });
-
-export const fetch = () => ({
-  type: FETCH,
-});
-
-// Sagas
-
-function* fetchCategory() {
-  if (Config.USE_MOCK) return yield;
-
-  const data = yield database
-    .ref('/todos/categories')
-    .once('value')
-    .then(snapshot => snapshot.val());
-
-  yield put({ type: FETCH_SUCCESS, data });
-}
-
-function* saveCategories() {
-  if (Config.USE_MOCK) return yield;
-  const { categories } = yield select(state => state.todos);
-  yield database.ref('/todos/categories').set(categories);
-}
-
-export function* categoriesSaga() {
-  yield takeLatest(FETCH, fetchCategory);
-  yield takeLatest(ADD_CATEGORY, saveCategories);
-  yield takeLatest(UPDATE_CATEGORY, saveCategories);
-}
 
 // Selector
 

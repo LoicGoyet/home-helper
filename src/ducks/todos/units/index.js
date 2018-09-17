@@ -1,11 +1,7 @@
-import { takeLatest, select, put } from 'redux-saga/effects';
+import { select, put } from 'redux-saga/effects';
 
-import Config from '../../../config';
-import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
 
-export const FETCH = 'home-helper/todos/units/FETCH';
-export const FETCH_SUCCESS = 'home-helper/todos/units/FETCH_SUCCESS';
 export const ADD_UNIT = 'home-helper/todos/units/ADD_UNIT';
 export const SET_UNIT_TITLE = 'home-helper/todos/units/SET_UNIT_TITLE';
 
@@ -18,10 +14,6 @@ export const defaultState = {
 // Reducer
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case FETCH_SUCCESS: {
-      return action.data;
-    }
-
     case ADD_UNIT: {
       const alreadyStored = state.allIds.find(unitId => state.byId[unitId].title === action.title);
       if (alreadyStored !== undefined) return { ...state };
@@ -81,34 +73,6 @@ export const setUnitTitle = (id, title) => ({
   id,
   title,
 });
-
-export const fetch = () => ({
-  type: FETCH,
-});
-
-// Sagas
-
-function* fetchUnits() {
-  if (Config.USE_MOCK) return yield;
-
-  const data = yield database
-    .ref('/todos/units')
-    .once('value')
-    .then(snapshot => snapshot.val());
-
-  yield put({ type: FETCH_SUCCESS, data });
-}
-
-function* saveUnits() {
-  if (Config.USE_MOCK) return yield;
-  const { units } = yield select(state => state.todos);
-  yield database.ref('/todos/units').set(units);
-}
-
-export function* unitsSaga() {
-  yield takeLatest(FETCH, fetchUnits);
-  yield takeLatest([ADD_UNIT, SET_UNIT_TITLE], saveUnits);
-}
 
 // Selectors
 

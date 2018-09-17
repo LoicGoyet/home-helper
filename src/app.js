@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 
 import Router from './router';
 import store from './store';
-import mock from './mock';
+import { loadDataFromFirebase } from './api';
 
 export default class App extends React.Component {
   componentDidMount() {
-    mock();
+    loadDataFromFirebase(store);
   }
 
   render() {

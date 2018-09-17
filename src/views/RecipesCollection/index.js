@@ -1,51 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { TiPlus } from 'react-icons/lib/ti';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { path } from 'ramda';
 
 import RecipesCollectionContainer from '../../container/RecipesCollection';
 import PantryCount from '../../container/PantryCount';
 import Button from '../../components/Button';
 import PATHS from '../../router/paths';
-import * as recipes from '../../ducks/recipes';
-import Config from '../../config';
 
-const mapStateToProps = () => ({});
+const RecipesCollection = () => (
+  <React.Fragment>
+    <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
+      <TiPlus size={26} />
+    </AddButton>
 
-const mapDispatchToProps = dispatch => ({
-  fetchRecipes: () => dispatch(recipes.fetch()),
-});
+    <Count />
+    <Collection editHref={PATHS.RECIPES_EDIT} />
+  </React.Fragment>
+);
 
-class RecipesCollection extends React.Component {
-  static propTypes = {
-    fetchRecipes: PropTypes.func.isRequired,
-  };
-
-  componentWillMount() {
-    if (Config.USE_MOCK) return;
-    this.props.fetchRecipes();
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
-          <TiPlus size={26} />
-        </AddButton>
-
-        <Count />
-        <Collection editHref={PATHS.RECIPES_EDIT} />
-      </React.Fragment>
-    );
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RecipesCollection);
+export default RecipesCollection;
 
 const AddButton = styled(Button)`
   position: fixed;

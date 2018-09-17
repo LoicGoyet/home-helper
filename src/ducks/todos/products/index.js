@@ -1,13 +1,9 @@
-import { takeLatest, takeEvery, select, put, take, call } from 'redux-saga/effects';
+import { takeEvery, select, put, take, call } from 'redux-saga/effects';
 
-import Config from '../../../config';
-import database from '../../../utils/database';
 import { generateId } from '../../../utils/redux';
 import { normalizeStr } from '../../../utils/strings';
 import { getCategoryId } from '../categories';
 
-export const FETCH = 'home-helper/todos/products/FETCH';
-export const FETCH_SUCCESS = 'home-helper/todos/products/FETCH_SUCCESS';
 export const ADD_PRODUCT = 'home-helper/todos/products/ADD_PRODUCT';
 export const ADD_PRODUCT_JOINED = 'home-helper/todos/products/ADD_PRODUCT_JOINED';
 export const SET_PRODUCT_CATEGORY = 'home-helper/todos/products/SET_PRODUCT_CATEGORY';
@@ -21,13 +17,8 @@ export const defaultState = {
 };
 
 // Reducer
-// Actions
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
-    case FETCH_SUCCESS: {
-      return action.data;
-    }
-
     case ADD_PRODUCT_JOINED: {
       const id = generateId(state.allIds);
       const { title, category, defaultUnit } = action;
@@ -110,28 +101,7 @@ export const setProductCategory = (id, categoryTitle) => ({
   categoryTitle,
 });
 
-export const fetch = () => ({
-  type: FETCH,
-});
-
 // Sagas
-
-function* fetchCategory() {
-  if (Config.USE_MOCK) return yield;
-
-  const data = yield database
-    .ref('/todos/products')
-    .once('value')
-    .then(snapshot => snapshot.val());
-
-  yield put({ type: FETCH_SUCCESS, data });
-}
-
-function* saveCategories() {
-  if (Config.USE_MOCK) return yield;
-  const { products } = yield select(state => state.todos);
-  yield database.ref('/todos/products').set(products);
-}
 
 function* createJoinedProduct(payload) {
   const category = yield call(getCategoryId, payload.categoryTitle);
@@ -146,8 +116,6 @@ function* createJoinedProduct(payload) {
 }
 
 export function* productsSaga() {
-  yield takeLatest(FETCH, fetchCategory);
-  yield takeLatest([ADD_PRODUCT_JOINED, SET_PRODUCT_TITLE, SET_PRODUCT_CATEGORY], saveCategories);
   yield takeEvery(ADD_PRODUCT, createJoinedProduct);
 }
 

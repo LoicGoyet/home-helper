@@ -7,23 +7,22 @@ import PATHS from '../../router/paths';
 import Button from '../../components/Button';
 import EditRecipe from '../../container/EditRecipe';
 
-class RecipesEdit extends React.Component {
-  static propTypes = {
-    match: PropTypes.any.isRequired,
-  };
+const RecipesEdit = props => (
+  <React.Fragment>
+    <Header>
+      <BackButton href={PATHS.RECIPES_LIST} color="#fff">
+        <FaArrowLeft style={{ marginRight: 6 }} />
+        Retour
+      </BackButton>
+    </Header>
 
-  render = () => (
-    <React.Fragment>
-      <Header>
-        <BackButton href={PATHS.RECIPES_LIST} color="#fff">
-          <FaArrowLeft style={{ marginRight: 6 }} />
-          Retour
-        </BackButton>
-      </Header>
-      <EditRecipe redirectTo={PATHS.RECIPES_LIST} id={this.props.match.params.id} />
-    </React.Fragment>
-  );
-}
+    <EditRecipe redirectTo={PATHS.RECIPES_LIST} id={props.match.params.id} />
+  </React.Fragment>
+);
+
+RecipesEdit.propTypes = {
+  match: PropTypes.any.isRequired,
+};
 
 export default RecipesEdit;
 

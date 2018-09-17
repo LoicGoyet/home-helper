@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
 
-import todos, { todosSaga } from './todos';
-import recipes, { recipesSaga } from './recipes';
+import rootReducer, { rootStateSaga } from './root';
+import { todosSaga } from './todos';
+import { recipesSaga } from './recipes';
 
-export default combineReducers({ todos, recipes });
+export default rootReducer;
 
 export function* rootSaga() {
-  yield all([todosSaga(), recipesSaga()]);
+  yield all([todosSaga(), recipesSaga(), rootStateSaga()]);
 }
