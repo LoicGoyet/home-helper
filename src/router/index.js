@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import { FaShoppingCart, FaBook, FaInbox } from 'react-icons/lib/fa';
 
 import Todos from '../views/Todos';
@@ -13,8 +13,6 @@ import nodeEnv from '../utils/nodeEnv';
 import PATHS from './paths';
 
 const Router = () => {
-  const basename = nodeEnv.isProd ? process.env.PRODUCTION_BASENAME : '/';
-
   const menu = [
     {
       icon: FaBook,
@@ -34,7 +32,7 @@ const Router = () => {
   ];
 
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter>
       <Layout menu={menu}>
         <Route exact path={PATHS.HOME} component={Todos} />
         <Route exact path={PATHS.TODOS} component={Todos} />
@@ -44,7 +42,7 @@ const Router = () => {
         <Route exact path={PATHS.RECIPES_PANTRY} component={RecipesPantry} />
         <SuggestionsLists />
       </Layout>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
