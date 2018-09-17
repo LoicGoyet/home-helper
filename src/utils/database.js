@@ -1,6 +1,5 @@
-import firebase from 'firebase';
-
-import nodeEnv from './nodeEnv';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
@@ -11,5 +10,4 @@ firebase.initializeApp({
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
 });
 
-const database = !nodeEnv.isTest ? firebase.database() : {};
-export default database;
+export default firebase.database();

@@ -4,6 +4,7 @@ import { FaShoppingCart, FaBook, FaInbox } from 'react-icons/lib/fa';
 
 import Todos from '../views/Todos';
 import RecipesAdd from '../views/RecipesAdd';
+import RecipesEdit from '../views/RecipesEdit';
 import RecipesPantry from '../views/RecipesPantry';
 import RecipesCollection from '../views/RecipesCollection';
 import SuggestionsLists from '../container/SuggestionsLists';
@@ -39,6 +40,7 @@ const Router = () => {
         <Route exact path={PATHS.TODOS} component={Todos} />
         <Route exact path={PATHS.RECIPES_LIST} component={RecipesCollection} />
         <Route exact path={PATHS.RECIPES_ADD} component={RecipesAdd} />
+        <Route exact path={PATHS.RECIPES_EDIT} component={RecipesEdit} />
         <Route exact path={PATHS.RECIPES_PANTRY} component={RecipesPantry} />
         <SuggestionsLists />
       </Layout>

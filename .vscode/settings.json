@@ -6,15 +6,17 @@
     "dist/": true,
   },
   "search.exclude": {
-    "node_modules/": true
+    "node_modules/": true,
+    ".cache": true,
+    "dist/": true,
   },
-  "prettier.printWidth": 88,
-  "prettier.trailingComma": "none",
-  "prettier.singleQuote": true,
-  "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "Fira Code, Menlo, Monaco, 'Courier New', monospace",
-  "editor.fontLigatures": true,
+  "[javascript]": {
+    "editor.formatOnSave": false,
+  },
+  "eslint.autoFixOnSave": true,
+  "eslint.alwaysShowStatus": true,
   "editor.tabSize": 2,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true
 }

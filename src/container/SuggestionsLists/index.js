@@ -1,29 +1,56 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { uniq } from '../../utils/arrays';
 
-const mapStateToProps = state => ({
-  categories: uniq(state.todos.tasks.map(task => task.category)),
-  tasks: uniq(state.todos.tasks.map(task => task.title)),
-  units: uniq(Object.values(state.todos.units)),
-});
+const mapStateToProps = state => {
+  const { products, units, categories } = state.todos;
 
-export const TASK_CATEGORY_SUGGESTIONS = 'category-suggestions';
-export const TASK_TITLE_SUGGESTIONS = 'title-suggestions';
-export const TASK_QUANTITY_UNIT_SUGGESTIONS = 'quantity-unit-suggestions';
+  const sort = (a, b, collection) => {
+    const titleA = collection.byId[a].title; // ignore upper and lowercase
+    const titleB = collection.byId[b].title; // ignore upper and lowercase
 
-export default connect(mapStateToProps)(({ categories, tasks, units }) => (
+    if (titleA < titleB) {
+      return -1;
+    }
+    if (titleA > titleB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  };
+
+  return {
+    products: {
+      ...products,
+      allIds: products.allIds.sort((a, b) => sort(a, b, products)),
+    },
+    units: {
+      ...units,
+      allIds: units.allIds.sort((a, b) => sort(a, b, units)),
+    },
+    categories: {
+      ...categories,
+      allIds: categories.allIds.sort((a, b) => sort(a, b, categories)),
+    },
+  };
+};
+
+export const TODOS_CATEGORIES_SUGGESTIONS = 'category-suggestions';
+export const TODOS_PRODUCTS_SUGGESTIONS = 'title-suggestions';
+export const TODOS_UNITS_SUGGESTIONS = 'units-suggestions';
+
+export default connect(mapStateToProps)(({ categories, products, units }) => (
   <React.Fragment>
-    <datalist id={TASK_CATEGORY_SUGGESTIONS}>
-      {categories.map(suggestion => <option key={suggestion} value={suggestion} />)}
+    <datalist id={TODOS_CATEGORIES_SUGGESTIONS}>
+      {categories.allIds.map(id => <option key={`category-${id}`} value={categories.byId[id].title} />)}
     </datalist>
 
-    <datalist id={TASK_TITLE_SUGGESTIONS}>
-      {tasks.map(suggestion => <option key={suggestion} value={suggestion} />)}
+    <datalist id={TODOS_PRODUCTS_SUGGESTIONS}>
+      {products.allIds.map(id => <option key={`products-${id}`} value={products.byId[id].title} />)}
     </datalist>
 
-    <datalist id={TASK_QUANTITY_UNIT_SUGGESTIONS}>
-      {units.map(suggestion => <option key={suggestion} value={suggestion} />)}
+    <datalist id={TODOS_UNITS_SUGGESTIONS}>
+      {units.allIds.map(id => <option key={`units-${id}`} value={units.byId[id].title} />)}
     </datalist>
   </React.Fragment>
 ));

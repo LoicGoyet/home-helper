@@ -10,7 +10,7 @@ export default class Input extends React.Component {
   };
 
   static defaultProps = {
-    reference: {},
+    reference: undefined,
   };
 
   render() {
@@ -39,6 +39,7 @@ const El = styled.input`
     --inner-shadow-color: var(--border-color);
     --outer-shadow-color: var(--border-color);
     outline-width: 0;
+    position: relative;
 
     /* &[pattern]:invalid { */
     &:invalid {

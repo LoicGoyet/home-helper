@@ -7,19 +7,17 @@ import COLORS from '../../style/colors';
 
 class Task extends React.Component {
   static propTypes = {
-    task: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      done: PropTypes.bool.isRequired,
-      quantity: PropTypes.number.isRequired,
-      quantityUnit: PropTypes.string.isRequired,
-    }).isRequired,
-    toggleTask: PropTypes.func.isRequired,
+    task: PropTypes.object.isRequired,
+    product: PropTypes.object.isRequired,
+    category: PropTypes.object.isRequired,
+    unit: PropTypes.object.isRequired,
+    toggleTask: PropTypes.func,
     style: PropTypes.object,
   };
 
   static defaultProps = {
     style: {},
+    toggleTask: () => undefined,
   };
 
   constructor(props) {
@@ -27,32 +25,35 @@ class Task extends React.Component {
     this.toggleTask = this.toggleTask.bind(this);
   }
 
+  get isDone() {
+    return this.props.task.done;
+  }
+
   get themeVars() {
-    const { task, style } = this.props;
+    const { style } = this.props;
 
     return {
-      '--text-decoration': task.done ? 'line-through' : 'initial',
-      '--opacity': task.done ? 0.5 : 'initial',
-      '--checkbox-bg-color': task.done ? 'currentColor' : COLORS.transparent,
-      '--checkbox-opacity': task.done ? 0.5 : 'initial',
+      '--text-decoration': this.isDone ? 'line-through' : 'initial',
+      '--opacity': this.isDone ? 0.5 : 'initial',
+      '--checkbox-bg-color': this.isDone ? 'currentColor' : COLORS.transparent,
+      '--checkbox-opacity': this.isDone ? 0.5 : 'initial',
+      '--category-color': this.props.category.color,
       ...style,
     };
   }
 
-  toggleTask() {
-    return this.props.toggleTask();
-  }
+  toggleTask = () => this.props.toggleTask(this.props.task.id);
 
   render() {
-    const { title, quantity, quantityUnit } = this.props.task;
+    const { task, product, unit } = this.props;
 
     return (
       <Wrapper style={this.themeVars} onClick={this.toggleTask}>
         <FakeCheckbox style={this.themeVars} />
         <Label>
-          {title}
+          {product.title}
           <Quantity>
-            {quantity} {quantityUnit}
+            {task.quantity} {unit.title}
           </Quantity>
         </Label>
       </Wrapper>
@@ -67,7 +68,14 @@ const Wrapper = styled(Card)`
   opacity: var(--opacity);
   display: flex;
   align-items: center;
-  cursor: default;
+  cursor: pointer;
+  position: relative;
+  padding-left: 1.25rem;
+
+  @media (max-width: 30rem) {
+    margin-left: calc(-1rem + 1px);
+    margin-right: calc(-1rem + 1px);
+  }
 
   &:hover {
     background-color: ${COLORS.lightgray};
@@ -75,6 +83,16 @@ const Wrapper = styled(Card)`
 
   & + & {
     margin-top: 1px;
+  }
+
+  &::before {
+    content: '';
+    width: 0.25rem;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--category-color);
   }
 `;
 

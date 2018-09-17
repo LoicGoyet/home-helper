@@ -1,91 +1,146 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
+import { path } from 'ramda';
+import { normalizeStr } from '../../utils/strings';
 
 import FormGroup from '../FormGroup';
+import Button from '../Button';
 import {
-  TASK_CATEGORY_SUGGESTIONS,
-  TASK_TITLE_SUGGESTIONS,
-  TASK_QUANTITY_UNIT_SUGGESTIONS,
+  TODOS_CATEGORIES_SUGGESTIONS,
+  TODOS_PRODUCTS_SUGGESTIONS,
+  TODOS_UNITS_SUGGESTIONS,
 } from '../../container/SuggestionsLists';
 
 class IngredientForm extends React.Component {
   static propTypes = {
-    tasks: PropTypes.arrayOf(PropTypes.object),
-    units: PropTypes.object,
+    products: PropTypes.object.isRequired,
+    units: PropTypes.object.isRequired,
+    categories: PropTypes.object.isRequired,
     onChange: PropTypes.func,
+    defaultValues: PropTypes.shape({
+      productTitle: PropTypes.string,
+      categoryTitle: PropTypes.string,
+      quantity: PropTypes.number,
+      unitTitle: PropTypes.string,
+    }),
+    button: PropTypes.shape({
+      onClick: PropTypes.func.isRequired,
+      color: ExtraPropTypes.color.isRequired /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
+      icon: PropTypes.func.isRequired,
+    }),
   };
 
   static defaultProps = {
-    tasks: [],
-    units: [],
-    onChange: undefined,
+    onChange: () => undefined,
+    defaultValues: {
+      productTitle: '',
+      categoryTitle: '',
+      quantity: 0,
+      unitTitle: '',
+    },
+    button: undefined,
   };
 
   constructor(props) {
     super(props);
-    this.titleInput = React.createRef();
-    this.categoryInput = React.createRef();
-    this.quantityInput = React.createRef();
-    this.quantityUnitInput = React.createRef();
-
-    this.autoFillInputs = this.autoFillInputs.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.state = this.props.defaultValues;
   }
 
-  onChange() {
-    return this.props.onChange({
-      title: this.titleInput.current.value,
-      category: this.categoryInput.current.value,
-      quantity: parseInt(this.quantityInput.current.value),
-      quantityUnit: this.quantityUnitInput.current.value,
-    });
+  state = {
+    productTitle: '',
+    categoryTitle: '',
+    quantity: 0,
+    unitTitle: '',
+  };
+
+  componentDidUpdate = prevProps => {
+    if (prevProps.defaultValues !== this.props.defaultValues) {
+      this.setState({
+        ...this.props.defaultValues,
+      });
+    }
+  };
+
+  onChange = () => this.props.onChange(this.state);
+
+  getStoredProductId = value => {
+    const { products } = this.props;
+    return products.allIds.find(id => normalizeStr(products.byId[id].title) === normalizeStr(value));
+  };
+
+  getAutoCategory() {
+    const storedProductId = this.getStoredProductId(this.state.productTitle);
+    if (storedProductId === undefined) return;
+
+    this.setState(
+      {
+        categoryTitle: this.props.categories.byId[this.props.products.byId[storedProductId].category].title,
+      },
+      this.onChange
+    );
   }
 
   getAutoQuantityUnit() {
-    const { value } = this.titleInput.current;
-    if (!this.props.units[value]) return false;
-    this.quantityUnitInput.current.value = this.props.units[value];
+    const storedProductId = this.getStoredProductId(this.state.productTitle);
+    if (storedProductId === undefined) return;
+
+    this.setState(
+      {
+        unitTitle: this.props.units.byId[this.props.products.byId[storedProductId].defaultUnit].title,
+      },
+      this.onChange
+    );
   }
 
-  getAutoCategory() {
-    const { value } = this.titleInput.current;
-    const taskWtSameTitle = this.props.tasks.find(({ title }) => title === value);
-    if (!taskWtSameTitle) return true;
+  handleProductChange = e => {
+    this.setState({ productTitle: e.target.value }, () => {
+      this.getAutoCategory();
+      this.getAutoQuantityUnit();
+      return this.onChange();
+    });
+  };
 
-    this.categoryInput.current.value = taskWtSameTitle.category;
-    return false;
-  }
+  handleCategoryChange = e => {
+    this.setState({ categoryTitle: e.target.value }, this.onChange);
+  };
 
-  autoFillInputs() {
-    this.getAutoCategory();
-    this.getAutoQuantityUnit();
-    return this.onChange();
-  }
+  handleQuantityChange = e => {
+    const { value } = e.target;
+    const quantity = value === '' ? 0 : parseInt(value);
+    this.setState({ quantity }, this.onChange);
+  };
+
+  handleUnitChange = e => {
+    this.setState({ unitTitle: e.target.value }, this.onChange);
+  };
 
   render() {
+    const ButtonIcon = path(['button', 'icon'], this.props);
+
     return (
       <Row role="group">
         <TitleCol>
           <FormGroup
-            innerRef={this.titleInput}
-            id="title"
-            label="Title"
-            list={TASK_TITLE_SUGGESTIONS}
+            id="product"
+            label="Produit"
+            list={TODOS_PRODUCTS_SUGGESTIONS}
             placeholder="nom du produit"
-            onChange={this.autoFillInputs}
+            onChange={this.handleProductChange}
+            value={this.state.productTitle}
             required
           />
         </TitleCol>
 
         <CategoryCol>
           <FormGroup
-            innerRef={this.categoryInput}
             id="category"
-            label="Category"
-            list={TASK_CATEGORY_SUGGESTIONS}
+            label="Catégorie"
+            list={TODOS_CATEGORIES_SUGGESTIONS}
             placeholder="categorie"
-            onChange={this.onChange}
+            onChange={this.handleCategoryChange}
+            value={this.state.categoryTitle}
             required
           />
         </CategoryCol>
@@ -93,27 +148,36 @@ class IngredientForm extends React.Component {
         <QuantityCol>
           <QuantityInputCol>
             <FormGroup
-              innerRef={this.quantityInput}
               id="quantity"
-              label="Quantity"
+              label="Quantité"
               type="number"
-              min="1"
-              onChange={this.onChange}
+              min="0"
+              step="any"
+              onChange={this.handleQuantityChange}
+              value={this.state.quantity}
               required
             />
           </QuantityInputCol>
 
           <QuantityUnitInputCol>
             <FormGroup
-              innerRef={this.quantityUnitInput}
-              id="quantity-unit"
-              list={TASK_QUANTITY_UNIT_SUGGESTIONS}
-              label="Quantity Unit"
+              id="unit"
+              list={TODOS_UNITS_SUGGESTIONS}
+              label="Unité"
               placeholder="unité"
-              onChange={this.onChange}
+              value={this.state.unitTitle}
+              onChange={this.handleUnitChange}
               required
             />
           </QuantityUnitInputCol>
+
+          {this.props.button && (
+            <ButtonCol>
+              <Button square="42px" onClick={this.props.button.onClick} color={this.props.button.color} block>
+                <ButtonIcon size={20} />
+              </Button>
+            </ButtonCol>
+          )}
         </QuantityCol>
       </Row>
     );
@@ -171,4 +235,10 @@ const QuantityInputCol = styled.div`
 
 const QuantityUnitInputCol = styled.div`
   flex-basis: 12rem;
+`;
+
+const ButtonCol = styled.div`
+  flex-shrink: 0;
+  flex-grow: initial;
+  flex-basis: initial;
 `;

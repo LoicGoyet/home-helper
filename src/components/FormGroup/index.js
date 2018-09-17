@@ -14,7 +14,7 @@ const FormGroup = ({ help, id, label, pattern, placeholder, required, type, ...p
 
 FormGroup.propTypes = {
   help: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   label: PropTypes.string.isRequired,
   pattern: PropTypes.string,
   placeholder: PropTypes.string,
@@ -23,6 +23,7 @@ FormGroup.propTypes = {
 };
 
 FormGroup.defaultProps = {
+  id: undefined,
   help: undefined,
   pattern: undefined,
   placeholder: undefined,

@@ -8,14 +8,38 @@ stories.add('default', () => (
   <IngredientsList
     ingredients={[
       {
-        title: 'poison pané',
+        product: {
+          id: 0,
+          title: 'Poisson pâné',
+          category: 0,
+          defaultUnit: 0,
+          createdAt: 1535573090701,
+          updatedAt: 1535573090701,
+        },
         quantity: 2,
-        quantityUnit: 'pièces',
+        unit: {
+          id: 0,
+          title: 'pieces',
+          createdAt: 1535573090679,
+          updatedAt: 1535573090679,
+        },
       },
       {
-        title: 'pomme de terre',
+        product: {
+          id: 1,
+          title: 'Frites',
+          category: 0,
+          defaultUnit: 0,
+          createdAt: 1535573090701,
+          updatedAt: 1535573090701,
+        },
         quantity: 300,
-        quantityUnit: 'grammes',
+        unit: {
+          id: 1,
+          title: 'grams',
+          createdAt: 1535573090679,
+          updatedAt: 1535573090679,
+        },
       },
     ]}
   />

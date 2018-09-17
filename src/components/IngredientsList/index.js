@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 const IngredientsList = ({ ingredients, className }) => (
   <List className={className}>
-    {ingredients.map(({ title, quantity, quantityUnit }) => (
-      <Item key={`${title} / ${quantity}`}>
-        <Title>{title}</Title>
+    {ingredients.map(({ product, quantity, unit }) => (
+      <Item key={`${product.title} / ${quantity}`}>
+        <Title>{product.title}</Title>
         <Quantity>
-          {quantity} {quantityUnit}
+          {quantity} {unit.title}
         </Quantity>
       </Item>
     ))}
@@ -16,13 +16,7 @@ const IngredientsList = ({ ingredients, className }) => (
 );
 
 IngredientsList.propTypes = {
-  ingredients: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      quantityUnit: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.object).isRequired,
   className: PropTypes.string,
 };
 
