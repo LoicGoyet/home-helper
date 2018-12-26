@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text } from '@storybook/addon-knobs/react';
-import backgrounds from '@storybook/addon-backgrounds';
+import { text } from '@storybook/addon-knobs';
+import { withBackgrounds } from '@storybook/addon-backgrounds';
 
 import Card from '../Card';
 
 const stories = storiesOf('Card', module);
-stories.addDecorator(backgrounds([{ name: 'purple', value: '#140A43', default: true }]));
+stories.addDecorator(withBackgrounds([{ name: 'purple', value: '#140A43', default: true }]));
 stories.add('default', () => (
   <Card>
     {text(

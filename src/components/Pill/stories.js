@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, color } from '@storybook/addon-knobs/react';
+import { text, color } from '@storybook/addon-knobs';
 
 import Pill from '../Pill';
 import { THEMES } from '../../style/colors';

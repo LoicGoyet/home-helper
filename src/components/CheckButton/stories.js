@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { boolean, color } from '@storybook/addon-knobs/react';
+import { boolean, color } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
 import CheckButton from '../CheckButton';

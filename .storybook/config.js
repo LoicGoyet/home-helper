@@ -1,10 +1,8 @@
-import 'babel-polyfill';
-
 import { configure, addDecorator } from '@storybook/react';
 import '@storybook/addon-console';
 import { checkA11y } from '@storybook/addon-a11y';
-import backgrounds from "@storybook/addon-backgrounds";
-import { withKnobs, text } from '@storybook/addon-knobs/react';
+import { withBackgrounds } from "@storybook/addon-backgrounds";
+import { withKnobs } from '@storybook/addon-knobs';
 import { injectGlobal } from 'styled-components';
 
 import COLORS from '../src/style/colors';
@@ -25,7 +23,7 @@ injectGlobal`
   }
 `;
 
-addDecorator(backgrounds([
+addDecorator(withBackgrounds([
   { name: "white", value: "#ffffff" },
   { name: "purple", value: "#140A43", default: true },
 ]));

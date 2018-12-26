@@ -68,13 +68,3 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
 ### Storybook
-
-"@storybook/addon-a11y": "^3.4.5",
-"@storybook/addon-actions": "^3.3.15",
-"@storybook/addon-backgrounds": "^3.4.3",
-"@storybook/addon-knobs": "^3.4.3",
-"@storybook/addon-viewport": "^3.4.5",
-"@storybook/react": "^3.3.15",
-"@storybook/addon-console": "^1.0.0",
-"@storybook/addon-links": "^3.3.15",
-"@storybook/addons": "^3.3.15",
