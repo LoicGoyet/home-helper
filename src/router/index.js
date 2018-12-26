@@ -9,7 +9,6 @@ import RecipesPantry from '../views/RecipesPantry';
 import RecipesCollection from '../views/RecipesCollection';
 import SuggestionsLists from '../container/SuggestionsLists';
 import Layout from '../components/Layout';
-import nodeEnv from '../utils/nodeEnv';
 import PATHS from './paths';
 
 const Router = () => {

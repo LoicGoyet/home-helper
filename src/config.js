@@ -1,5 +1,3 @@
 import nodeEnv from './utils/nodeEnv';
 
-export default {
-  USE_MOCK: !nodeEnv.isProd,
-};
+export const USE_MOCK = !nodeEnv.isProd;

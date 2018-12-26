@@ -1,18 +1,17 @@
 {
   "files.exclude": {
     "node_modules/": true,
-    "yarn.lock": true,
-    ".cache": true,
-    "dist/": true,
+    "package-lock.json": true,
+    "build/": false
   },
   "search.exclude": {
     "node_modules/": true,
-    ".cache": true,
-    "dist/": true,
+    "package-lock.json": true,
+    "build/": true
   },
   "editor.formatOnSave": true,
   "[javascript]": {
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": false
   },
   "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,

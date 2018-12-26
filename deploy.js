@@ -11,7 +11,7 @@ const config = {
   password: env.FTP_PASSWORD, // optional, prompted if none given
   host: env.FTP_HOST,
   port: env.FTP_PORT,
-  localRoot: `${__dirname}/dist`,
+  localRoot: `${__dirname}/build`,
   remoteRoot: env.FTP_REMOTEROOT,
   exclude: [], // this would upload everything except dot files
   include: ['*', '.htaccess'],
