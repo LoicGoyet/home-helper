@@ -42,15 +42,21 @@ export const TODOS_UNITS_SUGGESTIONS = 'units-suggestions';
 export default connect(mapStateToProps)(({ categories, products, units }) => (
   <React.Fragment>
     <datalist id={TODOS_CATEGORIES_SUGGESTIONS}>
-      {categories.allIds.map(id => <option key={`category-${id}`} value={categories.byId[id].title} />)}
+      {categories.allIds.map(id => (
+        <option key={`category-${id}`} value={categories.byId[id].title} />
+      ))}
     </datalist>
 
     <datalist id={TODOS_PRODUCTS_SUGGESTIONS}>
-      {products.allIds.map(id => <option key={`products-${id}`} value={products.byId[id].title} />)}
+      {products.allIds.map(id => (
+        <option key={`products-${id}`} value={products.byId[id].title} />
+      ))}
     </datalist>
 
     <datalist id={TODOS_UNITS_SUGGESTIONS}>
-      {units.allIds.map(id => <option key={`units-${id}`} value={units.byId[id].title} />)}
+      {units.allIds.map(id => (
+        <option key={`units-${id}`} value={units.byId[id].title} />
+      ))}
     </datalist>
   </React.Fragment>
 ));

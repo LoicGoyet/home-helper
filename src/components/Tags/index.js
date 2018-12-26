@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Tags = ({ items, ...props }) => (
-  <Wrapper {...props}>{items.map(item => <Item key={item.id}>{item.title}</Item>)}</Wrapper>
+  <Wrapper {...props}>
+    {items.map(item => (
+      <Item key={item.id}>{item.title}</Item>
+    ))}
+  </Wrapper>
 );
 
 Tags.propTypes = {

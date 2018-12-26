@@ -87,9 +87,9 @@ class TodosList extends React.Component {
       {Object.keys(this.toDoTasksByCategories).length === 0 && <DoneMessage />}
 
       <Department>
-        {this.doneTasks
-          .slice(0, this.state.showDone)
-          .map(taskId => <Task key={taskId} {...this.getTaskProps(taskId)} toggleTask={this.props.toggleTask} />)}
+        {this.doneTasks.slice(0, this.state.showDone).map(taskId => (
+          <Task key={taskId} {...this.getTaskProps(taskId)} toggleTask={this.props.toggleTask} />
+        ))}
 
         {this.doneTasks.length > this.state.showDone && <LoadMoreDoneTasksButton onClick={this.showMoreDoneTasks} />}
       </Department>
