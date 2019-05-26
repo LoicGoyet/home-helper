@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CardsAccordion, { CardsAccordionItem } from '../CardsAccordion';
+import Accordion, { AccordionItem } from '../Accordion';
 import Tags from '../Tags';
 import Checkbox from '../Checkbox';
 import IngredientsList from '../IngredientsList';
@@ -27,7 +27,7 @@ class RecipesCollection extends React.Component {
   };
 
   render = () => (
-    <CardsAccordion className={this.props.className}>
+    <Accordion className={this.props.className}>
       {this.props.pantry.allIds.map(id => {
         const item = this.props.pantry.byId[id];
 
@@ -56,7 +56,7 @@ class RecipesCollection extends React.Component {
           </CardItem>
         );
       })}
-    </CardsAccordion>
+    </Accordion>
   );
 }
 
@@ -97,7 +97,7 @@ const HeaderContent = styled.div`
   min-width: 0;
 `;
 
-const CardItem = styled(CardsAccordionItem)`
+const CardItem = styled(AccordionItem)`
   opacity: var(--opacity);
 `;
 

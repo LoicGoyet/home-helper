@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CardsAccordion, { CardsAccordionItem } from '../CardsAccordion';
+import Accordion, { AccordionItem } from '../Accordion';
 import Tags from '../Tags';
 import Button from '../Button';
 import IngredientsList from '../IngredientsList';
@@ -30,12 +30,12 @@ class RecipesCollection extends React.Component {
   getEditHref = id => this.props.editHref.replace(':id', id);
 
   render = () => (
-    <CardsAccordion className={this.props.className}>
+    <Accordion className={this.props.className}>
       {this.props.collection.allIds.map(id => {
         const item = this.props.collection.byId[id];
 
         return (
-          <CardsAccordionItem
+          <AccordionItem
             key={id}
             header={() => (
               <Header>
@@ -61,10 +61,10 @@ class RecipesCollection extends React.Component {
                 </Button>
               </EditButtonCol>
             </DetailRow>
-          </CardsAccordionItem>
+          </AccordionItem>
         );
       })}
-    </CardsAccordion>
+    </Accordion>
   );
 }
 
