@@ -1,7 +1,8 @@
-import { configure, addDecorator } from '@storybook/react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
+import { create } from '@storybook/theming';
+
 import '@storybook/addon-console';
-import { checkA11y } from '@storybook/addon-a11y';
-import { withBackgrounds } from "@storybook/addon-backgrounds";
+import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
 import { injectGlobal } from 'styled-components';
 
@@ -23,12 +24,13 @@ injectGlobal`
   }
 `;
 
-addDecorator(withBackgrounds([
+addParameters({ backgrounds: [
   { name: "white", value: "#ffffff" },
   { name: "purple", value: "#140A43", default: true },
-]));
+]});
 
-addDecorator(checkA11y)
+
+addDecorator(withA11y)
 addDecorator(withKnobs)
 
 configure(loadStories, module);
