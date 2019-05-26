@@ -1,6 +1,7 @@
 import React from 'react';
 import { TiPlus } from 'react-icons/lib/ti';
 import styled from 'styled-components';
+import Helmet from 'react-helmet';
 
 import RecipesCollectionContainer from '../../container/RecipesCollection';
 import PantryCount from '../../container/PantryCount';
@@ -9,6 +10,10 @@ import PATHS from '../../router/paths';
 
 const RecipesCollection = () => (
   <React.Fragment>
+    <Helmet>
+      <title>Livre de recettes - Home helper</title>
+    </Helmet>
+
     <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
       <TiPlus size={26} />
     </AddButton>

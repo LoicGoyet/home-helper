@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { path, prop } from 'ramda';
+import Helmet from 'react-helmet';
 
 import RecipeForm from '../../components/RecipeForm';
 import * as recipes from '../../ducks/recipes/collection';
@@ -87,6 +88,12 @@ class RecipeFormContainer extends React.Component {
     const redirect = path(['redirect', 'enabled'], this.state) && !!this.props.redirectTo;
     return (
       <React.Fragment>
+        {path(['defaultValues', 'title'], this.props) && (
+          <Helmet>
+            <title>Modifier la recette {this.props.defaultValues.title} - Home helper</title>
+          </Helmet>
+        )}
+
         {/* redirect une fois le formulaire soumi */}
         {redirect && (
           <Redirect
