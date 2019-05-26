@@ -44,7 +44,7 @@ class RecipesCollection extends React.Component {
                   <RecipeTags items={item.tags} />
                 </HeaderContent>
 
-                <AddButton color={COLORS.violet} block onClick={e => this.onAddBtnClick(e, id)}>
+                <AddButton color={COLORS.violet} isBlock onClick={e => this.onAddBtnClick(e, id)}>
                   Ajouter
                 </AddButton>
               </Header>
@@ -56,7 +56,7 @@ class RecipesCollection extends React.Component {
               </IngredientCol>
 
               <EditButtonCol>
-                <Button color={COLORS.blue} block href={this.getEditHref(id)}>
+                <Button color={COLORS.blue} isBlock href={this.getEditHref(id)}>
                   Modifier
                 </Button>
               </EditButtonCol>
@@ -107,7 +107,7 @@ const HeaderContent = styled.div`
 
 const AddButton = styled(Button).attrs({
   color: COLORS.violet,
-  block: true,
+  isBlock: true,
 })`
   flex-shrink: 0;
 `;

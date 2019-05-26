@@ -173,7 +173,7 @@ class IngredientForm extends React.Component {
 
           {this.props.button && (
             <ButtonCol>
-              <Button square="42px" onClick={this.props.button.onClick} color={this.props.button.color} block>
+              <Button square="42px" onClick={this.props.button.onClick} color={this.props.button.color} isBlock>
                 <ButtonIcon size={20} />
               </Button>
             </ButtonCol>

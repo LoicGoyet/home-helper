@@ -298,7 +298,7 @@ const Input = styled(InputComponent)`
 
 const Submit = styled(Button).attrs({
   color: COLORS.blue,
-  block: true,
+  isBlock: true,
   square: '3.125rem',
 })`
   position: absolute;

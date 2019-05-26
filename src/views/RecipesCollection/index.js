@@ -14,7 +14,7 @@ const RecipesCollection = () => (
       <title>Livre de recettes - Home helper</title>
     </Helmet>
 
-    <AddButton href={PATHS.RECIPES_ADD} color="#fff" block>
+    <AddButton href={PATHS.RECIPES_ADD} color="#fff" isBlock>
       <TiPlus size={26} />
     </AddButton>
 

@@ -169,7 +169,7 @@ class RecipeForm extends React.Component {
       })}
 
       <div style={{ textAlign: 'right' }}>
-        <Button type="submit" block color={COLORS.green}>
+        <Button type="submit" isBlock color={COLORS.green}>
           Enregistrer
         </Button>
       </div>
