@@ -4,11 +4,11 @@ import styled from 'styled-components';
 
 import Input from '../Input';
 
-const FormGroup = ({ help, id, label, pattern, placeholder, required, type, ...props }) => (
+const FormGroup = ({ help, id, label, type, ...props }) => (
   <Wrapper htmlFor={id}>
     <Label>{label}</Label>
-    <Input type={type} id={id} name={id} required={required} placeholder={placeholder} pattern={pattern} {...props} />
-    {help !== undefined && <Help>{help}</Help>}
+    <Input type={type} id={id} name={id} {...props} />
+    {!!help && <Help>{help}</Help>}
   </Wrapper>
 );
 
@@ -16,22 +16,16 @@ FormGroup.propTypes = {
   help: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
-  pattern: PropTypes.string,
-  placeholder: PropTypes.string,
-  required: PropTypes.bool,
   type: PropTypes.oneOf(['date', 'email', 'number', 'password', 'text', 'time']),
 };
 
 FormGroup.defaultProps = {
   id: undefined,
   help: undefined,
-  pattern: undefined,
-  placeholder: undefined,
-  required: false,
   type: 'text',
 };
 
-export default FormGroup;
+export default React.memo(FormGroup);
 
 const Wrapper = styled.label`
   display: block;
