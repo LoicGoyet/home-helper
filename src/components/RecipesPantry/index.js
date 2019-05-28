@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Accordion, { AccordionItem } from '../Accordion';
 import Tags from '../Tags';
-import Checkbox from '../Checkbox';
+import CheckButton from '../CheckButton';
 import IngredientsList from '../IngredientsList';
 
 class RecipesCollection extends React.Component {
@@ -46,8 +46,10 @@ class RecipesCollection extends React.Component {
 
                 <PantryCheckbox
                   isChecked={!item.available}
-                  title={`${item.title} checkbox`}
-                  onChange={() => this.onCheckboxChange(id)}
+                  onClick={e => {
+                    e.stopPropagation();
+                    this.onCheckboxChange(id);
+                  }}
                 />
               </Header>
             )}
@@ -101,6 +103,6 @@ const CardItem = styled(AccordionItem)`
   opacity: var(--opacity);
 `;
 
-const PantryCheckbox = styled(Checkbox)`
+const PantryCheckbox = styled(CheckButton)`
   flex-shrink: 0;
 `;
