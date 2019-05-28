@@ -12,7 +12,7 @@ Container.defaultProps = {
   children: undefined,
 };
 
-export default Container;
+export default React.memo(Container);
 
 const Wrapper = styled.div`
   width: 100%;
