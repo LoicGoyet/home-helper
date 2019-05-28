@@ -45,7 +45,7 @@ class RecipesCollection extends React.Component {
                 </HeaderContent>
 
                 <PantryCheckbox
-                  defaultChecked={!item.available}
+                  isChecked={!item.available}
                   title={`${item.title} checkbox`}
                   onChange={() => this.onCheckboxChange(id)}
                 />

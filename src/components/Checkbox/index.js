@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
@@ -7,98 +7,140 @@ import { MdCheck } from 'react-icons/lib/md';
 import { alpha, getContrastYIQ } from '../../utils/colors';
 import COLORS, { THEMES, isTheme } from '../../style/colors';
 
-class Checkbox extends React.Component {
-  static propTypes = {
-    className: PropTypes.string,
-    defaultChecked: PropTypes.bool,
-    color: PropTypes.oneOfType([
-      ExtraPropTypes.color /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
-      PropTypes.oneOf(Object.keys(THEMES)),
-    ]),
-    onChange: PropTypes.func,
-    title: PropTypes.string.isRequired,
-  };
+const Checkbox = ({ color, isChecked, className, onChange, title, ...props }) => {
+  const themeVars = useMemo(
+    () => {
+      const themeColor = isTheme(color) ? THEMES[color] : color;
 
-  static defaultProps = {
-    color: 'default',
-    className: undefined,
-    defaultChecked: undefined,
-    onChange: () => true,
-  };
+      return {
+        '--size': '1rem',
+        '--border-color': themeColor,
+        '--color': isChecked ? getContrastYIQ(themeColor) : COLORS.transparent,
+        '--bg-color': isChecked ? themeColor : COLORS.transparent,
+        '--focus-box-shadow': `0 0 0 4px ${alpha(themeColor, 0.4)}`,
+      };
+    },
+    [color, isChecked]
+  );
 
-  constructor(props) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
-    this.input = React.createRef();
-    this.onFocus = this.onFocus.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-  }
+  return (
+    <Wrapper className={className} style={themeVars}>
+      <Icon />
+      <Input type="checkbox" {...props} onChange={onChange} aria-label={title} />
+    </Wrapper>
+  );
+};
 
-  state = {
-    checked: this.props.defaultChecked,
-    focused: false,
-  };
+Checkbox.propTypes = {
+  className: PropTypes.string,
+  defaultChecked: PropTypes.bool,
+  color: PropTypes.oneOfType([
+    ExtraPropTypes.color /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
+    PropTypes.oneOf(Object.keys(THEMES)),
+  ]),
+  onChange: PropTypes.func,
+  title: PropTypes.string.isRequired,
+};
 
-  componentDidMount() {
-    this.focusWatcher = this.input.current.addEventListener('focus', this.onFocus);
-    this.blurWatcher = this.input.current.addEventListener('blur', this.onBlur);
-  }
+Checkbox.defaultProps = {
+  color: 'default',
+  className: undefined,
+  defaultChecked: undefined,
+  onChange: () => true,
+};
 
-  componentWillUnmount() {
-    this.focusWatcher = this.input.current.removeEventListener('focus', this.onFocus);
-    this.blurWatcher = this.input.current.removeEventListener('blur', this.onBlur);
-  }
+// class Checkbox extends React.Component {
+//   static propTypes = {
+//     className: PropTypes.string,
+//     defaultChecked: PropTypes.bool,
+//     color: PropTypes.oneOfType([
+//       ExtraPropTypes.color /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
+//       PropTypes.oneOf(Object.keys(THEMES)),
+//     ]),
+//     onChange: PropTypes.func,
+//     title: PropTypes.string.isRequired,
+//   };
 
-  onFocus() {
-    this.setState({
-      focused: true,
-    });
-  }
+//   static defaultProps = {
+//     color: 'default',
+//     className: undefined,
+//     defaultChecked: undefined,
+//     onChange: () => true,
+//   };
 
-  onBlur() {
-    this.setState({
-      focused: false,
-    });
-  }
+//   constructor(props) {
+//     super(props);
+//     this.onChange = this.onChange.bind(this);
+//     this.input = React.createRef();
+//     this.onFocus = this.onFocus.bind(this);
+//     this.onBlur = this.onBlur.bind(this);
+//   }
 
-  onChange(event) {
-    const checked = !this.state.checked;
+//   state = {
+//     checked: this.props.defaultChecked,
+//     focused: false,
+//   };
 
-    return this.setState(
-      {
-        checked,
-      },
-      () => this.props.onChange(event, checked)
-    );
-  }
+//   componentDidMount() {
+//     this.focusWatcher = this.input.current.addEventListener('focus', this.onFocus);
+//     this.blurWatcher = this.input.current.addEventListener('blur', this.onBlur);
+//   }
 
-  get themeVars() {
-    const { color } = this.props;
-    const { checked, focused } = this.state;
-    const themeColor = isTheme(color) ? THEMES[color] : color;
+//   componentWillUnmount() {
+//     this.focusWatcher = this.input.current.removeEventListener('focus', this.onFocus);
+//     this.blurWatcher = this.input.current.removeEventListener('blur', this.onBlur);
+//   }
 
-    return {
-      '--size': '1rem',
-      '--border-color': themeColor,
-      '--color': checked ? getContrastYIQ(themeColor) : COLORS.transparent,
-      '--bg-color': checked ? themeColor : COLORS.transparent,
-      '--box-shadow': focused ? `0 0 0 4px ${alpha(themeColor, 0.4)}` : 'none',
-    };
-  }
+//   onFocus() {
+//     this.setState({
+//       focused: true,
+//     });
+//   }
 
-  render() {
-    const { className, title } = this.props;
+//   onBlur() {
+//     this.setState({
+//       focused: false,
+//     });
+//   }
 
-    return (
-      <Wrapper className={className} style={this.themeVars}>
-        <Icon />
-        <Input {...this.props} onChange={this.onChange} type="checkbox" innerRef={this.input} aria-label={title} />
-      </Wrapper>
-    );
-  }
-}
+//   onChange(event) {
+//     const checked = !this.state.checked;
 
-export default Checkbox;
+//     return this.setState(
+//       {
+//         checked,
+//       },
+//       () => this.props.onChange(event, checked)
+//     );
+//   }
+
+//   get themeVars() {
+//     const { color } = this.props;
+//     const { checked, focused } = this.state;
+//     const themeColor = isTheme(color) ? THEMES[color] : color;
+
+//     return {
+//       '--size': '1rem',
+//       '--border-color': themeColor,
+//       '--color': checked ? getContrastYIQ(themeColor) : COLORS.transparent,
+//       '--bg-color': checked ? themeColor : COLORS.transparent,
+//       '--focus-box-shadow': focused ? `0 0 0 4px ${alpha(themeColor, 0.4)}` : 'none',
+//     };
+//   }
+
+//   render() {
+//     const { className, title } = this.props;
+
+//     return (
+//       <Wrapper className={className} style={this.themeVars}>
+//         <Icon />
+//         <Input {...this.props} onChange={this.onChange} type="checkbox" innerRef={this.input} aria-label={title} />
+//       </Wrapper>
+//     );
+//   }
+// }
+
+export default React.memo(Checkbox);
 
 const Wrapper = styled.label`
   font-size: var(--size);
@@ -113,8 +155,11 @@ const Wrapper = styled.label`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: var(--box-shadow);
   position: relative;
+
+  &:focus-within {
+    box-shadow: var(--focus-box-shadow);
+  }
 `;
 
 const Input = styled.input`
