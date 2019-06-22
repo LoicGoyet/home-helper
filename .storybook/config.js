@@ -1,14 +1,12 @@
+import React from 'react';
 import { configure, addDecorator, addParameters } from '@storybook/react';
-import { create } from '@storybook/theming';
-
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import '@storybook/addon-console';
 import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
-import { injectGlobal } from 'styled-components';
 
 import COLORS from '../src/style/colors';
-
-import '../src/style/global';
+import GlobalStyle from '../src/style/global';
 
 // automatically import all files ending in *.stories.js
 const req = require.context('../src/', true, /\**\/stories\.js$/);
@@ -16,13 +14,23 @@ function loadStories() {
   req.keys().forEach(filename => req(filename));
 }
 
-injectGlobal`
+const StorybookGlobalStyle = createGlobalStyle`
   body {
     padding: 1rem;
     color: ${COLORS.white};
     background-color: initial;
   }
 `;
+
+addDecorator(storyFn => (
+  <ThemeProvider theme={{}}>
+    <React.Fragment>
+      <StorybookGlobalStyle />
+      <GlobalStyle />
+      {storyFn()}
+    </React.Fragment>
+  </ThemeProvider>
+));
 
 addParameters({ backgrounds: [
   { name: "white", value: "#ffffff" },
