@@ -5,7 +5,7 @@ import { boolean } from '@storybook/addon-knobs';
 
 import Modal from '../Modal';
 
-const stories = storiesOf('Modal', module);
+const stories = storiesOf('Components|Modal', module);
 stories.add('default', () => (
   <Modal toggle={action('toggle modal')} isOpen={boolean('isOpen', false)}>
     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam assumenda aperiam, molestias adipisci quibusdam

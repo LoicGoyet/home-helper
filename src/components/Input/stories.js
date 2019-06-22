@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 
 import Input from '../Input';
 
-const stories = storiesOf('Input', module);
+const stories = storiesOf('Components|Input', module);
 
 stories.add('default', () => <Input onChange={action('onChange')} />);
 stories.add('with placeholder', () => <Input onChange={action('onChange')} placeholder="Hello world !" />);

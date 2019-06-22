@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Select from '../Select';
 
-const stories = storiesOf('Select', module);
+const stories = storiesOf('Components|Select', module);
 stories.add('default', () => (
   <Select>
     <option value="piece">pièce</option>

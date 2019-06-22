@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { collection, units, products, tags } from '../../../.storybook/mock';
 import RecipesPantry from '../RecipesPantry';
 
-const story = storiesOf('RecipesPantry', module);
+const story = storiesOf('Components|RecipesPantry', module);
 
 const pantryComputed = {
   ...collection,

@@ -4,7 +4,7 @@ import { text } from '@storybook/addon-knobs';
 
 import Card from '../Card';
 
-const stories = storiesOf('Card', module);
+const stories = storiesOf('Components|Card', module);
 stories.add('default', () => (
   <Card>
     {text(

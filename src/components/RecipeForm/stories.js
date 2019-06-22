@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import RecipeForm from '../RecipeForm';
 import { categories, products, units } from '../../../.storybook/mock';
 
-const stories = storiesOf('RecipeForm', module);
+const stories = storiesOf('Components|RecipeForm', module);
 
 stories.add('default', () => (
   <RecipeForm units={units} products={products} categories={categories} onSubmit={action('onSubmit')} />

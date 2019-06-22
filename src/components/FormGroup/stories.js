@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import FormGroup from '../FormGroup';
 
-storiesOf('FormGroup', module)
+storiesOf('Components|FormGroup', module)
   .add('default', () => <FormGroup id="form-group-ex-1" label="This is a label" placeholder="Placeholder" />)
   .add('custom type', () => (
     <FormGroup id="form-group-ex-3" label="This is a label" placeholder="Email input" type="email" />

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import TodosList from '../TodosList';
 import { tasks, categories, products, units } from '../../../.storybook/mock';
 
-const stories = storiesOf('TodosList', module);
+const stories = storiesOf('Components|TodosList', module);
 stories.add('default', () => <TodosList tasks={tasks} categories={categories} products={products} units={units} />);
 stories.add('all done', () => (
   <TodosList

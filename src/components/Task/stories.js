@@ -37,7 +37,7 @@ export const unit = {
   updatedAt: 1535322753835,
 };
 
-const stories = storiesOf('Task', module);
+const stories = storiesOf('Components|Task', module);
 stories.add('default', () => <Task task={task} category={category} product={product} unit={unit} />);
 
 stories.add('Done task', () => (

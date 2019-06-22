@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 import Button from '../Button';
 
-const stories = storiesOf('Button', module).addParameters({
+const stories = storiesOf('Components|Button', module).addParameters({
   backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
 });
 stories.add('default', () => (

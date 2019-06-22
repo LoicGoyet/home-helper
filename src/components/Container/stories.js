@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Container from '../Container';
 
-const stories = storiesOf('Container', module);
+const stories = storiesOf('Components|Container', module);
 stories.add('default', () => (
   <Container>
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae expedita dolores, repudiandae debitis quod

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import PantryCount from '../PantryCount';
 
-const stories = storiesOf('PantryCount', module);
+const stories = storiesOf('Components|PantryCount', module);
 stories.add('default', () => (
   <PantryCount
     counts={[

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import Accordion, { AccordionItem } from '.';
 
-const story = storiesOf('Accordion', module);
+const story = storiesOf('Components|Accordion', module);
 story.add('Default', () => (
   <Accordion>
     <AccordionItem header={() => <span>header</span>}>hello</AccordionItem>

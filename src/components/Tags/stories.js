@@ -4,7 +4,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import Tags from '../Tags';
 
-const stories = storiesOf('Tags', module);
+const stories = storiesOf('Components|Tags', module);
 stories.addDecorator(withKnobs);
 stories.add('default', () => (
   <Tags

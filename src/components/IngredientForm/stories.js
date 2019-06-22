@@ -7,7 +7,7 @@ import IngredientForm from '../IngredientForm';
 import { categories, products, units } from '../../../.storybook/mock';
 import { THEMES } from '../../style/colors';
 
-const stories = storiesOf('IngredientForm', module);
+const stories = storiesOf('Components|IngredientForm', module);
 
 stories.add('default', () => (
   <IngredientForm onChange={action('onChange')} units={units} products={products} categories={categories} />

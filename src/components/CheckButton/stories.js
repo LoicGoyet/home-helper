@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 import CheckButton from '../CheckButton';
 
-const stories = storiesOf('CheckButton', module).addParameters({
+const stories = storiesOf('Components|CheckButton', module).addParameters({
   backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
 });
 stories.add('default', () => (

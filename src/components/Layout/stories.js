@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom';
 
 import Layout from '../Layout';
 
-const stories = storiesOf('Layout', module);
+const stories = storiesOf('Components|Layout', module);
 
 stories.add('default', () => {
   const menu = [

@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 
 import IngredientsList from '../IngredientsList';
 
-const stories = storiesOf('IngredientsList', module);
+const stories = storiesOf('Components|IngredientsList', module);
 stories.add('default', () => (
   <IngredientsList
     ingredients={[
