@@ -1,67 +1,53 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card from '../Card';
 import COLORS from '../../style/colors';
 
-class Task extends React.Component {
-  static propTypes = {
-    task: PropTypes.object.isRequired,
-    product: PropTypes.object.isRequired,
-    category: PropTypes.object.isRequired,
-    unit: PropTypes.object.isRequired,
-    toggleTask: PropTypes.func,
-    style: PropTypes.object,
-  };
-
-  static defaultProps = {
-    style: {},
-    toggleTask: () => undefined,
-  };
-
-  constructor(props) {
-    super(props);
-    this.toggleTask = this.toggleTask.bind(this);
-  }
-
-  get isDone() {
-    return this.props.task.done;
-  }
-
-  get themeVars() {
-    const { style } = this.props;
-
-    return {
-      '--text-decoration': this.isDone ? 'line-through' : 'initial',
-      '--opacity': this.isDone ? 0.5 : 'initial',
-      '--checkbox-bg-color': this.isDone ? 'currentColor' : COLORS.transparent,
-      '--checkbox-opacity': this.isDone ? 0.5 : 'initial',
-      '--category-color': this.props.category.color,
+const Task = ({ task, product, category, unit, toggleTask, style }) => {
+  const themeVars = useMemo(
+    () => ({
+      '--text-decoration': task.done ? 'line-through' : 'initial',
+      '--opacity': task.done ? 0.5 : 'initial',
+      '--checkbox-bg-color': task.done ? 'currentColor' : COLORS.transparent,
+      '--checkbox-opacity': task.done ? 0.5 : 'initial',
+      '--category-color': category.color,
       ...style,
-    };
-  }
+    }),
+    [task.done, style, category.color]
+  );
 
-  toggleTask = () => this.props.toggleTask(this.props.task.id);
+  const onClick = useCallback(() => toggleTask(task.id), [toggleTask, task.id]);
 
-  render() {
-    const { task, product, unit } = this.props;
+  return (
+    <Wrapper style={themeVars} onClick={onClick}>
+      <FakeCheckbox style={themeVars} />
+      <Label>
+        {product.title}
+        <Quantity>
+          {task.quantity} {unit.title}
+        </Quantity>
+      </Label>
+    </Wrapper>
+  );
+};
 
-    return (
-      <Wrapper style={this.themeVars} onClick={this.toggleTask}>
-        <FakeCheckbox style={this.themeVars} />
-        <Label>
-          {product.title}
-          <Quantity>
-            {task.quantity} {unit.title}
-          </Quantity>
-        </Label>
-      </Wrapper>
-    );
-  }
-}
+Task.propTypes = {
+  task: PropTypes.object.isRequired,
+  product: PropTypes.object.isRequired,
+  category: PropTypes.object.isRequired,
+  unit: PropTypes.object.isRequired,
+  toggleTask: PropTypes.func,
+  style: PropTypes.object,
+};
 
-export default Task;
+Task.defaultProps = {
+  style: {},
+  toggleTask: () => undefined,
+};
+
+export default React.memo(Task);
 
 const Wrapper = styled(Card)`
   text-decoration: var(--text-decoration);

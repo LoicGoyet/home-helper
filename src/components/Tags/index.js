@@ -14,7 +14,7 @@ Tags.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default Tags;
+export default React.memo(Tags);
 
 const Wrapper = styled.div`
   display: flex;

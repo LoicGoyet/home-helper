@@ -56,7 +56,7 @@ Layout.defaultProps = {
   children: undefined,
 };
 
-export default Layout;
+export default React.memo(Layout);
 
 const Wrapper = styled(Container)`
   padding-top: 1rem;

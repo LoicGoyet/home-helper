@@ -5,7 +5,9 @@ import { text, color } from '@storybook/addon-knobs';
 import Pill from '../Pill';
 import { THEMES } from '../../style/colors';
 
-const stories = storiesOf('Pill', module);
+const stories = storiesOf('Pill', module).addParameters({
+  backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
+});
 
 stories.add('default', () => {
   const pillColor = color('color', '#140A43');

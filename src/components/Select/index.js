@@ -4,30 +4,26 @@ import styled from 'styled-components';
 
 import COLORS from '../../style/colors';
 
-export default class Select extends React.Component {
-  static propTypes = {
-    reference: PropTypes.object,
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-  };
+const Select = ({ reference, children, className, ...props }) => (
+  <Wrapper className={className}>
+    <El innerRef={reference} {...props}>
+      {children}
+    </El>
+  </Wrapper>
+);
 
-  static defaultProps = {
-    reference: {},
-    className: undefined,
-  };
+Select.propTypes = {
+  reference: PropTypes.object,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+};
 
-  render() {
-    const { reference, children, className } = this.props;
+Select.defaultProps = {
+  reference: {},
+  className: undefined,
+};
 
-    return (
-      <Wrapper className={className}>
-        <El innerRef={reference} {...this.props}>
-          {children}
-        </El>
-      </Wrapper>
-    );
-  }
-}
+export default React.memo(Select);
 
 const Wrapper = styled.span`
   position: relative;

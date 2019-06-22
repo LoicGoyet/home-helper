@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const PantryCount = ({ counts, className }) => (
-  <Wrapper className={className}>
+const PantryCount = ({ counts, ...props }) => (
+  <Wrapper {...props}>
     <Row>
       {counts.map(count => {
         const style = {
@@ -36,7 +36,7 @@ PantryCount.defaultProps = {
   className: undefined,
 };
 
-export default PantryCount;
+export default React.memo(PantryCount);
 
 const Wrapper = styled.section`
   padding: 15px;

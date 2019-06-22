@@ -1,57 +1,49 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import COLORS from '../../style/colors';
 import Card from '../Card';
 
-class Modal extends React.Component {
-  static propTypes = {
-    toggle: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-    isOpen: PropTypes.bool,
-  };
+const Modal = ({ toggle, children, isOpen }) => {
+  useEffect(
+    () => {
+      document.body.style.overflow = isOpen ? 'hidden' : null;
+    },
+    [isOpen]
+  );
 
-  static defaultProps = {
-    isOpen: true,
-  };
-
-  componentDidMount() {
-    return this.manageBodyStyle();
-  }
-
-  componentDidUpdate() {
-    return this.manageBodyStyle();
-  }
-
-  get themeVars() {
-    const { isOpen } = this.props;
-    return {
+  const themeVars = useMemo(
+    () => ({
       '--scale': isOpen ? 'scale(1)' : 'scale(0.7)',
       '--opacity': isOpen ? 'initial' : 0,
       '--pointer-events': isOpen ? 'initial' : 'none',
       '--backdrop-pointer-events': isOpen ? 'initial' : 'none',
       '--backdrop-opacity': isOpen ? 0.5 : 0,
-    };
-  }
+    }),
+    [isOpen]
+  );
 
-  manageBodyStyle() {
-    const { isOpen } = this.props;
-    document.body.style.overflow = isOpen ? 'hidden' : null;
-  }
+  return (
+    <Wrapper style={themeVars}>
+      <Backdrop onClick={toggle} aria-label="close modal" />
+      <Content>{children}</Content>
+    </Wrapper>
+  );
+};
 
-  render() {
-    const { toggle, children } = this.props;
-    return (
-      <Wrapper style={this.themeVars}>
-        <Backdrop onClick={toggle} style={this.themeVars} aria-label="close modal" />
-        <Content>{children}</Content>
-      </Wrapper>
-    );
-  }
-}
+Modal.propTypes = {
+  // @TODO update the `toggle` prop name
+  toggle: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  isOpen: PropTypes.bool,
+};
 
-export default Modal;
+Modal.defaultProps = {
+  isOpen: true,
+};
+
+export default React.memo(Modal);
 
 const Wrapper = styled.section`
   position: fixed;

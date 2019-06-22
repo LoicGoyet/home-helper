@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -7,29 +7,19 @@ import Tags from '../Tags';
 import CheckButton from '../CheckButton';
 import IngredientsList from '../IngredientsList';
 
-class RecipesCollection extends React.Component {
-  static propTypes = {
-    pantry: PropTypes.object.isRequired,
-    toggleItem: PropTypes.func,
-    className: PropTypes.string,
-  };
+const RecipesCollection = ({ pantry, toggleItem, ...props }) => {
+  const onCheckboxChange = useCallback(
+    id => e => {
+      e.stopPropagation();
+      return toggleItem(id);
+    },
+    [toggleItem]
+  );
 
-  static defaultProps = {
-    className: undefined,
-  };
-
-  static defaultProps = {
-    toggleItem: () => undefined,
-  };
-
-  onCheckboxChange = id => {
-    this.props.toggleItem(id);
-  };
-
-  render = () => (
-    <Accordion className={this.props.className}>
-      {this.props.pantry.allIds.map(id => {
-        const item = this.props.pantry.byId[id];
+  return (
+    <Accordion {...props}>
+      {pantry.allIds.map(id => {
+        const item = pantry.byId[id];
 
         return (
           <CardItem
@@ -44,13 +34,7 @@ class RecipesCollection extends React.Component {
                   <RecipeTags items={item.tags} />
                 </HeaderContent>
 
-                <PantryCheckbox
-                  isChecked={!item.available}
-                  onClick={e => {
-                    e.stopPropagation();
-                    this.onCheckboxChange(id);
-                  }}
-                />
+                <PantryCheckbox isChecked={!item.available} onClick={onCheckboxChange(id)} />
               </Header>
             )}
           >
@@ -60,9 +44,20 @@ class RecipesCollection extends React.Component {
       })}
     </Accordion>
   );
-}
+};
 
-export default RecipesCollection;
+RecipesCollection.propTypes = {
+  pantry: PropTypes.object.isRequired,
+  toggleItem: PropTypes.func,
+  className: PropTypes.string,
+};
+
+RecipesCollection.defaultProps = {
+  className: undefined,
+  toggleItem: () => undefined,
+};
+
+export default React.memo(RecipesCollection);
 
 const Title = styled.h2`
   font-weight: bold;

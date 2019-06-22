@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
@@ -6,49 +6,46 @@ import styled from 'styled-components';
 import COLORS, { THEMES, isTheme } from '../../style/colors';
 import { getContrastYIQ } from '../../utils/colors';
 
-class Pill extends React.Component {
-  static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.string, PropTypes.symbol]).isRequired,
-    isBlock: PropTypes.bool,
-    style: PropTypes.object,
-    color: PropTypes.oneOfType([
-      ExtraPropTypes.color /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
-      PropTypes.oneOf(Object.keys(THEMES)),
-    ]),
-  };
+const Pill = ({ isBlock, color, style, children, ...props }) => {
+  const themeVars = useMemo(
+    () => {
+      const themeColor = isTheme(color) ? THEMES[color] : color;
+      const bgColor = isBlock ? themeColor : COLORS.transparent;
 
-  static defaultProps = {
-    color: 'default',
-    isBlock: false,
-    style: {},
-  };
+      return {
+        '--bg-color': bgColor,
+        '--color': isBlock ? getContrastYIQ(bgColor) : themeColor,
+        '--border-color': themeColor,
+        ...style,
+      };
+    },
+    [isBlock, color, style]
+  );
 
-  get themeVars() {
-    const { isBlock, color, style } = this.props;
+  return (
+    <Wrapper {...props} style={themeVars}>
+      {children}
+    </Wrapper>
+  );
+};
 
-    const themeColor = isTheme(color) ? THEMES[color] : color;
-    const bgColor = isBlock ? themeColor : COLORS.transparent;
+Pill.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.symbol]).isRequired,
+  isBlock: PropTypes.bool,
+  style: PropTypes.object,
+  color: PropTypes.oneOfType([
+    ExtraPropTypes.color /* eslint-disable-line react/no-typos, react/no-unused-prop-types */,
+    PropTypes.oneOf(Object.keys(THEMES)),
+  ]),
+};
 
-    return {
-      '--bg-color': bgColor,
-      '--color': isBlock ? getContrastYIQ(bgColor) : themeColor,
-      '--border-color': themeColor,
-      ...style,
-    };
-  }
+Pill.defaultProps = {
+  color: 'default',
+  isBlock: false,
+  style: {},
+};
 
-  render() {
-    const { children } = this.props;
-
-    return (
-      <Wrapper {...this.props} style={this.themeVars}>
-        {children}
-      </Wrapper>
-    );
-  }
-}
-
-export default Pill;
+export default React.memo(Pill);
 
 const Wrapper = styled.span`
   display: inline-flex;

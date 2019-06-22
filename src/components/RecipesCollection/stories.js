@@ -26,4 +26,6 @@ const collectionComputed = {
   ),
 };
 
-story.add('Default', () => <RecipesCollection addItem={action('addItem')} collection={collectionComputed} />);
+story.add('Default', () => (
+  <RecipesCollection editHref="/recipes/edit/:id" addItem={action('addItem')} collection={collectionComputed} />
+));
