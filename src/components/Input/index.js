@@ -1,17 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // @TODO remove `reference` prop as no data should be fetch from UI with refs
-const Input = ({ reference, ...props }) => <El innerRef={reference} {...props} />;
-
-Input.propTypes = {
-  reference: PropTypes.object,
-};
-
-Input.defaultProps = {
-  reference: undefined,
-};
+const Input = React.forwardRef((props, ref) => <El {...props} ref={ref} />);
 
 export default React.memo(Input);
 
@@ -21,6 +12,7 @@ const El = styled.input`
   --inner-shadow-color: transparent;
   --box-shadow: inset 0 0 0 1px var(--border-color), inset 0 0 0 0.125rem var(--inner-shadow-color),
     0 0 0 0.125rem var(--outer-shadow-color);
+  --border-radius: 0.3125rem;
 
   font-size: 1rem;
   padding: 0.75rem;
@@ -28,6 +20,7 @@ const El = styled.input`
   display: block;
   width: 100%;
   box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
 
   &:focus {
     --border-color: ${props => props.theme.colors.blue};

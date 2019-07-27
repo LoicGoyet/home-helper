@@ -86,7 +86,7 @@ const BaseStyle = css`
   font-weight: 500;
   cursor: pointer;
 
-  border-radius: 1px;
+  border-radius: 0.3125rem;
   border: 0;
 
   font-size: 0.875rem;

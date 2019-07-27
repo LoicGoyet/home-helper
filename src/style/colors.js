@@ -1,5 +1,5 @@
 const COLORS = {
-  lightgray: 'rgb(240, 240, 240)',
+  lightgray: 'rgb(220, 220, 220)',
   gray: 'gray',
   white: 'rgb(255, 255, 255)',
   black: 'rgb(0, 0, 0)',
