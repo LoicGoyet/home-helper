@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import colors from './colors';
 
-export const Theme = props => <ThemeProvider theme={{ colors }}>{props.children}</ThemeProvider>;
+const Theme = props => <ThemeProvider theme={{ colors }}>{props.children}</ThemeProvider>;
 
 Theme.propTypes = {
   children: PropTypes.element.isRequired,
