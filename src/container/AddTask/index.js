@@ -1,20 +1,151 @@
-import { connect } from 'react-redux';
+import React, { useCallback, useReducer } from 'react';
+import { useDispatch } from 'react-redux';
 
-import AddTask from '../../components/AddTask';
+import AddTaskForm from '../../components/AddTaskForm';
+import { useAutoCategory, useAutoQuantityUnit } from './hooks';
 import * as todos from '../../ducks/todos/tasks';
+import { TODOS_CATEGORIES_SUGGESTIONS, TODOS_PRODUCTS_SUGGESTIONS, TODOS_UNITS_SUGGESTIONS } from '../SuggestionsLists';
 
-const mapStateToProps = state => ({
-  tasks: state.todos.tasks,
-  units: state.todos.units,
-  products: state.todos.products,
-  categories: state.todos.categories,
-});
+const initialState = {
+  fields: {
+    product: '',
+    category: '',
+    quantity: '',
+    quantityUnit: '',
+  },
+  activeStep: 0,
+};
 
-const mapDispatchToProps = dispatch => ({
-  addTask: (product, category, quantity, unit) => dispatch(todos.addTask(product, category, quantity, unit)),
-});
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'set_fields': {
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          ...action.fields,
+        },
+      };
+    }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddTask);
+    case 'set_category': {
+      const { category } = action;
+
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          category,
+        },
+      };
+    }
+
+    case 'set_quantity_unit': {
+      const { quantityUnit } = action;
+
+      return {
+        ...state,
+        fields: {
+          ...state.fields,
+          quantityUnit,
+        },
+      };
+    }
+
+    case 'reset': {
+      return { ...initialState };
+    }
+
+    case 'increase_step': {
+      return {
+        ...state,
+        activeStep: state.activeStep + 1,
+      };
+    }
+
+    case 'goto_quantity_step': {
+      return {
+        ...state,
+        activeStep: 2,
+      };
+    }
+
+    default: {
+      return state;
+    }
+  }
+};
+
+const AddTask = props => {
+  const dispatch = useDispatch();
+  const [state, stateDispatch] = useReducer(reducer, initialState);
+  const getAutoCategory = useAutoCategory();
+  const getAutoQuantityUnit = useAutoQuantityUnit();
+
+  const onChange = useCallback(
+    (e, values) => {
+      stateDispatch({
+        type: 'set_fields',
+        fields: values,
+      });
+    },
+    [stateDispatch]
+  );
+
+  const onFieldsetSubmit = useCallback(
+    () => {
+      if (state.activeStep === 0) {
+        const autoQuantityUnit = getAutoQuantityUnit(state.fields.product);
+        const autoCategory = getAutoCategory(state.fields.product);
+
+        if (autoQuantityUnit) {
+          stateDispatch({
+            type: 'set_quantity_unit',
+            quantityUnit: autoQuantityUnit,
+          });
+        }
+
+        if (autoCategory) {
+          stateDispatch({
+            type: 'set_category',
+            category: autoCategory,
+          });
+
+          return stateDispatch({ type: 'goto_quantity_step' });
+        }
+      }
+
+      return stateDispatch({ type: 'increase_step' });
+    },
+    [stateDispatch, state, getAutoCategory, getAutoQuantityUnit]
+  );
+
+  const onReset = useCallback(() => stateDispatch({ type: 'reset' }), [stateDispatch]);
+
+  const onSubmit = useCallback(
+    () => {
+      const { product, category, quantity, quantityUnit } = state.fields;
+      return dispatch(todos.addTask(product, category, quantity, quantityUnit));
+    },
+    [dispatch, state.fields]
+  );
+
+  return (
+    <AddTaskForm
+      {...props}
+      values={state.fields}
+      onChange={onChange}
+      onFieldsetSubmit={onFieldsetSubmit}
+      onSubmit={onSubmit}
+      activeStep={state.activeStep}
+      onReset={onReset}
+      lists={{
+        products: TODOS_PRODUCTS_SUGGESTIONS,
+        categories: TODOS_CATEGORIES_SUGGESTIONS,
+        quantityUnits: TODOS_UNITS_SUGGESTIONS,
+      }}
+    />
+  );
+};
+
+export default React.memo(AddTask);

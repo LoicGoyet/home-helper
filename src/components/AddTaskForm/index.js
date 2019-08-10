@@ -2,12 +2,13 @@ import React, { useCallback, useState, useMemo, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import GoArrowSmallRight from 'react-icons/lib/go/arrow-small-right';
+import IoRefresh from 'react-icons/lib/io/refresh';
 
 import COLORS from '../../style/colors';
 import Button from '../Button';
 import InputComp from '../Input';
 
-const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, ...props }) => {
+const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, lists, ...props }) => {
   const productInput = useRef();
   const categoryInput = useRef();
   const quantityInput = useRef();
@@ -58,26 +59,6 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
   const onQuantityChange = useCallback(onInputChange('quantity', 'number'), [onInputChange]);
   const onQuantityUnitChange = useCallback(onInputChange('quantityUnit'), [onInputChange]);
 
-  const onEnterPress = useCallback(
-    e => {
-      if (e.key !== 'Enter' || !isActiveFieldsetValid) return null;
-      e.preventDefault();
-      e.stopPropagation();
-      if (activeStep < 2) return onFieldsetSubmit(e);
-      return onSubmitForm(e);
-    },
-    [activeStep, onFieldsetSubmit, onSubmit, isActiveFieldsetValid]
-  );
-
-  const onSubmitForm = useCallback(
-    () => {
-      onSubmit();
-      onResetForm();
-      setDisplaySuccess(true);
-    },
-    [onSubmit, productInput, setDisplaySuccess, onResetForm]
-  );
-
   const onResetForm = useCallback(
     () => {
       productInput.current.focus();
@@ -86,31 +67,64 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
     [productInput, onReset]
   );
 
-  const isResetButtonVisible = useMemo(() => activeStep !== 0, [activeStep]);
+  const onSubmitForm = useCallback(
+    () => {
+      onSubmit();
+      onResetForm();
+      setDisplaySuccess(true);
+    },
+    [onSubmit, setDisplaySuccess, onResetForm]
+  );
+
+  const onEnterPress = useCallback(
+    e => {
+      if (e.key !== 'Enter' || !isActiveFieldsetValid) return null;
+      e.preventDefault();
+      e.stopPropagation();
+      if (activeStep < 2) return onFieldsetSubmit(e);
+      return onSubmitForm(e);
+    },
+    [activeStep, onFieldsetSubmit, isActiveFieldsetValid, onSubmitForm]
+  );
+
+  const resetBtn = useMemo(
+    () => (
+      <ResetButton type="button" onClick={onResetForm}>
+        <IoRefresh />
+      </ResetButton>
+    ),
+    [onResetForm]
+  );
 
   return (
     <Wrapper {...props} onKeyPress={onEnterPress}>
       <MainRow>
         <Fieldset step={0} activeStep={activeStep}>
           <Label>Produit</Label>
+
           <Input
             ref={productInput}
             onChange={onProductChange}
             value={values.product}
             type="text"
             placeholder="Pâtes, Riz, Poulet..."
+            list={lists.products}
           />
         </Fieldset>
 
         <Fieldset step={1} activeStep={activeStep}>
           <Label>Categorie</Label>
+
           <Input
             ref={categoryInput}
             onChange={onCategoryChange}
             value={values.category}
             type="text"
             placeholder="Épicerie sâlée, Produits Frais, Boulangerie..."
+            list={lists.categories}
+            hasResetBtnAside
           />
+          {resetBtn}
         </Fieldset>
 
         <Fieldset step={2} activeStep={activeStep}>
@@ -122,6 +136,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
             type="number"
             min="1"
             placeholder="nombre"
+            tabindex="0"
           />
           <Input
             ref={quantityUnitInput}
@@ -129,7 +144,11 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
             value={values.quantityUnit}
             type="text"
             placeholder="pièce(s), litre(s), gramme(s)..."
+            list={lists.quantityUnits}
+            tabindex="0"
+            hasResetBtnAside
           />
+          {resetBtn}
         </Fieldset>
 
         {activeStep < 2 && (
@@ -144,12 +163,13 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
           </SubmitButton>
         )}
 
-        <SuccessMessage isVisible={displaySuccess}>Produit ajouté ! 🎉</SuccessMessage>
+        <SuccessMessage isVisible={displaySuccess}>
+          Produit ajouté !{' '}
+          <span role="img" aria-label="icône de fête">
+            🎉
+          </span>
+        </SuccessMessage>
       </MainRow>
-
-      <ResetButton isVisible={isResetButtonVisible} type="button" onClick={onResetForm}>
-        reset
-      </ResetButton>
     </Wrapper>
   );
 };
@@ -158,15 +178,32 @@ AddTaskForm.propTypes = {
   values: PropTypes.shape({
     product: PropTypes.string,
     category: PropTypes.string,
-    quantity: PropTypes.number,
+    quantity: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     quantityUnit: PropTypes.string,
   }).isRequired,
   onChange: PropTypes.func.isRequired,
   activeStep: PropTypes.number.isRequired,
   onReset: PropTypes.func.isRequired,
+  lists: PropTypes.shape({
+    products: PropTypes.string.isRequired,
+    categories: PropTypes.string.isRequired,
+    quantityUnits: PropTypes.string.isRequired,
+  }),
+};
+
+AddTaskForm.defaultProps = {
+  lists: {
+    products: undefined,
+    categories: undefined,
+    quantityUnits: undefined,
+  },
 };
 
 export default AddTaskForm;
+
+const boxShadow = css`
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+`;
 
 const Wrapper = styled.form`
   position: relative;
@@ -216,6 +253,17 @@ const Fieldset = styled.label`
   border-radius: 0.3125rem;
   padding: 0.125rem;
   ${fieldsetPosition};
+  ${boxShadow};
+`;
+
+const ResetButton = styled(Button).attrs({
+  square: '2.875rem',
+})`
+  align-self: flex-start;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
 `;
 
 const Label = styled.span`
@@ -233,8 +281,13 @@ const Input = styled(InputComp)`
 
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  ${props =>
+    props.hasResetBtnAside &&
+    css`
+      padding-right: 3.625rem;
+    `}
 
-  &:last-child {
+  &:last-of-type {
     border-bottom-right-radius: var(--border-radius);
     border-top-right-radius: var(--border-radius);
   }
@@ -242,6 +295,7 @@ const Input = styled(InputComp)`
   & + & {
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
+    margin-left: 0.0625rem;
   }
 `;
 
@@ -253,6 +307,7 @@ const StepButton = styled(Button).attrs({
   position: absolute;
   z-index: 1;
   right: 0;
+  ${boxShadow};
 
   &:disabled {
     opacity: 0.5;
@@ -282,14 +337,4 @@ const SuccessMessage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const ResetButton = styled(Button).attrs({
-  color: COLORS.white,
-})`
-  opacity: ${props => (props.isVisible ? 1 : 0)};
-  pointer-events: ${props => (props.isVisible ? 'initial' : 'none')};
-  position: relative;
-  z-index: 0;
-  align-self: flex-start;
 `;

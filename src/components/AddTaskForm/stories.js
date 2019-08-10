@@ -16,7 +16,7 @@ const defaultFields = {
 const Container = () => {
   const [fields, setFields] = useState(defaultFields);
 
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
 
   const onChange = useCallback(
     (e, values) => {

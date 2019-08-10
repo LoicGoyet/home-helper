@@ -7,6 +7,7 @@ import { loadDataFromFirebase } from './api';
 
 export default class App extends React.Component {
   componentDidMount() {
+    // @TODO : redesign this with saga
     loadDataFromFirebase(store);
   }
 
