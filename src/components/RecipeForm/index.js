@@ -5,6 +5,7 @@ import { TiPlus, TiTrash } from 'react-icons/lib/ti';
 import FormGroup from 'components/FormGroup';
 import IngredientForm from 'components/IngredientForm';
 import Button from 'components/Button';
+import Input from 'components/Input';
 import COLORS, { THEMES } from 'style/colors';
 
 const defaultIngredient = {
@@ -138,16 +139,17 @@ class RecipeForm extends React.Component {
 
   render = () => (
     <form onSubmit={this.onSubmit}>
-      <FormGroup label="Nom" onChange={e => this.onInputChange(e, 'title')} value={this.state.title} required />
+      <FormGroup label="Nom">
+        <Input onChange={e => this.onInputChange(e, 'title')} value={this.state.title} required />
+      </FormGroup>
 
-      <FormGroup
-        label="Tags"
-        onChange={e => this.onInputChange(e, 'tags')}
-        value={this.state.tags}
-        help="Séparez les tags par une virgule"
-      />
+      <FormGroup label="Tags" help="Séparez les tags par une virgule">
+        <Input onChange={e => this.onInputChange(e, 'tags')} value={this.state.tags} />
+      </FormGroup>
 
-      <FormGroup label="Lien vers la recette" onChange={e => this.onInputChange(e, 'link')} value={this.state.link} />
+      <FormGroup label="Lien vers la recette">
+        <Input onChange={e => this.onInputChange(e, 'link')} value={this.state.link} />
+      </FormGroup>
 
       {this.state.ingredients.map((ingredient, index) => {
         const isLast = index === this.state.ingredients.length - 1;

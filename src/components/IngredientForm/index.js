@@ -7,6 +7,7 @@ import { path } from 'ramda';
 import { normalizeStr } from 'utils/strings';
 import FormGroup from 'components/FormGroup';
 import Button from 'components/Button';
+import Input from 'components/Input';
 import {
   TODOS_CATEGORIES_SUGGESTIONS,
   TODOS_PRODUCTS_SUGGESTIONS,
@@ -122,53 +123,57 @@ class IngredientForm extends React.Component {
     return (
       <Row role="group">
         <TitleCol>
-          <FormGroup
-            id="product"
-            label="Produit"
-            list={TODOS_PRODUCTS_SUGGESTIONS}
-            placeholder="nom du produit"
-            onChange={this.handleProductChange}
-            value={this.state.productTitle}
-            required
-          />
+          <FormGroup label="Produit">
+            <Input
+              id="product"
+              list={TODOS_PRODUCTS_SUGGESTIONS}
+              placeholder="nom du produit"
+              onChange={this.handleProductChange}
+              value={this.state.productTitle}
+              required
+            />
+          </FormGroup>
         </TitleCol>
 
         <CategoryCol>
-          <FormGroup
-            id="category"
-            label="Catégorie"
-            list={TODOS_CATEGORIES_SUGGESTIONS}
-            placeholder="categorie"
-            onChange={this.handleCategoryChange}
-            value={this.state.categoryTitle}
-            required
-          />
+          <FormGroup label="Catégorie">
+            <Input
+              id="category"
+              list={TODOS_CATEGORIES_SUGGESTIONS}
+              placeholder="categorie"
+              onChange={this.handleCategoryChange}
+              value={this.state.categoryTitle}
+              required
+            />
+          </FormGroup>
         </CategoryCol>
 
         <QuantityCol>
           <QuantityInputCol>
-            <FormGroup
-              id="quantity"
-              label="Quantité"
-              type="number"
-              min="0"
-              step="any"
-              onChange={this.handleQuantityChange}
-              value={this.state.quantity}
-              required
-            />
+            <FormGroup label="Quantité">
+              <Input
+                id="quantity"
+                type="number"
+                min="0"
+                step="any"
+                onChange={this.handleQuantityChange}
+                value={this.state.quantity}
+                required
+              />
+            </FormGroup>
           </QuantityInputCol>
 
           <QuantityUnitInputCol>
-            <FormGroup
-              id="unit"
-              list={TODOS_UNITS_SUGGESTIONS}
-              label="Unité"
-              placeholder="unité"
-              value={this.state.unitTitle}
-              onChange={this.handleUnitChange}
-              required
-            />
+            <FormGroup label="Unité">
+              <Input
+                id="unit"
+                list={TODOS_UNITS_SUGGESTIONS}
+                placeholder="unité"
+                value={this.state.unitTitle}
+                onChange={this.handleUnitChange}
+                required
+              />
+            </FormGroup>
           </QuantityUnitInputCol>
 
           {this.props.button && (

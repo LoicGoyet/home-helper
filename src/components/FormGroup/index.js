@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Input from 'components/Input';
-
-const FormGroup = ({ help, id, label, type, ...props }) => (
-  <Wrapper htmlFor={id}>
+const FormGroup = ({ help, label, children, ...props }) => (
+  <Wrapper {...props}>
     <Label>{label}</Label>
-    <Input type={type} id={id} name={id} {...props} />
+    {children}
     {!!help && <Help>{help}</Help>}
   </Wrapper>
 );
@@ -17,6 +15,7 @@ FormGroup.propTypes = {
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['date', 'email', 'number', 'password', 'text', 'time']),
+  children: PropTypes.any.isRequired,
 };
 
 FormGroup.defaultProps = {
@@ -37,7 +36,7 @@ const Label = styled.span`
   margin-bottom: 0.25rem;
 `;
 
-const Help = styled.p`
+const Help = styled.span`
   margin: 0.5rem 0 0;
   font-size: 0.75em;
   font-style: italic;
