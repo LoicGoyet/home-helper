@@ -3,18 +3,13 @@ import PropTypes from 'prop-types';
 import AnimateHeight from 'react-animate-height';
 import styled from 'styled-components';
 
+import { useAccordion } from './context';
 import Card from '../Card';
 import { alpha } from '../../utils/colors';
 import COLORS from '../../style/colors';
 
-const AccordionItem = ({ style, header, className, children, setOpenIndex, index, isOpen }) => {
-  const toggle = useCallback(
-    () => {
-      if (isOpen) return setOpenIndex(-1);
-      return setOpenIndex(index);
-    },
-    [index, setOpenIndex, isOpen]
-  );
+const AccordionItem = ({ style, header, className, children, index }) => {
+  const [isOpen, toggle] = useAccordion(index);
 
   const onHeaderKeyPress = useCallback(({ charCode }) => (charCode === 13 || charCode === 32) && toggle(), [toggle]);
 
@@ -50,8 +45,6 @@ const AccordionItem = ({ style, header, className, children, setOpenIndex, index
 
 AccordionItem.propTypes = {
   header: PropTypes.func.isRequired,
-  setOpenIndex: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
   children: PropTypes.node,
   style: PropTypes.object,

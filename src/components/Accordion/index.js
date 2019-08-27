@@ -1,25 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import AccordionItem from './card';
+import { AccordionProvider } from './context';
 
-export { AccordionItem };
-
-const Accordion = ({ children, className }) => {
-  const [openIndex, setOpenIndex] = useState(-1);
-
-  return (
-    <section className={className}>
+const Accordion = ({ children, className }) => (
+  <section className={className}>
+    <AccordionProvider>
       {React.Children.map(children, (child, index) =>
         React.cloneElement(child, {
-          isOpen: index === openIndex,
           index,
-          setOpenIndex,
         })
       )}
-    </section>
-  );
-};
+    </AccordionProvider>
+  </section>
+);
 
 Accordion.propTypes = {
   children: PropTypes.node.isRequired,
@@ -31,3 +26,4 @@ Accordion.defaultProps = {
 };
 
 export default React.memo(Accordion);
+export { AccordionItem };
