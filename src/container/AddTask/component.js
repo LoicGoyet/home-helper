@@ -7,8 +7,13 @@ import IoRefresh from 'react-icons/lib/io/refresh';
 import COLORS from 'style/colors';
 import Button from 'components/Button';
 import Input from 'components/Input';
+import {
+  TODOS_CATEGORIES_SUGGESTIONS,
+  TODOS_PRODUCTS_SUGGESTIONS,
+  TODOS_UNITS_SUGGESTIONS,
+} from 'container/SuggestionsLists';
 
-const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, lists, ...props }) => {
+const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, ...props }) => {
   const productInput = useRef();
   const categoryInput = useRef();
   const quantityInput = useRef();
@@ -108,7 +113,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
             value={values.product}
             type="text"
             placeholder="Pâtes, Riz, Poulet..."
-            list={lists.products}
+            list={TODOS_PRODUCTS_SUGGESTIONS}
           />
         </Fieldset>
 
@@ -121,7 +126,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
             value={values.category}
             type="text"
             placeholder="Épicerie sâlée, Produits Frais, Boulangerie..."
-            list={lists.categories}
+            list={TODOS_CATEGORIES_SUGGESTIONS}
             hasResetBtnAside
           />
           {resetBtn}
@@ -144,7 +149,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
             value={values.quantityUnit}
             type="text"
             placeholder="pièce(s), litre(s), gramme(s)..."
-            list={lists.quantityUnits}
+            list={TODOS_UNITS_SUGGESTIONS}
             tabindex="0"
             hasResetBtnAside
           />
@@ -184,19 +189,6 @@ AddTaskForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   activeStep: PropTypes.number.isRequired,
   onReset: PropTypes.func.isRequired,
-  lists: PropTypes.shape({
-    products: PropTypes.string.isRequired,
-    categories: PropTypes.string.isRequired,
-    quantityUnits: PropTypes.string.isRequired,
-  }),
-};
-
-AddTaskForm.defaultProps = {
-  lists: {
-    products: undefined,
-    categories: undefined,
-    quantityUnits: undefined,
-  },
 };
 
 export default AddTaskForm;

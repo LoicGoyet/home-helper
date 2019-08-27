@@ -4,11 +4,6 @@ import { useDispatch } from 'react-redux';
 import AddTaskComponent from 'container/AddTask/component';
 import { useAutoCategory, useAutoQuantityUnit } from 'container/AddTask/hooks';
 import * as todos from 'ducks/todos/tasks';
-import {
-  TODOS_CATEGORIES_SUGGESTIONS,
-  TODOS_PRODUCTS_SUGGESTIONS,
-  TODOS_UNITS_SUGGESTIONS,
-} from 'container/SuggestionsLists';
 
 const initialState = {
   fields: {
@@ -143,11 +138,6 @@ const AddTask = props => {
       onSubmit={onSubmit}
       activeStep={state.activeStep}
       onReset={onReset}
-      lists={{
-        products: TODOS_PRODUCTS_SUGGESTIONS,
-        categories: TODOS_CATEGORIES_SUGGESTIONS,
-        quantityUnits: TODOS_UNITS_SUGGESTIONS,
-      }}
     />
   );
 };
