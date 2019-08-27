@@ -1,15 +1,19 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import Select from '../Select';
+import Select from '.';
 
-const stories = storiesOf('Components|Select', module);
-stories.add('default', () => (
+export default {
+  title: 'Components|Select',
+};
+
+export const story1 = () => (
   <Select>
     <option value="piece">pièce</option>
     <option value="grams">grammes</option>
     <option value="milliliters">millilitres</option>
   </Select>
-));
+);
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

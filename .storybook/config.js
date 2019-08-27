@@ -8,12 +8,6 @@ import { withKnobs } from '@storybook/addon-knobs';
 import Theme from '../src/style/theme';
 import GlobalStyle from '../src/style/global';
 
-// automatically import all files ending in *.stories.js
-const req = require.context('../src/', true, /\**\/stories\.js$/);
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
-}
-
 const StorybookGlobalStyle = createGlobalStyle`
   body {
     padding: 1rem;
@@ -41,4 +35,5 @@ addParameters({ backgrounds: [
 addDecorator(withA11y)
 addDecorator(withKnobs)
 
-configure(loadStories, module);
+// automatically import all files ending in *.stories.js
+configure(require.context('../src/', true, /\**\/stories\.js$/), module);

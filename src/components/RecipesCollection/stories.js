@@ -1,11 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { collection, units, products, tags } from '../../../.storybook/mock';
-import RecipesCollection from '../RecipesCollection';
+import RecipesCollection from '.';
 
-const story = storiesOf('Components|RecipesCollection', module);
+export default {
+  title: 'Components|RecipesCollection',
+};
 
 const collectionComputed = {
   ...collection,
@@ -26,6 +27,10 @@ const collectionComputed = {
   ),
 };
 
-story.add('Default', () => (
+export const story1 = () => (
   <RecipesCollection editHref="/recipes/edit/:id" addItem={action('addItem')} collection={collectionComputed} />
-));
+);
+
+story1.story = {
+  name: 'default',
+};

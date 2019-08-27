@@ -1,15 +1,17 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { text, color } from '@storybook/addon-knobs';
 
-import Pill from '../Pill';
+import Pill from '.';
 import { THEMES } from '../../style/colors';
 
-const stories = storiesOf('Components|Pill', module).addParameters({
-  backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
-});
+export default {
+  title: 'Components|Pill',
+  parameters: {
+    backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
+  },
+};
 
-stories.add('default', () => {
+export const story1 = () => {
   const pillColor = color('color', '#140A43');
   const children = text('children', 'Hello World !');
 
@@ -24,9 +26,13 @@ stories.add('default', () => {
       </Pill>
     </React.Fragment>
   );
-});
+};
 
-stories.add('themes', () => (
+story1.story = {
+  name: 'default',
+};
+
+export const story2 = () => (
   <React.Fragment>
     {Object.keys(THEMES).map(theme => {
       const props = {
@@ -45,6 +51,8 @@ stories.add('themes', () => (
       );
     })}
   </React.Fragment>
-));
+);
 
-export default stories;
+story2.story = {
+  name: 'themes',
+};

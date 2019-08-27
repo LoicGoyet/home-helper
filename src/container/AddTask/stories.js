@@ -1,11 +1,15 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
 import { withReduxProvider } from '../../../.storybook/decorators';
 import AddTask from '.';
 
-const stories = storiesOf('Container|AddTask', module).addDecorator(withReduxProvider);
+export default {
+  title: 'Container|AddTask',
+  decorators: [withReduxProvider],
+};
 
-stories.add('default', () => <AddTask />);
+export const story1 = () => <AddTask />;
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

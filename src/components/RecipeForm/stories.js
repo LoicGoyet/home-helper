@@ -1,16 +1,22 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import RecipeForm from '../RecipeForm';
+import RecipeForm from '.';
 import { categories, products, units } from '../../../.storybook/mock';
 
-const stories = storiesOf('Components|RecipeForm', module);
+export default {
+  title: 'Components|RecipeForm',
+};
 
-stories.add('default', () => (
+export const story1 = () => (
   <RecipeForm units={units} products={products} categories={categories} onSubmit={action('onSubmit')} />
-));
-stories.add('with default value', () => (
+);
+
+story1.story = {
+  name: 'default',
+};
+
+export const story2 = () => (
   <RecipeForm
     units={units}
     products={products}
@@ -36,6 +42,8 @@ stories.add('with default value', () => (
       ],
     }}
   />
-));
+);
 
-export default stories;
+story2.story = {
+  name: 'with default value',
+};

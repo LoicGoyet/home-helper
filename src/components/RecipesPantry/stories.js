@@ -1,11 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import { collection, units, products, tags } from '../../../.storybook/mock';
-import RecipesPantry from '../RecipesPantry';
+import RecipesPantry from '.';
 
-const story = storiesOf('Components|RecipesPantry', module);
+export default {
+  title: 'Components|RecipesPantry',
+};
 
 const pantryComputed = {
   ...collection,
@@ -27,4 +28,8 @@ const pantryComputed = {
   ),
 };
 
-story.add('Default', () => <RecipesPantry addItem={action('addItem')} pantry={pantryComputed} />);
+export const story1 = () => <RecipesPantry addItem={action('addItem')} pantry={pantryComputed} />;
+
+story1.story = {
+  name: 'default',
+};

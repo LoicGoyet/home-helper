@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 import AddTaskForm from '../AddTaskForm';
 
-const stories = storiesOf('Components|AddTaskForm', module);
+export default { title: 'Components|AddTaskForm' };
 
 const defaultFields = {
   product: '',
@@ -58,6 +57,8 @@ const Container = () => {
   );
 };
 
-stories.add('default', () => <Container />);
+export const story1 = () => <Container />;
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

@@ -1,10 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import PantryCount from '../PantryCount';
+import PantryCount from '.';
 
-const stories = storiesOf('Components|PantryCount', module);
-stories.add('default', () => (
+export default {
+  title: 'Components|PantryCount',
+};
+
+export const story1 = () => (
   <PantryCount
     counts={[
       {
@@ -22,6 +24,8 @@ stories.add('default', () => (
       },
     ]}
   />
-));
+);
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

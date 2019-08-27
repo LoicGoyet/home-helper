@@ -1,12 +1,19 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import TodosList from '../TodosList';
+import TodosList from '.';
 import { tasks, categories, products, units } from '../../../.storybook/mock';
 
-const stories = storiesOf('Components|TodosList', module);
-stories.add('default', () => <TodosList tasks={tasks} categories={categories} products={products} units={units} />);
-stories.add('all done', () => (
+export default {
+  title: 'Components|TodosList',
+};
+
+export const story1 = () => <TodosList tasks={tasks} categories={categories} products={products} units={units} />;
+
+story1.story = {
+  name: 'default',
+};
+
+export const story2 = () => (
   <TodosList
     tasks={{
       ...tasks,
@@ -19,6 +26,8 @@ stories.add('all done', () => (
     products={products}
     units={units}
   />
-));
+);
 
-export default stories;
+story2.story = {
+  name: 'all done',
+};

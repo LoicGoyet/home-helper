@@ -1,18 +1,24 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { TiPlus } from 'react-icons/lib/ti';
 
-import IngredientForm from '../IngredientForm';
+import IngredientForm from '.';
 import { categories, products, units } from '../../../.storybook/mock';
 import { THEMES } from '../../style/colors';
 
-const stories = storiesOf('Components|IngredientForm', module);
+export default {
+  title: 'Components|IngredientForm',
+};
 
-stories.add('default', () => (
+export const story1 = () => (
   <IngredientForm onChange={action('onChange')} units={units} products={products} categories={categories} />
-));
-stories.add('with a button', () => (
+);
+
+story1.story = {
+  name: 'default',
+};
+
+export const story2 = () => (
   <IngredientForm
     onChange={action('onChange')}
     units={units}
@@ -24,8 +30,13 @@ stories.add('with a button', () => (
       icon: TiPlus,
     }}
   />
-));
-stories.add('with default value', () => (
+);
+
+story2.story = {
+  name: 'with a button',
+};
+
+export const story3 = () => (
   <IngredientForm
     onChange={action('onChange')}
     units={units}
@@ -38,6 +49,8 @@ stories.add('with default value', () => (
       unitTitle: 'tranche(s)',
     }}
   />
-));
+);
 
-export default stories;
+story3.story = {
+  name: 'with default value',
+};

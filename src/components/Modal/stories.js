@@ -1,12 +1,14 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
 
-import Modal from '../Modal';
+import Modal from '.';
 
-const stories = storiesOf('Components|Modal', module);
-stories.add('default', () => (
+export default {
+  title: 'Components|Modal',
+};
+
+export const story1 = () => (
   <Modal toggle={action('toggle modal')} isOpen={boolean('isOpen', false)}>
     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam assumenda aperiam, molestias adipisci quibusdam
     nostrum quas illo quasi repellat repudiandae praesentium incidunt, nobis, debitis quidem quia fugiat nesciunt modi
@@ -77,6 +79,8 @@ stories.add('default', () => (
     laudantium praesentium veniam iusto aspernatur aperiam rem debitis voluptatum consectetur placeat fugit illum nobis
     qui, ut veritatis.
   </Modal>
-));
+);
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

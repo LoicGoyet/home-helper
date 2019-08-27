@@ -1,10 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 
-import IngredientsList from '../IngredientsList';
+import IngredientsList from '.';
 
-const stories = storiesOf('Components|IngredientsList', module);
-stories.add('default', () => (
+export default {
+  title: 'Components|IngredientsList',
+};
+
+export const story1 = () => (
   <IngredientsList
     ingredients={[
       {
@@ -43,6 +45,8 @@ stories.add('default', () => (
       },
     ]}
   />
-));
+);
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

@@ -1,13 +1,14 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { FaShoppingCart, FaBook, FaInbox } from 'react-icons/lib/fa';
 import { HashRouter } from 'react-router-dom';
 
-import Layout from '../Layout';
+import Layout from '.';
 
-const stories = storiesOf('Components|Layout', module);
+export default {
+  title: 'Components|Layout',
+};
 
-stories.add('default', () => {
+export const story1 = () => {
   const menu = [
     {
       icon: FaBook,
@@ -34,6 +35,8 @@ stories.add('default', () => {
       </Layout>
     </HashRouter>
   );
-});
+};
 
-export default stories;
+story1.story = {
+  name: 'default',
+};
