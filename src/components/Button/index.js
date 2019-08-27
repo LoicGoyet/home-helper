@@ -4,8 +4,8 @@ import ExtraPropTypes from 'react-extra-prop-types';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { getContrastYIQ, alpha, darken, lighten, isLight } from '../../utils/colors';
-import COLORS from '../../style/colors';
+import COLORS from 'style/colors';
+import { getContrastYIQ, alpha, darken, lighten, isLight } from 'utils/colors';
 
 const Button = ({ isBlock, color, style, square, children, href, exthref, ...props }) => {
   const blockBgColorHover = isLight(color) ? darken(color, 0.15) : lighten(color, 0.15);

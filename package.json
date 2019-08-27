@@ -63,6 +63,7 @@
     "dotenv": "^6.0.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-html": "^4.0.2",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",

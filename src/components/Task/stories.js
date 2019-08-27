@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import Task from '.';
 
 export default {
-  title: 'Components|Task',
+  title: 'components|Task',
 };
 
 const task = {

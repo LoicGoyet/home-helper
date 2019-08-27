@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { withReduxProvider } from '../../../.storybook/decorators';
-import AddTask from '.';
+import { withReduxProvider } from 'storybook/decorators';
+import AddTask from 'container/AddTask';
 
 export default {
   title: 'Container|AddTask',

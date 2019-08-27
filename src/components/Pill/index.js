@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
 
-import COLORS, { THEMES, isTheme } from '../../style/colors';
-import { getContrastYIQ } from '../../utils/colors';
+import COLORS, { THEMES, isTheme } from 'style/colors';
+import { getContrastYIQ } from 'utils/colors';
 
 const Pill = ({ isBlock, color, style, children, ...props }) => {
   const themeColor = isTheme(color) ? THEMES[color] : color;

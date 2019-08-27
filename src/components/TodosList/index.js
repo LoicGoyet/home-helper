@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Task from '../Task';
-import Button from '../Button';
-import COLORS from '../../style/colors';
+import Task from 'components/Task';
+import Button from 'components/Button';
+import COLORS from 'style/colors';
 
 class TodosList extends React.Component {
   static propTypes = {

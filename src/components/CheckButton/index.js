@@ -4,8 +4,8 @@ import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
 import { MdCheck } from 'react-icons/lib/md';
 
-import COLORS from '../../style/colors';
-import { getContrastYIQ, alpha } from '../../utils/colors';
+import COLORS from 'style/colors';
+import { getContrastYIQ, alpha } from 'utils/colors';
 
 const CheckButton = props => (
   <Element {...props} style={getThemeVars(props)}>

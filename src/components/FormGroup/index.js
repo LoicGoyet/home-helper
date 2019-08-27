@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Input from '../Input';
+import Input from 'components/Input';
 
 const FormGroup = ({ help, id, label, type, ...props }) => (
   <Wrapper htmlFor={id}>

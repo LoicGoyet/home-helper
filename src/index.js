@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Theme from 'style/theme';
+import GlobalStyle from 'style/global';
 import App from './app';
-import Theme from './style/theme';
-import GlobalStyle from './style/global';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

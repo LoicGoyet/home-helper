@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import RecipesCollection from '../../components/RecipesCollection';
-import { addPantryEntry } from '../../ducks/recipes/pantry';
+import RecipesCollection from 'components/RecipesCollection';
+import { addPantryEntry } from 'ducks/recipes/pantry';
 
 const mapStateToProps = state => {
   const { collection, tags } = state.recipes;

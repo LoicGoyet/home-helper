@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import AnimateHeight from 'react-animate-height';
 import styled from 'styled-components';
 
-import { useAccordion } from './context';
-import Card from '../Card';
-import { alpha } from '../../utils/colors';
-import COLORS from '../../style/colors';
+import { useAccordion } from 'components/Accordion/context';
+import Card from 'components/Card';
+import COLORS from 'style/colors';
+import { alpha } from 'utils/colors';
 
 const AccordionItem = ({ style, header, className, children, index }) => {
   const [isOpen, toggle] = useAccordion(index);

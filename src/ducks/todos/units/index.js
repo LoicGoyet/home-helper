@@ -1,6 +1,6 @@
 import { select, put } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
+import { generateId } from 'utils/redux';
 
 export const ADD_UNIT = 'home-helper/todos/units/ADD_UNIT';
 export const SET_UNIT_TITLE = 'home-helper/todos/units/SET_UNIT_TITLE';

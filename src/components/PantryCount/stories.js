@@ -1,9 +1,9 @@
 import React from 'react';
 
-import PantryCount from '.';
+import PantryCount from 'components/PantryCount';
 
 export default {
-  title: 'Components|PantryCount',
+  title: 'components|PantryCount',
 };
 
 export const story1 = () => (

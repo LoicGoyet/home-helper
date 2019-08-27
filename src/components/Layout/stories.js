@@ -2,10 +2,10 @@ import React from 'react';
 import { FaShoppingCart, FaBook, FaInbox } from 'react-icons/lib/fa';
 import { HashRouter } from 'react-router-dom';
 
-import Layout from '.';
+import Layout from 'components/Layout';
 
 export default {
-  title: 'Components|Layout',
+  title: 'components|Layout',
 };
 
 export const story1 = () => {

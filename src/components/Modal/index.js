@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import COLORS from '../../style/colors';
-import Card from '../Card';
+import COLORS from 'style/colors';
+import Card from 'components/Card';
 
 const Modal = ({ toggle, children, isOpen }) => {
   useEffect(

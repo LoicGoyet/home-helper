@@ -1,11 +1,11 @@
 import React from 'react';
 import { text, color } from '@storybook/addon-knobs';
 
-import Pill from '.';
-import { THEMES } from '../../style/colors';
+import Pill from 'components/Pill';
+import { THEMES } from 'style/colors';
 
 export default {
-  title: 'Components|Pill',
+  title: 'components|Pill',
   parameters: {
     backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
   },

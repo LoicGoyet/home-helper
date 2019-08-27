@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 
-import colors from './colors';
+import colors from 'style/colors';
 
 const Theme = props => <ThemeProvider theme={{ colors }}>{props.children}</ThemeProvider>;
 

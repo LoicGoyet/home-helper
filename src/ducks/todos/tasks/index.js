@@ -1,9 +1,9 @@
 import { takeEvery, put, all, call } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
-import { getProductId } from '../products';
-import { getUnitId } from '../units';
-import { ADD_JOINED_PANTRY_ENTRY } from '../../recipes/pantry';
+import { generateId } from 'utils/redux';
+import { getProductId } from 'ducks/todos/products';
+import { getUnitId } from 'ducks/todos/units';
+import { ADD_JOINED_PANTRY_ENTRY } from 'ducks/recipes/pantry';
 
 // Actions
 export const ADD_TASK = 'home-helper/todos/tasks/ADD_TASK';

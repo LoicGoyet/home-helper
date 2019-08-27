@@ -1,6 +1,6 @@
-import database from '../utils/database';
-import { setState } from '../ducks/root';
-import { USE_MOCK } from '../config';
+import database from 'utils/database';
+import { setState } from 'ducks/root';
+import { USE_MOCK } from 'config';
 
 const data = database.ref('/');
 

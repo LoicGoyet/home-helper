@@ -1,8 +1,8 @@
 import { takeEvery, select, put, take, call } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
-import { normalizeStr } from '../../../utils/strings';
-import { getCategoryId } from '../categories';
+import { generateId } from 'utils/redux';
+import { normalizeStr } from 'utils/strings';
+import { getCategoryId } from 'ducks/todos/categories';
 
 export const ADD_PRODUCT = 'home-helper/todos/products/ADD_PRODUCT';
 export const ADD_PRODUCT_JOINED = 'home-helper/todos/products/ADD_PRODUCT_JOINED';

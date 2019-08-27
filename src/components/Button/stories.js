@@ -2,10 +2,10 @@ import React from 'react';
 import { text, color, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import Button from '.';
+import Button from 'components/Button';
 
 export default {
-  title: 'Components|Button',
+  title: 'components|Button',
   component: Button,
   parameters: {
     backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],

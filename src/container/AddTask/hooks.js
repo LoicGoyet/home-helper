@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { normalizeStr } from '../../utils/strings';
+import { normalizeStr } from 'utils/strings';
 
 const useStoredProductId = () => {
   const products = useSelector(state => state.todos.products);

@@ -2,12 +2,12 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { TiPlus } from 'react-icons/lib/ti';
 
-import IngredientForm from '.';
-import { categories, products, units } from '../../../.storybook/mock';
-import { THEMES } from '../../style/colors';
+import IngredientForm from 'components/IngredientForm';
+import { THEMES } from 'style/colors';
+import { categories, products, units } from 'storybook/mock';
 
 export default {
-  title: 'Components|IngredientForm',
+  title: 'components|IngredientForm',
 };
 
 export const story1 = () => (

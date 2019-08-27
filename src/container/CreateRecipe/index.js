@@ -5,9 +5,9 @@ import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { path } from 'ramda';
 
-import RecipeForm from '../../components/RecipeForm';
-import * as recipes from '../../ducks/recipes/collection';
-import PATHS from '../../router/paths';
+import RecipeForm from 'components/RecipeForm';
+import * as recipes from 'ducks/recipes/collection';
+import PATHS from 'router/paths';
 
 const mapStateToProps = state => ({
   units: state.todos.units,

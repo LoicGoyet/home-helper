@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AccordionItem from './card';
-import { AccordionProvider } from './context';
+import AccordionItem from 'components/Accordion/card';
+import { AccordionProvider } from 'components/Accordion/context';
 
 const Accordion = ({ children, className }) => (
   <section className={className}>

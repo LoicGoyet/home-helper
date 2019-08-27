@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TiPlus, TiTrash } from 'react-icons/lib/ti';
 
-import FormGroup from '../FormGroup';
-import IngredientForm from '../IngredientForm';
-import Button from '../Button';
-import COLORS, { THEMES } from '../../style/colors';
+import FormGroup from 'components/FormGroup';
+import IngredientForm from 'components/IngredientForm';
+import Button from 'components/Button';
+import COLORS, { THEMES } from 'style/colors';
 
 const defaultIngredient = {
   productTitle: '',

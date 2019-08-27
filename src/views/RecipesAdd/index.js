@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { FaArrowLeft } from 'react-icons/lib/fa';
 import Helmet from 'react-helmet';
 
-import CreateRecipe from '../../container/CreateRecipe';
-import Button from '../../components/Button';
-import PATHS from '../../router/paths';
+import CreateRecipe from 'container/CreateRecipe';
+import Button from 'components/Button';
+import PATHS from 'router/paths';
 
 const RecipesAdd = () => (
   <React.Fragment>

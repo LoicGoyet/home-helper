@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Container from '.';
+import Container from 'components/Container';
 
 export default {
-  title: 'Components|Container',
+  title: 'components|Container',
 };
 
 export const story1 = () => (

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import IngredientsList from '.';
+import IngredientsList from 'components/IngredientsList';
 
 export default {
-  title: 'Components|IngredientsList',
+  title: 'components|IngredientsList',
 };
 
 export const story1 = () => (

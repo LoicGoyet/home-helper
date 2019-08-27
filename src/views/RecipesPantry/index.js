@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
-import AvailableRecipesPantry from '../../container/AvailableRecipesPantry';
-import UnavailableRecipesPantry from '../../container/UnavailableRecipesPantry';
-import PantryCount from '../../container/PantryCount';
+import AvailableRecipesPantry from 'container/AvailableRecipesPantry';
+import UnavailableRecipesPantry from 'container/UnavailableRecipesPantry';
+import PantryCount from 'container/PantryCount';
 
 const RecipesPantry = () => (
   <React.Fragment>

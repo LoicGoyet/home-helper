@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { takeLatest, select } from 'redux-saga/effects';
 
-import todos from '../todos';
-import recipes from '../recipes';
-import { sendDataToFirebase } from '../../api';
+import todos from 'ducks/todos';
+import recipes from 'ducks/recipes';
+import { sendDataToFirebase } from 'api';
 
 export const SET_STATE = 'home-helper/root/SET_STATE';
 

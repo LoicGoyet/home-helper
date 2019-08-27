@@ -1,11 +1,11 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import RecipeForm from '.';
-import { categories, products, units } from '../../../.storybook/mock';
+import RecipeForm from 'components/RecipeForm';
+import { categories, products, units } from 'storybook/mock';
 
 export default {
-  title: 'Components|RecipeForm',
+  title: 'components|RecipeForm',
 };
 
 export const story1 = () => (

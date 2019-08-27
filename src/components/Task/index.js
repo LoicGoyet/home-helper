@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Card from '../Card';
-import COLORS from '../../style/colors';
+import Card from 'components/Card';
+import COLORS from 'style/colors';
 
 const Task = ({ task, product, category, unit, toggleTask, style }) => {
   const themeVars = {

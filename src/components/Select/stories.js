@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Select from '.';
+import Select from 'components/Select';
 
 export default {
-  title: 'Components|Select',
+  title: 'components|Select',
 };
 
 export const story1 = () => (

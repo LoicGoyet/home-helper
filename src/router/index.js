@@ -2,14 +2,14 @@ import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { FaShoppingCart, FaBook, FaInbox } from 'react-icons/lib/fa';
 
-import Todos from '../views/Todos';
-import RecipesAdd from '../views/RecipesAdd';
-import RecipesEdit from '../views/RecipesEdit';
-import RecipesPantry from '../views/RecipesPantry';
-import RecipesCollection from '../views/RecipesCollection';
-import SuggestionsLists from '../container/SuggestionsLists';
-import Layout from '../components/Layout';
-import PATHS from './paths';
+import Todos from 'views/Todos';
+import RecipesAdd from 'views/RecipesAdd';
+import RecipesEdit from 'views/RecipesEdit';
+import RecipesPantry from 'views/RecipesPantry';
+import RecipesCollection from 'views/RecipesCollection';
+import SuggestionsLists from 'container/SuggestionsLists';
+import Layout from 'components/Layout';
+import PATHS from 'router/paths';
 
 const Router = () => {
   const menu = [

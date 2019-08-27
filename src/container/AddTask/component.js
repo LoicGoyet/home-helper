@@ -4,9 +4,9 @@ import styled, { css } from 'styled-components';
 import GoArrowSmallRight from 'react-icons/lib/go/arrow-small-right';
 import IoRefresh from 'react-icons/lib/io/refresh';
 
-import COLORS from '../../style/colors';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
+import COLORS from 'style/colors';
+import Button from 'components/Button';
+import Input from 'components/Input';
 
 const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, lists, ...props }) => {
   const productInput = useRef();

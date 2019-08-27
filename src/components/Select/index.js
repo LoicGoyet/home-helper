@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import COLORS from '../../style/colors';
+import COLORS from 'style/colors';
 
 const Select = ({ reference, children, className, ...props }) => (
   <Wrapper className={className}>

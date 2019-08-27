@@ -3,10 +3,10 @@ import { TiPlus } from 'react-icons/lib/ti';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
-import RecipesCollectionContainer from '../../container/RecipesCollection';
-import PantryCount from '../../container/PantryCount';
-import Button from '../../components/Button';
-import PATHS from '../../router/paths';
+import RecipesCollectionContainer from 'container/RecipesCollection';
+import PantryCount from 'container/PantryCount';
+import Button from 'components/Button';
+import PATHS from 'router/paths';
 
 const RecipesCollection = () => (
   <React.Fragment>

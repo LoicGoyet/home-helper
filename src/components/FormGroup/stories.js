@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FormGroup from '.';
+import FormGroup from 'components/FormGroup';
 
 export default {
-  title: 'Components|FormGroup',
+  title: 'components|FormGroup',
 };
 
 export const story1 = () => <FormGroup id="form-group-ex-1" label="This is a label" placeholder="Placeholder" />;

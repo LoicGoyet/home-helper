@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux';
 import { path, prop } from 'ramda';
 import Helmet from 'react-helmet';
 
-import RecipeForm from '../../components/RecipeForm';
-import * as recipes from '../../ducks/recipes/collection';
-import PATHS from '../../router/paths';
+import RecipeForm from 'components/RecipeForm';
+import * as recipes from 'ducks/recipes/collection';
+import PATHS from 'router/paths';
 
 const mapStateToProps = (state, ownProps) => {
   const { units, products, categories } = state.todos;

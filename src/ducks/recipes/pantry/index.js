@@ -1,7 +1,7 @@
 // Actions
 import { takeEvery, put, select } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
+import { generateId } from 'utils/redux';
 
 export const ADD_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_PANTRY_ENTRY';
 export const ADD_JOINED_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_JOINED_PANTRY_ENTRY';

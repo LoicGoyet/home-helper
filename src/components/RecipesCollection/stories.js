@@ -1,11 +1,11 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { collection, units, products, tags } from '../../../.storybook/mock';
-import RecipesCollection from '.';
+import { collection, units, products, tags } from 'storybook/mock';
+import RecipesCollection from 'components/RecipesCollection';
 
 export default {
-  title: 'Components|RecipesCollection',
+  title: 'components|RecipesCollection',
 };
 
 const collectionComputed = {

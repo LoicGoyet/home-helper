@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
 import { path } from 'ramda';
-import { normalizeStr } from '../../utils/strings';
 
-import FormGroup from '../FormGroup';
-import Button from '../Button';
+import { normalizeStr } from 'utils/strings';
+import FormGroup from 'components/FormGroup';
+import Button from 'components/Button';
 import {
   TODOS_CATEGORIES_SUGGESTIONS,
   TODOS_PRODUCTS_SUGGESTIONS,
   TODOS_UNITS_SUGGESTIONS,
-} from '../../container/SuggestionsLists';
+} from 'container/SuggestionsLists';
 
 class IngredientForm extends React.Component {
   static propTypes = {

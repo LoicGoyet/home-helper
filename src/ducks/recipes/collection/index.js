@@ -1,11 +1,11 @@
 // Actions
 import { takeEvery, put, all, call } from 'redux-saga/effects';
 
-import { getProductId } from '../../todos/products';
-import { getUnitId } from '../../todos/units';
-import { getTagId } from '../../recipes/tags';
-import { generateId } from '../../../utils/redux';
-import { ADD_JOINED_PANTRY_ENTRY } from '../pantry';
+import { getProductId } from 'ducks/todos/products';
+import { getUnitId } from 'ducks/todos/units';
+import { getTagId } from 'ducks/recipes/tags';
+import { generateId } from 'utils/redux';
+import { ADD_JOINED_PANTRY_ENTRY } from 'ducks/recipes/pantry';
 
 export const ADD_COLLECTION_ITEM = 'home-helper/recipes/collection/ADD_COLLECTION_ITEM';
 export const UPDATE_COLLECTION_ITEM = 'home-helper/recipes/collection/UPDATE_COLLECTION_ITEM';

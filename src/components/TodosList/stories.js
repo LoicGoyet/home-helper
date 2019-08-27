@@ -1,10 +1,10 @@
 import React from 'react';
 
-import TodosList from '.';
-import { tasks, categories, products, units } from '../../../.storybook/mock';
+import TodosList from 'components/TodosList';
+import { tasks, categories, products, units } from 'storybook/mock';
 
 export default {
-  title: 'Components|TodosList',
+  title: 'components|TodosList',
 };
 
 export const story1 = () => <TodosList tasks={tasks} categories={categories} products={products} units={units} />;

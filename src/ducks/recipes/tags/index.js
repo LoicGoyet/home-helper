@@ -1,7 +1,7 @@
 import { select, put } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
-import { normalizeStr } from '../../../utils/strings';
+import { generateId } from 'utils/redux';
+import { normalizeStr } from 'utils/strings';
 
 export const ADD_TAG = 'home-helper/recipes/tags/ADD_UNIT';
 

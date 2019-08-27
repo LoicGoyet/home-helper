@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Tags from '.';
+import Tags from 'components/Tags';
 
 export default {
-  title: 'Components|Tags',
+  title: 'components|Tags',
 };
 
 export const story1 = () => (

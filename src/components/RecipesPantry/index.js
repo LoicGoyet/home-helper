@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Accordion, { AccordionItem } from '../Accordion';
-import Tags from '../Tags';
-import CheckButton from '../CheckButton';
-import IngredientsList from '../IngredientsList';
+import Accordion, { AccordionItem } from 'components/Accordion';
+import Tags from 'components/Tags';
+import CheckButton from 'components/CheckButton';
+import IngredientsList from 'components/IngredientsList';
 
 const RecipesCollection = ({ pantry, toggleItem, ...props }) => {
   const onCheckboxChange = useCallback(

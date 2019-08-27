@@ -3,9 +3,9 @@ import { PropTypes } from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import Container from '../Container';
-import COLORS from '../../style/colors';
-import { darken } from '../../utils/colors';
+import Container from 'components/Container';
+import COLORS from 'style/colors';
+import { darken } from 'utils/colors';
 
 const Layout = ({ children, menu }) => (
   <Wrapper>

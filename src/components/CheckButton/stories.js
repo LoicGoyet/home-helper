@@ -2,10 +2,10 @@ import React from 'react';
 import { boolean, color } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 
-import CheckButton from '.';
+import CheckButton from 'components/CheckButton';
 
 export default {
-  title: 'Components|CheckButton',
+  title: 'components|CheckButton',
   parameters: {
     backgrounds: [{ name: 'transparent', value: 'rgba(255, 255, 255, 0)', default: true }],
   },

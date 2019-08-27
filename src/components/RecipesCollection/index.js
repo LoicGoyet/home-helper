@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Accordion, { AccordionItem } from '../Accordion';
-import Tags from '../Tags';
-import Button from '../Button';
-import IngredientsList from '../IngredientsList';
-import COLORS from '../../style/colors';
+import Accordion, { AccordionItem } from 'components/Accordion';
+import Tags from 'components/Tags';
+import Button from 'components/Button';
+import IngredientsList from 'components/IngredientsList';
+import COLORS from 'style/colors';
 
 class RecipesCollection extends React.Component {
   static propTypes = {

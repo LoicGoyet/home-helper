@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import PantryCount from '../../components/PantryCount';
+import PantryCount from 'components/PantryCount';
 
 const mapStateToProps = state => {
   const { tags, pantry } = state.recipes;

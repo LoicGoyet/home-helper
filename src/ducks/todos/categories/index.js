@@ -1,8 +1,8 @@
 import { select, put } from 'redux-saga/effects';
 
-import { strToColor } from '../../../utils/colors';
-import { generateId } from '../../../utils/redux';
-import { normalizeStr } from '../../../utils/strings';
+import { strToColor } from 'utils/colors';
+import { generateId } from 'utils/redux';
+import { normalizeStr } from 'utils/strings';
 
 export const ADD_CATEGORY = 'home-helper/todos/categories/ADD_CATEGORY';
 export const UPDATE_CATEGORY = 'home-helper/todos/categories/UPDATE_CATEGORY';

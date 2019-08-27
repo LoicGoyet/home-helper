@@ -1,10 +1,10 @@
 import React from 'react';
 import { text } from '@storybook/addon-knobs';
 
-import Card from '.';
+import Card from 'components/Card';
 
 export default {
-  title: 'Components|Card',
+  title: 'components|Card',
 };
 
 export const story1 = () => (

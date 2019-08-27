@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import Task from '../../components/Task';
-import * as todos from '../../ducks/todos/tasks';
+import Task from 'components/Task';
+import * as todos from 'ducks/todos/tasks';
 
 const mapStateToProps = () => ({});
 

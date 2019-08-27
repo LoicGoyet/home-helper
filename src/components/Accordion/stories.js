@@ -1,7 +1,8 @@
 import React from 'react';
-import Accordion, { AccordionItem } from '.';
 
-export default { title: 'Components|Accordion' };
+import Accordion, { AccordionItem } from 'components/Accordion';
+
+export default { title: 'components|Accordion' };
 
 export const story1 = () => (
   <Accordion>

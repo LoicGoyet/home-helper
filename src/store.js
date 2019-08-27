@@ -2,9 +2,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 
-import { USE_MOCK } from './config';
-import rootReducer, { rootSaga } from './ducks';
-import preloadedFixture from './fixtures/preloaded-state.json';
+import { USE_MOCK } from 'config';
+import rootReducer, { rootSaga } from 'ducks';
+import preloadedFixture from 'fixtures/preloaded-state.json';
 
 const sagaMiddleware = createSagaMiddleware();
 const preloadedState = USE_MOCK ? preloadedFixture : null;

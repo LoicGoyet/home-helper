@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import TodosList from '../../components/TodosList';
-import * as todos from '../../ducks/todos/tasks';
+import TodosList from 'components/TodosList';
+import * as todos from 'ducks/todos/tasks';
 
 const mapStateToProps = state => {
   const { tasks, products, categories, units } = state.todos;
