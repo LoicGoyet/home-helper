@@ -96,12 +96,12 @@ const MenuLink = styled(NavLink)`
   transition: 300ms ease-in-out;
   transition-property: box-shadow, transform;
 
-  &:first-child {
+  &:first-of-type {
     margin-left: 0;
     margin-right: 0;
   }
 
-  &:last-child {
+  &:last-of-type {
     margin-left: 0;
     margin-right: 0;
   }
