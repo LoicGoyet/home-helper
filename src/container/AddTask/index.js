@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
-import AddTaskForm from '../../components/AddTaskForm';
+import AddTaskComponent from './component';
 import { useAutoCategory, useAutoQuantityUnit } from './hooks';
 import * as todos from '../../ducks/todos/tasks';
 import { TODOS_CATEGORIES_SUGGESTIONS, TODOS_PRODUCTS_SUGGESTIONS, TODOS_UNITS_SUGGESTIONS } from '../SuggestionsLists';
@@ -131,7 +131,7 @@ const AddTask = props => {
   );
 
   return (
-    <AddTaskForm
+    <AddTaskComponent
       {...props}
       values={state.fields}
       onChange={onChange}

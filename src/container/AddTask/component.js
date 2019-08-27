@@ -5,8 +5,8 @@ import GoArrowSmallRight from 'react-icons/lib/go/arrow-small-right';
 import IoRefresh from 'react-icons/lib/io/refresh';
 
 import COLORS from '../../style/colors';
-import Button from '../Button';
-import InputComp from '../Input';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, lists, ...props }) => {
   const productInput = useRef();
@@ -102,7 +102,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
         <Fieldset step={0} activeStep={activeStep}>
           <Label>Produit</Label>
 
-          <Input
+          <StyledInput
             ref={productInput}
             onChange={onProductChange}
             value={values.product}
@@ -115,7 +115,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
         <Fieldset step={1} activeStep={activeStep}>
           <Label>Categorie</Label>
 
-          <Input
+          <StyledInput
             ref={categoryInput}
             onChange={onCategoryChange}
             value={values.category}
@@ -129,7 +129,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
 
         <Fieldset step={2} activeStep={activeStep}>
           <Label>Quantité</Label>
-          <Input
+          <StyledInput
             ref={quantityInput}
             onChange={onQuantityChange}
             value={values.quantity}
@@ -138,7 +138,7 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
             placeholder="nombre"
             tabindex="0"
           />
-          <Input
+          <StyledInput
             ref={quantityUnitInput}
             onChange={onQuantityUnitChange}
             value={values.quantityUnit}
@@ -158,9 +158,9 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
         )}
 
         {activeStep === 2 && (
-          <SubmitButton type="submit" disabled={!isActiveFieldsetValid} onClick={onSubmitForm}>
+          <StepButton type="submit" disabled={!isActiveFieldsetValid} onClick={onSubmitForm} color={COLORS.green}>
             <GoArrowSmallRight size={30} />
-          </SubmitButton>
+          </StepButton>
         )}
 
         <SuccessMessage isVisible={displaySuccess}>
@@ -275,7 +275,7 @@ const Label = styled.span`
   color: ${COLORS.black};
 `;
 
-const Input = styled(InputComp)`
+const StyledInput = styled(Input)`
   --border-radius: 0.1895rem;
   flex-grow: 1;
 
@@ -313,10 +313,6 @@ const StepButton = styled(Button).attrs({
     opacity: 0.5;
   }
 `;
-
-const SubmitButton = styled(StepButton).attrs({
-  color: COLORS.green,
-})``;
 
 const SuccessMessage = styled.div`
   background-color: ${COLORS.green};
