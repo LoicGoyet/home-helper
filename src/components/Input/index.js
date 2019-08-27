@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// @TODO remove `reference` prop as no data should be fetch from UI with refs
 const Input = React.forwardRef((props, ref) => <El {...props} ref={ref} />);
 
 export default React.memo(Input);
