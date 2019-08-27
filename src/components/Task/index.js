@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -6,17 +6,14 @@ import Card from '../Card';
 import COLORS from '../../style/colors';
 
 const Task = ({ task, product, category, unit, toggleTask, style }) => {
-  const themeVars = useMemo(
-    () => ({
-      '--text-decoration': task.done ? 'line-through' : 'initial',
-      '--opacity': task.done ? 0.5 : 'initial',
-      '--checkbox-bg-color': task.done ? 'currentColor' : COLORS.transparent,
-      '--checkbox-opacity': task.done ? 0.5 : 'initial',
-      '--category-color': category.color,
-      ...style,
-    }),
-    [task.done, style, category.color]
-  );
+  const themeVars = {
+    '--text-decoration': task.done ? 'line-through' : 'initial',
+    '--opacity': task.done ? 0.5 : 'initial',
+    '--checkbox-bg-color': task.done ? 'currentColor' : COLORS.transparent,
+    '--checkbox-opacity': task.done ? 0.5 : 'initial',
+    '--category-color': category.color,
+    ...style,
+  };
 
   const onClick = useCallback(() => toggleTask(task.id), [toggleTask, task.id]);
 

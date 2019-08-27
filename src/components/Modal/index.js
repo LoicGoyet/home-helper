@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -13,16 +13,13 @@ const Modal = ({ toggle, children, isOpen }) => {
     [isOpen]
   );
 
-  const themeVars = useMemo(
-    () => ({
-      '--scale': isOpen ? 'scale(1)' : 'scale(0.7)',
-      '--opacity': isOpen ? 'initial' : 0,
-      '--pointer-events': isOpen ? 'initial' : 'none',
-      '--backdrop-pointer-events': isOpen ? 'initial' : 'none',
-      '--backdrop-opacity': isOpen ? 0.5 : 0,
-    }),
-    [isOpen]
-  );
+  const themeVars = {
+    '--scale': isOpen ? 'scale(1)' : 'scale(0.7)',
+    '--opacity': isOpen ? 'initial' : 0,
+    '--pointer-events': isOpen ? 'initial' : 'none',
+    '--backdrop-pointer-events': isOpen ? 'initial' : 'none',
+    '--backdrop-opacity': isOpen ? 0.5 : 0,
+  };
 
   return (
     <Wrapper style={themeVars}>

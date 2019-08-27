@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled, { css } from 'styled-components';
@@ -8,31 +8,26 @@ import { getContrastYIQ, alpha, darken, lighten, isLight } from '../../utils/col
 import COLORS from '../../style/colors';
 
 const Button = ({ isBlock, color, style, square, children, href, exthref, ...props }) => {
-  const themeVars = useMemo(
-    () => {
-      const blockBgColorHover = isLight(color) ? darken(color, 0.15) : lighten(color, 0.15);
-      const blockBgColorActive = isLight(color) ? darken(color, 0.3) : lighten(color, 0.3);
-      const bgColor = isBlock ? color : COLORS.transparent;
-      const height = square || '36px';
-      const minWidth = square ? 'initial' : '64px';
-      const width = square || 'initial';
-      const padding = square ? '0' : '0 16px';
+  const blockBgColorHover = isLight(color) ? darken(color, 0.15) : lighten(color, 0.15);
+  const blockBgColorActive = isLight(color) ? darken(color, 0.3) : lighten(color, 0.3);
+  const bgColor = isBlock ? color : COLORS.transparent;
+  const height = square || '36px';
+  const minWidth = square ? 'initial' : '64px';
+  const width = square || 'initial';
+  const padding = square ? '0' : '0 16px';
 
-      return {
-        '--bg-color': bgColor,
-        '--bg-color--hover': isBlock ? blockBgColorHover : alpha(color, 0.1),
-        '--bg-color--active': isBlock ? blockBgColorActive : alpha(color, 0.2),
-        '--color': isBlock ? getContrastYIQ(bgColor) : color,
-        '--box-shadow': `0 0 0 4px ${alpha(color, 0.4)}`,
-        '--height': height,
-        '--width': width,
-        '--min-width': minWidth,
-        '--padding': padding,
-        ...style,
-      };
-    },
-    [isBlock, color, square, style]
-  );
+  const themeVars = {
+    '--bg-color': bgColor,
+    '--bg-color--hover': isBlock ? blockBgColorHover : alpha(color, 0.1),
+    '--bg-color--active': isBlock ? blockBgColorActive : alpha(color, 0.2),
+    '--color': isBlock ? getContrastYIQ(bgColor) : color,
+    '--box-shadow': `0 0 0 4px ${alpha(color, 0.4)}`,
+    '--height': height,
+    '--width': width,
+    '--min-width': minWidth,
+    '--padding': padding,
+    ...style,
+  };
 
   if (href) {
     return (

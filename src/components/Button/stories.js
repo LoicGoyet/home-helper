@@ -63,6 +63,6 @@ export const story3 = () => {
   );
 };
 
-story2.story = {
+story3.story = {
   name: 'square',
 };

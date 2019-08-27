@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
@@ -7,20 +7,15 @@ import COLORS, { THEMES, isTheme } from '../../style/colors';
 import { getContrastYIQ } from '../../utils/colors';
 
 const Pill = ({ isBlock, color, style, children, ...props }) => {
-  const themeVars = useMemo(
-    () => {
-      const themeColor = isTheme(color) ? THEMES[color] : color;
-      const bgColor = isBlock ? themeColor : COLORS.transparent;
+  const themeColor = isTheme(color) ? THEMES[color] : color;
+  const bgColor = isBlock ? themeColor : COLORS.transparent;
 
-      return {
-        '--bg-color': bgColor,
-        '--color': isBlock ? getContrastYIQ(bgColor) : themeColor,
-        '--border-color': themeColor,
-        ...style,
-      };
-    },
-    [isBlock, color, style]
-  );
+  const themeVars = {
+    '--bg-color': bgColor,
+    '--color': isBlock ? getContrastYIQ(bgColor) : themeColor,
+    '--border-color': themeColor,
+    ...style,
+  };
 
   return (
     <Wrapper {...props} style={themeVars}>

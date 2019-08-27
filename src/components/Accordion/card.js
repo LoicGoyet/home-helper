@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import AnimateHeight from 'react-animate-height';
 import styled from 'styled-components';
@@ -26,22 +26,14 @@ const AccordionItem = ({ style, header, className, children, setOpenIndex, index
     [toggle]
   );
 
-  const themeVars = useMemo(
-    () => {
-      const isOpenBoxShadow = `0 11px 15px -7px ${alpha(COLORS.black, 0.2)}, 0 24px 38px 3px ${alpha(
-        COLORS.black,
-        0.14
-      )},
-        0 9px 46px 8px ${alpha(COLORS.black, 0.12)}`;
+  const isOpenBoxShadow = `0 11px 15px -7px ${alpha(COLORS.black, 0.2)}, 0 24px 38px 3px ${alpha(COLORS.black, 0.14)},
+    0 9px 46px 8px ${alpha(COLORS.black, 0.12)}`;
 
-      return {
-        '--box-shadow': isOpen ? isOpenBoxShadow : 'none',
-        '--z-index': isOpen ? '1' : 'initial',
-        ...style,
-      };
-    },
-    [isOpen, style]
-  );
+  const themeVars = {
+    '--box-shadow': isOpen ? isOpenBoxShadow : 'none',
+    '--z-index': isOpen ? '1' : 'initial',
+    ...style,
+  };
 
   return (
     <Wrapper style={themeVars} className={className}>

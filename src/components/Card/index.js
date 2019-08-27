@@ -1,17 +1,14 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import COLORS from '../../style/colors';
 
 const Card = ({ children, className, onClick, style }) => {
-  const themeVars = useMemo(
-    () => ({
-      '--bg-color': COLORS.white,
-      ...style,
-    }),
-    [style]
-  );
+  const themeVars = {
+    '--bg-color': COLORS.white,
+    ...style,
+  };
 
   return (
     <Wrapper className={className} style={themeVars} onClick={onClick}>
