@@ -51,9 +51,6 @@ const mapDispatchToProps = dispatch => ({
 
 class RecipeFormContainer extends React.Component {
   static propTypes = {
-    units: PropTypes.object.isRequired,
-    products: PropTypes.object.isRequired,
-    categories: PropTypes.object.isRequired,
     defaultValues: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
     redirectTo: PropTypes.oneOf(Object.values(PATHS)),
@@ -108,13 +105,7 @@ class RecipeFormContainer extends React.Component {
           />
         )}
 
-        <RecipeForm
-          units={this.props.units}
-          products={this.props.products}
-          categories={this.props.categories}
-          defaultValues={this.props.defaultValues}
-          onSubmit={this.onSubmit}
-        />
+        <RecipeForm defaultValues={this.props.defaultValues} onSubmit={this.onSubmit} />
       </React.Fragment>
     );
   };

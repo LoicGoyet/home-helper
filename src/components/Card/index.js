@@ -37,5 +37,6 @@ const Wrapper = styled.article`
   --color: ${COLORS.violet};
   background-color: var(--bg-color);
   color: var(--color);
-  padding: 1rem;
+  padding: ${props => props.theme.space};
+  border-radius: ${props => props.theme.radius};
 `;

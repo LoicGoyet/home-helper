@@ -2,7 +2,7 @@ import React, { useCallback, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
 import AddTaskComponent from 'container/AddTask/component';
-import { useAutoCategory, useAutoQuantityUnit } from 'container/AddTask/hooks';
+import { useAutoCategory, useAutoQuantityUnit } from 'container/hooks';
 import * as todos from 'ducks/todos/tasks';
 
 const initialState = {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TiPlus, TiTrash } from 'react-icons/lib/ti';
 
 import FormGroup from 'components/FormGroup';
-import IngredientForm from 'components/IngredientForm';
+import IngredientField from 'container/IngredientField';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import COLORS, { THEMES } from 'style/colors';
@@ -25,9 +25,6 @@ const defaultValues = {
 
 class RecipeForm extends React.Component {
   static propTypes = {
-    products: PropTypes.object.isRequired,
-    units: PropTypes.object.isRequired,
-    categories: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
     defaultValues: PropTypes.shape({
       title: PropTypes.string,
@@ -151,24 +148,21 @@ class RecipeForm extends React.Component {
         <Input onChange={e => this.onInputChange(e, 'link')} value={this.state.link} />
       </FormGroup>
 
-      {this.state.ingredients.map((ingredient, index) => {
-        const isLast = index === this.state.ingredients.length - 1;
-        return (
-          <IngredientForm
-            key={`ingredient-${ingredient.id || index}`}
-            units={this.props.units}
-            products={this.props.products}
-            categories={this.props.categories}
-            onChange={values => this.getIngredientValues(index, values)}
-            defaultValues={ingredient}
-            button={{
-              onClick: isLast ? this.addIngredient : event => this.removeIngredient(event, ingredient.id),
-              color: THEMES[isLast ? 'success' : 'danger'],
-              icon: isLast ? TiPlus : TiTrash,
-            }}
-          />
-        );
-      })}
+      {this.state.ingredients.map((ingredient, index) => (
+        <IngredientField
+          key={`ingredient-${ingredient.id || index}`}
+          onChange={values => this.getIngredientValues(index, values)}
+          values={ingredient}
+        >
+          <Button onClick={e => this.removeIngredient(e, ingredient.id)} color={THEMES.danger} isBlock>
+            <TiTrash />
+          </Button>
+        </IngredientField>
+      ))}
+
+      <Button onClick={this.addIngredient} color={THEMES.success} isBlock>
+        <TiPlus />
+      </Button>
 
       <div style={{ textAlign: 'right' }}>
         <Button type="submit" isBlock color={COLORS.green}>

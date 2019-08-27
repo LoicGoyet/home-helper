@@ -1,16 +1,15 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
+import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
 import RecipeForm from 'components/RecipeForm';
-import { categories, products, units } from 'storybook/mock';
 
 export default {
   title: 'components|RecipeForm',
+  decorators: [withSuggestionLists, withReduxProvider],
 };
 
-export const story1 = () => (
-  <RecipeForm units={units} products={products} categories={categories} onSubmit={action('onSubmit')} />
-);
+export const story1 = () => <RecipeForm onSubmit={action('onSubmit')} />;
 
 story1.story = {
   name: 'default',
@@ -18,9 +17,6 @@ story1.story = {
 
 export const story2 = () => (
   <RecipeForm
-    units={units}
-    products={products}
-    categories={categories}
     onSubmit={action('onSubmit')}
     defaultValues={{
       title: 'Fish & Chips',
