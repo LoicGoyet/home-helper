@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { path, prop } from 'ramda';
 import Helmet from 'react-helmet';
 
-import RecipeForm from 'components/RecipeForm';
+import RecipeForm from 'container/RecipeForm';
 import * as recipes from 'ducks/recipes/collection';
 import PATHS from 'router/paths';
 
@@ -68,9 +68,9 @@ class RecipeFormContainer extends React.Component {
     },
   };
 
-  onSubmit = (...args) => {
-    this.props.onSubmit(this.props.id, ...args);
-    const recipeTitle = args[1];
+  onSubmit = recipe => {
+    this.props.onSubmit(this.props.id, recipe);
+    const recipeTitle = recipe.title;
 
     this.setState({
       redirect: {

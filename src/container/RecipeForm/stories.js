@@ -2,10 +2,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
-import RecipeForm from 'components/RecipeForm';
+import RecipeForm from 'container/RecipeForm';
 
 export default {
-  title: 'components|RecipeForm',
+  title: 'container|RecipeForm',
   decorators: [withSuggestionLists, withReduxProvider],
 };
 
@@ -41,5 +41,5 @@ export const story2 = () => (
 );
 
 story2.story = {
-  name: 'with default value',
+  name: 'with values',
 };

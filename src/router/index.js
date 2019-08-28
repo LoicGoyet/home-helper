@@ -21,8 +21,9 @@ const Router = () => (
         <Route exact path={PATHS.RECIPES_EDIT} component={RecipesEdit} />
         <Route exact path={PATHS.RECIPES_PANTRY} component={RecipesPantry} />
         <Redirect from="*" to={PATHS.TODOS} />
-        <SuggestionsLists />
       </Switch>
+
+      <SuggestionsLists />
 
       <Menu
         items={[

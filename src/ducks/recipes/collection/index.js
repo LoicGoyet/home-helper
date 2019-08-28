@@ -90,21 +90,15 @@ export default reducer;
 
 // Action Creators
 
-export const addInCollection = (title, tags, ingredients, link) => ({
+export const addInCollection = recipe => ({
   type: ADD_COLLECTION_ITEM,
-  title,
-  tags,
-  ingredients,
-  link,
+  recipe,
 });
 
-export const updateInCollection = (id, title, tags, ingredients, link) => ({
+export const updateInCollection = (id, recipe) => ({
   type: UPDATE_COLLECTION_ITEM,
   id,
-  title,
-  tags,
-  ingredients,
-  link,
+  recipe,
 });
 
 // Sagas
@@ -133,11 +127,11 @@ function* joinTags(tags) {
   );
 }
 
-function* createJoinedCollectionItem(payload) {
-  const { title, link } = payload;
+function* createJoinedCollectionItem({ recipe }) {
+  const { title, link } = recipe;
 
-  const ingredients = yield call(joinIngredients, payload.ingredients);
-  const tags = yield call(joinTags, payload.tags);
+  const ingredients = yield call(joinIngredients, recipe.ingredients);
+  const tags = yield call(joinTags, recipe.tags);
 
   yield put({
     type: ADD_JOINED_COLLECTION_ITEM,
@@ -148,11 +142,11 @@ function* createJoinedCollectionItem(payload) {
   });
 }
 
-function* updateJoinedCollectionItem(payload) {
-  const { id, title, link } = payload;
+function* updateJoinedCollectionItem({ id, recipe }) {
+  const { title, link } = recipe;
 
-  const ingredients = yield call(joinIngredients, payload.ingredients);
-  const tags = yield call(joinTags, payload.tags);
+  const ingredients = yield call(joinIngredients, recipe.ingredients);
+  const tags = yield call(joinTags, recipe.tags);
 
   yield put({
     type: UPDATE_JOINED_COLLECTION_ITEM,
