@@ -8,31 +8,16 @@ import Button from 'components/Button';
 import IngredientsList from 'components/IngredientsList';
 import COLORS from 'style/colors';
 
-class RecipesCollection extends React.Component {
-  static propTypes = {
-    collection: PropTypes.object.isRequired,
-    addItem: PropTypes.func,
-    editHref: PropTypes.string,
-    className: PropTypes.string,
-  };
-
-  static defaultProps = {
-    className: undefined,
-    addItem: () => undefined,
-    editHref: undefined,
-  };
-
-  onAddBtnClick = (event, id) => {
+const RecipesCollection = ({ addItem, collection, getEditHref, ...props }) => {
+  const onAddBtnClick = id => event => {
     event.stopPropagation();
-    this.props.addItem(id);
+    addItem(id);
   };
 
-  getEditHref = id => this.props.editHref.replace(':id', id);
-
-  render = () => (
-    <Accordion className={this.props.className}>
-      {this.props.collection.allIds.map(id => {
-        const item = this.props.collection.byId[id];
+  return (
+    <Accordion {...props}>
+      {collection.allIds.map(id => {
+        const item = collection.byId[id];
 
         return (
           <AccordionItem
@@ -44,7 +29,7 @@ class RecipesCollection extends React.Component {
                   <RecipeTags items={item.tags} />
                 </HeaderContent>
 
-                <AddButton color={COLORS.violet} isBlock onClick={e => this.onAddBtnClick(e, id)}>
+                <AddButton color={COLORS.violet} isBlock onClick={onAddBtnClick(id)}>
                   Ajouter
                 </AddButton>
               </Header>
@@ -56,7 +41,7 @@ class RecipesCollection extends React.Component {
               </IngredientCol>
 
               <EditButtonCol>
-                <Button color={COLORS.blue} isBlock href={this.getEditHref(id)}>
+                <Button color={COLORS.blue} isBlock href={getEditHref(id)}>
                   Modifier
                 </Button>
               </EditButtonCol>
@@ -66,7 +51,20 @@ class RecipesCollection extends React.Component {
       })}
     </Accordion>
   );
-}
+};
+
+RecipesCollection.propTypes = {
+  collection: PropTypes.object.isRequired,
+  addItem: PropTypes.func,
+  getEditHref: PropTypes.func,
+  className: PropTypes.string,
+};
+
+RecipesCollection.defaultProps = {
+  className: undefined,
+  addItem: () => undefined,
+  getEditHref: () => undefined,
+};
 
 export default RecipesCollection;
 

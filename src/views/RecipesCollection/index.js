@@ -19,7 +19,8 @@ const RecipesCollection = () => (
     </AddButton>
 
     <Count />
-    <Collection editHref={PATHS.RECIPES_EDIT} />
+
+    <Collection getEditHref={id => PATHS.RECIPES_EDIT.replace(':id', id)} />
   </React.Fragment>
 );
 
