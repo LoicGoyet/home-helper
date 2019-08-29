@@ -5,25 +5,25 @@ import styled from 'styled-components';
 import Card from 'components/Card';
 import COLORS from 'style/colors';
 
-const Task = ({ task, product, category, unit, toggleTask, style }) => {
+const Task = ({ task, onClick, style }) => {
   const themeVars = {
     '--text-decoration': task.done ? 'line-through' : 'initial',
     '--opacity': task.done ? 0.5 : 'initial',
     '--checkbox-bg-color': task.done ? 'currentColor' : COLORS.transparent,
     '--checkbox-opacity': task.done ? 0.5 : 'initial',
-    '--category-color': category.color,
+    '--category-color': task.product.category.color,
     ...style,
   };
 
-  const onClick = useCallback(() => toggleTask(task.id), [toggleTask, task.id]);
+  const onTaskClick = useCallback(() => onClick(task.id), [onClick, task.id]);
 
   return (
-    <Wrapper style={themeVars} onClick={onClick}>
+    <Wrapper style={themeVars} onClick={onTaskClick}>
       <FakeCheckbox style={themeVars} />
       <Label>
-        {product.title}
+        {task.product.title}
         <Quantity>
-          {task.quantity} {unit.title}
+          {task.quantity} {task.unit.title}
         </Quantity>
       </Label>
     </Wrapper>
@@ -32,16 +32,13 @@ const Task = ({ task, product, category, unit, toggleTask, style }) => {
 
 Task.propTypes = {
   task: PropTypes.object.isRequired,
-  product: PropTypes.object.isRequired,
-  category: PropTypes.object.isRequired,
-  unit: PropTypes.object.isRequired,
-  toggleTask: PropTypes.func,
+  onClick: PropTypes.func,
   style: PropTypes.object,
 };
 
 Task.defaultProps = {
   style: {},
-  toggleTask: () => undefined,
+  onClick: () => undefined,
 };
 
 export default React.memo(Task);

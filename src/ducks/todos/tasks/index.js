@@ -1,4 +1,12 @@
 import { takeEvery, put, all, call } from 'redux-saga/effects';
+import * as R from 'ramda';
+import {
+  sortTasksByDateDesc,
+  filterTasksByUndone,
+  reshapeTasksByCategories,
+  filterTasksByDone,
+  unfoldTasks,
+} from 'utils/tasks';
 
 import { generateId } from 'utils/redux';
 import { getProductId } from 'ducks/todos/products';
@@ -155,3 +163,27 @@ export function* tasksSaga() {
   yield takeEvery(ADD_TASK, createJoinedTask);
   yield takeEvery(ADD_JOINED_PANTRY_ENTRY, createdJoinedTaskFromPantry);
 }
+
+// Selectors
+
+export const selectors = {
+  getUndoneTasksByCategories: state => {
+    const { products, units, categories, tasks } = state.todos;
+
+    return R.compose(
+      reshapeTasksByCategories(products, units, categories),
+      sortTasksByDateDesc,
+      filterTasksByUndone
+    )(tasks);
+  },
+
+  getDoneTasks: state => {
+    const { products, units, categories, tasks } = state.todos;
+
+    return R.compose(
+      unfoldTasks(products, units, categories),
+      sortTasksByDateDesc,
+      filterTasksByDone
+    )(tasks);
+  },
+};

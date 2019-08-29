@@ -85,6 +85,10 @@ export const selectCategoryByTitle = title => state => {
   return categories.allIds.find(id => normalizeStr(categories.byId[id].title) === normalizeStr(title));
 };
 
+export const selectors = {
+  getCategories: state => state.todos.categories,
+};
+
 // Getter
 
 export function* getCategoryId(title) {

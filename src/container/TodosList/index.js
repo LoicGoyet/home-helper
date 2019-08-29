@@ -1,27 +1,27 @@
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import TodosList from 'components/TodosList';
-import * as todos from 'ducks/todos/tasks';
+import * as tasksDuck from 'ducks/todos/tasks';
+import * as categoriesDuck from 'ducks/todos/categories';
+import TodoList from 'components/TodoList';
 
-const mapStateToProps = state => {
-  const { tasks, products, categories, units } = state.todos;
+const TodosList = () => {
+  const dispatch = useDispatch();
+  const undoneTasksByCategories = useSelector(tasksDuck.selectors.getUndoneTasksByCategories);
+  const doneTasks = useSelector(tasksDuck.selectors.getDoneTasks);
+  const categories = useSelector(categoriesDuck.selectors.getCategories);
+  const toggleTask = useCallback(id => dispatch(tasksDuck.toggleTask(id)), [dispatch]);
 
-  return {
-    tasks,
-    products,
-    categories: {
-      ...categories,
-      allIds: categories.allIds.sort((a, b) => categories.byId[a].pos > categories.byId[b].pos),
-    },
-    units,
-  };
+  return (
+    <React.Fragment>
+      {undoneTasksByCategories.allIds.map(categoryId => {
+        const tasks = undoneTasksByCategories.byId[categoryId];
+        const category = categories.byId[categoryId];
+        return <TodoList key={categoryId} tasks={tasks} heading={category.title} onTaskClick={toggleTask} />;
+      })}
+      <TodoList tasks={doneTasks} onTaskClick={toggleTask} limit={5} />
+    </React.Fragment>
+  );
 };
 
-const mapDispatchToProps = dispatch => ({
-  toggleTask: id => dispatch(todos.toggleTask(id)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodosList);
+export default TodosList;
