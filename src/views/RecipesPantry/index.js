@@ -2,8 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
-import AvailableRecipesPantry from 'container/AvailableRecipesPantry';
-import UnavailableRecipesPantry from 'container/UnavailableRecipesPantry';
+import RecipesPantryContainer from 'container/RecipesPantry';
 import PantryCount from 'container/PantryCount';
 
 const RecipesPantry = () => (
@@ -22,11 +21,13 @@ const RecipesPantry = () => (
 
 export default RecipesPantry;
 
-const Available = styled(AvailableRecipesPantry)`
+const Available = styled(RecipesPantryContainer)`
   margin-bottom: 1rem;
 `;
 
-const Unavailable = styled(UnavailableRecipesPantry)`
+const Unavailable = styled(RecipesPantryContainer).attrs({
+  hasUnavailable: true,
+})`
   margin-bottom: 1rem;
 `;
 

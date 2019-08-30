@@ -7,13 +7,13 @@ import Tags from 'components/Tags';
 import CheckButton from 'components/CheckButton';
 import IngredientsList from 'components/IngredientsList';
 
-const RecipesCollection = ({ pantry, toggleItem, ...props }) => {
-  const onCheckboxChange = useCallback(
+const RecipesCollection = ({ pantry, onItemClick, ...props }) => {
+  const onCheckboxClick = useCallback(
     id => e => {
       e.stopPropagation();
-      return toggleItem(id);
+      return onItemClick(id);
     },
-    [toggleItem]
+    [onItemClick]
   );
 
   return (
@@ -34,7 +34,7 @@ const RecipesCollection = ({ pantry, toggleItem, ...props }) => {
                   <RecipeTags items={item.tags} />
                 </HeaderContent>
 
-                <PantryCheckbox isChecked={!item.available} onClick={onCheckboxChange(id)} />
+                <PantryCheckbox isChecked={!item.available} onClick={onCheckboxClick(id)} />
               </Header>
             )}
           >
@@ -48,13 +48,13 @@ const RecipesCollection = ({ pantry, toggleItem, ...props }) => {
 
 RecipesCollection.propTypes = {
   pantry: PropTypes.object.isRequired,
-  toggleItem: PropTypes.func,
+  onItemClick: PropTypes.func,
   className: PropTypes.string,
 };
 
 RecipesCollection.defaultProps = {
   className: undefined,
-  toggleItem: () => undefined,
+  onItemClick: () => undefined,
 };
 
 export default React.memo(RecipesCollection);
