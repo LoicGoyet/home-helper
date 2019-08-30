@@ -1,8 +1,9 @@
 import { select, put } from 'redux-saga/effects';
 
-import { strToColor } from '../../../utils/colors';
-import { generateId } from '../../../utils/redux';
-import { normalizeStr } from '../../../utils/strings';
+import { strToColor } from 'utils/colors';
+import { generateId } from 'utils/redux';
+import { sortCategoriesByAlphabetical } from 'utils/categories';
+import { normalizeStr } from 'utils/strings';
 
 export const ADD_CATEGORY = 'home-helper/todos/categories/ADD_CATEGORY';
 export const UPDATE_CATEGORY = 'home-helper/todos/categories/UPDATE_CATEGORY';
@@ -80,15 +81,19 @@ export const updateCategory = (id, title) => ({
 
 // Selector
 
-export const selectCategoryByTitle = title => state => {
-  const { categories } = state.todos;
-  return categories.allIds.find(id => normalizeStr(categories.byId[id].title) === normalizeStr(title));
+export const selectors = {
+  getCategories: state => state.todos.categories,
+  getCategoriesByAlphabetical: state => sortCategoriesByAlphabetical(state.todos.products),
+  getCategoryByTitle: title => state => {
+    const { categories } = state.todos;
+    return categories.allIds.find(id => normalizeStr(categories.byId[id].title) === normalizeStr(title));
+  },
 };
 
 // Getter
 
 export function* getCategoryId(title) {
-  let category = yield select(selectCategoryByTitle(title));
+  let category = yield select(selectors.getCategoryByTitle(title));
 
   if (category !== undefined) {
     return yield category;
@@ -99,6 +104,6 @@ export function* getCategoryId(title) {
     title,
   });
 
-  category = yield select(selectCategoryByTitle(title));
+  category = yield select(selectors.getCategoryByTitle(title));
   return yield category;
 }

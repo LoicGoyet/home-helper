@@ -1,56 +1,45 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Task from '../Task';
+import Task from '.';
 
-export const task = {
-  id: 0,
-  product: 0,
-  quantity: 4,
-  unit: 0,
+export default {
+  title: 'components|Task',
+};
+
+const task = {
+  id: 11,
+  product: {
+    id: 11,
+    title: 'Blanc de Poulet',
+    defaultUnit: 0,
+    category: { id: 5, title: 'Produits Frais', createdAt: 1535322753861, updatedAt: 1535322753861, color: '#4969c6' },
+    createdAt: 1535322753863,
+    updatedAt: 1535322753863,
+  },
+  quantity: 2,
+  unit: { id: 0, title: 'piece', createdAt: 1535322753835, updatedAt: 1535322753835 },
   done: false,
-  createdAt: 1535322753837,
-  updatedAt: 1535322753837,
+  createdAt: 1535322753864,
+  updatedAt: 1535322753864,
 };
 
-export const category = {
-  id: 0,
-  title: 'Boulangerie',
-  createdAt: 1535322753832,
-  updatedAt: 1535322753832,
-  color: '#1f6be0',
+export const story1 = () => <Task task={task} />;
+
+story1.story = {
+  name: 'default',
 };
 
-export const product = {
-  id: 0,
-  title: 'Croissants',
-  category: 0,
-  createdAt: 1535322753834,
-  updatedAt: 1535322753834,
-};
-
-export const unit = {
-  id: 0,
-  title: 'piece',
-  createdAt: 1535322753835,
-  updatedAt: 1535322753835,
-};
-
-const stories = storiesOf('Task', module);
-stories.add('default', () => <Task task={task} category={category} product={product} unit={unit} />);
-
-stories.add('Done task', () => (
+export const story2 = () => (
   <Task
     task={{
       ...task,
       done: true,
     }}
-    category={category}
-    product={product}
-    unit={unit}
     toggleTask={action('toggleTask')}
   />
-));
+);
 
-export default stories;
+story2.story = {
+  name: 'done task',
+};

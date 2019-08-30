@@ -1,0 +1,1624 @@
+{
+  "todos": {
+    "tasks": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "product": 0,
+          "quantity": 1,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597561,
+          "updatedAt": 1537129597561
+        },
+        "1": {
+          "id": 1,
+          "product": 1,
+          "quantity": 4,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597564,
+          "updatedAt": 1537129597564
+        },
+        "2": {
+          "id": 2,
+          "product": 2,
+          "quantity": 2,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597566,
+          "updatedAt": 1537129597566
+        },
+        "3": {
+          "id": 3,
+          "product": 3,
+          "quantity": 1,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597568,
+          "updatedAt": 1537129597568
+        },
+        "4": {
+          "id": 4,
+          "product": 4,
+          "quantity": 140,
+          "unit": 1,
+          "done": false,
+          "createdAt": 1537129597570,
+          "updatedAt": 1537129597570
+        },
+        "5": {
+          "id": 5,
+          "product": 5,
+          "quantity": 50,
+          "unit": 1,
+          "done": false,
+          "createdAt": 1537129597571,
+          "updatedAt": 1537129597571
+        },
+        "6": {
+          "id": 6,
+          "product": 6,
+          "quantity": 500,
+          "unit": 1,
+          "done": false,
+          "createdAt": 1537129597573,
+          "updatedAt": 1537129597573
+        },
+        "7": {
+          "id": 7,
+          "product": 7,
+          "quantity": 1,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597575,
+          "updatedAt": 1537129597575
+        },
+        "8": {
+          "id": 8,
+          "product": 8,
+          "quantity": 3,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597576,
+          "updatedAt": 1537129597576
+        },
+        "9": {
+          "id": 9,
+          "product": 9,
+          "quantity": 14,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597577,
+          "updatedAt": 1537129597577
+        },
+        "10": {
+          "id": 10,
+          "product": 10,
+          "quantity": 2,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597579,
+          "updatedAt": 1537129597579
+        },
+        "11": {
+          "id": 11,
+          "product": 11,
+          "quantity": 2,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597579,
+          "updatedAt": 1537129597579
+        },
+        "12": {
+          "id": 12,
+          "product": 12,
+          "quantity": 150,
+          "unit": 1,
+          "done": false,
+          "createdAt": 1537129597581,
+          "updatedAt": 1537129597581
+        },
+        "13": {
+          "id": 13,
+          "product": 14,
+          "quantity": 2,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597666,
+          "updatedAt": 1537129597666
+        },
+        "14": {
+          "id": 14,
+          "product": 13,
+          "quantity": 200,
+          "unit": 1,
+          "done": false,
+          "createdAt": 1537129597666,
+          "updatedAt": 1537129597666
+        },
+        "15": {
+          "id": 15,
+          "product": 15,
+          "quantity": 4,
+          "unit": 0,
+          "done": false,
+          "createdAt": 1537129597668,
+          "updatedAt": 1537129597669
+        },
+        "16": {
+          "id": 16,
+          "product": 16,
+          "quantity": 320,
+          "unit": 1,
+          "done": false,
+          "createdAt": 1537129597668,
+          "updatedAt": 1537129597669
+        }
+      },
+      "allIds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    },
+    "categories": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "title": "Boissons",
+          "pos": 0,
+          "color": "#f89f98",
+          "createdAt": 1537129597560,
+          "updatedAt": 1537129597560
+        },
+        "1": {
+          "id": 1,
+          "title": "Boulangerie",
+          "pos": 1,
+          "color": "#1f6be0",
+          "createdAt": 1537129597562,
+          "updatedAt": 1537129597562
+        },
+        "2": {
+          "id": 2,
+          "title": "Épicerie salée",
+          "pos": 2,
+          "color": "#845f85",
+          "createdAt": 1537129597569,
+          "updatedAt": 1537129597569
+        },
+        "3": {
+          "id": 3,
+          "title": "Épicerie sucrée",
+          "pos": 3,
+          "color": "#63a13a",
+          "createdAt": 1537129597572,
+          "updatedAt": 1537129597572
+        },
+        "4": {
+          "id": 4,
+          "title": "Fruits & légumes",
+          "pos": 4,
+          "color": "#75b406",
+          "createdAt": 1537129597574,
+          "updatedAt": 1537129597574
+        },
+        "5": {
+          "id": 5,
+          "title": "Produits frais",
+          "pos": 5,
+          "color": "#695989",
+          "createdAt": 1537129597577,
+          "updatedAt": 1537129597577
+        },
+        "6": {
+          "id": 6,
+          "title": "Poissonerie",
+          "pos": 6,
+          "color": "#72df9c",
+          "createdAt": 1537129597582,
+          "updatedAt": 1537129597582
+        },
+        "7": {
+          "id": 7,
+          "title": "Produits du monde",
+          "pos": 7,
+          "color": "#944fb9",
+          "createdAt": 1537129597659,
+          "updatedAt": 1537129597659
+        }
+      },
+      "allIds": [0, 1, 4, 6, 7, 5, 2, 3]
+    },
+    "products": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "title": "Jus d'Orange",
+          "category": 0,
+          "defaultUnit": 0,
+          "createdAt": 1537129597561,
+          "updatedAt": 1537129597561
+        },
+        "1": {
+          "id": 1,
+          "title": "Croissants",
+          "category": 1,
+          "defaultUnit": 0,
+          "createdAt": 1537129597563,
+          "updatedAt": 1537129597563
+        },
+        "2": {
+          "id": 2,
+          "title": "Coca-Cola Zero",
+          "category": 0,
+          "defaultUnit": 0,
+          "createdAt": 1537129597565,
+          "updatedAt": 1537129597565
+        },
+        "3": {
+          "id": 3,
+          "title": "Baguette",
+          "category": 1,
+          "defaultUnit": 0,
+          "createdAt": 1537129597568,
+          "updatedAt": 1537129597568
+        },
+        "4": {
+          "id": 4,
+          "title": "Thon en boîte",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597569,
+          "updatedAt": 1537129597569
+        },
+        "5": {
+          "id": 5,
+          "title": "Croûtons",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597571,
+          "updatedAt": 1537129597571
+        },
+        "6": {
+          "id": 6,
+          "title": "Céréales",
+          "category": 3,
+          "defaultUnit": 1,
+          "createdAt": 1537129597572,
+          "updatedAt": 1537129597572
+        },
+        "7": {
+          "id": 7,
+          "title": "Salade Batavia",
+          "category": 4,
+          "defaultUnit": 0,
+          "createdAt": 1537129597575,
+          "updatedAt": 1537129597575
+        },
+        "8": {
+          "id": 8,
+          "title": "Tomates",
+          "category": 4,
+          "defaultUnit": 0,
+          "createdAt": 1537129597576,
+          "updatedAt": 1537129597576
+        },
+        "9": {
+          "id": 9,
+          "title": "Pain de mie",
+          "category": 1,
+          "defaultUnit": 0,
+          "createdAt": 1537129597576,
+          "updatedAt": 1537129597576
+        },
+        "10": {
+          "id": 10,
+          "title": "Pizza industrielle",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597578,
+          "updatedAt": 1537129597578
+        },
+        "11": {
+          "id": 11,
+          "title": "Blanc de Poulet",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597579,
+          "updatedAt": 1537129597579
+        },
+        "12": {
+          "id": 12,
+          "title": "Émincés de Poulet",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597581,
+          "updatedAt": 1537129597581
+        },
+        "13": {
+          "id": 13,
+          "title": "Pomme de terre",
+          "category": 4,
+          "defaultUnit": 1,
+          "createdAt": 1537129597583,
+          "updatedAt": 1537129597583
+        },
+        "14": {
+          "id": 14,
+          "title": "Poisson pâné",
+          "category": 6,
+          "defaultUnit": 0,
+          "createdAt": 1537129597583,
+          "updatedAt": 1537129597583
+        },
+        "15": {
+          "id": 15,
+          "title": "Cordon bleu",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597586,
+          "updatedAt": 1537129597586
+        },
+        "16": {
+          "id": 16,
+          "title": "Pâtes",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597586,
+          "updatedAt": 1537129597586
+        },
+        "17": {
+          "id": 17,
+          "title": "Taboulé oriental",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597593,
+          "updatedAt": 1537129597593
+        },
+        "18": {
+          "id": 18,
+          "title": "Betteraves",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597593,
+          "updatedAt": 1537129597593
+        },
+        "19": {
+          "id": 19,
+          "title": "Quiche lorraine industrielle",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597596,
+          "updatedAt": 1537129597596
+        },
+        "20": {
+          "id": 20,
+          "title": "Baguette moulée",
+          "category": 1,
+          "defaultUnit": 0,
+          "createdAt": 1537129597600,
+          "updatedAt": 1537129597600
+        },
+        "21": {
+          "id": 21,
+          "title": "Madame Loïk",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597600,
+          "updatedAt": 1537129597600
+        },
+        "22": {
+          "id": 22,
+          "title": "Cheddar",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597600,
+          "updatedAt": 1537129597600
+        },
+        "23": {
+          "id": 23,
+          "title": "Salade",
+          "category": 4,
+          "defaultUnit": 0,
+          "createdAt": 1537129597600,
+          "updatedAt": 1537129597600
+        },
+        "24": {
+          "id": 24,
+          "title": "Dés de mozzarela",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597605,
+          "updatedAt": 1537129597605
+        },
+        "25": {
+          "id": 25,
+          "title": "Lasagnes au saumon industrielles",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597606,
+          "updatedAt": 1537129597606
+        },
+        "26": {
+          "id": 26,
+          "title": "Riz",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597609,
+          "updatedAt": 1537129597609
+        },
+        "27": {
+          "id": 27,
+          "title": "Mozzarella",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597609,
+          "updatedAt": 1537129597609
+        },
+        "28": {
+          "id": 28,
+          "title": "Crème fraîche",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597610,
+          "updatedAt": 1537129597610
+        },
+        "29": {
+          "id": 29,
+          "title": "Saumon",
+          "category": 5,
+          "defaultUnit": 2,
+          "createdAt": 1537129597610,
+          "updatedAt": 1537129597610
+        },
+        "30": {
+          "id": 30,
+          "title": "Nuggets de poulet",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597613,
+          "updatedAt": 1537129597613
+        },
+        "31": {
+          "id": 31,
+          "title": "Purée",
+          "category": 2,
+          "defaultUnit": 3,
+          "createdAt": 1537129597614,
+          "updatedAt": 1537129597614
+        },
+        "32": {
+          "id": 32,
+          "title": "Lait",
+          "category": 5,
+          "defaultUnit": 4,
+          "createdAt": 1537129597614,
+          "updatedAt": 1537129597614
+        },
+        "33": {
+          "id": 33,
+          "title": "Pâte feuilletée",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597616,
+          "updatedAt": 1537129597616
+        },
+        "34": {
+          "id": 34,
+          "title": "Jambon de dinde",
+          "category": 5,
+          "defaultUnit": 6,
+          "createdAt": 1537129597619,
+          "updatedAt": 1537129597619
+        },
+        "35": {
+          "id": 35,
+          "title": "Fromage en tranche",
+          "category": 5,
+          "defaultUnit": 6,
+          "createdAt": 1537129597619,
+          "updatedAt": 1537129597619
+        },
+        "36": {
+          "id": 36,
+          "title": "Steak hâché",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597623,
+          "updatedAt": 1537129597623
+        },
+        "37": {
+          "id": 37,
+          "title": "Jambon de poulet",
+          "category": 5,
+          "defaultUnit": 6,
+          "createdAt": 1537129597623,
+          "updatedAt": 1537129597623
+        },
+        "38": {
+          "id": 38,
+          "title": "Filet de poulet",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597634,
+          "updatedAt": 1537129597634
+        },
+        "39": {
+          "id": 39,
+          "title": "Farine",
+          "category": 3,
+          "defaultUnit": 1,
+          "createdAt": 1537129597634,
+          "updatedAt": 1537129597634
+        },
+        "40": {
+          "id": 40,
+          "title": "Paprika",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597634,
+          "updatedAt": 1537129597634
+        },
+        "41": {
+          "id": 41,
+          "title": "Oignon en poudre",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597635,
+          "updatedAt": 1537129597635
+        },
+        "42": {
+          "id": 42,
+          "title": "Ail en poudre",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597635,
+          "updatedAt": 1537129597635
+        },
+        "43": {
+          "id": 43,
+          "title": "Lait ribot",
+          "category": 5,
+          "defaultUnit": 4,
+          "createdAt": 1537129597635,
+          "updatedAt": 1537129597635
+        },
+        "44": {
+          "id": 44,
+          "title": "Levure chimique",
+          "category": 3,
+          "defaultUnit": 3,
+          "createdAt": 1537129597636,
+          "updatedAt": 1537129597636
+        },
+        "45": {
+          "id": 45,
+          "title": "Sucre en poudre",
+          "category": 3,
+          "defaultUnit": 1,
+          "createdAt": 1537129597636,
+          "updatedAt": 1537129597636
+        },
+        "46": {
+          "id": 46,
+          "title": "Oeufs",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597636,
+          "updatedAt": 1537129597636
+        },
+        "47": {
+          "id": 47,
+          "title": "Beurre",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597636,
+          "updatedAt": 1537129597636
+        },
+        "48": {
+          "id": 48,
+          "title": "Pâte à pizza rectangle",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597642,
+          "updatedAt": 1537129597642
+        },
+        "49": {
+          "id": 49,
+          "title": "Coulis de tomate",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597642,
+          "updatedAt": 1537129597642
+        },
+        "50": {
+          "id": 50,
+          "title": "Fromage râpé",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597642,
+          "updatedAt": 1537129597642
+        },
+        "51": {
+          "id": 51,
+          "title": "Macaroni",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597645,
+          "updatedAt": 1537129597645
+        },
+        "52": {
+          "id": 52,
+          "title": "Compté",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597645,
+          "updatedAt": 1537129597645
+        },
+        "53": {
+          "id": 53,
+          "title": "Parmesan",
+          "category": 5,
+          "defaultUnit": 1,
+          "createdAt": 1537129597646,
+          "updatedAt": 1537129597646
+        },
+        "54": {
+          "id": 54,
+          "title": "Sauce soja",
+          "category": 2,
+          "defaultUnit": 4,
+          "createdAt": 1537129597649,
+          "updatedAt": 1537129597649
+        },
+        "55": {
+          "id": 55,
+          "title": "Poivron",
+          "category": 4,
+          "defaultUnit": 0,
+          "createdAt": 1537129597649,
+          "updatedAt": 1537129597649
+        },
+        "56": {
+          "id": 56,
+          "title": "Cacahuètes",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597650,
+          "updatedAt": 1537129597650
+        },
+        "57": {
+          "id": 57,
+          "title": "Galettes de blé noir",
+          "category": 5,
+          "defaultUnit": 0,
+          "createdAt": 1537129597652,
+          "updatedAt": 1537129597652
+        },
+        "58": {
+          "id": 58,
+          "title": "Cidre",
+          "category": 0,
+          "defaultUnit": 7,
+          "createdAt": 1537129597653,
+          "updatedAt": 1537129597653
+        },
+        "59": {
+          "id": 59,
+          "title": "Kit Old el Paso",
+          "category": 7,
+          "defaultUnit": 8,
+          "createdAt": 1537129597659,
+          "updatedAt": 1537129597659
+        },
+        "60": {
+          "id": 60,
+          "title": "Huile d\"olive",
+          "category": 2,
+          "defaultUnit": 4,
+          "createdAt": 1537129597661,
+          "updatedAt": 1537129597661
+        },
+        "61": {
+          "id": 61,
+          "title": "La vache qui rit",
+          "category": 5,
+          "defaultUnit": 9,
+          "createdAt": 1537129597661,
+          "updatedAt": 1537129597661
+        },
+        "62": {
+          "id": 62,
+          "title": "Sauce pesto rouge",
+          "category": 2,
+          "defaultUnit": 1,
+          "createdAt": 1537129597663,
+          "updatedAt": 1537129597663
+        }
+      },
+      "allIds": [
+        42,
+        3,
+        20,
+        18,
+        47,
+        11,
+        56,
+        22,
+        58,
+        2,
+        52,
+        15,
+        49,
+        1,
+        5,
+        28,
+        6,
+        24,
+        39,
+        38,
+        35,
+        50,
+        57,
+        60,
+        34,
+        37,
+        0,
+        59,
+        61,
+        32,
+        43,
+        25,
+        44,
+        51,
+        21,
+        27,
+        30,
+        46,
+        41,
+        9,
+        40,
+        53,
+        10,
+        14,
+        55,
+        13,
+        31,
+        33,
+        48,
+        16,
+        19,
+        26,
+        23,
+        7,
+        62,
+        54,
+        29,
+        36,
+        45,
+        17,
+        4,
+        8,
+        12
+      ]
+    },
+    "units": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "title": "pièce(s)",
+          "createdAt": 1537129597557,
+          "updatedAt": 1537129597557
+        },
+        "1": {
+          "id": 1,
+          "title": "gramme(s)",
+          "createdAt": 1537129597568,
+          "updatedAt": 1537129597568
+        },
+        "2": {
+          "id": 2,
+          "title": "pavé(s)",
+          "createdAt": 1537129597608,
+          "updatedAt": 1537129597608
+        },
+        "3": {
+          "id": 3,
+          "title": "sachet(s)",
+          "createdAt": 1537129597612,
+          "updatedAt": 1537129597612
+        },
+        "4": {
+          "id": 4,
+          "title": "millilitre(s)",
+          "createdAt": 1537129597613,
+          "updatedAt": 1537129597613
+        },
+        "5": {
+          "id": 5,
+          "title": "boule(s)",
+          "createdAt": 1537129597616,
+          "updatedAt": 1537129597616
+        },
+        "6": {
+          "id": 6,
+          "title": "tranche(s)",
+          "createdAt": 1537129597619,
+          "updatedAt": 1537129597619
+        },
+        "7": {
+          "id": 7,
+          "title": "bouteille(s)",
+          "createdAt": 1537129597652,
+          "updatedAt": 1537129597652
+        },
+        "8": {
+          "id": 8,
+          "title": "boîte(s)",
+          "createdAt": 1537129597657,
+          "updatedAt": 1537129597657
+        },
+        "9": {
+          "id": 9,
+          "title": "portion(s)",
+          "createdAt": 1537129597660,
+          "updatedAt": 1537129597660
+        }
+      },
+      "allIds": [5, 7, 8, 1, 4, 2, 0, 9, 3, 6]
+    }
+  },
+  "recipes": {
+    "collection": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "title": "Fish & Chips",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 14,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 13,
+              "quantity": 200,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597586,
+          "updatedAt": 1537129597586,
+          "lastAddInPantry": 1537129597666
+        },
+        "1": {
+          "id": 1,
+          "title": "Cordon bleu & pâtes",
+          "tags": [0, 1],
+          "ingredients": [
+            {
+              "product": 15,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 16,
+              "quantity": 160,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597591,
+          "updatedAt": 1537129597591,
+          "lastAddInPantry": 1537129597670
+        },
+        "2": {
+          "id": 2,
+          "title": "Pizza industrielle",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 10,
+              "quantity": 1,
+              "unit": 0
+            }
+          ],
+          "createdAt": 1537129597591,
+          "updatedAt": 1537129597591,
+          "lastAddInPantry": 0
+        },
+        "3": {
+          "id": 3,
+          "title": "Taboulé & Betteraves",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 17,
+              "quantity": 300,
+              "unit": 1
+            },
+            {
+              "product": 18,
+              "quantity": 300,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597596,
+          "updatedAt": 1537129597596,
+          "lastAddInPantry": 0
+        },
+        "4": {
+          "id": 4,
+          "title": "Quiche lorraine industrielle",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 19,
+              "quantity": 400,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597597,
+          "updatedAt": 1537129597597,
+          "lastAddInPantry": 0
+        },
+        "5": {
+          "id": 5,
+          "title": "Tartines",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 20,
+              "quantity": 1,
+              "unit": 0
+            },
+            {
+              "product": 21,
+              "quantity": 320,
+              "unit": 1
+            },
+            {
+              "product": 22,
+              "quantity": 200,
+              "unit": 1
+            },
+            {
+              "product": 23,
+              "quantity": 0.2,
+              "unit": 0
+            },
+            {
+              "product": 8,
+              "quantity": 2,
+              "unit": 0
+            }
+          ],
+          "createdAt": 1537129597603,
+          "updatedAt": 1537129597603,
+          "lastAddInPantry": 0
+        },
+        "6": {
+          "id": 6,
+          "title": "Salade",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 23,
+              "quantity": 0.2,
+              "unit": 0
+            },
+            {
+              "product": 8,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 24,
+              "quantity": 200,
+              "unit": 1
+            },
+            {
+              "product": 5,
+              "quantity": 200,
+              "unit": 1
+            },
+            {
+              "product": 12,
+              "quantity": 150,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597605,
+          "updatedAt": 1537129597605,
+          "lastAddInPantry": 0
+        },
+        "7": {
+          "id": 7,
+          "title": "Lasagnes au saumon industrielles",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 25,
+              "quantity": 2,
+              "unit": 0
+            }
+          ],
+          "createdAt": 1537129597606,
+          "updatedAt": 1537129597606,
+          "lastAddInPantry": 0
+        },
+        "8": {
+          "id": 8,
+          "title": "Saumon tomates mozzarela",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 29,
+              "quantity": 2,
+              "unit": 2
+            },
+            {
+              "product": 26,
+              "quantity": 160,
+              "unit": 1
+            },
+            {
+              "product": 8,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 27,
+              "quantity": 125,
+              "unit": 1
+            },
+            {
+              "product": 28,
+              "quantity": 20,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597612,
+          "updatedAt": 1537129597612,
+          "lastAddInPantry": 0
+        },
+        "9": {
+          "id": 9,
+          "title": "Nuggets purée",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 30,
+              "quantity": 200,
+              "unit": 1
+            },
+            {
+              "product": 31,
+              "quantity": 1,
+              "unit": 3
+            },
+            {
+              "product": 32,
+              "quantity": 350,
+              "unit": 4
+            }
+          ],
+          "createdAt": 1537129597615,
+          "updatedAt": 1537129597615,
+          "lastAddInPantry": 0
+        },
+        "10": {
+          "id": 10,
+          "title": "Tarte aux Tomates & Mozzarella",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 33,
+              "quantity": 1,
+              "unit": 0
+            },
+            {
+              "product": 8,
+              "quantity": 4,
+              "unit": 0
+            },
+            {
+              "product": 27,
+              "quantity": 2,
+              "unit": 5
+            }
+          ],
+          "createdAt": 1537129597617,
+          "updatedAt": 1537129597617,
+          "lastAddInPantry": 0
+        },
+        "11": {
+          "id": 11,
+          "title": "Sandwich",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 9,
+              "quantity": 8,
+              "unit": 0
+            },
+            {
+              "product": 34,
+              "quantity": 4,
+              "unit": 6
+            },
+            {
+              "product": 35,
+              "quantity": 8,
+              "unit": 6
+            },
+            {
+              "product": 23,
+              "quantity": 0.25,
+              "unit": 0
+            },
+            {
+              "product": 8,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 4,
+              "quantity": 140,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597621,
+          "updatedAt": 1537129597621,
+          "lastAddInPantry": 0
+        },
+        "12": {
+          "id": 12,
+          "title": "Steak pâtes",
+          "tags": [1, 0],
+          "ingredients": [
+            {
+              "product": 36,
+              "quantity": 1,
+              "unit": 0
+            },
+            {
+              "product": 16,
+              "quantity": 160,
+              "unit": 1
+            },
+            {
+              "product": 4,
+              "quantity": 140,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597623,
+          "updatedAt": 1537129597623,
+          "lastAddInPantry": 0
+        },
+        "13": {
+          "id": 13,
+          "title": "Croque monsieur",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 9,
+              "quantity": 6,
+              "unit": 0
+            },
+            {
+              "product": 35,
+              "quantity": 6,
+              "unit": 6
+            },
+            {
+              "product": 37,
+              "quantity": 2,
+              "unit": 6
+            }
+          ],
+          "createdAt": 1537129597625,
+          "updatedAt": 1537129597625,
+          "lastAddInPantry": 0
+        },
+        "14": {
+          "id": 14,
+          "title": "Gauffre au poulet",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 38,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 39,
+              "quantity": 330,
+              "unit": 1
+            },
+            {
+              "product": 40,
+              "quantity": 10,
+              "unit": 1
+            },
+            {
+              "product": 41,
+              "quantity": 5,
+              "unit": 1
+            },
+            {
+              "product": 42,
+              "quantity": 5,
+              "unit": 1
+            },
+            {
+              "product": 43,
+              "quantity": 400,
+              "unit": 4
+            },
+            {
+              "product": 44,
+              "quantity": 1,
+              "unit": 3
+            },
+            {
+              "product": 45,
+              "quantity": 10,
+              "unit": 1
+            },
+            {
+              "product": 46,
+              "quantity": 3,
+              "unit": 0
+            },
+            {
+              "product": 47,
+              "quantity": 90,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597640,
+          "updatedAt": 1537129597640,
+          "lastAddInPantry": 0
+        },
+        "15": {
+          "id": 15,
+          "title": "Mini pizza muffins",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 48,
+              "quantity": 1,
+              "unit": 0
+            },
+            {
+              "product": 49,
+              "quantity": 200,
+              "unit": 1
+            },
+            {
+              "product": 50,
+              "quantity": 400,
+              "unit": 1
+            },
+            {
+              "product": 27,
+              "quantity": 1,
+              "unit": 5
+            }
+          ],
+          "createdAt": 1537129597644,
+          "updatedAt": 1537129597644,
+          "lastAddInPantry": 0
+        },
+        "16": {
+          "id": 16,
+          "title": "Macaroni au fromage",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 51,
+              "quantity": 180,
+              "unit": 1
+            },
+            {
+              "product": 47,
+              "quantity": 20,
+              "unit": 1
+            },
+            {
+              "product": 52,
+              "quantity": 100,
+              "unit": 1
+            },
+            {
+              "product": 53,
+              "quantity": 100,
+              "unit": 1
+            },
+            {
+              "product": 27,
+              "quantity": 1,
+              "unit": 5
+            },
+            {
+              "product": 28,
+              "quantity": 50,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597647,
+          "updatedAt": 1537129597647,
+          "lastAddInPantry": 0
+        },
+        "17": {
+          "id": 17,
+          "title": "Poulet Wok",
+          "tags": [1],
+          "ingredients": [
+            {
+              "product": 38,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 54,
+              "quantity": 100,
+              "unit": 4
+            },
+            {
+              "product": 55,
+              "quantity": 1,
+              "unit": 0
+            },
+            {
+              "product": 16,
+              "quantity": 160,
+              "unit": 1
+            },
+            {
+              "product": 56,
+              "quantity": 30,
+              "unit": 1
+            }
+          ],
+          "createdAt": 1537129597651,
+          "updatedAt": 1537129597651,
+          "lastAddInPantry": 0
+        },
+        "18": {
+          "id": 18,
+          "title": "Galettes",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 57,
+              "quantity": 3,
+              "unit": 0
+            },
+            {
+              "product": 50,
+              "quantity": 250,
+              "unit": 1
+            },
+            {
+              "product": 37,
+              "quantity": 1,
+              "unit": 6
+            },
+            {
+              "product": 58,
+              "quantity": 1,
+              "unit": 7
+            }
+          ],
+          "createdAt": 1537129597656,
+          "updatedAt": 1537129597656,
+          "lastAddInPantry": 0
+        },
+        "19": {
+          "id": 19,
+          "title": "Old el Paso",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 38,
+              "quantity": 400,
+              "unit": 1
+            },
+            {
+              "product": 23,
+              "quantity": 0.25,
+              "unit": 0
+            },
+            {
+              "product": 8,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 50,
+              "quantity": 250,
+              "unit": 1
+            },
+            {
+              "product": 28,
+              "quantity": 200,
+              "unit": 4
+            },
+            {
+              "product": 59,
+              "quantity": 1,
+              "unit": 8
+            }
+          ],
+          "createdAt": 1537129597660,
+          "updatedAt": 1537129597660,
+          "lastAddInPantry": 0
+        },
+        "20": {
+          "id": 20,
+          "title": "Quesadillas",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 39,
+              "quantity": 400,
+              "unit": 1
+            },
+            {
+              "product": 60,
+              "quantity": 50,
+              "unit": 4
+            },
+            {
+              "product": 22,
+              "quantity": 200,
+              "unit": 1
+            },
+            {
+              "product": 61,
+              "quantity": 12,
+              "unit": 9
+            }
+          ],
+          "createdAt": 1537129597663,
+          "updatedAt": 1537129597663,
+          "lastAddInPantry": 0
+        },
+        "21": {
+          "id": 21,
+          "title": "Pâtes sauce pesto",
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 16,
+              "quantity": 280,
+              "unit": 1
+            },
+            {
+              "product": 62,
+              "quantity": 100,
+              "unit": 1
+            },
+            {
+              "product": 55,
+              "quantity": 1,
+              "unit": 0
+            }
+          ],
+          "createdAt": 1537129597664,
+          "updatedAt": 1537129597664,
+          "lastAddInPantry": 0
+        }
+      },
+      "allIds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    "pantry": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "title": "Fish & Chips",
+          "available": true,
+          "tags": [0],
+          "ingredients": [
+            {
+              "product": 14,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 13,
+              "quantity": 200,
+              "unit": 1
+            }
+          ],
+          "collectionItem": 0,
+          "createdAt": 1537129597665,
+          "updatedAt": 1537129597665
+        },
+        "1": {
+          "id": 1,
+          "title": "Cordon bleu & pâtes",
+          "available": true,
+          "tags": [0, 1],
+          "ingredients": [
+            {
+              "product": 15,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 16,
+              "quantity": 160,
+              "unit": 1
+            }
+          ],
+          "collectionItem": 1,
+          "createdAt": 1537129597668,
+          "updatedAt": 1537129597668
+        },
+        "2": {
+          "id": 2,
+          "title": "Cordon bleu & pâtes",
+          "available": true,
+          "tags": [0, 1],
+          "ingredients": [
+            {
+              "product": 15,
+              "quantity": 2,
+              "unit": 0
+            },
+            {
+              "product": 16,
+              "quantity": 160,
+              "unit": 1
+            }
+          ],
+          "collectionItem": 1,
+          "createdAt": 1537129597669,
+          "updatedAt": 1537129597669
+        }
+      },
+      "allIds": [0, 1, 2]
+    },
+    "tags": {
+      "byId": {
+        "0": {
+          "id": 0,
+          "title": "maison",
+          "createdAt": 1537129597585,
+          "updatedAt": 1537129597585
+        },
+        "1": {
+          "id": 1,
+          "title": "bento",
+          "createdAt": 1537129597590,
+          "updatedAt": 1537129597590
+        }
+      },
+      "allIds": [0, 1]
+    }
+  }
+}

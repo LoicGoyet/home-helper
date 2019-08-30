@@ -1,9 +1,17 @@
 import { takeEvery, put, all, call } from 'redux-saga/effects';
+import * as R from 'ramda';
+import {
+  sortTasksByDateDesc,
+  filterTasksByUndone,
+  reshapeTasksByCategories,
+  filterTasksByDone,
+  unfoldTasks,
+} from 'utils/tasks';
 
-import { generateId } from '../../../utils/redux';
-import { getProductId } from '../products';
-import { getUnitId } from '../units';
-import { ADD_JOINED_PANTRY_ENTRY } from '../../recipes/pantry';
+import { generateId } from 'utils/redux';
+import { getProductId } from 'ducks/todos/products';
+import { getUnitId } from 'ducks/todos/units';
+import { ADD_JOINED_PANTRY_ENTRY } from 'ducks/recipes/pantry';
 
 // Actions
 export const ADD_TASK = 'home-helper/todos/tasks/ADD_TASK';
@@ -155,3 +163,27 @@ export function* tasksSaga() {
   yield takeEvery(ADD_TASK, createJoinedTask);
   yield takeEvery(ADD_JOINED_PANTRY_ENTRY, createdJoinedTaskFromPantry);
 }
+
+// Selectors
+
+export const selectors = {
+  getUndoneTasksByCategories: state => {
+    const { products, units, categories, tasks } = state.todos;
+
+    return R.compose(
+      reshapeTasksByCategories(products, units, categories),
+      sortTasksByDateDesc,
+      filterTasksByUndone
+    )(tasks);
+  },
+
+  getDoneTasks: state => {
+    const { products, units, categories, tasks } = state.todos;
+
+    return R.compose(
+      unfoldTasks(products, units, categories),
+      sortTasksByDateDesc,
+      filterTasksByDone
+    )(tasks);
+  },
+};

@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
 
-import rootReducer, { rootStateSaga } from './root';
-import { todosSaga } from './todos';
-import { recipesSaga } from './recipes';
+import rootReducer, { rootStateSaga } from 'ducks/root';
+import { todosSaga } from 'ducks/todos';
+import { recipesSaga } from 'ducks/recipes';
 
 export default rootReducer;
 

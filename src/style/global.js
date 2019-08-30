@@ -1,19 +1,17 @@
-import { injectGlobal } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
-import COLORS from './colors';
+import COLORS from 'style/colors';
 
-injectGlobal`
-  @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
-
+export default createGlobalStyle`
   html {
     font-size: 16px;
   }
 
   body {
-      margin: 0;
-      font-family: 'Roboto', sans-serif;
-      background-color: ${COLORS.violet};
-      color: ${COLORS.white};
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    background-color: ${COLORS.violet};
+    color: ${COLORS.white};
   }
 
   *,

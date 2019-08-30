@@ -1,19 +1,21 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
-import { withBackgrounds } from '@storybook/addon-backgrounds';
 
-import Card from '../Card';
+import Card from 'components/Card';
 
-const stories = storiesOf('Card', module);
-stories.addDecorator(withBackgrounds([{ name: 'purple', value: '#140A43', default: true }]));
-stories.add('default', () => (
+export default {
+  title: 'components|Card',
+};
+
+export const story1 = () => (
   <Card>
     {text(
       'content',
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum doloribus, dolorum, molestias voluptas numquam corrupti iure, obcaecati eos eum iusto accusamus voluptates blanditiis. Quidem vel, quasi voluptatem nostrum sapiente cum.'
     )}
   </Card>
-));
+);
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

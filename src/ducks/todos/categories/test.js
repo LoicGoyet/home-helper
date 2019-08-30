@@ -1,5 +1,11 @@
-import reducer, { defaultState, addCategory, updateCategory, ADD_CATEGORY, UPDATE_CATEGORY } from './index';
-import { strToColor } from '../../../utils/colors';
+import reducer, {
+  defaultState,
+  addCategory,
+  updateCategory,
+  ADD_CATEGORY,
+  UPDATE_CATEGORY,
+} from 'ducks/todos/categories';
+import { strToColor } from 'utils/colors';
 
 Date.now = jest.fn(() => 1534598990000);
 

@@ -4,8 +4,8 @@ import ExtraPropTypes from 'react-extra-prop-types';
 import styled from 'styled-components';
 import { MdCheck } from 'react-icons/lib/md';
 
-import COLORS from '../../style/colors';
-import { getContrastYIQ, alpha } from '../../utils/colors';
+import COLORS from 'style/colors';
+import { getContrastYIQ, alpha } from 'utils/colors';
 
 const CheckButton = props => (
   <Element {...props} style={getThemeVars(props)}>
@@ -25,12 +25,12 @@ CheckButton.defaultProps = {
   color: '#140A43',
 };
 
-export default CheckButton;
+export default React.memo(CheckButton);
 
 const getThemeVars = ({ isChecked, color }) => ({
   '--size': '1rem',
   '--border-color': color,
-  '--color': isChecked ? getContrastYIQ(color) : color,
+  '--color': isChecked ? getContrastYIQ(color) : COLORS.transparent,
   '--bg-color': isChecked ? color : COLORS.transparent,
   '--box-shadow--focus': `0 0 0 4px ${alpha(color, 0.4)}`,
 });
@@ -48,6 +48,7 @@ const Element = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  position: relative;
 
   &:focus {
     outline-width: 0;

@@ -1,5 +1,4 @@
 export default {
-  HOME: '/',
   TODOS: '/todos',
   RECIPES_LIST: '/recipes/list',
   RECIPES_ADD: '/recipes/add',

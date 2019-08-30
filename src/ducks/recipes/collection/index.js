@@ -1,11 +1,13 @@
+import * as R from 'ramda';
 // Actions
 import { takeEvery, put, all, call } from 'redux-saga/effects';
 
-import { getProductId } from '../../todos/products';
-import { getUnitId } from '../../todos/units';
-import { getTagId } from '../../recipes/tags';
-import { generateId } from '../../../utils/redux';
-import { ADD_JOINED_PANTRY_ENTRY } from '../pantry';
+import { getProductId } from 'ducks/todos/products';
+import { getUnitId } from 'ducks/todos/units';
+import { getTagId } from 'ducks/recipes/tags';
+import { generateId } from 'utils/redux';
+import { ADD_JOINED_PANTRY_ENTRY } from 'ducks/recipes/pantry';
+import { sortPantryByDateDesc, unfoldPantry } from 'utils/pantry';
 
 export const ADD_COLLECTION_ITEM = 'home-helper/recipes/collection/ADD_COLLECTION_ITEM';
 export const UPDATE_COLLECTION_ITEM = 'home-helper/recipes/collection/UPDATE_COLLECTION_ITEM';
@@ -90,22 +92,46 @@ export default reducer;
 
 // Action Creators
 
-export const addInCollection = (title, tags, ingredients, link) => ({
+export const addInCollection = recipe => ({
   type: ADD_COLLECTION_ITEM,
-  title,
-  tags,
-  ingredients,
-  link,
+  recipe,
 });
 
-export const updateInCollection = (id, title, tags, ingredients, link) => ({
+export const updateInCollection = (id, recipe) => ({
   type: UPDATE_COLLECTION_ITEM,
   id,
-  title,
-  tags,
-  ingredients,
-  link,
+  recipe,
 });
+
+// selectors
+
+export const selectors = {
+  getRecipeById: id => state => R.path(['recipes', 'collection', 'byId', id], state),
+  getIngredientsWithTitles: id => state => {
+    const recipe = R.path(['recipes', 'collection', 'byId', id], state);
+    const ingredients = R.prop('ingredients', recipe) || [];
+
+    return ingredients.map(ingredient => {
+      const category = R.path(['byId', ingredient.product, 'category'], state.todos.products);
+
+      return {
+        quantity: ingredient.quantity,
+        productTitle: R.path(['byId', ingredient.product, 'title'], state.todos.products),
+        unitTitle: R.path(['byId', ingredient.unit, 'title'], state.todos.units),
+        categoryTitle: R.path(['byId', category, 'title'], state.todos.categories),
+      };
+    });
+  },
+  getRecipes: state => {
+    const { collection, tags } = state.recipes;
+    const { products, units } = state.todos;
+
+    return R.compose(
+      unfoldPantry(tags, products, units),
+      sortPantryByDateDesc
+    )(collection);
+  },
+};
 
 // Sagas
 
@@ -133,11 +159,11 @@ function* joinTags(tags) {
   );
 }
 
-function* createJoinedCollectionItem(payload) {
-  const { title, link } = payload;
+function* createJoinedCollectionItem({ recipe }) {
+  const { title, link } = recipe;
 
-  const ingredients = yield call(joinIngredients, payload.ingredients);
-  const tags = yield call(joinTags, payload.tags);
+  const ingredients = yield call(joinIngredients, recipe.ingredients);
+  const tags = yield call(joinTags, recipe.tags);
 
   yield put({
     type: ADD_JOINED_COLLECTION_ITEM,
@@ -148,11 +174,11 @@ function* createJoinedCollectionItem(payload) {
   });
 }
 
-function* updateJoinedCollectionItem(payload) {
-  const { id, title, link } = payload;
+function* updateJoinedCollectionItem({ id, recipe }) {
+  const { title, link } = recipe;
 
-  const ingredients = yield call(joinIngredients, payload.ingredients);
-  const tags = yield call(joinTags, payload.tags);
+  const ingredients = yield call(joinIngredients, recipe.ingredients);
+  const tags = yield call(joinTags, recipe.tags);
 
   yield put({
     type: UPDATE_JOINED_COLLECTION_ITEM,

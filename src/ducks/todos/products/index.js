@@ -1,8 +1,9 @@
 import { takeEvery, select, put, take, call } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
-import { normalizeStr } from '../../../utils/strings';
-import { getCategoryId } from '../categories';
+import { generateId } from 'utils/redux';
+import { normalizeStr } from 'utils/strings';
+import { sortProductsByAlphabetical } from 'utils/products';
+import { getCategoryId } from 'ducks/todos/categories';
 
 export const ADD_PRODUCT = 'home-helper/todos/products/ADD_PRODUCT';
 export const ADD_PRODUCT_JOINED = 'home-helper/todos/products/ADD_PRODUCT_JOINED';
@@ -121,15 +122,18 @@ export function* productsSaga() {
 
 // Selectors
 
-export const selectProductByTitle = title => state => {
-  const { products } = state.todos;
-  return products.allIds.find(id => normalizeStr(products.byId[id].title) === normalizeStr(title));
+export const selectors = {
+  getProductsByAlphabetical: state => sortProductsByAlphabetical(state.todos.products),
+  getProductByTitle: title => state => {
+    const { products } = state.todos;
+    return products.allIds.find(id => normalizeStr(products.byId[id].title) === normalizeStr(title));
+  },
 };
 
 // Getters
 
 export function* getProductId(productTitle, categoryTitle, unit) {
-  let product = yield select(selectProductByTitle(productTitle));
+  let product = yield select(selectors.getProductByTitle(productTitle));
 
   if (product !== undefined) {
     return yield product;
@@ -152,6 +156,6 @@ export function* getProductId(productTitle, categoryTitle, unit) {
     type: GHOST_ACTION,
   });
 
-  product = yield select(selectProductByTitle(productTitle));
+  product = yield select(selectors.getProductByTitle(productTitle));
   return yield product;
 }

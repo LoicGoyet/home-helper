@@ -1,7 +1,15 @@
+import * as R from 'ramda';
 // Actions
 import { takeEvery, put, select } from 'redux-saga/effects';
 
-import { generateId } from '../../../utils/redux';
+import { generateId } from 'utils/redux';
+import {
+  filterPantryByAvailable,
+  filterPantryByUnavailable,
+  sortPantryByDateDesc,
+  unfoldPantry,
+  getPantryCounts,
+} from 'utils/pantry';
 
 export const ADD_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_PANTRY_ENTRY';
 export const ADD_JOINED_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_JOINED_PANTRY_ENTRY';
@@ -75,6 +83,35 @@ export const togglePantryEntry = id => ({
   type: TOGGLE_PANTRY_ENTRY,
   id,
 });
+
+// Selectors
+
+export const selectors = {
+  getAvailablePantry: state => {
+    const { pantry, tags } = state.recipes;
+    const { products, units } = state.todos;
+
+    return R.compose(
+      unfoldPantry(tags, products, units),
+      sortPantryByDateDesc,
+      filterPantryByAvailable
+    )(pantry);
+  },
+  getUnavailablePantry: state => {
+    const { pantry, tags } = state.recipes;
+    const { products, units } = state.todos;
+
+    return R.compose(
+      unfoldPantry(tags, products, units),
+      sortPantryByDateDesc,
+      filterPantryByUnavailable
+    )(pantry);
+  },
+  getCounts: state => {
+    const { pantry, tags } = state.recipes;
+    return getPantryCounts(tags)(pantry);
+  },
+};
 
 // Sagas
 

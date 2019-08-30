@@ -1,12 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs } from '@storybook/addon-knobs';
 
-import Tags from '../Tags';
+import Tags from 'components/Tags';
 
-const stories = storiesOf('Tags', module);
-stories.addDecorator(withKnobs);
-stories.add('default', () => (
+export default {
+  title: 'components|Tags',
+};
+
+export const story1 = () => (
   <Tags
     items={[
       {
@@ -23,6 +23,8 @@ stories.add('default', () => (
       },
     ]}
   />
-));
+);
 
-export default stories;
+story1.story = {
+  name: 'default',
+};

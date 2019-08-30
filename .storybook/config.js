@@ -1,34 +1,39 @@
-import { configure, addDecorator } from '@storybook/react';
+import React from 'react';
+import { configure, addDecorator, addParameters } from '@storybook/react';
+import { createGlobalStyle } from 'styled-components';
 import '@storybook/addon-console';
-import { checkA11y } from '@storybook/addon-a11y';
-import { withBackgrounds } from "@storybook/addon-backgrounds";
+import { withA11y } from '@storybook/addon-a11y';
 import { withKnobs } from '@storybook/addon-knobs';
-import { injectGlobal } from 'styled-components';
 
-import COLORS from '../src/style/colors';
+import Theme from '../src/style/theme';
+import GlobalStyle from '../src/style/global';
 
-import '../src/style/global';
-
-// automatically import all files ending in *.stories.js
-const req = require.context('../src/', true, /\**\/stories\.js$/);
-function loadStories() {
-  req.keys().forEach(filename => req(filename));
-}
-
-injectGlobal`
+const StorybookGlobalStyle = createGlobalStyle`
   body {
     padding: 1rem;
-    color: ${COLORS.white};
+    color: ${props => props.theme.colors.white};
     background-color: initial;
   }
 `;
 
-addDecorator(withBackgrounds([
+addDecorator(storyFn => (
+  <Theme>
+    <React.Fragment>
+      <StorybookGlobalStyle />
+      <GlobalStyle />
+      {storyFn()}
+    </React.Fragment>
+  </Theme>
+));
+
+addParameters({ backgrounds: [
   { name: "white", value: "#ffffff" },
   { name: "purple", value: "#140A43", default: true },
-]));
+]});
 
-addDecorator(checkA11y)
+
+addDecorator(withA11y)
 addDecorator(withKnobs)
 
-configure(loadStories, module);
+// automatically import all files ending in *.stories.js
+configure(require.context('../src/', true, /\**\/stories\.js$/), module);

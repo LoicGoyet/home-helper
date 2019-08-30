@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Input from '../Input';
-
-const FormGroup = ({ help, id, label, pattern, placeholder, required, type, ...props }) => (
-  <Wrapper htmlFor={id}>
+const FormGroup = ({ help, label, children, ...props }) => (
+  <Wrapper {...props}>
     <Label>{label}</Label>
-    <Input type={type} id={id} name={id} required={required} placeholder={placeholder} pattern={pattern} {...props} />
-    {help !== undefined && <Help>{help}</Help>}
+    {children}
+    {!!help && <Help>{help}</Help>}
   </Wrapper>
 );
 
@@ -16,22 +14,17 @@ FormGroup.propTypes = {
   help: PropTypes.string,
   id: PropTypes.string,
   label: PropTypes.string.isRequired,
-  pattern: PropTypes.string,
-  placeholder: PropTypes.string,
-  required: PropTypes.bool,
   type: PropTypes.oneOf(['date', 'email', 'number', 'password', 'text', 'time']),
+  children: PropTypes.any.isRequired,
 };
 
 FormGroup.defaultProps = {
   id: undefined,
   help: undefined,
-  pattern: undefined,
-  placeholder: undefined,
-  required: false,
   type: 'text',
 };
 
-export default FormGroup;
+export default React.memo(FormGroup);
 
 const Wrapper = styled.label`
   display: block;
@@ -43,7 +36,7 @@ const Label = styled.span`
   margin-bottom: 0.25rem;
 `;
 
-const Help = styled.p`
+const Help = styled.span`
   margin: 0.5rem 0 0;
   font-size: 0.75em;
   font-style: italic;
