@@ -1,18 +1,18 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectors as productsSelectors } from 'ducks/todos/products';
-import { selectors as categoriesSelectors } from 'ducks/todos/categories';
-import { selectors as unitsSelectors } from 'ducks/todos/units';
+import * as productsDuck from 'ducks/todos/products';
+import * as categoriesDuck from 'ducks/todos/categories';
+import * as unitsDuck from 'ducks/todos/units';
 
 export const TODOS_CATEGORIES_SUGGESTIONS = 'category-suggestions';
 export const TODOS_PRODUCTS_SUGGESTIONS = 'title-suggestions';
 export const TODOS_UNITS_SUGGESTIONS = 'units-suggestions';
 
 const SuggestionsLists = () => {
-  const products = useSelector(productsSelectors.getProductsByAlphabetical);
-  const categories = useSelector(categoriesSelectors.getCategoriesByAlphabetical);
-  const units = useSelector(unitsSelectors.getUnitsByAlphabetical);
+  const products = useSelector(productsDuck.selectors.getProductsByAlphabetical);
+  const categories = useSelector(categoriesDuck.selectors.getCategoriesByAlphabetical);
+  const units = useSelector(unitsDuck.selectors.getUnitsByAlphabetical);
 
   return (
     <React.Fragment>

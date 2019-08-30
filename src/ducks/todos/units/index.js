@@ -77,19 +77,18 @@ export const setUnitTitle = (id, title) => ({
 
 // Selectors
 
-export const selectUnitByTitle = title => state => {
-  const { units } = state.todos;
-  return units.allIds.find(id => units.byId[id].title === title);
-};
-
 export const selectors = {
   getUnitsByAlphabetical: state => sortUnitsByAlphabetical(state.todos.products),
+  getUnitByTitle: title => state => {
+    const { units } = state.todos;
+    return units.allIds.find(id => units.byId[id].title === title);
+  },
 };
 
 // Getters
 
 export function* getUnitId(title) {
-  let unit = yield select(selectUnitByTitle(title));
+  let unit = yield select(selectors.getUnitByTitle(title));
   if (unit !== undefined) {
     return yield unit;
   }
@@ -99,6 +98,6 @@ export function* getUnitId(title) {
     title,
   });
 
-  unit = yield select(selectUnitByTitle(title));
+  unit = yield select(selectors.getUnitByTitle(title));
   return yield unit;
 }

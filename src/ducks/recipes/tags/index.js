@@ -52,20 +52,19 @@ export const addTag = title => ({
 
 // Selectors
 
-export const selectTagByTitle = title => state => {
-  const { tags } = state.recipes;
-  return tags.allIds.find(id => normalizeStr(tags.byId[id].title) === normalizeStr(title));
-};
-
 export const selectors = {
   getTagsTitleByIds: (tagsIds = []) => state =>
     tagsIds.map(tagId => R.path(['recipes', 'tags', 'byId', tagId, 'title'], state)),
+  getTagByTitle: title => state => {
+    const { tags } = state.recipes;
+    return tags.allIds.find(id => normalizeStr(tags.byId[id].title) === normalizeStr(title));
+  },
 };
 
 // Getters
 
 export function* getTagId(title) {
-  let tag = yield select(selectTagByTitle(title));
+  let tag = yield select(selectors.getTagByTitle(title));
   if (tag !== undefined) {
     return yield tag;
   }
@@ -75,6 +74,6 @@ export function* getTagId(title) {
     title,
   });
 
-  tag = yield select(selectTagByTitle(title));
+  tag = yield select(selectors.getTagByTitle(title));
   return yield tag;
 }

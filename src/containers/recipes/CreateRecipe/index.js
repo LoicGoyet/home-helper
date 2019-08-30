@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import RecipeForm from 'containers/recipes/RecipeForm';
-import * as recipes from 'ducks/recipes/collection';
+import * as collectionDuck from 'ducks/recipes/collection';
 import PATHS from 'router/paths';
 
 const Container = ({ redirectTo }) => {
@@ -14,7 +14,7 @@ const Container = ({ redirectTo }) => {
 
   const onSubmit = useCallback(
     recipe => {
-      dispatch(recipes.addInCollection(recipe));
+      dispatch(collectionDuck.addInCollection(recipe));
       setHasToRedirect(true);
     },
     [dispatch, setHasToRedirect]

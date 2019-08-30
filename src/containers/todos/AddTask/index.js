@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import AddTaskComponent from 'containers/todos/AddTask/component';
 import { useAutoCategory, useAutoQuantityUnit } from 'containers/hooks';
-import * as todos from 'ducks/todos/tasks';
+import * as todosDuck from 'ducks/todos/tasks';
 
 const initialState = {
   fields: {
@@ -124,7 +124,7 @@ const AddTask = props => {
   const onSubmit = useCallback(
     () => {
       const { product, category, quantity, quantityUnit } = state.fields;
-      return dispatch(todos.addTask(product, category, quantity, quantityUnit));
+      return dispatch(todosDuck.addTask(product, category, quantity, quantityUnit));
     },
     [dispatch, state.fields]
   );
