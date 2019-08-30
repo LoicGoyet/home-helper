@@ -2,10 +2,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { withReduxProvider } from 'storybook/decorators';
-import RecipeForm from 'containers/RecipeForm';
+import RecipeForm from 'containers/recipes/RecipeForm';
 
 export default {
-  title: 'Containers|RecipeForm',
+  title: 'Containers|recipes/RecipeForm',
   decorators: [withReduxProvider],
 };
 

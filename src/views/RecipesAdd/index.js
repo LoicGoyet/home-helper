@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaArrowLeft } from 'react-icons/lib/fa';
 import Helmet from 'react-helmet';
 
-import CreateRecipe from 'containers/CreateRecipe';
+import CreateRecipe from 'containers/recipes/CreateRecipe';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import PATHS from 'router/paths';

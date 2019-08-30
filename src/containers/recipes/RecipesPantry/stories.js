@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { withReduxProvider } from 'storybook/decorators';
-import RecipesPantry from 'containers/RecipesPantry';
+import RecipesPantry from 'containers/recipes/RecipesPantry';
 
 export default {
-  title: 'Containers|RecipesPantry',
+  title: 'Containers|recipes/RecipesPantry',
   decorators: [withReduxProvider],
 };
 

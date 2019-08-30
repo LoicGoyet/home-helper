@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import RecipeForm from 'containers/RecipeForm';
+import RecipeForm from 'containers/recipes/RecipeForm';
 import * as recipes from 'ducks/recipes/collection';
 import PATHS from 'router/paths';
 

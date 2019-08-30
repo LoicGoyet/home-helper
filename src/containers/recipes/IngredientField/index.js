@@ -10,7 +10,7 @@ import {
   TODOS_CATEGORIES_SUGGESTIONS,
   TODOS_PRODUCTS_SUGGESTIONS,
   TODOS_UNITS_SUGGESTIONS,
-} from 'containers/SuggestionsLists';
+} from 'containers/todos/SuggestionsLists';
 
 const IngredientField = ({ values, onChange, children, ...props }) => {
   const getAutoCategory = useAutoCategory();

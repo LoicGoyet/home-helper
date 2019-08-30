@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import PantryCountComponent from 'containers/PantryCount/component';
+import PantryCountComponent from 'containers/recipes/PantryCount/component';
 import { selectors } from 'ducks/recipes/pantry';
 
 const PantryCountContainer = () => {

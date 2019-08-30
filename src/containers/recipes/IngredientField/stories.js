@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { withReduxProvider } from 'storybook/decorators';
-import IngredientField from 'containers/IngredientField';
+import IngredientField from 'containers/recipes/IngredientField';
 import Button from 'components/Button';
 
 export default {
-  title: 'Containers|IngredientField',
+  title: 'Containers|recipes/IngredientField',
   decorators: [withReduxProvider],
 };
 

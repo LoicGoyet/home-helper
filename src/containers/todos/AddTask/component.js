@@ -11,7 +11,7 @@ import {
   TODOS_CATEGORIES_SUGGESTIONS,
   TODOS_PRODUCTS_SUGGESTIONS,
   TODOS_UNITS_SUGGESTIONS,
-} from 'containers/SuggestionsLists';
+} from 'containers/todos/SuggestionsLists';
 
 const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, activeStep, ...props }) => {
   const productInput = useRef();

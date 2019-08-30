@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
 import Container from 'components/Container';
-import RecipesPantryContainer from 'containers/RecipesPantry';
-import PantryCount from 'containers/PantryCount';
+import RecipesPantryContainer from 'containers/recipes/RecipesPantry';
+import PantryCount from 'containers/recipes/PantryCount';
 
 const RecipesPantry = () => (
   <React.Fragment>

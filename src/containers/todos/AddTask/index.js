@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 
-import AddTaskComponent from 'containers/AddTask/component';
+import AddTaskComponent from 'containers/todos/AddTask/component';
 import { useAutoCategory, useAutoQuantityUnit } from 'containers/hooks';
 import * as todos from 'ducks/todos/tasks';
 

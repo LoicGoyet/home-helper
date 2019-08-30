@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import FormGroup from 'components/FormGroup';
 import Input from 'components/Input';
 import Button from 'components/Button';
-import IngredientField from 'containers/IngredientField';
+import IngredientField from 'containers/recipes/IngredientField';
 import COLORS, { THEMES } from 'style/colors';
 import { alpha } from 'utils/colors';
 

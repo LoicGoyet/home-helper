@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { withReduxProvider } from 'storybook/decorators';
-import CreateRecipe from 'containers/CreateRecipe';
+import AddTask from 'containers/todos/AddTask';
 
 export default {
-  title: 'Containers|CreateRecipe',
+  title: 'Containers|todos/AddTask',
   decorators: [withReduxProvider],
 };
 
-export const story1 = () => <CreateRecipe />;
+export const story1 = () => <AddTask />;
 
 story1.story = {
   name: 'default',

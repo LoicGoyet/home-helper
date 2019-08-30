@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import store from '../src/store';
-import SuggestionsLists from 'containers/SuggestionsLists';
+import SuggestionsLists from 'containers/todos/SuggestionsLists';
 
 export const withReduxProvider = storyFn => (
   <Provider store={store}>
