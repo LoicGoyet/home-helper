@@ -66,6 +66,7 @@ const WrapperContainer = styled(Container).attrs({
   left: 0;
   right: 0;
   padding: 0;
+  z-index: 1000;
 `;
 
 const Wrapper = styled.nav`

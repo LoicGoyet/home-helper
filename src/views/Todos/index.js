@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
+import Container from 'components/Container';
 import TodosList from 'container/TodosList';
 import AddTask from 'container/AddTask';
 
@@ -11,8 +12,10 @@ const Todos = () => (
       <title>Liste de course - Home helper</title>
     </Helmet>
 
-    <AddTaskForm />
-    <TodosList />
+    <Container>
+      <AddTaskForm />
+      <TodosList />
+    </Container>
   </React.Fragment>
 );
 

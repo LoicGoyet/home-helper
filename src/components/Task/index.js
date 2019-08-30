@@ -52,11 +52,6 @@ const Wrapper = styled(Card)`
   position: relative;
   padding-left: 1.25rem;
 
-  @media (max-width: 30rem) {
-    margin-left: calc(-1rem + 1px);
-    margin-right: calc(-1rem + 1px);
-  }
-
   &:hover {
     background-color: ${COLORS.lightgray};
   }

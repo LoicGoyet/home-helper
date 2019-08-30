@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 
 import CreateRecipe from 'container/CreateRecipe';
 import Button from 'components/Button';
+import Container from 'components/Container';
 import PATHS from 'router/paths';
 
 const RecipesAdd = () => (
@@ -13,14 +14,16 @@ const RecipesAdd = () => (
       <title>Ajouter une recette - Home helper</title>
     </Helmet>
 
-    <Header>
-      <BackButton href={PATHS.RECIPES_LIST} color="#fff">
-        <FaArrowLeft style={{ marginRight: 6 }} />
-        Retour
-      </BackButton>
-    </Header>
+    <Container>
+      <Header>
+        <BackButton href={PATHS.RECIPES_LIST} color="#fff">
+          <FaArrowLeft style={{ marginRight: 6 }} />
+          Retour
+        </BackButton>
+      </Header>
 
-    <CreateRecipe redirectTo={PATHS.RECIPES_LIST} />
+      <CreateRecipe redirectTo={PATHS.RECIPES_LIST} />
+    </Container>
   </React.Fragment>
 );
 

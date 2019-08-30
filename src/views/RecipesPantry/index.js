@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
+import Container from 'components/Container';
 import RecipesPantryContainer from 'container/RecipesPantry';
 import PantryCount from 'container/PantryCount';
 
@@ -11,11 +12,11 @@ const RecipesPantry = () => (
       <title>Au menu - Home helper</title>
     </Helmet>
 
-    <Count />
-    <ListWrapper>
+    <Container>
+      <Count />
       <Available />
       <Unavailable />
-    </ListWrapper>
+    </Container>
   </React.Fragment>
 );
 
@@ -33,11 +34,4 @@ const Unavailable = styled(RecipesPantryContainer).attrs({
 
 const Count = styled(PantryCount)`
   margin-bottom: 1rem;
-`;
-
-const ListWrapper = styled.div`
-  @media (max-width: 38rem) {
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
 `;

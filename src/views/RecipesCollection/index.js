@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 import RecipesCollectionContainer from 'container/RecipesCollection';
 import PantryCount from 'container/PantryCount';
 import Button from 'components/Button';
+import Container from 'components/Container';
 import PATHS from 'router/paths';
 
 const RecipesCollection = () => (
@@ -14,13 +15,15 @@ const RecipesCollection = () => (
       <title>Livre de recettes - Home helper</title>
     </Helmet>
 
-    <AddButton href={PATHS.RECIPES_ADD} color="#fff" isBlock>
-      <TiPlus size={26} />
-    </AddButton>
+    <Container>
+      <AddButton href={PATHS.RECIPES_ADD} color="#fff" isBlock>
+        <TiPlus size={26} />
+      </AddButton>
 
-    <Count />
+      <Count />
 
-    <Collection getEditHref={id => PATHS.RECIPES_EDIT.replace(':id', id)} />
+      <RecipesCollectionContainer getEditHref={id => PATHS.RECIPES_EDIT.replace(':id', id)} />
+    </Container>
   </React.Fragment>
 );
 
@@ -42,11 +45,4 @@ const AddButton = styled(Button)`
 
 const Count = styled(PantryCount)`
   margin-bottom: 1rem;
-`;
-
-const Collection = styled(RecipesCollectionContainer)`
-  @media (max-width: 38rem) {
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
 `;

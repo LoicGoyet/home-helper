@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 
 import PATHS from 'router/paths';
 import Button from 'components/Button';
+import Container from 'components/Container';
 import EditRecipe from 'container/EditRecipe';
 
 const RecipesEdit = props => (
@@ -14,14 +15,16 @@ const RecipesEdit = props => (
       <title>Modifier la recette - Home helper</title>
     </Helmet>
 
-    <Header>
-      <BackButton href={PATHS.RECIPES_LIST} color="#fff">
-        <FaArrowLeft style={{ marginRight: 6 }} />
-        Retour
-      </BackButton>
-    </Header>
+    <Container>
+      <Header>
+        <BackButton href={PATHS.RECIPES_LIST} color="#fff">
+          <FaArrowLeft style={{ marginRight: 6 }} />
+          Retour
+        </BackButton>
+      </Header>
 
-    <EditRecipe redirectTo={PATHS.RECIPES_LIST} id={props.match.params.id} />
+      <EditRecipe redirectTo={PATHS.RECIPES_LIST} id={props.match.params.id} />
+    </Container>
   </React.Fragment>
 );
 
