@@ -1,12 +1,12 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
+import { withReduxProvider } from 'storybook/decorators';
 import RecipeForm from 'containers/RecipeForm';
 
 export default {
   title: 'Containers|RecipeForm',
-  decorators: [withSuggestionLists, withReduxProvider],
+  decorators: [withReduxProvider],
 };
 
 export const story1 = () => <RecipeForm onSubmit={action('onSubmit')} />;

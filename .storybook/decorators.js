@@ -6,7 +6,7 @@ import SuggestionsLists from 'containers/SuggestionsLists';
 
 export const withReduxProvider = storyFn => (
   <Provider store={store}>
-    {storyFn()}
+    {withSuggestionLists(storyFn)}
   </Provider>
 )
 

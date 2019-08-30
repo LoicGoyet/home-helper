@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
+import { withReduxProvider } from 'storybook/decorators';
 import AddTask from 'containers/AddTask';
 
 export default {
   title: 'Containers|AddTask',
-  decorators: [withSuggestionLists, withReduxProvider],
+  decorators: [withReduxProvider],
 };
 
 export const story1 = () => <AddTask />;

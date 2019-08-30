@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
+import { withReduxProvider } from 'storybook/decorators';
 import RecipesPantry from 'containers/RecipesPantry';
 
 export default {
   title: 'Containers|RecipesPantry',
-  decorators: [withSuggestionLists, withReduxProvider],
+  decorators: [withReduxProvider],
 };
 
 export const story1 = () => <RecipesPantry />;

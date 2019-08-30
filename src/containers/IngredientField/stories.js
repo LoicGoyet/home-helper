@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
+import { withReduxProvider } from 'storybook/decorators';
 import IngredientField from 'containers/IngredientField';
 import Button from 'components/Button';
 
 export default {
   title: 'Containers|IngredientField',
-  decorators: [withSuggestionLists, withReduxProvider],
+  decorators: [withReduxProvider],
 };
 
 const onChange = cb => e => {

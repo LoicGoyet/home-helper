@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
+import { withReduxProvider } from 'storybook/decorators';
 import PantryCount from 'containers/PantryCount';
 
 export default {
   title: 'Containers|PantryCount',
-  decorators: [withSuggestionLists, withReduxProvider],
+  decorators: [withReduxProvider],
 };
 
 export const story1 = () => <PantryCount />;

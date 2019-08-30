@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
+import { withReduxProvider } from 'storybook/decorators';
 import TodosList from 'containers/TodosList';
 
 export default {
   title: 'Containers|TodosList',
-  decorators: [withSuggestionLists, withReduxProvider],
+  decorators: [withReduxProvider],
 };
 
 export const story1 = () => <TodosList />;
