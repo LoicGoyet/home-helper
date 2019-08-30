@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
 
 import store from '../src/store';
 import SuggestionsLists from 'containers/todos/SuggestionsLists';
@@ -15,4 +16,8 @@ export const withSuggestionLists = storyFn => (
     {storyFn()}
     <SuggestionsLists />
   </React.Fragment>
+)
+
+export const withHashRouter = storyFn => (
+  <HashRouter>{storyFn()}</HashRouter>
 )
