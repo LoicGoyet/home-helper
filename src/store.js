@@ -9,7 +9,9 @@ import preloadedFixture from 'fixtures/preloaded-state.json';
 const sagaMiddleware = createSagaMiddleware();
 const preloadedState = USE_MOCK ? preloadedFixture : null;
 
-const store = createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const store = preloadedState
+  ? createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(sagaMiddleware)))
+  : createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);
 
