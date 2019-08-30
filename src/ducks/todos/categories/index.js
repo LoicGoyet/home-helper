@@ -2,6 +2,7 @@ import { select, put } from 'redux-saga/effects';
 
 import { strToColor } from 'utils/colors';
 import { generateId } from 'utils/redux';
+import { sortCategoriesByAlphabetical } from 'utils/categories';
 import { normalizeStr } from 'utils/strings';
 
 export const ADD_CATEGORY = 'home-helper/todos/categories/ADD_CATEGORY';
@@ -87,6 +88,7 @@ export const selectCategoryByTitle = title => state => {
 
 export const selectors = {
   getCategories: state => state.todos.categories,
+  getCategoriesByAlphabetical: state => sortCategoriesByAlphabetical(state.todos.products),
 };
 
 // Getter

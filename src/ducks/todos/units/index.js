@@ -1,6 +1,7 @@
 import { select, put } from 'redux-saga/effects';
 
 import { generateId } from 'utils/redux';
+import { sortUnitsByAlphabetical } from 'utils/units';
 
 export const ADD_UNIT = 'home-helper/todos/units/ADD_UNIT';
 export const SET_UNIT_TITLE = 'home-helper/todos/units/SET_UNIT_TITLE';
@@ -79,6 +80,10 @@ export const setUnitTitle = (id, title) => ({
 export const selectUnitByTitle = title => state => {
   const { units } = state.todos;
   return units.allIds.find(id => units.byId[id].title === title);
+};
+
+export const selectors = {
+  getUnitsByAlphabetical: state => sortUnitsByAlphabetical(state.todos.products),
 };
 
 // Getters
