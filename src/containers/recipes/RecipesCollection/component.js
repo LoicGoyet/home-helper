@@ -8,10 +8,10 @@ import Button from 'components/Button';
 import IngredientsList from 'components/IngredientsList';
 import COLORS from 'style/colors';
 
-const RecipesCollection = ({ addItem, collection, getEditHref, ...props }) => {
+const RecipesCollection = ({ onAddItem, collection, getEditHref, ...props }) => {
   const onAddBtnClick = id => event => {
     event.stopPropagation();
-    addItem(id);
+    onAddItem(id);
   };
 
   return (
@@ -55,14 +55,14 @@ const RecipesCollection = ({ addItem, collection, getEditHref, ...props }) => {
 
 RecipesCollection.propTypes = {
   collection: PropTypes.object.isRequired,
-  addItem: PropTypes.func,
+  onAddItem: PropTypes.func,
   getEditHref: PropTypes.func,
   className: PropTypes.string,
 };
 
 RecipesCollection.defaultProps = {
   className: undefined,
-  addItem: () => undefined,
+  onAddItem: () => undefined,
   getEditHref: () => undefined,
 };
 

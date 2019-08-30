@@ -9,27 +9,24 @@ import Button from 'components/Button';
 import Container from 'components/Container';
 import EditRecipe from 'containers/recipes/EditRecipe';
 
-const RecipesEdit = props => {
-  console.log({ props });
-  return (
-    <React.Fragment>
-      <Helmet>
-        <title>Modifier la recette - Home helper</title>
-      </Helmet>
+const RecipesEdit = props => (
+  <React.Fragment>
+    <Helmet>
+      <title>Modifier la recette - Home helper</title>
+    </Helmet>
 
-      <Container>
-        <Header>
-          <BackButton href={PATHS.RECIPES_LIST} color="#fff">
-            <FaArrowLeft style={{ marginRight: 6 }} />
-            Retour
-          </BackButton>
-        </Header>
+    <Container>
+      <Header>
+        <BackButton href={PATHS.RECIPES_LIST} color="#fff">
+          <FaArrowLeft style={{ marginRight: 6 }} />
+          Retour
+        </BackButton>
+      </Header>
 
-        <EditRecipe redirectTo={PATHS.RECIPES_LIST} id={props.match.params.id} />
-      </Container>
-    </React.Fragment>
-  );
-};
+      <EditRecipe redirectTo={PATHS.RECIPES_LIST} id={props.match.params.id} />
+    </Container>
+  </React.Fragment>
+);
 
 RecipesEdit.propTypes = {
   match: PropTypes.any.isRequired,

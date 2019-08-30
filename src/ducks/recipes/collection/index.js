@@ -7,6 +7,7 @@ import { getUnitId } from 'ducks/todos/units';
 import { getTagId } from 'ducks/recipes/tags';
 import { generateId } from 'utils/redux';
 import { ADD_JOINED_PANTRY_ENTRY } from 'ducks/recipes/pantry';
+import { sortPantryByDateDesc, unfoldPantry } from 'utils/pantry';
 
 export const ADD_COLLECTION_ITEM = 'home-helper/recipes/collection/ADD_COLLECTION_ITEM';
 export const UPDATE_COLLECTION_ITEM = 'home-helper/recipes/collection/UPDATE_COLLECTION_ITEM';
@@ -120,6 +121,15 @@ export const selectors = {
         categoryTitle: R.path(['byId', category, 'title'], state.todos.categories),
       };
     });
+  },
+  getRecipes: state => {
+    const { collection, tags } = state.recipes;
+    const { products, units } = state.todos;
+
+    return R.compose(
+      unfoldPantry(tags, products, units),
+      sortPantryByDateDesc
+    )(collection);
   },
 };
 

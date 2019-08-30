@@ -1,40 +1,22 @@
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import RecipesCollection from 'containers/recipes/RecipesCollection/component';
+import RecipesCollectionComponent from 'containers/recipes/RecipesCollection/component';
 import * as pantryDuck from 'ducks/recipes/pantry';
+import * as collectionDuck from 'ducks/recipes/collection';
 
-const mapStateToProps = state => {
-  const { collection, tags } = state.recipes;
-  const { products, units } = state.todos;
+const RecipesCollectionNew = props => {
+  const dispatch = useDispatch();
+  const collection = useSelector(collectionDuck.selectors.getRecipes);
 
-  return {
-    collection: {
-      ...collection,
-      byId: collection.allIds.reduce(
-        (acc, id) => ({
-          ...acc,
-          [id]: {
-            ...collection.byId[id],
-            tags: collection.byId[id].tags.map(tagId => tags.byId[tagId]),
-            ingredients: collection.byId[id].ingredients.map(ingredient => ({
-              ...ingredient,
-              product: products.byId[ingredient.product],
-              unit: units.byId[ingredient.unit],
-            })),
-          },
-        }),
-        {}
-      ),
+  const onAddItem = useCallback(
+    (...args) => {
+      dispatch(pantryDuck.addPantryEntry(...args));
     },
-  };
+    [dispatch]
+  );
+
+  return <RecipesCollectionComponent {...props} onAddItem={onAddItem} collection={collection} />;
 };
 
-const mapDispatchToProps = dispatch => ({
-  addItem: bindActionCreators(pantryDuck.addPantryEntry, dispatch),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RecipesCollection);
+export default RecipesCollectionNew;
