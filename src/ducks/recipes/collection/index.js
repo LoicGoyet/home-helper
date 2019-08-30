@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 // Actions
 import { takeEvery, put, all, call } from 'redux-saga/effects';
 
@@ -100,6 +101,27 @@ export const updateInCollection = (id, recipe) => ({
   id,
   recipe,
 });
+
+// selectors
+
+export const selectors = {
+  getRecipeById: id => state => R.path(['recipes', 'collection', 'byId', id], state),
+  getIngredientsWithTitles: id => state => {
+    const recipe = R.path(['recipes', 'collection', 'byId', id], state);
+    const ingredients = R.prop('ingredients', recipe) || [];
+
+    return ingredients.map(ingredient => {
+      const category = R.path(['byId', ingredient.product, 'category'], state.todos.products);
+
+      return {
+        quantity: ingredient.quantity,
+        productTitle: R.path(['byId', ingredient.product, 'title'], state.todos.products),
+        unitTitle: R.path(['byId', ingredient.unit, 'title'], state.todos.units),
+        categoryTitle: R.path(['byId', category, 'title'], state.todos.categories),
+      };
+    });
+  },
+};
 
 // Sagas
 

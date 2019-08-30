@@ -1,4 +1,5 @@
 import { select, put } from 'redux-saga/effects';
+import * as R from 'ramda';
 
 import { generateId } from 'utils/redux';
 import { normalizeStr } from 'utils/strings';
@@ -54,6 +55,11 @@ export const addTag = title => ({
 export const selectTagByTitle = title => state => {
   const { tags } = state.recipes;
   return tags.allIds.find(id => normalizeStr(tags.byId[id].title) === normalizeStr(title));
+};
+
+export const selectors = {
+  getTagsTitleByIds: (tagsIds = []) => state =>
+    tagsIds.map(tagId => R.path(['recipes', 'tags', 'byId', tagId, 'title'], state)),
 };
 
 // Getters

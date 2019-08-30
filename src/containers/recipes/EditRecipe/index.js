@@ -1,117 +1,68 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { path, prop } from 'ramda';
 import Helmet from 'react-helmet';
 
 import RecipeForm from 'containers/recipes/RecipeForm';
-import * as recipes from 'ducks/recipes/collection';
+import * as collectionDuck from 'ducks/recipes/collection';
+import * as tagsDuck from 'ducks/recipes/tags';
 import PATHS from 'router/paths';
 
-const mapStateToProps = (state, ownProps) => {
-  const { units, products, categories } = state.todos;
-  const recipe = path(['collection', 'byId', ownProps.id], state.recipes);
+const EditRecipe = ({ id, redirectTo }) => {
+  const dispatch = useDispatch();
+  const [hasToRedirect, setHasToRedirect] = useState(false);
+  const redirect = !!hasToRedirect && !!redirectTo;
 
-  const title = prop('title', recipe);
-  const tags = (prop('tags', recipe) || []).map(tagId => path(['byId', tagId, 'title'], state.recipes.tags));
-  const link = prop('link', recipe);
-  const ingredients = (prop('ingredients', recipe) || []).map(ingredient => {
-    const { quantity } = ingredient;
-    const unitTitle = path(['byId', ingredient.unit, 'title'], units);
-    const productTitle = path(['byId', ingredient.product, 'title'], products);
-    const category = path(['byId', ingredient.product, 'category'], products);
-    const categoryTitle = path(['byId', category, 'title'], categories);
+  const recipes = useSelector(collectionDuck.selectors.getRecipeById(id));
+  const ingredients = useSelector(collectionDuck.selectors.getIngredientsWithTitles(id));
+  const tags = useSelector(tagsDuck.selectors.getTagsTitleByIds(recipes.tags));
 
-    return {
-      productTitle,
-      quantity,
-      unitTitle,
-      categoryTitle,
-    };
-  });
-
-  return {
-    units,
-    products,
-    categories,
-    defaultValues: {
-      title,
-      tags,
-      link,
-      ingredients,
+  const onSubmit = useCallback(
+    values => {
+      dispatch(collectionDuck.updateInCollection(id, values));
+      setHasToRedirect(true);
     },
-  };
+    [id, dispatch]
+  );
+
+  return (
+    <React.Fragment>
+      {!!recipes.title && (
+        <Helmet>
+          <title>Modifier la recette {recipes.title} - Home helper</title>
+        </Helmet>
+      )}
+
+      {redirect && (
+        <Redirect
+          to={{
+            pathname: redirectTo,
+          }}
+        />
+      )}
+
+      <RecipeForm
+        onSubmit={onSubmit}
+        id={id}
+        defaultValues={{
+          title: recipes.title || '',
+          tags,
+          link: recipes.link || '',
+          ingredients,
+        }}
+      />
+    </React.Fragment>
+  );
 };
 
-const mapDispatchToProps = dispatch => ({
-  onSubmit: bindActionCreators(recipes.updateInCollection, dispatch),
-});
+EditRecipe.propTypes = {
+  redirectTo: PropTypes.oneOf(Object.values(PATHS)),
+  id: PropTypes.any.isRequired,
+};
 
-class RecipeFormContainer extends React.Component {
-  static propTypes = {
-    defaultValues: PropTypes.object.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    redirectTo: PropTypes.oneOf(Object.values(PATHS)),
-    id: PropTypes.any.isRequired,
-  };
+EditRecipe.defaultProps = {
+  redirectTo: undefined,
+};
 
-  static defaultProps = {
-    redirectTo: undefined,
-  };
-
-  state = {
-    redirect: {
-      enabled: false,
-      recipeTitle: undefined,
-    },
-  };
-
-  onSubmit = recipe => {
-    this.props.onSubmit(this.props.id, recipe);
-    const recipeTitle = recipe.title;
-
-    this.setState({
-      redirect: {
-        ...this.state.redirect,
-        enabled: true,
-        recipeTitle,
-      },
-    });
-  };
-
-  render = () => {
-    const redirect = path(['redirect', 'enabled'], this.state) && !!this.props.redirectTo;
-    return (
-      <React.Fragment>
-        {path(['defaultValues', 'title'], this.props) && (
-          <Helmet>
-            <title>Modifier la recette {this.props.defaultValues.title} - Home helper</title>
-          </Helmet>
-        )}
-
-        {/* redirect une fois le formulaire soumi */}
-        {redirect && (
-          <Redirect
-            to={{
-              pathname: this.props.redirectTo,
-              state: {
-                newRecipe: {
-                  title: path(['redirect', 'recipeTitle'], this.state),
-                },
-              },
-            }}
-          />
-        )}
-
-        <RecipeForm defaultValues={this.props.defaultValues} onSubmit={this.onSubmit} />
-      </React.Fragment>
-    );
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RecipeFormContainer);
+export default EditRecipe;
