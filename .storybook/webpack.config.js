@@ -7,7 +7,7 @@ module.exports = async ({ config, mode }) => {
 
     api: path.resolve(__dirname, "../src/api/"),
     components: path.resolve(__dirname, "../src/components/"),
-    container: path.resolve(__dirname, "../src/container/"),
+    containers: path.resolve(__dirname, "../src/containers/"),
     ducks: path.resolve(__dirname, "../src/ducks/"),
     fixtures: path.resolve(__dirname, "../src/fixtures/"),
     icons: path.resolve(__dirname, "../src/icons/"),

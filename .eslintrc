@@ -104,7 +104,7 @@
       "alias": [
         ["api", "./src/api"],
         ["components", "./src/components"],
-        ["container", "./src/container"],
+        ["containers", "./src/containers"],
         ["ducks", "./src/ducks"],
         ["fixtures", "./src/fixtures"],
         ["icons", "./src/icons"],

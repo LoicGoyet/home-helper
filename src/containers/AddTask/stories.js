@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
-import TodosList from 'container/TodosList';
+import AddTask from 'containers/AddTask';
 
 export default {
-  title: 'Container|TodosList',
+  title: 'Containers|AddTask',
   decorators: [withSuggestionLists, withReduxProvider],
 };
 
-export const story1 = () => <TodosList />;
+export const story1 = () => <AddTask />;
 
 story1.story = {
   name: 'default',

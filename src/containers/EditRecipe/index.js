@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { path, prop } from 'ramda';
 import Helmet from 'react-helmet';
 
-import RecipeForm from 'container/RecipeForm';
+import RecipeForm from 'containers/RecipeForm';
 import * as recipes from 'ducks/recipes/collection';
 import PATHS from 'router/paths';
 

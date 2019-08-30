@@ -3,8 +3,8 @@ import { TiPlus } from 'react-icons/lib/ti';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
-import RecipesCollectionContainer from 'container/RecipesCollection';
-import PantryCount from 'container/PantryCount';
+import RecipesCollectionContainer from 'containers/RecipesCollection';
+import PantryCount from 'containers/PantryCount';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import PATHS from 'router/paths';

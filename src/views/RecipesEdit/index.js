@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 import PATHS from 'router/paths';
 import Button from 'components/Button';
 import Container from 'components/Container';
-import EditRecipe from 'container/EditRecipe';
+import EditRecipe from 'containers/EditRecipe';
 
 const RecipesEdit = props => (
   <React.Fragment>

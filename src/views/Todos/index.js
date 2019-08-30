@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Helmet from 'react-helmet';
 
 import Container from 'components/Container';
-import TodosList from 'container/TodosList';
-import AddTask from 'container/AddTask';
+import TodosList from 'containers/TodosList';
+import AddTask from 'containers/AddTask';
 
 const Todos = () => (
   <React.Fragment>

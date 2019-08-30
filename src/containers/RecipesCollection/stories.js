@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { withReduxProvider, withSuggestionLists } from 'storybook/decorators';
-import RecipesCollection from 'container/RecipesCollection';
+import RecipesCollection from 'containers/RecipesCollection';
 
 export default {
-  title: 'container|RecipesCollection',
+  title: 'Containers|RecipesCollection',
   decorators: [withSuggestionLists, withReduxProvider],
 };
 

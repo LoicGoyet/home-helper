@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 
-import RecipesPantryComponent from 'container/RecipesPantry/component';
+import RecipesPantryComponent from 'containers/RecipesPantry/component';
 import { togglePantryEntry, selectors } from 'ducks/recipes/pantry';
 
 const RecipesPantryContainer = ({ hasUnavailable, ...props }) => {

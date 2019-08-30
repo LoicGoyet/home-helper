@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { path } from 'ramda';
 
-import RecipeForm from 'container/RecipeForm';
+import RecipeForm from 'containers/RecipeForm';
 import * as recipes from 'ducks/recipes/collection';
 import PATHS from 'router/paths';
 

@@ -7,7 +7,7 @@ import RecipesAdd from 'views/RecipesAdd';
 import RecipesEdit from 'views/RecipesEdit';
 import RecipesPantry from 'views/RecipesPantry';
 import RecipesCollection from 'views/RecipesCollection';
-import SuggestionsLists from 'container/SuggestionsLists';
+import SuggestionsLists from 'containers/SuggestionsLists';
 import Menu from 'components/Menu';
 import PATHS from 'router/paths';
 

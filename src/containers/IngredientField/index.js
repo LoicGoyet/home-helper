@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import FormGroup from 'components/FormGroup';
 import Input from 'components/Input';
 import Card from 'components/Card';
-import { useAutoCategory, useAutoQuantityUnit } from 'container/hooks';
+import { useAutoCategory, useAutoQuantityUnit } from 'containers/hooks';
 import {
   TODOS_CATEGORIES_SUGGESTIONS,
   TODOS_PRODUCTS_SUGGESTIONS,
   TODOS_UNITS_SUGGESTIONS,
-} from 'container/SuggestionsLists';
+} from 'containers/SuggestionsLists';
 
 const IngredientField = ({ values, onChange, children, ...props }) => {
   const getAutoCategory = useAutoCategory();
