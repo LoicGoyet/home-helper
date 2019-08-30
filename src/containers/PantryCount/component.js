@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const PantryCount = ({ counts, ...props }) => (
+const PantryCountComponent = ({ counts, ...props }) => (
   <Wrapper {...props}>
     <Row>
       {counts.map(count => {
@@ -21,7 +21,7 @@ const PantryCount = ({ counts, ...props }) => (
   </Wrapper>
 );
 
-PantryCount.propTypes = {
+PantryCountComponent.propTypes = {
   className: PropTypes.string,
   counts: PropTypes.arrayOf(
     PropTypes.shape({
@@ -32,11 +32,11 @@ PantryCount.propTypes = {
   ).isRequired,
 };
 
-PantryCount.defaultProps = {
+PantryCountComponent.defaultProps = {
   className: undefined,
 };
 
-export default React.memo(PantryCount);
+export default React.memo(PantryCountComponent);
 
 const Wrapper = styled.section`
   padding: 15px;

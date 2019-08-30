@@ -3,7 +3,13 @@ import * as R from 'ramda';
 import { takeEvery, put, select } from 'redux-saga/effects';
 
 import { generateId } from 'utils/redux';
-import { filterPantryByAvailable, filterPantryByUnavailable, sortPantryByDateDesc, unfoldPantry } from 'utils/pantry';
+import {
+  filterPantryByAvailable,
+  filterPantryByUnavailable,
+  sortPantryByDateDesc,
+  unfoldPantry,
+  getPantryCounts,
+} from 'utils/pantry';
 
 export const ADD_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_PANTRY_ENTRY';
 export const ADD_JOINED_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_JOINED_PANTRY_ENTRY';
@@ -100,6 +106,10 @@ export const selectors = {
       sortPantryByDateDesc,
       filterPantryByUnavailable
     )(pantry);
+  },
+  getCounts: state => {
+    const { pantry, tags } = state.recipes;
+    return getPantryCounts(tags)(pantry);
   },
 };
 
