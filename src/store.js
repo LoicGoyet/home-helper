@@ -7,11 +7,9 @@ import rootReducer, { rootSaga } from 'ducks';
 import preloadedFixture from 'fixtures/preloaded-state.json';
 
 const sagaMiddleware = createSagaMiddleware();
-const preloadedState = USE_MOCK ? preloadedFixture : null;
+const preloadedState = USE_MOCK ? preloadedFixture : undefined;
 
-const store = preloadedState
-  ? createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(sagaMiddleware)))
-  : createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
+const store = createStore(rootReducer, preloadedState, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);
 
