@@ -8,6 +8,7 @@ import RecipesEdit from 'views/RecipesEdit';
 import RecipesPantry from 'views/RecipesPantry';
 import RecipesCollection from 'views/RecipesCollection';
 import SuggestionsLists from 'containers/todos/SuggestionsLists';
+import PantryCount from 'containers/recipes/PantryCount';
 import Menu from 'components/Menu';
 import PATHS from 'router/paths';
 
@@ -41,6 +42,7 @@ const Router = () => (
             icon: FaInbox,
             path: PATHS.RECIPES_PANTRY,
             label: 'Au menu',
+            counter: PantryCount,
           },
         ]}
       />

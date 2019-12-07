@@ -90,6 +90,12 @@ export const selectors = {
       filterPantryByAvailable
     )(pantry);
   },
+  getAvailablePantryLength: R.compose(
+    R.length,
+    R.pathOr([], ['allIds']),
+    filterPantryByAvailable,
+    R.path(['recipes', 'pantry'])
+  ),
   getUnavailablePantry: state => {
     const { pantry } = state.recipes;
     const { products, units } = state.todos;
