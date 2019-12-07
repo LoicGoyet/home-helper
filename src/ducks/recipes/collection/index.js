@@ -123,11 +123,11 @@ export const selectors = {
     });
   },
   getRecipes: state => {
-    const { collection, tags } = state.recipes;
+    const { collection } = state.recipes;
     const { products, units } = state.todos;
 
     return R.compose(
-      unfoldPantry(tags, products, units),
+      unfoldPantry(products, units),
       sortPantryByDateDesc
     )(collection);
   },

@@ -88,21 +88,21 @@ export const togglePantryEntry = id => ({
 
 export const selectors = {
   getAvailablePantry: state => {
-    const { pantry, tags } = state.recipes;
+    const { pantry } = state.recipes;
     const { products, units } = state.todos;
 
     return R.compose(
-      unfoldPantry(tags, products, units),
+      unfoldPantry(products, units),
       sortPantryByDateDesc,
       filterPantryByAvailable
     )(pantry);
   },
   getUnavailablePantry: state => {
-    const { pantry, tags } = state.recipes;
+    const { pantry } = state.recipes;
     const { products, units } = state.todos;
 
     return R.compose(
-      unfoldPantry(tags, products, units),
+      unfoldPantry(products, units),
       sortPantryByDateDesc,
       filterPantryByUnavailable
     )(pantry);

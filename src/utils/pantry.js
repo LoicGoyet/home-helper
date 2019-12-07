@@ -31,9 +31,8 @@ export const sortPantryByDateDesc = pantry => {
   };
 };
 
-export const unfoldPantry = (tags, products, units) => pantry => {
+export const unfoldPantry = (products, units) => pantry => {
   const unfoldedPantryById = R.map(recipe => {
-    const recipeTags = recipe.tags.map(tagId => tags.byId[tagId]);
     const ingredients = recipe.ingredients.map(ingredient => ({
       ...ingredient,
       product: products.byId[ingredient.product],
@@ -42,7 +41,6 @@ export const unfoldPantry = (tags, products, units) => pantry => {
 
     return {
       ...recipe,
-      tags: recipeTags,
       ingredients,
     };
   }, pantry.byId);
