@@ -74,18 +74,16 @@ Button.defaultProps = {
 export default React.memo(Button);
 
 const BaseStyle = css`
-  text-transform: uppercase;
   font-family: inherit;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
 
   border-radius: 0.3125rem;
   border: 0;
 
   font-size: 0.875rem;
-  letter-spacing: 0.08929em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
