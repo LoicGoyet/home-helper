@@ -107,10 +107,6 @@ export const selectors = {
       filterPantryByUnavailable
     )(pantry);
   },
-  getCounts: state => {
-    const { pantry, tags } = state.recipes;
-    return getPantryCounts(tags)(pantry);
-  },
 };
 
 // Sagas
