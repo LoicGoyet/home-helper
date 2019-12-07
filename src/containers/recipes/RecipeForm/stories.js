@@ -20,7 +20,6 @@ export const story2 = () => (
     onSubmit={action('onSubmit')}
     defaultValues={{
       title: 'Fish & Chips',
-      tags: ['maison', 'bento'],
       link: '#',
       ingredients: [
         {
