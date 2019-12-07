@@ -19,7 +19,6 @@ const defaultIngredient = {
 
 const defaultState = {
   title: '',
-  tags: [],
   link: '',
   ingredients: [defaultIngredient],
 };
@@ -100,16 +99,6 @@ const RecipeForm = ({ onSubmit, defaultValues }) => {
     });
   };
 
-  const onTagsInputChange = e => {
-    const value = e.target.value.split(',').map(item => item.trim());
-
-    dispatch({
-      type: 'update_field',
-      field: 'tags',
-      value,
-    });
-  };
-
   const onIngredientChange = index => values => {
     dispatch({
       type: 'update_ingredient',
@@ -138,10 +127,6 @@ const RecipeForm = ({ onSubmit, defaultValues }) => {
       <TitleFormGroup label="Nom">
         <Input onChange={onInputChange('title')} value={state.title} required />
       </TitleFormGroup>
-
-      <FormGroup label="Tags" help="Séparez les tags par une virgule">
-        <Input onChange={onTagsInputChange} value={state.tags} />
-      </FormGroup>
 
       <FormGroup label="Lien vers la recette">
         <Input onChange={onInputChange('link')} value={state.link} />
@@ -178,7 +163,6 @@ RecipeForm.propTypes = {
   onSubmit: PropTypes.func,
   defaultValues: PropTypes.shape({
     title: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string),
     link: PropTypes.string,
     ingredients: PropTypes.arrayOf(
       PropTypes.shape({

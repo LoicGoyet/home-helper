@@ -3,13 +3,7 @@ import * as R from 'ramda';
 import { takeEvery, put, select } from 'redux-saga/effects';
 
 import { generateId } from 'utils/redux';
-import {
-  filterPantryByAvailable,
-  filterPantryByUnavailable,
-  sortPantryByDateDesc,
-  unfoldPantry,
-  getPantryCounts,
-} from 'utils/pantry';
+import { filterPantryByAvailable, filterPantryByUnavailable, sortPantryByDateDesc, unfoldPantry } from 'utils/pantry';
 
 export const ADD_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_PANTRY_ENTRY';
 export const ADD_JOINED_PANTRY_ENTRY = 'home-helper/recipes/pantry/ADD_JOINED_PANTRY_ENTRY';
@@ -25,7 +19,7 @@ export const defaultState = {
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_JOINED_PANTRY_ENTRY: {
-      const { title, tags, ingredients, link, collectionItem } = action;
+      const { title, ingredients, link, collectionItem } = action;
       const id = generateId(state.allIds);
       const createdAt = Date.now();
 
@@ -37,7 +31,6 @@ const reducer = (state = defaultState, action = {}) => {
             id,
             title,
             available: true,
-            tags,
             ingredients,
             link,
             collectionItem,
@@ -88,40 +81,41 @@ export const togglePantryEntry = id => ({
 
 export const selectors = {
   getAvailablePantry: state => {
-    const { pantry, tags } = state.recipes;
+    const { pantry } = state.recipes;
     const { products, units } = state.todos;
 
     return R.compose(
-      unfoldPantry(tags, products, units),
+      unfoldPantry(products, units),
       sortPantryByDateDesc,
       filterPantryByAvailable
     )(pantry);
   },
+  getAvailablePantryLength: R.compose(
+    R.length,
+    R.pathOr([], ['allIds']),
+    filterPantryByAvailable,
+    R.path(['recipes', 'pantry'])
+  ),
   getUnavailablePantry: state => {
-    const { pantry, tags } = state.recipes;
+    const { pantry } = state.recipes;
     const { products, units } = state.todos;
 
     return R.compose(
-      unfoldPantry(tags, products, units),
+      unfoldPantry(products, units),
       sortPantryByDateDesc,
       filterPantryByUnavailable
     )(pantry);
-  },
-  getCounts: state => {
-    const { pantry, tags } = state.recipes;
-    return getPantryCounts(tags)(pantry);
   },
 };
 
 // Sagas
 
 function* getCollectionItemForPantry(payload) {
-  const { ingredients, link, tags, title, id } = yield select(state => state.recipes.collection.byId[payload.id]);
+  const { ingredients, link, title, id } = yield select(state => state.recipes.collection.byId[payload.id]);
   return yield put({
     type: ADD_JOINED_PANTRY_ENTRY,
     ingredients,
     link,
-    tags,
     title,
     collectionItem: id,
   });

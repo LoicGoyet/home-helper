@@ -5,7 +5,7 @@ import RecipesCollectionComponent from 'containers/recipes/RecipesCollection/com
 import * as pantryDuck from 'ducks/recipes/pantry';
 import * as collectionDuck from 'ducks/recipes/collection';
 
-const RecipesCollectionNew = props => {
+const RecipesCollection = props => {
   const dispatch = useDispatch();
   const collection = useSelector(collectionDuck.selectors.getRecipes);
 
@@ -19,4 +19,4 @@ const RecipesCollectionNew = props => {
   return <RecipesCollectionComponent {...props} onAddItem={onAddItem} collection={collection} />;
 };
 
-export default RecipesCollectionNew;
+export default RecipesCollection;

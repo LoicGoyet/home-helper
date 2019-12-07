@@ -298,34 +298,12 @@ export const units = {
   allIds: [0, 1],
 };
 
-export const tags = {
-  byId: {
-    '0': {
-      id: 0,
-      title: 'maison',
-      createdAt: 1535624567194,
-      updatedAt: 1535624567194
-    },
-    '1': {
-      id: 1,
-      title: 'bento',
-      createdAt: 1535624567202,
-      updatedAt: 1535624567202
-    }
-  },
-  allIds: [
-    0,
-    1
-  ]
-}
-
 
 export const collection = {
   byId: {
     '0': {
       id: 0,
       title: 'Fish & Chips',
-      tags: [0],
       ingredients: [
         {
           product: 0,
@@ -345,7 +323,6 @@ export const collection = {
     '1': {
       id: 1,
       title: 'Cordon bleu & pates',
-      tags: [0, 1],
       ingredients: [
         {
           product: 2,

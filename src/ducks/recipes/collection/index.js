@@ -4,7 +4,6 @@ import { takeEvery, put, all, call } from 'redux-saga/effects';
 
 import { getProductId } from 'ducks/todos/products';
 import { getUnitId } from 'ducks/todos/units';
-import { getTagId } from 'ducks/recipes/tags';
 import { generateId } from 'utils/redux';
 import { ADD_JOINED_PANTRY_ENTRY } from 'ducks/recipes/pantry';
 import { sortPantryByDateDesc, unfoldPantry } from 'utils/pantry';
@@ -26,7 +25,7 @@ export const defaultState = {
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_JOINED_COLLECTION_ITEM: {
-      const { title, tags, ingredients, link } = action;
+      const { title, ingredients, link } = action;
       const id = generateId(state.allIds);
       const createdAt = Date.now();
 
@@ -37,7 +36,6 @@ const reducer = (state = defaultState, action = {}) => {
           [id]: {
             id,
             title,
-            tags,
             ingredients,
             link,
             createdAt,
@@ -50,7 +48,7 @@ const reducer = (state = defaultState, action = {}) => {
     }
 
     case UPDATE_JOINED_COLLECTION_ITEM: {
-      const { id, title, tags, ingredients, link } = action;
+      const { id, title, ingredients, link } = action;
       const updatedAt = Date.now();
 
       return {
@@ -61,7 +59,6 @@ const reducer = (state = defaultState, action = {}) => {
             ...state.byId[id],
             id,
             title,
-            tags,
             ingredients,
             link,
             updatedAt,
@@ -123,11 +120,11 @@ export const selectors = {
     });
   },
   getRecipes: state => {
-    const { collection, tags } = state.recipes;
+    const { collection } = state.recipes;
     const { products, units } = state.todos;
 
     return R.compose(
-      unfoldPantry(tags, products, units),
+      unfoldPantry(products, units),
       sortPantryByDateDesc
     )(collection);
   },
@@ -151,24 +148,14 @@ function* joinIngredients(ingredients) {
   );
 }
 
-function* joinTags(tags) {
-  return yield all(
-    tags.map(function*(tag) {
-      return yield call(getTagId, tag);
-    })
-  );
-}
-
 function* createJoinedCollectionItem({ recipe }) {
   const { title, link } = recipe;
 
   const ingredients = yield call(joinIngredients, recipe.ingredients);
-  const tags = yield call(joinTags, recipe.tags);
 
   yield put({
     type: ADD_JOINED_COLLECTION_ITEM,
     title,
-    tags,
     ingredients,
     link,
   });
@@ -178,13 +165,11 @@ function* updateJoinedCollectionItem({ id, recipe }) {
   const { title, link } = recipe;
 
   const ingredients = yield call(joinIngredients, recipe.ingredients);
-  const tags = yield call(joinTags, recipe.tags);
 
   yield put({
     type: UPDATE_JOINED_COLLECTION_ITEM,
     id,
     title,
-    tags,
     ingredients,
     link,
   });

@@ -6,7 +6,6 @@ import Helmet from 'react-helmet';
 
 import RecipeForm from 'containers/recipes/RecipeForm';
 import * as collectionDuck from 'ducks/recipes/collection';
-import * as tagsDuck from 'ducks/recipes/tags';
 import PATHS from 'router/paths';
 
 const EditRecipe = ({ id, redirectTo }) => {
@@ -16,8 +15,6 @@ const EditRecipe = ({ id, redirectTo }) => {
 
   const recipes = useSelector(collectionDuck.selectors.getRecipeById(id));
   const ingredients = useSelector(collectionDuck.selectors.getIngredientsWithTitles(id));
-  const tags = useSelector(tagsDuck.selectors.getTagsTitleByIds(recipes.tags));
-
   const onSubmit = useCallback(
     values => {
       dispatch(collectionDuck.updateInCollection(id, values));
@@ -47,7 +44,6 @@ const EditRecipe = ({ id, redirectTo }) => {
         id={id}
         defaultValues={{
           title: recipes.title || '',
-          tags,
           link: recipes.link || '',
           ingredients,
         }}

@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Accordion, { AccordionItem } from 'components/Accordion';
-import Tags from 'components/Tags';
 import Button from 'components/Button';
 import IngredientsList from 'components/IngredientsList';
 import COLORS from 'style/colors';
 
-const RecipesCollection = ({ onAddItem, collection, getEditHref, ...props }) => {
+const RecipesCollectionComponent = ({ onAddItem, collection, getEditHref, ...props }) => {
   const onAddBtnClick = id => event => {
     event.stopPropagation();
     onAddItem(id);
@@ -26,7 +25,6 @@ const RecipesCollection = ({ onAddItem, collection, getEditHref, ...props }) => 
               <Header>
                 <HeaderContent>
                   <Title>{item.title}</Title>
-                  <RecipeTags items={item.tags} />
                 </HeaderContent>
 
                 <AddButton color={COLORS.violet} isBlock onClick={onAddBtnClick(id)}>
@@ -53,27 +51,26 @@ const RecipesCollection = ({ onAddItem, collection, getEditHref, ...props }) => 
   );
 };
 
-RecipesCollection.propTypes = {
+RecipesCollectionComponent.propTypes = {
   collection: PropTypes.object.isRequired,
   onAddItem: PropTypes.func,
   getEditHref: PropTypes.func,
   className: PropTypes.string,
 };
 
-RecipesCollection.defaultProps = {
+RecipesCollectionComponent.defaultProps = {
   className: undefined,
   onAddItem: () => undefined,
   getEditHref: () => undefined,
 };
 
-export default RecipesCollection;
+export default RecipesCollectionComponent;
 
 const Title = styled.h2`
   font-weight: bold;
   margin: 0;
   font-size: 1.25rem;
   letter-spacing: 0.0125em;
-  margin-bottom: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -81,13 +78,6 @@ const Title = styled.h2`
   @media (max-width: 28rem) {
     font-size: 1rem;
     letter-spacing: initial;
-    margin-bottom: 0.25rem;
-  }
-`;
-
-const RecipeTags = styled(Tags)`
-  @media (max-width: 28rem) {
-    font-size: 0.75rem;
   }
 `;
 

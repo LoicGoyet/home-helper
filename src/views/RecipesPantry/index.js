@@ -4,7 +4,6 @@ import Helmet from 'react-helmet';
 
 import Container from 'components/Container';
 import RecipesPantryContainer from 'containers/recipes/RecipesPantry';
-import PantryCount from 'containers/recipes/PantryCount';
 
 const RecipesPantry = () => (
   <React.Fragment>
@@ -13,7 +12,6 @@ const RecipesPantry = () => (
     </Helmet>
 
     <Container>
-      <Count />
       <Available />
       <Unavailable />
     </Container>
@@ -29,9 +27,5 @@ const Available = styled(RecipesPantryContainer)`
 const Unavailable = styled(RecipesPantryContainer).attrs({
   hasUnavailable: true,
 })`
-  margin-bottom: 1rem;
-`;
-
-const Count = styled(PantryCount)`
   margin-bottom: 1rem;
 `;

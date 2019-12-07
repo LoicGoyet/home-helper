@@ -8,8 +8,8 @@ export default {
   decorators: [withReduxProvider],
 };
 
-export const story1 = () => <PantryCount />;
+export const defaultStory = () => <PantryCount />;
 
-story1.story = {
+defaultStory.story = {
   name: 'default',
 };

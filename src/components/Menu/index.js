@@ -24,14 +24,17 @@ const Menu = ({ items }) => {
     <React.Fragment>
       <WrapperContainer>
         <Wrapper>
-          {items.map(({ path, label, icon }) => {
+          {items.map(({ path, label, icon, counter }) => {
             const Icon = icon;
+
+            console.log(counter);
 
             return (
               <Link key={`${path} / ${label}`} to={path} style={style} activeStyle={activeStyle}>
                 <InnerLink>
                   <Icon size={26} />
                   <span>{label}</span>
+                  {!!counter && <Counter as={counter} />}
                 </InnerLink>
               </Link>
             );
@@ -49,6 +52,7 @@ Menu.propTypes = {
       path: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func]).isRequired,
+      counter: PropTypes.any,
     })
   ).isRequired,
 };
@@ -116,4 +120,10 @@ const InnerLink = styled.span`
 
 const Placeholder = styled.div`
   height: ${height + margin * 2}rem;
+`;
+
+const Counter = styled.span`
+  position: absolute;
+  bottom: 29%;
+  right: 12%;
 `;

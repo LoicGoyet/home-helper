@@ -872,7 +872,6 @@
         "0": {
           "id": 0,
           "title": "Fish & Chips",
-          "tags": [0],
           "ingredients": [
             {
               "product": 14,
@@ -892,7 +891,6 @@
         "1": {
           "id": 1,
           "title": "Cordon bleu & pâtes",
-          "tags": [0, 1],
           "ingredients": [
             {
               "product": 15,
@@ -912,7 +910,6 @@
         "2": {
           "id": 2,
           "title": "Pizza industrielle",
-          "tags": [0],
           "ingredients": [
             {
               "product": 10,
@@ -927,7 +924,6 @@
         "3": {
           "id": 3,
           "title": "Taboulé & Betteraves",
-          "tags": [1],
           "ingredients": [
             {
               "product": 17,
@@ -947,7 +943,6 @@
         "4": {
           "id": 4,
           "title": "Quiche lorraine industrielle",
-          "tags": [1],
           "ingredients": [
             {
               "product": 19,
@@ -962,7 +957,6 @@
         "5": {
           "id": 5,
           "title": "Tartines",
-          "tags": [0],
           "ingredients": [
             {
               "product": 20,
@@ -997,7 +991,6 @@
         "6": {
           "id": 6,
           "title": "Salade",
-          "tags": [1],
           "ingredients": [
             {
               "product": 23,
@@ -1032,7 +1025,6 @@
         "7": {
           "id": 7,
           "title": "Lasagnes au saumon industrielles",
-          "tags": [1],
           "ingredients": [
             {
               "product": 25,
@@ -1047,7 +1039,6 @@
         "8": {
           "id": 8,
           "title": "Saumon tomates mozzarela",
-          "tags": [1],
           "ingredients": [
             {
               "product": 29,
@@ -1082,7 +1073,6 @@
         "9": {
           "id": 9,
           "title": "Nuggets purée",
-          "tags": [0],
           "ingredients": [
             {
               "product": 30,
@@ -1107,7 +1097,6 @@
         "10": {
           "id": 10,
           "title": "Tarte aux Tomates & Mozzarella",
-          "tags": [1],
           "ingredients": [
             {
               "product": 33,
@@ -1132,7 +1121,6 @@
         "11": {
           "id": 11,
           "title": "Sandwich",
-          "tags": [1],
           "ingredients": [
             {
               "product": 9,
@@ -1172,7 +1160,6 @@
         "12": {
           "id": 12,
           "title": "Steak pâtes",
-          "tags": [1, 0],
           "ingredients": [
             {
               "product": 36,
@@ -1197,7 +1184,6 @@
         "13": {
           "id": 13,
           "title": "Croque monsieur",
-          "tags": [0],
           "ingredients": [
             {
               "product": 9,
@@ -1222,7 +1208,6 @@
         "14": {
           "id": 14,
           "title": "Gauffre au poulet",
-          "tags": [0],
           "ingredients": [
             {
               "product": 38,
@@ -1282,7 +1267,6 @@
         "15": {
           "id": 15,
           "title": "Mini pizza muffins",
-          "tags": [0],
           "ingredients": [
             {
               "product": 48,
@@ -1312,7 +1296,6 @@
         "16": {
           "id": 16,
           "title": "Macaroni au fromage",
-          "tags": [0],
           "ingredients": [
             {
               "product": 51,
@@ -1352,7 +1335,6 @@
         "17": {
           "id": 17,
           "title": "Poulet Wok",
-          "tags": [1],
           "ingredients": [
             {
               "product": 38,
@@ -1387,7 +1369,6 @@
         "18": {
           "id": 18,
           "title": "Galettes",
-          "tags": [0],
           "ingredients": [
             {
               "product": 57,
@@ -1417,7 +1398,6 @@
         "19": {
           "id": 19,
           "title": "Old el Paso",
-          "tags": [0],
           "ingredients": [
             {
               "product": 38,
@@ -1457,7 +1437,6 @@
         "20": {
           "id": 20,
           "title": "Quesadillas",
-          "tags": [0],
           "ingredients": [
             {
               "product": 39,
@@ -1487,7 +1466,6 @@
         "21": {
           "id": 21,
           "title": "Pâtes sauce pesto",
-          "tags": [0],
           "ingredients": [
             {
               "product": 16,
@@ -1541,7 +1519,6 @@
           "id": 0,
           "title": "Fish & Chips",
           "available": true,
-          "tags": [0],
           "ingredients": [
             {
               "product": 14,
@@ -1562,7 +1539,6 @@
           "id": 1,
           "title": "Cordon bleu & pâtes",
           "available": true,
-          "tags": [0, 1],
           "ingredients": [
             {
               "product": 15,
@@ -1583,7 +1559,6 @@
           "id": 2,
           "title": "Cordon bleu & pâtes",
           "available": true,
-          "tags": [0, 1],
           "ingredients": [
             {
               "product": 15,
@@ -1602,23 +1577,6 @@
         }
       },
       "allIds": [0, 1, 2]
-    },
-    "tags": {
-      "byId": {
-        "0": {
-          "id": 0,
-          "title": "maison",
-          "createdAt": 1537129597585,
-          "updatedAt": 1537129597585
-        },
-        "1": {
-          "id": 1,
-          "title": "bento",
-          "createdAt": 1537129597590,
-          "updatedAt": 1537129597590
-        }
-      },
-      "allIds": [0, 1]
     }
   }
 }
