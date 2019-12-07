@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "api/*": ["./src/api/*"],
-      "components/*": ["./src/components/*"],
-      "containers/*": ["./src/containers/*"],
-      "ducks/*": ["./src/ducks/*"],
-      "fixtures/*": ["./src/fixtures/*"],
-      "icons/*": ["./src/icons/*"],
-      "router/*": ["./src/router/*"],
-      "style/*": ["./src/style/*"],
-      "utils/*": ["./src/utils/*"],
-      "views/*": ["./src/views/*"],
-      "config/*": ["./src/config/*"],
+      "api/*": ["./api/*"],
+      "components/*": ["./components/*"],
+      "containers/*": ["./containers/*"],
+      "ducks/*": ["./ducks/*"],
+      "fixtures/*": ["./fixtures/*"],
+      "icons/*": ["./icons/*"],
+      "router/*": ["./router/*"],
+      "style/*": ["./style/*"],
+      "utils/*": ["./utils/*"],
+      "views/*": ["./views/*"],
+      "config/*": ["./config/*"],
       "storybook/*": [".storybook/*"]
     }
   },
