@@ -37,6 +37,12 @@ const RecipesCollectionComponent = ({ onAddItem, collection, getEditHref, ...pro
               <Button color={COLORS.blue} href={getEditHref(id)}>
                 Modifier
               </Button>
+
+              {!!item.link && (
+                <Button color={COLORS.green} exthref={item.link} target="_blank">
+                  Voir la recette
+                </Button>
+              )}
             </div>
           </AccordionItem>
         );

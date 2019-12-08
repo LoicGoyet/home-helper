@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Accordion, { AccordionItem } from 'components/Accordion';
 import Checkbox from 'components/Checkbox';
 import IngredientsList from 'components/IngredientsList';
+import Button from 'components/Button';
+import COLORS from 'style/colors';
 
 const RecipesPantryComponent = ({ pantry, onItemClick, ...props }) => {
   const onCheckboxChange = useCallback(
@@ -36,7 +38,15 @@ const RecipesPantryComponent = ({ pantry, onItemClick, ...props }) => {
               </Header>
             )}
           >
-            <IngredientsList ingredients={item.ingredients} />
+            <Ingredients ingredients={item.ingredients} />
+
+            <div>
+              {!!item.link && (
+                <Button color={COLORS.green} exthref={item.link} target="_blank">
+                  Voir la recette
+                </Button>
+              )}
+            </div>
           </CardItem>
         );
       })}
@@ -90,4 +100,8 @@ const CardItem = styled(AccordionItem)`
 
 const PantryCheckbox = styled(Checkbox)`
   flex-shrink: 0;
+`;
+
+const Ingredients = styled(IngredientsList)`
+  margin-bottom: 1rem;
 `;
