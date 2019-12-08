@@ -10,7 +10,7 @@ export default createGlobalStyle`
   body {
     margin: 1rem 0 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-    background-color: ${COLORS.violet};
+    background-color: rgb(0, 0, 0);
     color: ${COLORS.white};
   }
 

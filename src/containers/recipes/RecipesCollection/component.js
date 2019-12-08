@@ -27,23 +27,23 @@ const RecipesCollectionComponent = ({ onAddItem, collection, getEditHref, ...pro
                   <Title>{item.title}</Title>
                 </HeaderContent>
 
-                <AddButton color={COLORS.violet} isBlock onClick={onAddBtnClick(id)}>
-                  Ajouter
-                </AddButton>
+                <AddButton onClick={onAddBtnClick(id)}>Ajouter</AddButton>
               </Header>
             )}
           >
-            <DetailRow>
-              <IngredientCol>
-                <IngredientsList ingredients={item.ingredients} />
-              </IngredientCol>
+            <Ingredients ingredients={item.ingredients} />
 
-              <EditButtonCol>
-                <Button color={COLORS.blue} isBlock href={getEditHref(id)}>
-                  Modifier
+            <div>
+              <Button color={COLORS.blue} href={getEditHref(id)}>
+                Modifier
+              </Button>
+
+              {!!item.link && (
+                <Button color={COLORS.green} exthref={item.link} target="_blank">
+                  Voir la recette
                 </Button>
-              </EditButtonCol>
-            </DetailRow>
+              )}
+            </div>
           </AccordionItem>
         );
       })}
@@ -94,31 +94,12 @@ const HeaderContent = styled.div`
 `;
 
 const AddButton = styled(Button).attrs({
-  color: COLORS.violet,
+  color: COLORS.white,
   isBlock: true,
 })`
   flex-shrink: 0;
 `;
 
-const DetailRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
-  margin-top: -1rem;
-`;
-
-const IngredientCol = styled.div`
-  flex-grow: 1;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 1rem;
-  flex-basis: 28rem;
-`;
-
-const EditButtonCol = styled.div`
-  flex-shrink: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 1rem;
+const Ingredients = styled(IngredientsList)`
+  margin-bottom: 1rem;
 `;

@@ -21,7 +21,7 @@ export const defaultState = {
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_PRODUCT_JOINED: {
-      const id = generateId(state.allIds);
+      const id = `product-${generateId(state.allIds)}`;
       const { title, category, defaultUnit } = action;
       const createdAt = Date.now();
 

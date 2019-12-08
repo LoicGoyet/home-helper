@@ -21,7 +21,7 @@ const reducer = (state = defaultState, action = {}) => {
       const alreadyStored = state.allIds.find(categoryId => state.byId[categoryId].title === action.title);
       if (alreadyStored !== undefined) return { ...state };
 
-      const id = generateId(state.allIds);
+      const id = `category-${generateId(state.allIds)}`;
       const { title } = action;
       const createdAt = Date.now();
 
@@ -83,7 +83,7 @@ export const updateCategory = (id, title) => ({
 
 export const selectors = {
   getCategories: state => state.todos.categories,
-  getCategoriesByAlphabetical: state => sortCategoriesByAlphabetical(state.todos.products),
+  getCategoriesByAlphabetical: state => sortCategoriesByAlphabetical(state.todos.categories),
   getCategoryByTitle: title => state => {
     const { categories } = state.todos;
     return categories.allIds.find(id => normalizeStr(categories.byId[id].title) === normalizeStr(title));

@@ -7,12 +7,11 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 import IngredientField from 'containers/recipes/IngredientField';
 import COLORS, { THEMES } from 'style/colors';
-import { alpha } from 'utils/colors';
 
 const defaultIngredient = {
   productTitle: '',
   categoryTitle: '',
-  quantity: 0,
+  quantity: null,
   unitTitle: '',
   id: 0,
 };
@@ -124,13 +123,13 @@ const RecipeForm = ({ onSubmit, defaultValues }) => {
 
   return (
     <Form onSubmit={onFormSubmit}>
-      <TitleFormGroup label="Nom">
+      <FullFormGroup label="Nom">
         <Input onChange={onInputChange('title')} value={state.title} required />
-      </TitleFormGroup>
+      </FullFormGroup>
 
-      <FormGroup label="Lien vers la recette">
+      <FullFormGroup label="Lien vers la recette">
         <Input onChange={onInputChange('link')} value={state.link} />
-      </FormGroup>
+      </FullFormGroup>
 
       {state.ingredients.map((ingredient, index) => (
         <IngredientField
@@ -138,16 +137,14 @@ const RecipeForm = ({ onSubmit, defaultValues }) => {
           onChange={onIngredientChange(index)}
           values={ingredient}
         >
-          <Button type="button" onClick={onIngredientRemove(index)} color={THEMES.danger} isBlock>
+          <Button type="button" onClick={onIngredientRemove(index)} color={THEMES.danger}>
             Supprimer
           </Button>
         </IngredientField>
       ))}
 
       <IngredientPlaceholder>
-        <Button onClick={onIngredientAdd} color={THEMES.info} isBlock>
-          Ajouter un ingrédient
-        </Button>
+        <Button onClick={onIngredientAdd}>Ajouter un ingrédient</Button>
       </IngredientPlaceholder>
 
       <ActionBar>
@@ -197,7 +194,7 @@ const Form = styled.form`
   }
 `;
 
-const TitleFormGroup = styled(FormGroup)`
+const FullFormGroup = styled(FormGroup)`
   @media (min-width: 600px) {
     grid-column: span 2;
   }
@@ -209,7 +206,6 @@ const IngredientPlaceholder = styled.div`
   justify-content: center;
   align-items: center;
   padding: ${props => props.theme.space};
-  background-color: ${props => alpha(props.theme.colors.white, 0.1)};
 `;
 
 const ActionBar = styled.div`

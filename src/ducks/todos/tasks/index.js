@@ -59,7 +59,7 @@ const reducer = (state = defaultState, action = {}) => {
         };
       }
 
-      const id = generateId(state.allIds);
+      const id = `task-${generateId(state.allIds)}`;
       const { product, quantity, unit } = action;
       const createdAt = Date.now();
 
