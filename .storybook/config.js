@@ -12,7 +12,6 @@ const StorybookGlobalStyle = createGlobalStyle`
   body {
     padding: 1rem;
     color: ${props => props.theme.colors.white};
-    background-color: initial;
   }
 `;
 
