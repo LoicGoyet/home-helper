@@ -2,17 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import Card from 'components/Card';
+
 const IngredientsList = ({ ingredients, className }) => (
-  <List className={className}>
-    {ingredients.map(({ product, quantity, unit }) => (
-      <Item key={`${product.title} / ${quantity}`}>
-        <Title>{product.title}</Title>
-        <Quantity>
-          {quantity} {unit.title}
-        </Quantity>
-      </Item>
-    ))}
-  </List>
+  <Card className={className}>
+    <List>
+      {ingredients.map(({ product, quantity, unit }) => (
+        <Item key={`${product.title} / ${quantity}`}>
+          <Title>{product.title}</Title>
+          <Quantity>
+            {quantity} {unit.title}
+          </Quantity>
+        </Item>
+      ))}
+    </List>
+  </Card>
 );
 
 IngredientsList.propTypes = {
