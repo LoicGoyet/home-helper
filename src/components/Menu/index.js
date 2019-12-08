@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { NavLink, withRouter } from 'react-router-dom';
 
 import Container from 'components/Container';
+import Card from 'components/Card';
+import Plan from 'components/Plan';
 
 const Menu = ({ items }) => {
   const style = {
@@ -21,7 +23,7 @@ const Menu = ({ items }) => {
   };
 
   return (
-    <React.Fragment>
+    <Plan level={1000}>
       <WrapperContainer>
         <Wrapper>
           {items.map(({ path, label, icon, counter }) => {
@@ -42,7 +44,7 @@ const Menu = ({ items }) => {
         </Wrapper>
       </WrapperContainer>
       <Placeholder />
-    </React.Fragment>
+    </Plan>
   );
 };
 
@@ -73,14 +75,12 @@ const WrapperContainer = styled(Container).attrs({
   z-index: 1000;
 `;
 
-const Wrapper = styled.nav`
+const Wrapper = styled(Card)`
   display: flex;
   margin: ${margin}rem;
   height: ${height}rem;
   z-index: 10;
-  border-radius: ${props => props.theme.radius};
   background-color: ${props => props.theme.colors.violet};
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
 const Link = styled(NavLink)`

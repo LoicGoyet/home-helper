@@ -26,12 +26,13 @@ PlanProvider.propTypes = {
   children: PropTypes.any.isRequired,
 };
 
-const Plan = ({ children }) => {
+const Plan = ({ children, level }) => {
   const theme = useContext(ThemeContext);
-  const level = R.view(levelLens, theme);
+  const previousLevel = R.view(levelLens, theme);
+  const nextLevel = level || previousLevel + 1;
 
   return (
-    <ThemeProvider theme={R.set(levelLens, level + 1, theme)}>
+    <ThemeProvider theme={R.set(levelLens, nextLevel, theme)}>
       <React.Fragment>{children}</React.Fragment>
     </ThemeProvider>
   );
@@ -39,6 +40,11 @@ const Plan = ({ children }) => {
 
 Plan.propTypes = {
   children: PropTypes.any.isRequired,
+  level: PropTypes.number,
+};
+
+Plan.defaultProps = {
+  level: undefined,
 };
 
 export default Plan;
