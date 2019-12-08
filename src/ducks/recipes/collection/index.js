@@ -26,7 +26,7 @@ const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_JOINED_COLLECTION_ITEM: {
       const { title, ingredients, link } = action;
-      const id = generateId(state.allIds);
+      const id = `recipe-${generateId(state.allIds)}`;
       const createdAt = Date.now();
 
       return {

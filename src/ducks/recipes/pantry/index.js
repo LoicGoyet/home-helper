@@ -20,7 +20,7 @@ const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case ADD_JOINED_PANTRY_ENTRY: {
       const { title, ingredients, link, collectionItem } = action;
-      const id = generateId(state.allIds);
+      const id = `pantry-recipe-${generateId(state.allIds)}`;
       const createdAt = Date.now();
 
       return {

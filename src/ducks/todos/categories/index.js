@@ -21,7 +21,7 @@ const reducer = (state = defaultState, action = {}) => {
       const alreadyStored = state.allIds.find(categoryId => state.byId[categoryId].title === action.title);
       if (alreadyStored !== undefined) return { ...state };
 
-      const id = generateId(state.allIds);
+      const id = `category-${generateId(state.allIds)}`;
       const { title } = action;
       const createdAt = Date.now();
 

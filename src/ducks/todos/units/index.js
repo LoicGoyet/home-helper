@@ -19,7 +19,7 @@ const reducer = (state = defaultState, action = {}) => {
       const alreadyStored = state.allIds.find(unitId => state.byId[unitId].title === action.title);
       if (alreadyStored !== undefined) return { ...state };
 
-      const id = generateId(state.allIds);
+      const id = `unit-${generateId(state.allIds)}`;
       const { title } = action;
       const createdAt = Date.now();
 
