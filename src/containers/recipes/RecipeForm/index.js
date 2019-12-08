@@ -11,7 +11,7 @@ import COLORS, { THEMES } from 'style/colors';
 const defaultIngredient = {
   productTitle: '',
   categoryTitle: '',
-  quantity: 0,
+  quantity: null,
   unitTitle: '',
   id: 0,
 };
