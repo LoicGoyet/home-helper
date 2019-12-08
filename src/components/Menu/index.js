@@ -80,7 +80,7 @@ const Wrapper = styled(Card)`
   margin: ${margin}rem;
   height: ${height}rem;
   z-index: 10;
-  background-color: ${props => props.theme.colors.violet};
+  /* background-color: ${props => props.theme.colors.violet}; */
 `;
 
 const Link = styled(NavLink)`

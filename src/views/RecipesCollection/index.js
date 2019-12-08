@@ -7,6 +7,7 @@ import RecipesCollectionContainer from 'containers/recipes/RecipesCollection';
 import Button from 'components/Button';
 import Container from 'components/Container';
 import PATHS from 'router/paths';
+import COLORS from 'style/colors';
 
 const RecipesCollection = () => (
   <React.Fragment>
@@ -15,7 +16,7 @@ const RecipesCollection = () => (
     </Helmet>
 
     <Container>
-      <AddButton href={PATHS.RECIPES_ADD} color="#fff" isBlock>
+      <AddButton href={PATHS.RECIPES_ADD} color={COLORS.green} isBlock>
         <TiPlus size={26} />
       </AddButton>
 
