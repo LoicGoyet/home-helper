@@ -11,13 +11,12 @@ const Theme = props => (
     <PlanProvider
       properties={{
         color: ['rgb(250, 250, 250)'],
-        backgroundColor: ['rgb(20, 20, 20)', 'rgb(30, 30, 30)', 'rgb(40, 40, 40)'],
-        // boxShadow: [
-        //   '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
-        //   '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
-        //   '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
-        // ],
-        boxShadow: ['0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)', 'none'],
+        backgroundColor: ['rgb(20, 20, 20)', 'rgb(35, 35, 35)', 'rgb(45, 45, 45)'],
+        boxShadow: [
+          '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
+          '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)',
+          '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)',
+        ],
       }}
     >
       {props.children}
