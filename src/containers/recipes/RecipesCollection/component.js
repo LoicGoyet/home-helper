@@ -27,9 +27,7 @@ const RecipesCollectionComponent = ({ onAddItem, collection, getEditHref, ...pro
                   <Title>{item.title}</Title>
                 </HeaderContent>
 
-                <AddButton color={COLORS.violet} isBlock onClick={onAddBtnClick(id)}>
-                  Ajouter
-                </AddButton>
+                <AddButton onClick={onAddBtnClick(id)}>Ajouter</AddButton>
               </Header>
             )}
           >
@@ -39,7 +37,7 @@ const RecipesCollectionComponent = ({ onAddItem, collection, getEditHref, ...pro
               </IngredientCol>
 
               <EditButtonCol>
-                <Button color={COLORS.blue} isBlock href={getEditHref(id)}>
+                <Button color={COLORS.blue} href={getEditHref(id)}>
                   Modifier
                 </Button>
               </EditButtonCol>
@@ -94,7 +92,7 @@ const HeaderContent = styled.div`
 `;
 
 const AddButton = styled(Button).attrs({
-  color: COLORS.violet,
+  color: COLORS.white,
   isBlock: true,
 })`
   flex-shrink: 0;
