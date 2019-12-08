@@ -37,22 +37,27 @@ export default React.memo(Ingredient);
 
 const Wrapper = styled.article`
   display: flex;
-  opacity: ${props => props.isDiscreet && 0.5};
+  opacity: ${props => props.isDiscreet && 0.3};
 `;
 
 const Checkbox = styled(CheckButton)`
   margin-right: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
 `;
 
 const Info = styled.div`
   flex-grow: 1;
+  min-width: 0;
 `;
 
 const Name = styled.h5`
   font-size: 1rem;
   margin: 0;
   font-weight: 500;
-  line-height: 1;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Quantity = styled.h6`

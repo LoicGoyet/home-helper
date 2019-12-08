@@ -31,17 +31,13 @@ const RecipesCollectionComponent = ({ onAddItem, collection, getEditHref, ...pro
               </Header>
             )}
           >
-            <DetailRow>
-              <IngredientCol>
-                <IngredientsList ingredients={item.ingredients} />
-              </IngredientCol>
+            <Ingredients ingredients={item.ingredients} />
 
-              <EditButtonCol>
-                <Button color={COLORS.blue} href={getEditHref(id)}>
-                  Modifier
-                </Button>
-              </EditButtonCol>
-            </DetailRow>
+            <div>
+              <Button color={COLORS.blue} href={getEditHref(id)}>
+                Modifier
+              </Button>
+            </div>
           </AccordionItem>
         );
       })}
@@ -98,25 +94,6 @@ const AddButton = styled(Button).attrs({
   flex-shrink: 0;
 `;
 
-const DetailRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
-  margin-top: -1rem;
-`;
-
-const IngredientCol = styled.div`
-  flex-grow: 1;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 1rem;
-  flex-basis: 28rem;
-`;
-
-const EditButtonCol = styled.div`
-  flex-shrink: 0;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  padding-top: 1rem;
+const Ingredients = styled(IngredientsList)`
+  margin-bottom: 1rem;
 `;

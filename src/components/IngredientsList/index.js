@@ -3,20 +3,14 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Card from 'components/Card';
+import Ingredient from 'components/Ingredient';
 
 const IngredientsList = ({ ingredients, className }) => (
-  <Card className={className}>
-    <List>
-      {ingredients.map(({ product, quantity, unit }) => (
-        <Item key={`${product.title} / ${quantity}`}>
-          <Title>{product.title}</Title>
-          <Quantity>
-            {quantity} {unit.title}
-          </Quantity>
-        </Item>
-      ))}
-    </List>
-  </Card>
+  <Wrapper className={className}>
+    {ingredients.map(({ product, quantity, unit }) => (
+      <Ingredient key={`${product.title} / ${quantity}`} name={product.title} quantity={quantity} unit={unit.title} />
+    ))}
+  </Wrapper>
 );
 
 IngredientsList.propTypes = {
@@ -30,24 +24,8 @@ IngredientsList.defaultProps = {
 
 export default IngredientsList;
 
-const List = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 0.8rem;
-`;
-
-const Item = styled.li`
-  &:not(:last-child) {
-    margin-bottom: 0.4em;
-  }
-`;
-
-const Title = styled.span`
-  margin-right: 0.5em;
-`;
-
-const Quantity = styled.span`
-  font-size: 0.8em;
-  font-style: italic;
+const Wrapper = styled(Card)`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(100px, auto));
 `;
