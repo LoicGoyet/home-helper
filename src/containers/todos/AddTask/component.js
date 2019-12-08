@@ -7,6 +7,7 @@ import IoRefresh from 'react-icons/lib/io/refresh';
 import COLORS from 'style/colors';
 import Button from 'components/Button';
 import Input from 'components/Input';
+import Plan, { planProp } from 'components/Plan';
 import {
   TODOS_CATEGORIES_SUGGESTIONS,
   TODOS_PRODUCTS_SUGGESTIONS,
@@ -106,54 +107,59 @@ const AddTaskForm = ({ values, onChange, onFieldsetSubmit, onSubmit, onReset, ac
       <MainRow>
         <Fieldset step={0} activeStep={activeStep}>
           <Label>Produit</Label>
-
-          <StyledInput
-            ref={productInput}
-            onChange={onProductChange}
-            value={values.product}
-            type="text"
-            placeholder="Pâtes, Riz, Poulet..."
-            list={TODOS_PRODUCTS_SUGGESTIONS}
-          />
+          <Plan>
+            <StyledInput
+              ref={productInput}
+              onChange={onProductChange}
+              value={values.product}
+              type="text"
+              placeholder="Pâtes, Riz, Poulet..."
+              list={TODOS_PRODUCTS_SUGGESTIONS}
+            />
+          </Plan>
         </Fieldset>
 
         <Fieldset step={1} activeStep={activeStep}>
           <Label>Categorie</Label>
 
-          <StyledInput
-            ref={categoryInput}
-            onChange={onCategoryChange}
-            value={values.category}
-            type="text"
-            placeholder="Épicerie sâlée, Produits Frais, Boulangerie..."
-            list={TODOS_CATEGORIES_SUGGESTIONS}
-            hasResetBtnAside
-          />
+          <Plan>
+            <StyledInput
+              ref={categoryInput}
+              onChange={onCategoryChange}
+              value={values.category}
+              type="text"
+              placeholder="Épicerie sâlée, Produits Frais, Boulangerie..."
+              list={TODOS_CATEGORIES_SUGGESTIONS}
+              hasResetBtnAside
+            />
+          </Plan>
           {resetBtn}
         </Fieldset>
 
         <Fieldset step={2} activeStep={activeStep}>
           <Label>Quantité</Label>
-          <StyledInput
-            ref={quantityInput}
-            onChange={onQuantityChange}
-            value={values.quantity}
-            type="number"
-            min="1"
-            placeholder="nombre"
-            tabindex="0"
-          />
-          <StyledInput
-            ref={quantityUnitInput}
-            onChange={onQuantityUnitChange}
-            value={values.quantityUnit}
-            type="text"
-            placeholder="pièce(s), litre(s), gramme(s)..."
-            list={TODOS_UNITS_SUGGESTIONS}
-            tabindex="0"
-            hasResetBtnAside
-          />
-          {resetBtn}
+          <Plan>
+            <StyledInput
+              ref={quantityInput}
+              onChange={onQuantityChange}
+              value={values.quantity}
+              type="number"
+              min="1"
+              placeholder="nombre"
+              tabindex="0"
+            />
+            <StyledInput
+              ref={quantityUnitInput}
+              onChange={onQuantityUnitChange}
+              value={values.quantityUnit}
+              type="text"
+              placeholder="pièce(s), litre(s), gramme(s)..."
+              list={TODOS_UNITS_SUGGESTIONS}
+              tabindex="0"
+              hasResetBtnAside
+            />
+            {resetBtn}
+          </Plan>
         </Fieldset>
 
         {activeStep < 2 && (
@@ -192,10 +198,6 @@ AddTaskForm.propTypes = {
 };
 
 export default AddTaskForm;
-
-const boxShadow = css`
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-`;
 
 const Wrapper = styled.form`
   position: relative;
@@ -241,11 +243,11 @@ const Fieldset = styled.label`
   transition-timing-function: ease-in-out;
   opacity: 0;
   pointer-events: none;
-  background-color: ${COLORS.lightgray};
+  background-color: ${planProp('backgroundColor')};
   border-radius: 0.3125rem;
   padding: 0.125rem;
+  box-shadow: ${planProp('boxShadow')};
   ${fieldsetPosition};
-  ${boxShadow};
 `;
 
 const ResetButton = styled(Button).attrs({
@@ -264,7 +266,6 @@ const Label = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${COLORS.black};
 `;
 
 const StyledInput = styled(Input)`
@@ -299,7 +300,7 @@ const StepButton = styled(Button).attrs({
   position: absolute;
   z-index: 1;
   right: 0;
-  ${boxShadow};
+  box-shadow: ${planProp('boxShadow')};
 
   &:disabled {
     opacity: 0.5;

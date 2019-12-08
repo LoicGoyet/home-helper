@@ -63,7 +63,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  color: COLORS.violet,
+  color: COLORS.white,
   isBlock: false,
   square: undefined,
   style: {},
