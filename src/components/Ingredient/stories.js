@@ -1,5 +1,4 @@
 import React from 'react';
-import COLORS from 'style/colors';
 
 import Ingredient from './index';
 

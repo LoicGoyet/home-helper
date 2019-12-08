@@ -36,7 +36,7 @@ const TodoList = ({ tasks, heading, onTaskClick, limit }) => {
               unit={task.unit.title}
               isChecked={task.done}
               color={task.product.category.color}
-              onClick={() => onTaskClick(task.id)}
+              onChange={() => onTaskClick(task.id)}
             />
           );
         })}

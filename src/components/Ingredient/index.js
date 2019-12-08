@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import CheckButton from 'components/CheckButton';
+import Checkbox from 'components/Checkbox';
 import COLORS from 'style/colors';
 
-const Ingredient = ({ name, quantity, unit, color, isChecked, onClick, ...props }) => (
+const Ingredient = ({ name, quantity, unit, color, isChecked, onChange, ...props }) => (
   <Wrapper {...props} isDiscreet={isChecked}>
-    {isChecked !== undefined && <Checkbox isChecked={isChecked} color={color} onClick={onClick} />}
+    {isChecked !== undefined && <Check isChecked={isChecked} color={color} onChange={onChange} />}
 
     <Info>
       <Name>{name}</Name>
@@ -24,13 +24,13 @@ Ingredient.propTypes = {
   unit: PropTypes.string.isRequired,
   isChecked: PropTypes.bool,
   color: PropTypes.string,
-  onClick: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
 Ingredient.defaultProps = {
   isChecked: undefined,
   color: COLORS.white,
-  onClick: () => undefined,
+  onChange: () => undefined,
 };
 
 export default React.memo(Ingredient);
@@ -38,12 +38,12 @@ export default React.memo(Ingredient);
 const Wrapper = styled.article`
   display: flex;
   opacity: ${props => props.isDiscreet && 0.3};
+  align-items: flex-start;
 `;
 
-const Checkbox = styled(CheckButton)`
+const Check = styled(Checkbox)`
   margin-right: 1rem;
   flex-shrink: 0;
-  margin-top: 2px;
 `;
 
 const Info = styled.div`

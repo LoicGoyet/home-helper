@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Accordion, { AccordionItem } from 'components/Accordion';
-import CheckButton from 'components/CheckButton';
+import Checkbox from 'components/Checkbox';
 import IngredientsList from 'components/IngredientsList';
 
 const RecipesPantryComponent = ({ pantry, onItemClick, ...props }) => {
-  const onCheckboxClick = useCallback(
+  const onCheckboxChange = useCallback(
     id => e => {
       e.stopPropagation();
       return onItemClick(id);
@@ -32,7 +32,7 @@ const RecipesPantryComponent = ({ pantry, onItemClick, ...props }) => {
                   <Title>{item.title}</Title>
                 </HeaderContent>
 
-                <PantryCheckbox isChecked={!item.available} onClick={onCheckboxClick(id)} />
+                <PantryCheckbox isChecked={!item.available} onChange={onCheckboxChange(id)} />
               </Header>
             )}
           >
@@ -88,6 +88,6 @@ const CardItem = styled(AccordionItem)`
   opacity: var(--opacity);
 `;
 
-const PantryCheckbox = styled(CheckButton)`
+const PantryCheckbox = styled(Checkbox)`
   flex-shrink: 0;
 `;

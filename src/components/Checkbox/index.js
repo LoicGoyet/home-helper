@@ -7,25 +7,29 @@ import { MdCheck } from 'react-icons/lib/md';
 import COLORS from 'style/colors';
 import { getContrastYIQ, alpha } from 'utils/colors';
 
-const CheckButton = props => (
-  <Element {...props} style={getThemeVars(props)}>
-    <Icon />
-  </Element>
+const Checkbox = ({ isChecked, onChange, ...props }) => (
+  // eslint-disable-next-line jsx-a11y/label-has-for
+  <Wrapper {...props}>
+    <RealInput type="checkbox" onChange={onChange} checked={isChecked} />
+    <FakeElement style={getThemeVars({ ...props, isChecked })}>
+      <Icon />
+    </FakeElement>
+  </Wrapper>
 );
 
-CheckButton.propTypes = {
-  onClick: PropTypes.func,
+Checkbox.propTypes = {
+  onChange: PropTypes.func,
   isChecked: PropTypes.bool,
   color: ExtraPropTypes.color /* eslint-disable-line react/no-typos */,
 };
 
-CheckButton.defaultProps = {
-  onClick: undefined,
+Checkbox.defaultProps = {
+  onChange: () => undefined,
   isChecked: false,
   color: COLORS.white,
 };
 
-export default React.memo(CheckButton);
+export default React.memo(Checkbox);
 
 const getThemeVars = ({ isChecked, color }) => ({
   '--size': '1rem',
@@ -35,7 +39,25 @@ const getThemeVars = ({ isChecked, color }) => ({
   '--box-shadow--focus': `0 0 0 4px ${alpha(color, 0.4)}`,
 });
 
-const Element = styled.button`
+const Wrapper = styled.label`
+  display: inline-flex;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+`;
+
+const RealInput = styled.input`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  opacity: 0;
+`;
+
+const FakeElement = styled.span`
   font-size: var(--size);
   height: 1.5rem;
   width: 1.5rem;
