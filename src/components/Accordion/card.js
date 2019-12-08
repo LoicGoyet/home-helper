@@ -7,6 +7,7 @@ import { useAccordion } from 'components/Accordion/context';
 import Card from 'components/Card';
 import COLORS from 'style/colors';
 import { alpha } from 'utils/colors';
+import { planProp } from 'components/Plan';
 
 const AccordionItem = ({ style, header, className, children, index }) => {
   const [isOpen, toggle] = useAccordion(index);
@@ -90,5 +91,5 @@ const Header = styled.header`
 const Body = styled.div`
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid ${COLORS.lightgray};
+  border-top: 1px solid ${planProp('backgroundColor')};
 `;
