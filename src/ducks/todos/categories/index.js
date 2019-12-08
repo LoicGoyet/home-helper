@@ -83,7 +83,7 @@ export const updateCategory = (id, title) => ({
 
 export const selectors = {
   getCategories: state => state.todos.categories,
-  getCategoriesByAlphabetical: state => sortCategoriesByAlphabetical(state.todos.products),
+  getCategoriesByAlphabetical: state => sortCategoriesByAlphabetical(state.todos.categories),
   getCategoryByTitle: title => state => {
     const { categories } = state.todos;
     return categories.allIds.find(id => normalizeStr(categories.byId[id].title) === normalizeStr(title));

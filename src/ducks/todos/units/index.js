@@ -78,7 +78,7 @@ export const setUnitTitle = (id, title) => ({
 // Selectors
 
 export const selectors = {
-  getUnitsByAlphabetical: state => sortUnitsByAlphabetical(state.todos.products),
+  getUnitsByAlphabetical: state => sortUnitsByAlphabetical(state.todos.units),
   getUnitByTitle: title => state => {
     const { units } = state.todos;
     return units.allIds.find(id => units.byId[id].title === title);
