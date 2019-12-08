@@ -22,7 +22,7 @@ CheckButton.propTypes = {
 CheckButton.defaultProps = {
   onClick: undefined,
   isChecked: false,
-  color: '#140A43',
+  color: COLORS.white,
 };
 
 export default React.memo(CheckButton);
@@ -37,9 +37,9 @@ const getThemeVars = ({ isChecked, color }) => ({
 
 const Element = styled.button`
   font-size: var(--size);
-  height: 2.25rem;
-  width: 2.25rem;
-  border: 3px solid var(--border-color);
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid var(--border-color);
   display: inline-flex;
   border-radius: 3px;
   background-color: var(--bg-color);
@@ -57,5 +57,5 @@ const Element = styled.button`
 `;
 
 const Icon = styled(MdCheck)`
-  font-size: 1.4em;
+  font-size: 1em;
 `;

@@ -14,37 +14,39 @@ import PATHS from 'router/paths';
 
 const Router = () => (
   <HashRouter>
-    <Switch>
-      <Route exact path={PATHS.TODOS} component={Todos} />
-      <Route exact path={PATHS.RECIPES_LIST} component={RecipesCollection} />
-      <Route exact path={PATHS.RECIPES_ADD} component={RecipesAdd} />
-      <Route exact path={PATHS.RECIPES_EDIT} component={RecipesEdit} />
-      <Route exact path={PATHS.RECIPES_PANTRY} component={RecipesPantry} />
-      <Redirect from="*" to={PATHS.TODOS} />
-    </Switch>
+    <React.Fragment>
+      <Switch>
+        <Route exact path={PATHS.TODOS} component={Todos} />
+        <Route exact path={PATHS.RECIPES_LIST} component={RecipesCollection} />
+        <Route exact path={PATHS.RECIPES_ADD} component={RecipesAdd} />
+        <Route exact path={PATHS.RECIPES_EDIT} component={RecipesEdit} />
+        <Route exact path={PATHS.RECIPES_PANTRY} component={RecipesPantry} />
+        <Redirect from="*" to={PATHS.TODOS} />
+      </Switch>
 
-    <SuggestionsLists />
+      <SuggestionsLists />
 
-    <Menu
-      items={[
-        {
-          icon: FaBook,
-          path: PATHS.RECIPES_LIST,
-          label: 'Livre de recettes',
-        },
-        {
-          icon: FaShoppingCart,
-          path: PATHS.TODOS,
-          label: 'Liste de courses',
-        },
-        {
-          icon: FaInbox,
-          path: PATHS.RECIPES_PANTRY,
-          label: 'Au menu',
-          counter: PantryCount,
-        },
-      ]}
-    />
+      <Menu
+        items={[
+          {
+            icon: FaBook,
+            path: PATHS.RECIPES_LIST,
+            label: 'Livre de recettes',
+          },
+          {
+            icon: FaShoppingCart,
+            path: PATHS.TODOS,
+            label: 'Liste de courses',
+          },
+          {
+            icon: FaInbox,
+            path: PATHS.RECIPES_PANTRY,
+            label: 'Au menu',
+            counter: PantryCount,
+          },
+        ]}
+      />
+    </React.Fragment>
   </HashRouter>
 );
 

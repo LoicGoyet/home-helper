@@ -12,7 +12,7 @@ export default {
 };
 
 export const story1 = () => (
-  <CheckButton onClick={action('on click')} isChecked={boolean('isChecked', false)} color={color('color', '#140A43')} />
+  <CheckButton onClick={action('on click')} isChecked={boolean('isChecked', false)} color={color('color', 'white')} />
 );
 
 story1.story = {
