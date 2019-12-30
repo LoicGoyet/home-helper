@@ -16,6 +16,7 @@
   "eslint.autoFixOnSave": true,
   "eslint.alwaysShowStatus": true,
   "editor.tabSize": 2,
-  "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
