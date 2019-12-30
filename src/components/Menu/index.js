@@ -29,8 +29,6 @@ const Menu = ({ items }) => {
           {items.map(({ path, label, icon, counter }) => {
             const Icon = icon;
 
-            console.log(counter);
-
             return (
               <Link key={`${path} / ${label}`} to={path} style={style} activeStyle={activeStyle}>
                 <InnerLink>
