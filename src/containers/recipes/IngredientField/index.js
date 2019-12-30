@@ -20,12 +20,14 @@ const IngredientField = ({ values, onChange, children, ...props }) => {
     // try to get auto categoryTitle and quantityUnit if productTitle field updates
     const categoryTitle = field === 'productTitle' && getAutoCategory(e.target.value);
     const unitTitle = field === 'productTitle' && getAutoQuantityUnit(e.target.value);
+    const quantity = field === 'quantity' && parseInt(e.target.value);
 
     return onChange({
       ...values,
       [field]: e.target.value,
       ...(!!categoryTitle && { categoryTitle }),
       ...(!!unitTitle && { unitTitle }),
+      ...(!!quantity && { quantity }),
     });
   };
 
